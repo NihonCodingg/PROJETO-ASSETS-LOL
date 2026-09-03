@@ -5,9 +5,10 @@ servidos sem re-encode e com PNG gerado no navegador sob demanda — pensado par
 editores de vídeo e thumbnail que precisam do arquivo agora, sem login e sem
 navegar por wiki.
 
-> Status: **etapa 4 das 7** (Spec escrita). Ainda não há produto rodando.
-> A fonte de verdade é [`docs/SPEC.md`](docs/SPEC.md), apoiada pelos
-> [ADRs](docs/adr/README.md) e pelos números de [`docs/SPIKES.md`](docs/SPIKES.md).
+> Status: **etapa 5 das 7** (tickets escritos, aguardando aprovação). Ainda não há
+> produto rodando. A fonte de verdade é [`docs/SPEC.md`](docs/SPEC.md), quebrada em
+> [`docs/TICKETS.md`](docs/TICKETS.md) e apoiada pelos [ADRs](docs/adr/README.md) e
+> pelos números de [`docs/SPIKES.md`](docs/SPIKES.md).
 > O [`docs/KICKOFF.md`](docs/KICKOFF.md) guarda a ideia e a pesquisa originais.
 
 Uso pessoal e de um pequeno grupo, sem monetização, **custo de operação zero**:
