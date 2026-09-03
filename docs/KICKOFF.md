@@ -63,7 +63,7 @@ PROJETO-ASSETS-LOL/
 ```
 
 **Stack fixada:**
-- Front: Next.js 15+, TypeScript strict, Tailwind, Fuse.js para busca no cliente, JSZip apenas como fallback offline.
+- Front: Next.js 15+, TypeScript strict, Tailwind, **shadcn/ui sobre Radix** (primitivas acessíveis, código no repositório), **TanStack Virtual** nas listas grandes e **cmdk** na paleta de busca ([ADR 0011](adr/0011-base-de-componentes-do-front.md)). **Sem Fuse.js**: a busca é nossa — normalização + tabela de apelidos ([ADR 0009](adr/0009-apelidos-de-busca-mantidos-a-mao.md)) com o ranqueamento de duas classes do [ADR 0010](adr/0010-navegacao-por-campeao-busca-por-skin.md). **JSZip é o caminho principal** da seleção customizada, não fallback ([ADR 0005](adr/0005-arquitetura-estatica-custo-zero.md)).
 - API: Python 3.12+, FastAPI, Pydantic v2, httpx, Pillow, uvicorn. Testes com pytest.
 - Indexador: mesmo Python; CLI com Typer; roda em GitHub Actions.
 - Storage: bucket compatível com S3 (Cloudflare R2 como padrão) + CDN. Localmente, MinIO ou pasta em disco.

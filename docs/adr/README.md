@@ -15,3 +15,4 @@ com contexto, decisão e consequências. A Spec referencia; não repete.
 | [0008](0008-catalogo-de-skins-e-seletor.md) | O catálogo é de skins; seletor de skin na v1 | ⚠️ emendado pelo 0010 |
 | [0009](0009-apelidos-de-busca-mantidos-a-mao.md) | Apelidos em JSON estático mantido à mão | aceito |
 | [0010](0010-navegacao-por-campeao-busca-por-skin.md) | Navegação por campeão, busca por skin; catálogo vira documento próprio | aceito — emenda o 0008 |
+| [0011](0011-base-de-componentes-do-front.md) | shadcn/ui sobre Radix, TanStack Virtual, cmdk; Fuse.js fora | aceito |

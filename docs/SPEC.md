@@ -123,7 +123,7 @@ implementa e pelo teste que o prova.
 | **RNF-08** | Etiqueta de rede | User-Agent identificado, concorrência ≤ 4, backoff em 429/5xx | Teste unitário do cliente HTTP |
 | **RNF-09** | Wiki | Zero requisições enquanto `WIKI_CONSENT_GRANTED` for falso | Trava em código que levanta exceção |
 | **RNF-10** | Legal | Aviso da Riot visível; produto registrado no Developer Portal antes do lançamento | Checklist de lançamento |
-| **RNF-11** | Acessibilidade | Navegável por teclado, contraste AA, `alt` em toda imagem | axe no e2e |
+| **RNF-11** | Acessibilidade | Navegável por teclado, contraste AA, `alt` em toda imagem; primitivas acessíveis via Radix ([ADR 0011](adr/0011-base-de-componentes-do-front.md)) | axe no e2e |
 | **RNF-12** | Qualidade | ruff, ruff format, mypy strict, pytest, eslint, tsc, vitest verdes em todo PR | CI |
 
 ---
@@ -454,4 +454,5 @@ jeito de o site apodrecer.
 | [0007](adr/0007-politica-de-versoes-e-orcamento.md) versões e orçamento | RF-19, RF-20, RNF-05, §8 |
 | [0008](adr/0008-catalogo-de-skins-e-seletor.md) catálogo de skins | RF-06 — emendado pelo 0010 |
 | [0010](adr/0010-navegacao-por-campeao-busca-por-skin.md) navegação × busca | RF-04, RF-05, RF-24, RF-25, RNF-03, §5.4, §6, §6.1, §8 |
+| [0011](adr/0011-base-de-componentes-do-front.md) base de componentes | RF-01, RF-03, RF-08, RF-24, RNF-01, RNF-11 |
 | [0009](adr/0009-apelidos-de-busca-mantidos-a-mao.md) apelidos | RF-03, §6, §10 |

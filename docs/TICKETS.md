@@ -4,7 +4,7 @@
 > Cada ticket cabe em **≤ 500 linhas de lógica** (exclui lockfiles, fixtures e snapshots).
 > Se não couber, divide-se o ticket — nunca se infla o PR (regra 5 do [CLAUDE.md](../CLAUDE.md)).
 >
-> Data: 03/09/2026 · 33 tickets · 7 ondas
+> Data: 03/09/2026 · 34 tickets · 7 ondas
 >
 > **Revisão de 03/09/2026:** navegação passa a ser por campeão e busca por skin
 > ([ADR 0010](adr/0010-navegacao-por-campeao-busca-por-skin.md)). Afeta T-04, T-07,
@@ -26,6 +26,16 @@ interface especificam **comportamento e critério de aceite**, nunca decisão vi
 Espaçamento, cor, tipografia, grid e ilustração **não** aparecem em critério de aceite —
 chegam depois, como referência, em **T-30**. Um ticket de UI está pronto quando o
 comportamento passa nos testes, mesmo que a tela ainda esteja crua.
+
+**Base de componentes** ([ADR 0011](adr/0011-base-de-componentes-do-front.md)): shadcn/ui
+sobre Radix, TanStack Virtual nas listas grandes e cmdk na paleta de busca — com o filtro
+embutido do cmdk **desligado**, porque o algoritmo de busca é o nosso. Fuse.js está fora.
+Componente gerado pelo shadcn conta como **scaffold, não como lógica**, para efeito do
+limite de 500 linhas.
+
+> ⚠️ **`docs/design/TOKENS.md` ainda não existe.** A ingestão do design não aconteceu —
+> nenhum arquivo de tela chegou ao repositório. **T-34** e **T-30** estão bloqueados nisso;
+> os demais tickets de UI seguem executáveis, porque não dependem de decisão visual.
 
 ---
 
@@ -566,6 +576,53 @@ comportamento passa nos testes, mesmo que a tela ainda esteja crua.
 
 ---
 
+### 🚧 T-34 — Base de componentes e tokens do design
+
+| | |
+|---|---|
+| **Objetivo** | Instalar a base do [ADR 0011](adr/0011-base-de-componentes-do-front.md) e traduzir os tokens do design para o Tailwind, uma vez, num lugar só |
+| **Dependências** | T-08 · **e a ingestão do design** (`docs/design/TOKENS.md`) |
+| **Estimativa** | ~150 linhas de lógica (+ scaffold do shadcn, que não conta) |
+| **Effort** | médio |
+| **Cobre** | RNF-11, [ADR 0011](adr/0011-base-de-componentes-do-front.md) |
+
+> 🚧 **Bloqueado.** Precisa de `docs/design/TOKENS.md`, que só existe depois da ingestão do
+> design. Enquanto isso, T-14, T-15, T-19, T-20, T-24, T-25 e T-26 rodam sem ele — ficam
+> com a tela crua, que é o combinado da nota no topo.
+
+**Entra**
+- `shadcn/ui` inicializado sobre Radix, com os componentes efetivamente usados copiados
+  para `apps/web/src/components/ui/`.
+- `@tanstack/react-virtual` e `cmdk` no `package.json`, com o filtro do cmdk desligado por
+  configuração no ponto de uso.
+- Tokens de `docs/design/TOKENS.md` traduzidos para o tema do Tailwind: escala de cinzas,
+  cor de destaque única, escala de espaçamento, raio de borda, escala tipográfica, fonte de
+  interface e fonte mono dos metadados técnicos.
+- Verificação de contraste dos pares de token que o design usa.
+
+**NÃO entra**
+- Aplicar os tokens nas telas. Isso é **T-30**, e o critério de aceite dele é a suíte
+  inteira continuar passando.
+- Fuse.js. Está fora por ADR.
+- Qualquer componente que nenhum ticket use ainda.
+
+**Critérios de aceite**
+1. Os tokens do Tailwind batem, valor a valor, com `docs/design/TOKENS.md` — teste que lê
+   os dois e compara.
+2. Nenhum valor de cor, espaçamento ou raio literal fora do tema; o lint falha se aparecer.
+3. Existe **uma** cor de destaque; um segundo acento faz o teste falhar.
+4. Os pares de token de texto sobre fundo passam em contraste AA.
+5. `cmdk` não filtra: passar uma lista e uma consulta que não casa devolve a lista inteira,
+   porque quem filtra somos nós.
+
+**Testes que provam**
+- Teste de paridade tokens × tema do Tailwind.
+- Teste de contraste dos pares.
+- Teste do cmdk com filtro desligado.
+- axe nos componentes primitivos.
+
+---
+
 ### T-14 — Front: busca com normalização e apelidos
 
 | | |
@@ -579,6 +636,8 @@ comportamento passa nos testes, mesmo que a tela ainda esteja crua.
 **Entra**
 - Normalização: NFD, remover diacríticos, minúsculas, remover não-alfanuméricos.
 - Importar `champion-aliases.json` de `packages/schema` **em tempo de build**.
+- Paleta de busca com **cmdk**, pela lista acessível e pela navegação por teclado, com o
+  **filtro embutido desligado** ([ADR 0011](adr/0011-base-de-componentes-do-front.md)).
 - Índice de busca sobre **`catalog.skins[]` (2.149) e `catalog.champions[]` (173)**,
   montado uma vez, na carga do catálogo.
 - **Duas classes de resultado.** Campeão casado vira **uma** entrada de campeão, nunca 18
@@ -587,7 +646,9 @@ comportamento passa nos testes, mesmo que a tela ainda esteja crua.
 - Foco automático no campo e atalho `/` sem inserir o caractere.
 
 **NÃO entra**
-- Fuse.js. Fica como segunda camada só se aparecer caso real de zero resultado (ticket novo).
+- Fuse.js. Está **fora por ADR 0011**; se um dia aparecer caso real de zero resultado que a
+  normalização não resolva, vira ticket próprio com o caso em mãos.
+- O filtro do cmdk. Deixá-lo ligado quebraria `mf`, `j4` e `kda` em silêncio.
 - Busca por tag ou filtro (T-24).
 - Decisão visual — ver a nota no topo.
 
@@ -600,12 +661,16 @@ comportamento passa nos testes, mesmo que a tela ainda esteja crua.
 3. `/` foca o campo e o valor não muda.
 4. Com 173 campeões e 2.149 skins no índice, a busca responde em < 50 ms (medido).
 5. Acrescentar uma linha ao JSON de apelidos passa a valer sem tocar em código.
+6. O filtro do cmdk está desligado: uma consulta que não casa nada devolve a lista inteira
+   do componente, e quem reduz é o nosso ranqueamento.
 
 **Testes que provam**
 - Vitest com tabela de ≥ 20 pares consulta→esperado, incluindo os quatro apelidos citados,
   o caso `jax` (uma entrada) e os casos transversais `kda` e `prestigio`.
 - Teste de performance com o catálogo completo sintético (173 + 2.149).
 - Teste que adiciona um apelido à fixture e confirma que passa a resolver.
+- Teste que falha se o filtro do cmdk voltar a ser aplicado (a armadilha silenciosa do
+  ADR 0011).
 
 ---
 
@@ -771,6 +836,10 @@ comportamento passa nos testes, mesmo que a tela ainda esteja crua.
 - **Resultado de skin abre o painel do campeão já com aquela skin selecionada** — o
   resultado de busca é atalho para dentro do painel, não destino separado.
 - Carregar a fatia de assets sob demanda, na primeira abertura de painel.
+- **TanStack Virtual nos resultados de busca de skin** (até 2.149). A grade de 173
+  campeões e a lista de skins do painel (até ~90) **não** virtualizam — não pagam o custo
+  ([ADR 0011](adr/0011-base-de-componentes-do-front.md)).
+- Altura de item fixa por breakpoint, que é o que a virtualização exige.
 - Contagem de cliques do fluxo mantida em ≤ 3.
 
 **NÃO entra**
@@ -787,11 +856,14 @@ comportamento passa nos testes, mesmo que a tela ainda esteja crua.
 5. Nenhum chroma aparece na grade nem na lista de skins do painel.
 6. Do carregamento ao arquivo salvo: ≤ 3 cliques nos quatro caminhos do ADR 0010,
    contados por teste.
+7. Com 2.149 resultados de skin, o número de nós no DOM fica na casa das dezenas, não dos
+   milhares, e a rolagem não perde quadro.
 
 **Testes que provam**
 - Vitest com catálogo de fixture completo: contagem da grade, atalho da busca para a skin
   certa, troca de skin, ausência de chroma.
 - Teste que conta cliques dos quatro caminhos e falha em > 3.
+- Teste que conta nós renderizados com 2.149 resultados e falha se a virtualização sumir.
 
 ---
 
@@ -938,7 +1010,9 @@ comportamento passa nos testes, mesmo que a tela ainda esteja crua.
 | **Cobre** | RF-08, RNF-03 |
 
 **Entra**
-- Navegação por categoria, carregando a fatia sob demanda (a home só carrega `champion`).
+- Navegação por categoria, carregando a fatia sob demanda (a home só carrega o catálogo).
+- **TanStack Virtual nas categorias grandes** — ícones de perfil (5.021) e emotes (2.347)
+  ([ADR 0011](adr/0011-base-de-componentes-do-front.md)).
 - Filtros por função, lane, comprável, mapa, árvore de runa e elo, a partir das `tags`.
 - Combinação de filtro com busca.
 
@@ -951,6 +1025,8 @@ comportamento passa nos testes, mesmo que a tela ainda esteja crua.
 2. Cada filtro reduz a lista corretamente, e combinados também.
 3. A fatia `champion` continua sendo a única carregada na home (RNF-03).
 4. Filtro sem resultado mostra estado vazio com o que foi filtrado.
+5. Abrir a categoria de ícones de perfil (5.021) mantém o DOM na casa das dezenas de nós e
+   a rolagem fluida.
 
 **Testes que provam**
 - Vitest com fixture multicategoria: carga sob demanda, cada filtro, combinações, vazio.
@@ -1128,14 +1204,16 @@ comportamento passa nos testes, mesmo que a tela ainda esteja crua.
 | | |
 |---|---|
 | **Objetivo** | Aplicar o desenho feito no Claude Design sobre o comportamento já testado |
-| **Dependências** | T-27, T-28, T-29 |
+| **Dependências** | T-27, T-28, T-29, **T-34** |
 | **Estimativa** | ~300 linhas |
 | **Effort** | médio |
 | **Cobre** | §A.4 do KICKOFF, RNF-11 |
 
+> 🚧 **Bloqueado junto com T-34** até `docs/design/` existir no repositório.
+
 **Entra**
-- Tokens de espaçamento, cor e tipografia a partir do design.
-- Aplicação nos componentes já existentes, **sem mudar comportamento**.
+- Aplicação dos tokens de **T-34** nos componentes já existentes, **sem mudar
+  comportamento**, conferindo cada tela contra a referência em `docs/design/`.
 - Verificação de contraste sobre a paleta escolhida.
 - Ajuste de responsividade.
 
@@ -1304,7 +1382,7 @@ Todo requisito da Spec tem pelo menos um ticket.
 |---|---|---|---|
 | 0 | ✅ T-02 → T-01 | sequencial | **Concluída.** Orçamento fechado em 2,0 GB (20,1 % de 10 GB); protótipo removido |
 | 1 | (T-03 ∥ T-04) → (T-05 ∥ T-06) → T-07; T-08 ∥ | 2 frentes | **Esqueleto andante**: 1 campeão, 2 tipos, ponta a ponta |
-| 2 | T-09 → (T-10 ∥ T-11 ∥ T-12) → T-13; (T-14 ∥ T-15) ∥ | 2 frentes | Catálogo de campeões completo e automático |
+| 2 | T-09 → (T-10 ∥ T-11 ∥ T-12) → T-13; (T-14 ∥ T-15) ∥; 🚧 T-34 quando o design chegar | 2 frentes | Catálogo de campeões completo e automático |
 | 3 | (T-16 → T-17) ∥ (T-19 → T-20); T-18 ao final | 2 frentes | Grade de campeões, seletor de skin, chromas e a segunda fonte |
 | 4 | (T-21 ∥ T-22) → T-23; (T-24 ∥ T-25 ∥ T-26) ∥ | 2 frentes | Catálogo inteiro e download em lote |
 | 5 | (T-27 ∥ T-28 ∥ T-31) → T-29 → T-30 | 3 frentes | Produto fechado e vestido |
