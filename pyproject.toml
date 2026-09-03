@@ -1,0 +1,48 @@
+# Raiz virtual do workspace Python (uv). Não é um pacote publicável:
+# serve só para agrupar os membros e centralizar a configuração de qualidade.
+
+[tool.uv.workspace]
+members = ["apps/api", "packages/indexer", "packages/schema"]
+
+[tool.uv.sources]
+lol-assets-schema = { workspace = true }
+lol-assets-indexer = { workspace = true }
+lol-assets-api = { workspace = true }
+
+[dependency-groups]
+dev = [
+    "ruff>=0.14.0",
+    "mypy>=1.18.0",
+    "pytest>=8.4.0",
+    "pytest-asyncio>=1.2.0",
+    "httpx>=0.28.0",
+    "respx>=0.22.0",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+extend-exclude = ["prototype"]
+
+[tool.ruff.lint]
+select = [
+    "E",   # pycodestyle
+    "F",   # pyflakes
+    "I",   # isort
+    "UP",  # pyupgrade
+    "B",   # bugbear
+    "SIM", # simplify
+    "RUF",
+]
+
+[tool.mypy]
+python_version = "3.12"
+files = ["apps", "packages"]
+exclude = "prototype"
+strict = true
+warn_unreachable = true
+
+[tool.pytest.ini_options]
+testpaths = ["apps", "packages"]
+addopts = "-q"
+asyncio_mode = "auto"

@@ -1,0 +1,39 @@
+# Node
+node_modules/
+.pnpm-store/
+*.tsbuildinfo
+
+# Next.js
+.next/
+out/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+*.egg-info/
+dist/
+build/
+
+# Ambiente
+.env
+.env.local
+.env.*.local
+
+# Artefatos de spike / indexação (nunca versionar binários de asset)
+prototype/spikes/.cache/
+prototype/spikes/out/
+.cache/
+tmp/
+data/
+
+# Editores / SO
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json

@@ -1,0 +1,10 @@
+packages:
+  - "apps/*"
+  - "packages/*"
+  - "prototype/*"
+
+# pnpm 11 nao le mais configuracao do campo "pnpm" do package.json e exige
+# aprovacao explicita do postinstall de pacotes com binario nativo.
+allowBuilds:
+  esbuild: true
+  unrs-resolver: true

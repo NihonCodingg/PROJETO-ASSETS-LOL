@@ -1,0 +1,16 @@
+{
+  "name": "lol-assets",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Catálogo público de assets visuais de League of Legends em PNG.",
+  "packageManager": "pnpm@11.8.0",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "lint": "pnpm -r --if-present lint",
+    "typecheck": "pnpm -r --if-present typecheck",
+    "test": "pnpm -r --if-present test",
+    "build": "pnpm -r --if-present build"
+  }
+}

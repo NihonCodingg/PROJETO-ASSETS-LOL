@@ -1,0 +1,23 @@
+[project]
+name = "lol-assets-indexer"
+version = "0.0.0"
+description = "Adaptadores de fonte, fusão, conversão para PNG e publicação do índice."
+requires-python = ">=3.12"
+dependencies = [
+    "lol-assets-schema",
+    "httpx>=0.28.0",
+    "pillow>=11.0.0",
+    "typer>=0.15.0",
+    "pydantic>=2.9.0",
+    "pydantic-settings>=2.6.0",
+]
+
+[project.scripts]
+lol-assets-indexer = "lol_assets_indexer.cli:app"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/lol_assets_indexer"]
