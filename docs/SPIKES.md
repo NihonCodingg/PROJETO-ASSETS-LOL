@@ -293,6 +293,74 @@ Somando o que o tarball já entrega em PNG e que está no escopo (ícones de per
 
 ---
 
+## S4 — Orçamento fechado (decisão D4)
+
+Emotes e ward skins eram os dois buracos do RNF-05: contados, nunca medidos em bytes.
+Medidos por amostragem aleatória com semente fixa (`20260903`), 40 arquivos por categoria.
+De quebra, fecharam-se os dois buracos menores que sobravam.
+
+| Categoria | Arquivos | Medição | Mediana | Total |
+|---|---:|---|---:|---:|
+| Emotes | 2.338 | amostra de 40, todos 256×256 PNG | 70,2 KB | **156,5 MB** |
+| Ward skins | 530 | amostra de 40, 460×550 PNG | 15,3 KB | **7,7 MB** |
+| Loading vintage | 915 | proporção medida no S2 (42,6 % das skins) | 58,5 KB | **51,1 MB** |
+| Emblemas de elo | zip | `Content-Length` do zip oficial da Riot | — | **61,5 MB** |
+
+Notas honestas sobre a amostragem:
+
+- **Emotes:** 9 das 2.347 entradas têm `inventoryIcon` vazio; sobram 2.338 arquivos reais.
+  A amostra veio homogênea — 40 de 40 em 256×256 PNG.
+- **Ward skins:** cada ward tem **duas** imagens (`wardImagePath` e `wardShadowImagePath`),
+  então são 530 arquivos, não 265. A distribuição é torta: mediana 15,3 KB contra média
+  56,3 KB, com um caso de 1623×1536 e 685 KB. Usando a média em vez da mediana o total
+  vai de 7,7 MB para 29,8 MB — **irrelevante** para a decisão, porque muda o orçamento
+  total de 2,00 GB para 2,03 GB.
+- **Emblemas de elo:** `ranked-emblems-latest.zip` respondeu **HTTP 200 · 64.478.096 bytes**,
+  o que confirma §B.4 e dispensa o cdragon para esta categoria.
+
+### Orçamento de uma versão completa
+
+Onde havia número exato (o tarball, medido em 100 % dos arquivos no S1), usou-se o exato;
+extrapolação só onde não havia.
+
+| Categoria | Arquivos | Tamanho | % | Origem do número |
+|---|---:|---:|---:|---|
+| Ícone de perfil | 5.021 | 554,0 MB | 26,9 % | S1, exato |
+| Chromas | 7.037 | 408,7 MB | 19,9 % | S3, extrapolado |
+| `splash_wide` | 2.118 | 367,4 MB | 17,8 % | S1, exato |
+| `splash_centered` | 2.118 | 219,6 MB | 10,7 % | S1, exato |
+| Emotes | 2.338 | 156,5 MB | 7,6 % | **S4** |
+| Loading | 2.118 | 124,4 MB | 6,0 % | S1, exato |
+| Tile | 2.118 | 89,4 MB | 4,3 % | S1, exato |
+| Emblemas de elo | zip | 61,5 MB | 3,0 % | **S4** |
+| Loading vintage | 915 | 51,1 MB | 2,5 % | **S4** |
+| Ward skins | 530 | 7,7 MB | 0,4 % | **S4** |
+| Ícone de item | 868 | 5,5 MB | 0,3 % | S1, exato |
+| Square do campeão | 173 | 4,6 MB | 0,2 % | S1, exato |
+| Ícone de habilidade e feitiço | 726 | 4,2 MB | 0,2 % | S1, exato |
+| Runas | 88 | 2,1 MB | 0,1 % | S1, exato |
+| Ícone de passiva | 173 | 1014,0 KB | 0,0 % | S1, exato |
+| Minimapa | 5 | 577,9 KB | 0,0 % | S1, exato |
+| **Total** | **26.346** | **2,0 GB** | | |
+
+### Veredito
+
+**Cabe.** 2,0 GB = **20,1 %** do tier gratuito de 10 GB do R2, e bem abaixo do limite de
+aborto de 8 GB do RNF-05. A condição de parada do T-02 **não** foi disparada.
+
+A projeção do [ADR 0007](adr/0007-politica-de-versoes-e-orcamento.md) era "~1,9 GB"; o
+medido é 2,0 GB. A estimativa estava certa.
+
+Sobra que vale registrar: com uma versão ocupando 2,0 GB, caberiam **quatro** versões
+completas nos 10 GB. A política de uma versão só continua valendo — o custo constante é o
+que garante que o orçamento nunca é atingido por acúmulo —, mas há folga real se algum dia
+fizer sentido guardar a anterior.
+
+E se um dia apertar, a primeira fatia a sair continua sendo a mesma: **ícones de perfil**,
+sozinhos 26,9 % do total e a categoria que menos serve a um editor de vídeo.
+
+---
+
 ## O que estes números mudam no plano
 
 Recomendações para a Spec. Cada uma vira ADR.
@@ -369,4 +437,5 @@ Descoberta relacionada: o pnpm 11 **não lê mais** o campo `pnpm` do `package.j
   tipo Jayce e Nidalee).
 - Histórico: o cdragon serve patches antigos em `raw.communitydragon.org/{patch}/`, mas o
   layout muda entre versões — não medido nesta sessão.
-- Emblemas de elo: `static.developer.riotgames.com` não foi testado (§B.4).
+- ~~Emblemas de elo: `static.developer.riotgames.com` não foi testado (§B.4).~~
+  ✅ Testado no S4: `ranked-emblems-latest.zip` responde HTTP 200 com 61,5 MB.

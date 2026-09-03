@@ -1,0 +1,203 @@
+{
+  "spike": "s4-orcamento",
+  "started_at": "2026-09-03T19:37:56-0300",
+  "user_agent": "lol-assets-indexer/0.0.0-spike (+https://github.com/NihonCodingg/PROJETO-ASSETS-LOL; https://github.com/NihonCodingg/PROJETO-ASSETS-LOL/issues)",
+  "data": {
+    "medidas": {
+      "loading_vintage": {
+        "rotulo": "loading vintage",
+        "n": 23,
+        "skins_medidas": 54,
+        "proporcao_com_vintage": 0.426,
+        "bytes_mediano": 58533
+      },
+      "emotes": {
+        "rotulo": "emotes",
+        "n": 40,
+        "n_tentadas": 40,
+        "ausentes": 0,
+        "bytes_mediano": 70174,
+        "bytes_medio": 83154,
+        "bytes_min": 40621,
+        "bytes_max": 262508,
+        "dimensoes": {
+          "256x256": 40
+        },
+        "formatos": {
+          "PNG": 40
+        },
+        "total_no_catalogo": 2347,
+        "total_com_caminho": 2338,
+        "arquivos_projetados": 2338
+      },
+      "wards": {
+        "rotulo": "ward skins",
+        "n": 40,
+        "n_tentadas": 40,
+        "ausentes": 0,
+        "bytes_mediano": 15299,
+        "bytes_medio": 56250,
+        "bytes_min": 4047,
+        "bytes_max": 685072,
+        "dimensoes": {
+          "460x550": 39,
+          "1623x1536": 1
+        },
+        "formatos": {
+          "PNG": 40
+        },
+        "total_no_catalogo": 265,
+        "imagens_por_ward": 2.0,
+        "arquivos_projetados": 530
+      },
+      "emblemas": {
+        "rotulo": "emblemas de elo",
+        "url": "https://static.developer.riotgames.com/docs/lol/ranked-emblems-latest.zip",
+        "status": 200,
+        "bytes": 64478096,
+        "arquivos_projetados": null
+      }
+    },
+    "orcamento": {
+      "linhas": [
+        {
+          "categoria": "icone de perfil",
+          "fonte_do_numero": "S1 (tarball, exato)",
+          "arquivos": 5021,
+          "bytes": 580928642,
+          "legivel": "554.0 MB",
+          "pct_do_total": 26.9
+        },
+        {
+          "categoria": "chromas",
+          "fonte_do_numero": "S3 (extrapolado)",
+          "arquivos": 7037,
+          "bytes": 428581448,
+          "legivel": "408.7 MB",
+          "pct_do_total": 19.9
+        },
+        {
+          "categoria": "splash_wide",
+          "fonte_do_numero": "S1 (tarball, exato)",
+          "arquivos": 2118,
+          "bytes": 385270717,
+          "legivel": "367.4 MB",
+          "pct_do_total": 17.8
+        },
+        {
+          "categoria": "splash_centered",
+          "fonte_do_numero": "S1 (tarball, exato)",
+          "arquivos": 2118,
+          "bytes": 230249479,
+          "legivel": "219.6 MB",
+          "pct_do_total": 10.7
+        },
+        {
+          "categoria": "emotes",
+          "fonte_do_numero": "S4 (amostra de 40)",
+          "arquivos": 2338,
+          "bytes": 164066812,
+          "legivel": "156.5 MB",
+          "pct_do_total": 7.6
+        },
+        {
+          "categoria": "loading",
+          "fonte_do_numero": "S1 (tarball, exato)",
+          "arquivos": 2118,
+          "bytes": 130493100,
+          "legivel": "124.4 MB",
+          "pct_do_total": 6.0
+        },
+        {
+          "categoria": "tile",
+          "fonte_do_numero": "S1 (tarball, exato)",
+          "arquivos": 2118,
+          "bytes": 93749441,
+          "legivel": "89.4 MB",
+          "pct_do_total": 4.3
+        },
+        {
+          "categoria": "emblemas de elo (zip oficial)",
+          "fonte_do_numero": "S4 (Content-Length)",
+          "arquivos": 0,
+          "bytes": 64478096,
+          "legivel": "61.5 MB",
+          "pct_do_total": 3.0
+        },
+        {
+          "categoria": "loading vintage",
+          "fonte_do_numero": "S4 (proporcao do S2)",
+          "arquivos": 915,
+          "bytes": 53557695,
+          "legivel": "51.1 MB",
+          "pct_do_total": 2.5
+        },
+        {
+          "categoria": "ward skins",
+          "fonte_do_numero": "S4 (amostra de 40)",
+          "arquivos": 530,
+          "bytes": 8108470,
+          "legivel": "7.7 MB",
+          "pct_do_total": 0.4
+        },
+        {
+          "categoria": "icone de item",
+          "fonte_do_numero": "S1 (tarball, exato)",
+          "arquivos": 868,
+          "bytes": 5802119,
+          "legivel": "5.5 MB",
+          "pct_do_total": 0.3
+        },
+        {
+          "categoria": "square do campeao",
+          "fonte_do_numero": "S1 (tarball, exato)",
+          "arquivos": 173,
+          "bytes": 4866217,
+          "legivel": "4.6 MB",
+          "pct_do_total": 0.2
+        },
+        {
+          "categoria": "icone de habilidade e feitico",
+          "fonte_do_numero": "S1 (tarball, exato)",
+          "arquivos": 726,
+          "bytes": 4392692,
+          "legivel": "4.2 MB",
+          "pct_do_total": 0.2
+        },
+        {
+          "categoria": "runas",
+          "fonte_do_numero": "S1 (tarball, exato)",
+          "arquivos": 88,
+          "bytes": 2227464,
+          "legivel": "2.1 MB",
+          "pct_do_total": 0.1
+        },
+        {
+          "categoria": "icone de passiva",
+          "fonte_do_numero": "S1 (tarball, exato)",
+          "arquivos": 173,
+          "bytes": 1038351,
+          "legivel": "1014.0 KB",
+          "pct_do_total": 0.0
+        },
+        {
+          "categoria": "minimapa",
+          "fonte_do_numero": "S1 (tarball, exato)",
+          "arquivos": 5,
+          "bytes": 591747,
+          "legivel": "577.9 KB",
+          "pct_do_total": 0.0
+        }
+      ],
+      "arquivos_total": 26346,
+      "bytes_total": 2158402490,
+      "total_legivel": "2.0 GB",
+      "pct_do_tier_gratuito": 20.1,
+      "limite_r2_bytes": 10737418240,
+      "limite_aborto_bytes": 8589934592,
+      "cabe_em_10gb": true,
+      "abaixo_do_aborto_de_8gb": true,
+      "maior_categoria": "icone de perfil"
+    }
+  }
+}
