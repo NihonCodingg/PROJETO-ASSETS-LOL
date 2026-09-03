@@ -24,12 +24,13 @@ build/
 .env.local
 .env.*.local
 
-# Artefatos de spike / indexação (nunca versionar binários de asset)
+# Artefatos de spike / indexação (nunca versionar binários de asset).
+# Ancorado na raiz: `packages/schema/data/` é contrato e precisa ser versionado.
 prototype/spikes/.cache/
 prototype/spikes/out/
 .cache/
-tmp/
-data/
+/tmp/
+/data/
 
 # Editores / SO
 .DS_Store

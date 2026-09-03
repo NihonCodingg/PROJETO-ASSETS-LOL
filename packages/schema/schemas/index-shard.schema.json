@@ -1,0 +1,216 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/NihonCodingg/PROJETO-ASSETS-LOL/schemas/index-shard.schema.json",
+  "title": "Fatia do índice de assets",
+  "description": "Um arquivo por categoria e por versão do jogo. É o que o front baixa e usa para busca no cliente. O manifesto (index-manifest.schema.json) lista as fatias disponíveis.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "gameVersion", "category", "generatedAt", "assets"],
+  "properties": {
+    "schemaVersion": {
+      "description": "Versão deste contrato. Muda só com ADR.",
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "gameVersion": {
+      "description": "Patch do jogo, como o ddragon publica (ex.: 16.17.1).",
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "category": { "$ref": "#/$defs/category" },
+    "generatedAt": { "type": "string", "format": "date-time" },
+    "assetsBaseUrl": {
+      "description": "Prefixo público do bucket para montar a URL de um storageKey. Ausente quando nenhum asset desta fatia foi copiado (versões antigas).",
+      "type": "string",
+      "format": "uri"
+    },
+    "assets": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/asset" }
+    }
+  },
+  "$defs": {
+    "category": {
+      "description": "Agrupamento de alto nível; também é a unidade de fatiamento do índice e dos zips pré-gerados.",
+      "type": "string",
+      "enum": [
+        "champion",
+        "item",
+        "profile_icon",
+        "rune",
+        "summoner_spell",
+        "emote",
+        "ward",
+        "map",
+        "rank",
+        "misc"
+      ]
+    },
+    "assetType": {
+      "description": "Nomes canônicos. `splash_centered` e `splash_wide` vêm do ADR 0002; os nomes das fontes (`centered`, `uncentered`) são proibidos aqui.",
+      "type": "string",
+      "enum": [
+        "square",
+        "splash_centered",
+        "splash_wide",
+        "loading",
+        "loading_vintage",
+        "tile",
+        "chroma",
+        "ability_icon",
+        "passive_icon",
+        "item_icon",
+        "profile_icon",
+        "rune_icon",
+        "rune_tree_icon",
+        "stat_mod_icon",
+        "summoner_spell_icon",
+        "emote_icon",
+        "ward_icon",
+        "map_image",
+        "rank_emblem"
+      ]
+    },
+    "source": {
+      "description": "De onde os bytes vieram. `wiki` só pode aparecer com consentimento registrado (ADR 0004).",
+      "type": "string",
+      "enum": ["ddragon", "cdragon", "riot_static", "wiki"]
+    },
+    "asset": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "type",
+        "category",
+        "names",
+        "source",
+        "sourceUrl",
+        "fileName",
+        "width",
+        "height",
+        "format",
+        "hasAlpha",
+        "bytes",
+        "sha256"
+      ],
+      "properties": {
+        "id": {
+          "description": "Identidade estável entre versões: \"{type}:{chave natural}\". Ex.: \"splash_centered:24004\", \"item_icon:3031\".",
+          "type": "string",
+          "pattern": "^[a-z_]+:[A-Za-z0-9_.-]+$"
+        },
+        "type": { "$ref": "#/$defs/assetType" },
+        "category": { "$ref": "#/$defs/category" },
+
+        "championKey": {
+          "description": "Id numérico do campeão. É a chave de fusão entre ddragon e cdragon (KICKOFF §B.1.5).",
+          "type": "integer",
+          "minimum": 1
+        },
+        "championId": {
+          "description": "Id interno do ddragon (ex.: MissFortune). A grafia muda entre patches — nunca use para exibir.",
+          "type": "string"
+        },
+        "skinId": {
+          "description": "{championKey}{skinNum:03d}. Ex.: Jax Deus da Guerra = 24004.",
+          "type": "integer",
+          "minimum": 1
+        },
+        "skinNum": { "type": "integer", "minimum": 0 },
+        "isBaseSkin": { "type": "boolean" },
+        "parentSkinNum": {
+          "description": "Presente só em chroma. Espelha o campo `parentSkin` do ddragon (KICKOFF §B.1.4).",
+          "type": "integer",
+          "minimum": 0
+        },
+        "itemId": { "type": "integer", "minimum": 1 },
+        "refId": {
+          "description": "Id da fonte para o que não é campeão nem item (ícone de perfil, emote, ward, runa, elo).",
+          "type": "string"
+        },
+
+        "names": {
+          "description": "Nome exibido por idioma. pt_BR é obrigatório; en_US entra quando disponível.",
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["pt_BR"],
+          "properties": {
+            "pt_BR": { "type": "string", "minLength": 1 },
+            "en_US": { "type": "string", "minLength": 1 }
+          }
+        },
+        "aliases": {
+          "description": "Termos extras de busca específicos deste asset. A tabela geral de apelidos de campeão vive em data/champion-aliases.json.",
+          "type": "array",
+          "items": { "type": "string" },
+          "default": []
+        },
+        "tags": {
+          "description": "Filtros: função do campeão, lane, comprável, mapa, árvore de runa, elo.",
+          "type": "array",
+          "items": { "type": "string" },
+          "default": []
+        },
+
+        "source": { "$ref": "#/$defs/source" },
+        "sourceUrl": {
+          "description": "URL original. Sempre presente — é o que mantém versões antigas utilizáveis sem copiar nada.",
+          "type": "string",
+          "format": "uri"
+        },
+        "storageKey": {
+          "description": "Chave no bucket. Ausente quando o asset não foi copiado (versões que não são a atual — ADR 0007). Sem ela, o front usa sourceUrl.",
+          "type": "string"
+        },
+        "fileName": {
+          "description": "Nome previsível entregue no download, com extensão do formato de origem (§A.4 item 4). Ex.: Jax_004_splash_centered.jpg.",
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_.-]+\\.(png|jpg)$"
+        },
+
+        "width": { "type": "integer", "minimum": 1 },
+        "height": { "type": "integer", "minimum": 1 },
+        "format": {
+          "description": "Formato dos bytes servidos. O indexador nunca re-encoda (ADR 0001).",
+          "type": "string",
+          "enum": ["png", "jpeg"]
+        },
+        "hasAlpha": {
+          "description": "Medido com Pillow. Quando true, o asset nunca pode ser convertido para JPEG (ADR 0001 regra 4).",
+          "type": "boolean"
+        },
+        "bytes": { "type": "integer", "minimum": 1 },
+        "sha256": {
+          "description": "Hash dos bytes de origem. Serve para deduplicar e para detectar mudança entre patches.",
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      },
+      "allOf": [
+        {
+          "$comment": "Todo asset com hasAlpha precisa ser PNG — JPEG não carrega canal alfa.",
+          "if": { "properties": { "hasAlpha": { "const": true } }, "required": ["hasAlpha"] },
+          "then": { "properties": { "format": { "const": "png" } } }
+        },
+        {
+          "$comment": "Assets de campeão precisam da chave de fusão.",
+          "if": { "properties": { "category": { "const": "champion" } }, "required": ["category"] },
+          "then": { "required": ["championKey", "championId"] }
+        },
+        {
+          "$comment": "Cortes de splash e afins são sempre por skin.",
+          "if": {
+            "properties": {
+              "type": {
+                "enum": ["splash_centered", "splash_wide", "loading", "loading_vintage", "tile", "chroma"]
+              }
+            },
+            "required": ["type"]
+          },
+          "then": { "required": ["skinId", "skinNum"] }
+        }
+      ]
+    }
+  }
+}
