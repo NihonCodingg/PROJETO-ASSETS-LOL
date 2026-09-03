@@ -39,8 +39,9 @@ cp .env.example .env
 Se o `uv` não estiver no PATH (é o caso quando foi instalado com `pip install uv`),
 troque `uv` por `python -m uv` em todos os comandos.
 
-**Atenção no Windows:** `pnpm install` falha com `ERR_PNPM_EPERM` se o caminho do
-repositório tiver acento. Use um caminho ASCII (ex.: `D:\PROJETOS\PROJETO-ASSETS-LOL`).
+**Regra no Windows: o caminho do repositório não pode ter caractere não-ASCII.**
+Com acento, o `pnpm install` falha com `ERR_PNPM_EPERM` nos pacotes de binário nativo
+(`esbuild`, `unrs-resolver`). Mantenha em um caminho como `D:\PROJETOS\PROJETO-ASSETS-LOL`.
 Detalhes em [`docs/SPIKES.md`](docs/SPIKES.md).
 
 Qualidade (é o que a CI roda):

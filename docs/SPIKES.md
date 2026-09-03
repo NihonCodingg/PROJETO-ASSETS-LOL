@@ -323,11 +323,16 @@ Recomendações para a Spec. Cada uma vira ADR.
 
 ---
 
-## Ambiente — um bloqueio local encontrado nesta sessão
+## Ambiente — o acento no caminho quebra o pnpm (RESOLVIDO em 03/09/2026)
 
-`pnpm install` **falha** dentro de `D:\PROGRAMAÇÃO\…` com
+> **Resolvido.** O repositório foi movido para `D:\PROJETOS\PROJETO-ASSETS-LOL` e o
+> `pnpm install` passou a terminar em exit 0. O espelho ASCII foi apagado. A regra que
+> fica: **o caminho do repositório não pode ter caractere não-ASCII.** O diagnóstico
+> abaixo é o registro de como isso foi isolado.
+
+`pnpm install` **falha** dentro de um caminho com acento (era `D:\PROGRAMAÇÃO\…`) com
 `ERR_PNPM_EPERM: operation not permitted, rename` ao instalar pacotes com binário
-nativo (`esbuild`, `unrs-resolver`). Isolado com três testes controlados:
+nativo (`esbuild`, `unrs-resolver`). Isolado com quatro testes controlados:
 
 | Caminho | Resultado |
 |---|---|
@@ -339,13 +344,14 @@ nativo (`esbuild`, `unrs-resolver`). Isolado com três testes controlados:
 Ou seja: **o acento no caminho é a causa**, não o espaço nem o antivírus. Seis tentativas
 com limpeza dos diretórios temporários não resolveram.
 
-Contorno usado nesta sessão: o workspace foi espelhado em `C:\…\lolassets-mirror`,
+Contorno usado enquanto durou: o workspace foi espelhado em `C:\…\lolassets-mirror`,
 onde `pnpm install`, `eslint`, `tsc` e `vitest` rodaram e passaram; o `pnpm-lock.yaml`
-gerado lá foi commitado. A CI roda em Linux e não é afetada.
+gerado lá foi commitado. A CI roda em Linux e nunca foi afetada.
 
-**Precisa da sua decisão:** mover o repositório para um caminho sem acento (por
-exemplo `D:\PROJETOS\PROJETO-ASSETS-LOL`) resolve de vez e é o que eu recomendo.
-Enquanto isso, o desenvolvimento Python funciona normalmente no caminho atual.
+**Confirmação da causa.** Depois de mover o repositório para
+`D:\PROJETOS\PROJETO-ASSETS-LOL` — mesma máquina, mesmo pnpm, mesmo Defender ligado,
+mesmo lockfile — o `pnpm install` terminou em **exit 0**, com os postinstall de `esbuild`
+e `unrs-resolver` executados. Foi a única variável alterada. O espelho foi apagado.
 
 Descoberta relacionada: o pnpm 11 **não lê mais** o campo `pnpm` do `package.json`.
 `onlyBuiltDependencies` virou `allowBuilds` no `pnpm-workspace.yaml` — sem isso o

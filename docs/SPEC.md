@@ -400,7 +400,7 @@ jeito de o site apodrecer.
 |---|---|---|---|
 | **D1** | Nome público do produto | Escolher antes do lançamento; não pode conter "Riot", "League of Legends" nem "LoL" | Lançamento |
 | **D2** | Consentimento da Weird Gloop | Pedir agora — é o único caminho para arte acima de 1280×720 | Tier HD |
-| **D3** | Mover o repositório para caminho ASCII | Recomendo mover; é o que destrava `pnpm install` local | Desenvolvimento web local |
+| ~~**D3**~~ | ~~Mover o repositório para caminho ASCII~~ | ✅ **Resolvida em 03/09/2026.** Repositório em `D:\PROJETOS\PROJETO-ASSETS-LOL`; `pnpm install` em exit 0 | — |
 | **D4** | Emotes (2.347) e ward skins (265) entram na v1? | Sim, mas **medir os bytes primeiro** — é o único buraco no orçamento do RNF-05 | Fechar o orçamento |
 | **D5** | Ícones de perfil (5.021, 554 MB) valem 32 % do armazenamento? | Manter na v1; se apertar, é a primeira fatia a sair | Nada |
 | **D6** | Texto exato do aviso legal + registro no Developer Portal | Copiar literalmente da política e registrar antes de divulgar | Lançamento |
