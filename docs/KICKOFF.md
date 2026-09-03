@@ -80,10 +80,10 @@ O schema vive em `packages/schema` e é a única coisa que front, API e indexado
 
 **Princípios de system design que a Spec deve respeitar:**
 - Indexação separada da consulta; o tráfego de usuário nunca toca ddragon/cdragon/wiki.
-- Tudo que puder ser pré-gerado, é pré-gerado no indexador (PNGs, zips por categoria, índice de busca).
-- A API é fina: serve índice, gera zips sob demanda com cache por hash da seleção, e expõe `/health` e `/versions`.
+- Tudo que puder ser pré-gerado, é pré-gerado no indexador (índice de busca, zips por categoria). Assets **não** são convertidos: vão para o bucket nos bytes de origem ([ADR 0001](adr/0001-formato-de-entrega-dos-assets.md)).
+- **Nada no caminho do usuário depende de um servidor** ([ADR 0005](adr/0005-arquitetura-estatica-custo-zero.md)). Índice, assets e zips por categoria são estáticos; seleção customizada é zipada no cliente com JSZip. A API FastAPI é componente opcional de portfólio ([ADR 0006](adr/0006-api-como-componente-opcional.md)).
 - Front carrega o índice uma vez por versão e busca no cliente; imagens vêm direto do CDN.
-- Degradação graciosa: se a API cair, busca e download individual continuam funcionando (só o zip sob demanda para).
+- Degradação graciosa: como não há servidor no caminho crítico, o site inteiro continua de pé enquanto o bucket responder.
 - Observabilidade mínima desde o início: logs estruturados, métricas de indexação (assets por fonte, falhas, duração), alerta quando o teste de contrato de uma fonte falha.
 
 ### 0.4 Definição de pronto (por ticket)
@@ -148,13 +148,14 @@ Catálogo completo de assets visuais, sempre na maior resolução disponível en
 3. **League of Legends Wiki (wiki.leagueoflegends.com)** — MediaWiki hospedado pela Weird Gloop. Fonte secundária para artes HD, unidades não-campeão, histórico e curadoria de nomes. Acessada via `api.php` apenas pelo indexador, nunca em tempo real pelo usuário. Quando o mesmo asset existe em mais de uma fonte, vence a de maior resolução; a fonte usada fica registrada no índice e visível no card.
 
 Funcionalidades:
-- Busca instantânea tolerante a erro (acento, apóstrofo, apelidos: "mf", "kaisa", "wukong", "tf", "j4").
+- Busca instantânea tolerante a erro (acento, apóstrofo, apelidos: "mf", "kaisa", "wukong", "tf", "j4"). A unidade do catálogo é a **skin**, não o campeão — ~2.149 entradas ([ADR 0008](adr/0008-catalogo-de-skins-e-seletor.md)). Apelidos vêm de uma tabela mantida à mão ([ADR 0009](adr/0009-apelidos-de-busca-mantidos-a-mao.md)).
 - Navegação por categoria com filtros (função, lane, comprável, árvore de runa, elo…).
-- Seletor de versão/patch, com a versão atual como padrão.
+- Seletor de skin dentro do campeão, com a skin base primeiro; chromas atrás de um toggle.
+- Seletor de versão/patch, com a versão atual como padrão. Só a versão atual tem assets copiados; as anteriores existem como índice e **não** têm splash, loading nem tile históricos ([ADR 0007](adr/0007-politica-de-versoes-e-orcamento.md)).
 - Preview em tamanho real com dimensões visíveis.
-- Download individual em PNG com nome de arquivo previsível.
-- Download em lote (zip): por seleção, por categoria, por campeão ("tudo do Jax").
-- Copiar URL direta do PNG.
+- Download individual nos bytes de origem, com nome de arquivo previsível, e PNG convertido no navegador sob demanda.
+- Download em lote (zip): por categoria, pré-gerado pelo indexador; por seleção ou por campeão, montado no cliente com JSZip.
+- Copiar URL direta do arquivo.
 - Página "Sobre" com créditos e aviso legal.
 
 ### Fora (v1)
@@ -180,10 +181,11 @@ Funcionalidades:
 ## A.5. Requisitos não funcionais
 
 - **Performance:** busca responde em < 50 ms (índice no cliente); imagem abre em < 1 s.
-- **Custo:** o site precisa ser sustentável de graça ou quase. Consequência: os assets são servidos como estáticos via CDN nos bytes de origem, sem conversão no servidor nem por requisição ([ADR 0001](adr/0001-formato-de-entrega-dos-assets.md)).
+- **Custo: zero.** Vercel Hobby (uso não comercial) + Cloudflare R2 no tier gratuito (10 GB, egress zero) + GitHub Actions em repositório público ([ADR 0005](adr/0005-arquitetura-estatica-custo-zero.md)). O produto **não será monetizado**. Assets são servidos como estáticos nos bytes de origem, sem conversão no servidor ([ADR 0001](adr/0001-formato-de-entrega-dos-assets.md)).
+- **Orçamento de armazenamento:** cabe em 10 GB. Assets completos só da versão atual (~1,9 GB medidos); versões anteriores só no índice. Idiomas: `pt_BR` primeiro, `en_US` se couber ([ADR 0007](adr/0007-politica-de-versoes-e-orcamento.md)).
 - **Resiliência:** se ddragon/cdragon caírem, o site continua funcionando com o último índice publicado.
 - **Atualização:** novo patch refletido em até 24 h, sem intervenção manual.
-- **Abuso:** rate limit em geração de zip; zips de categoria inteira pré-gerados.
+- **Abuso:** não se aplica — não há servidor a abusar. Zips de categoria são estáticos e pré-gerados; o zip de seleção roda no navegador do próprio usuário.
 - **Legal:** aviso obrigatório da Riot (Legal Jibber Jabber) visível; sem monetização direta dos assets; sem "Riot", "League of Legends" ou "LoL" no nome público do produto — o nome exibido está [A DECIDIR] até o lançamento ([ADR 0003](adr/0003-nome-publico-do-produto.md)); repositório e pacotes internos ficam como estão. Assets vindos da wiki exibem crédito à League of Legends Wiki / Weird Gloop (o texto da wiki é CC BY-SA; as imagens continuam sendo propriedade da Riot).
 - **Etiqueta com a wiki:** indexador usa a API oficial do MediaWiki com User-Agent identificado (nome do projeto + contato), rate limit conservador, cache agressivo e respeito aos termos de uso da Weird Gloop. O site nunca faz hotlink de imagens da wiki — tudo é copiado pro storage próprio no momento da indexação.
 - **Acessibilidade básica:** navegável por teclado, contraste adequado, alt em todas as imagens.
@@ -191,19 +193,22 @@ Funcionalidades:
 ## A.6. Decisões de arquitetura (nível de ideia)
 
 - **Indexação separada da consulta.** Dados mudam por patch, não por usuário. Um job de indexação roda por patch, gera o índice normalizado e os PNGs, e publica tudo em storage estático. O tráfego dos usuários não toca a Riot.
-- **Front-end:** Next.js + TypeScript + Tailwind, hospedado na Vercel. Busca no cliente sobre o índice.
-- **API:** Python + FastAPI. Responsabilidades: servir índices, gerar zips sob demanda (com cache), expor metadados. Serve de portfólio de back-end.
-- **Indexador:** Python (mesmo repositório da API), com Pillow para conversão. Roda como GitHub Action agendada. Estruturado em **adaptadores por fonte** (`ddragon`, `cdragon`, `wiki`), cada um produzindo assets no mesmo schema; uma etapa de **fusão** deduplica por identidade (campeão + skin + tipo) e escolhe a melhor resolução. Isso permite adicionar ou remover fontes sem tocar no resto.
-- **Storage/CDN:** bucket com egress barato ou gratuito (ex.: Cloudflare R2) + CDN na frente, servindo PNGs e zips pré-gerados.
+- **Front-end:** Next.js + TypeScript + Tailwind, hospedado na Vercel (plano Hobby). Busca no cliente sobre o índice. É o único componente que o usuário toca.
+- **API:** Python + FastAPI, **fora do caminho crítico** — componente opcional de portfólio, com Docker e testes, rodando localmente. O site funciona inteiro sem ela ([ADR 0006](adr/0006-api-como-componente-opcional.md)).
+- **Indexador:** Python (mesmo repositório da API), com Pillow para **medir** dimensões e canal alfa — nunca para converter. Roda como GitHub Action agendada em repositório público. Estruturado em **adaptadores por fonte** (`ddragon`, `cdragon`, `wiki`), cada um produzindo assets no mesmo schema; uma etapa de **fusão** deduplica por identidade (campeão + skin + tipo) e escolhe a melhor resolução. Isso permite adicionar ou remover fontes sem tocar no resto.
+- **Storage/CDN:** Cloudflare R2 no tier gratuito (egress zero) + CDN na frente, servindo os assets nos bytes de origem, o índice e os zips por categoria.
 - **Monorepo:** `apps/web` (Next), `apps/api` (FastAPI), `packages/indexer` (Python), `packages/schema` (contrato do índice compartilhado).
 
 ## A.7. Métricas de sucesso
 
+> O site é de uso pessoal e de um pequeno grupo de amigos. Metas de escala de público e
+> de custo por usuário foram removidas em 03/09/2026 ([ADR 0005](adr/0005-arquitetura-estatica-custo-zero.md)).
+
 - Métrica pessoal: o autor para de abrir Google/wiki durante edições.
 - Tempo mediano da chegada ao primeiro download < 20 s.
-- ≥ 95 % das buscas por nome de campeão retornam o campeão certo em primeiro lugar.
+- ≥ 95 % das buscas por nome de campeão ou de skin retornam o certo em primeiro lugar — atingido por **normalização de texto + tabela de apelidos mantida à mão**, não por busca inteligente ([ADR 0009](adr/0009-apelidos-de-busca-mantidos-a-mao.md)). Quando falhar, a correção é acrescentar uma linha ao arquivo de apelidos.
 - Novo patch refletido em ≤ 24 h em 100 % dos casos.
-- Custo mensal de infra próximo de zero até ~10 k usuários/mês.
+- Custo de operação: **R$ 0,00 por mês**, dentro dos tiers gratuitos da Vercel, do R2 e do GitHub Actions.
 
 ## A.8. Riscos conhecidos
 

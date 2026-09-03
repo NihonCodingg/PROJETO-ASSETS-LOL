@@ -1,19 +1,26 @@
 # lol-assets
 
-Catálogo público de assets visuais de League of Legends em PNG, na melhor
-resolução disponível — pensado para editores de vídeo e thumbnail que precisam
-do arquivo agora, sem login e sem navegar por wiki.
+Catálogo de assets visuais de League of Legends na melhor fonte disponível,
+servidos sem re-encode e com PNG gerado no navegador sob demanda — pensado para
+editores de vídeo e thumbnail que precisam do arquivo agora, sem login e sem
+navegar por wiki.
 
-> Status: **etapa 3 das 7** (protótipo + spikes). Ainda não há produto rodando.
-> A fonte de verdade do projeto é [`docs/KICKOFF.md`](docs/KICKOFF.md).
+> Status: **etapa 4 das 7** (Spec escrita). Ainda não há produto rodando.
+> A fonte de verdade é [`docs/SPEC.md`](docs/SPEC.md), apoiada pelos
+> [ADRs](docs/adr/README.md) e pelos números de [`docs/SPIKES.md`](docs/SPIKES.md).
+> O [`docs/KICKOFF.md`](docs/KICKOFF.md) guarda a ideia e a pesquisa originais.
+
+Uso pessoal e de um pequeno grupo, sem monetização, **custo de operação zero**:
+Vercel Hobby + Cloudflare R2 (tier gratuito) + GitHub Actions. Nada no caminho do
+usuário depende de um servidor nosso.
 
 ## Estrutura
 
 ```
 apps/web/          front-end Next.js (Vercel)
-apps/api/          API FastAPI (zips sob demanda, índice, metadados)
-packages/indexer/  adaptadores de fonte, fusão, conversão e publicação
-packages/schema/   contrato do índice (JSON Schema + tipos TS + Pydantic)
+apps/api/          API FastAPI — opcional, fora do caminho crítico (ADR 0006)
+packages/indexer/  adaptadores de fonte, fusão, nomeação e publicação
+packages/schema/   contrato do índice (JSON Schema + tipos TS) e apelidos de busca
 prototype/         descartável — apagado no primeiro ticket da etapa 6
 docs/              kickoff, spikes, spec, tickets, ADRs e relatórios de sessão
 ```
