@@ -35,8 +35,9 @@ deixa claro que não é formalidade.
    de backlog. É a diferença entre entregar 1280×720 e entregar arte em alta de verdade.
 2. A regra 3 do [CLAUDE.md](../../CLAUDE.md) **não muda**: nenhuma requisição automatizada
    à wiki enquanto `WIKI_CONSENT_GRANTED` não estiver documentado em
-   [`docs/SPIKES.md`](../SPIKES.md) com data e evidência. A trava em código
-   (`prototype/spikes/common.py`) continua ativa.
+   [`docs/SPIKES.md`](../SPIKES.md) com data e evidência. A trava em código vivia no
+   cliente HTTP dos spikes e é recriada, com teste, em
+   `packages/indexer/src/lol_assets_indexer/http.py` pelo ticket T-03.
 3. O pedido é **tarefa humana** (mantenedor), não do agente. Deve dizer, no mínimo:
    o que é o projeto; que só o indexador acessa a wiki, nunca o usuário final; volume
    estimado por patch; o User-Agent identificado; a concorrência proposta (1 requisição

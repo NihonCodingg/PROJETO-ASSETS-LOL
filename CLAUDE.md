@@ -32,7 +32,7 @@
 | `apps/api/` | API FastAPI |
 | `packages/indexer/` | Adaptadores, fusão, conversão e publicação |
 | `packages/schema/` | Contrato do índice (JSON Schema + tipos TS + modelos Pydantic) |
-| `prototype/` | Descartável; apagado no primeiro ticket da etapa 6 |
+| `docs/evidencias/spikes/` | JSONs brutos das medições (o `prototype/` foi apagado no T-01) |
 
 ## Comandos
 

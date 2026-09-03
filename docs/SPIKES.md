@@ -1,18 +1,22 @@
 # SPIKES — números reais das fontes
 
 > Medições feitas em **03/09/2026** contra o patch **16.17.1**.
-> Tudo aqui foi medido, não estimado. Os scripts estão em `prototype/spikes/` e
-> os resultados brutos em `prototype/spikes/results/*.json` (versionados como evidência).
+> Tudo aqui foi medido, não estimado. Os resultados brutos estão em
+> [`docs/evidencias/spikes/`](evidencias/spikes/) (versionados como evidência).
 > Onde a Parte B do [KICKOFF](KICKOFF.md) se mostrou errada, está marcado com **[CORRIGE B.x]**.
 
 ## Como reproduzir
 
+Os scripts viviam em `prototype/spikes/` e foram apagados no ticket T-01, junto com o
+resto do protótipo. Continuam recuperáveis pelo histórico:
+
 ```bash
-uv sync --all-packages
-python prototype/spikes/s1_ddragon.py   # baixa ~2,4 GB para prototype/spikes/.cache/
-python prototype/spikes/s2_cdragon.py
-python prototype/spikes/s3_volume.py    # depende dos resultados de S1 e S2
+git show 0410fd7 -- prototype/spikes   # S1, S2, S3 e o cliente HTTP compartilhado
+git show 388ea0a -- prototype/spikes   # S4
 ```
+
+A partir da Onda 1, o cliente HTTP com a mesma etiqueta passa a viver em
+`packages/indexer/src/lol_assets_indexer/http.py` (ticket T-03), aí sim com testes.
 
 Todas as requisições usaram
 `User-Agent: lol-assets-indexer/0.0.0-spike (+https://github.com/NihonCodingg/PROJETO-ASSETS-LOL; …)`,
@@ -21,9 +25,10 @@ concorrência 4 e backoff exponencial, conforme a regra 4 do [CLAUDE.md](../CLAU
 ## Wiki — status do consentimento
 
 **`WIKI_CONSENT_GRANTED = false`.** Nenhuma requisição a `wiki.leagueoflegends.com`
-foi feita nesta sessão. `prototype/spikes/common.py` tem uma trava explícita que
-levanta exceção se qualquer URL da wiki for passada, então a regra 3 é imposta pelo
-código, não só pela disciplina. O spike **S4 não foi executado** e só será depois que
+foi feita em nenhum spike. O cliente HTTP usado por eles tinha uma trava explícita que
+levantava exceção se qualquer URL da wiki fosse passada, e o **T-03 recria essa trava** em
+`packages/indexer/.../http.py`, com teste. A regra 3 é imposta pelo código, não só pela
+disciplina. O spike **S4 não foi executado** e só será depois que
 o consentimento da Weird Gloop for obtido e registrado aqui, com data e evidência.
 
 ---

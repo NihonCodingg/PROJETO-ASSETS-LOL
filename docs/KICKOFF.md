@@ -15,7 +15,7 @@
 |---|---|---|---|
 | 1. Ideia | ✅ Concluída | Humano + Claude (chat) | Parte A deste documento |
 | 2. Pesquisa | ✅ Concluída | Claude (chat) | Parte B deste documento |
-| 3. Protótipo + Spikes | ⏳ Próxima | Claude Code | `prototype/` descartável + `docs/SPIKES.md` com números reais |
+| 3. Protótipo + Spikes | ✅ Concluída | Claude Code | `docs/SPIKES.md` com números reais; o `prototype/` foi apagado no T-01 |
 | 4. Spec / PRD | ⏳ | Claude Code escreve, humano aprova | `docs/SPEC.md` |
 | 5. Tickets | ⏳ | Claude Code escreve, humano aprova | `docs/TICKETS.md` (≤ 500 linhas de lógica cada) |
 | 6. Execução | ⏳ | Claude Code, um ticket por sessão | PRs pequenos |
@@ -58,7 +58,7 @@ PROJETO-ASSETS-LOL/
 ├── packages/
 │   ├── indexer/              # Python: adaptadores + fusão + conversão + publicação
 │   └── schema/               # JSON Schema do índice + tipos TS gerados + modelos Pydantic gerados
-├── prototype/                # descartável, apagado após a Spec
+├── docs/evidencias/spikes/   # JSONs brutos das medições (o prototype/ saiu no T-01)
 └── .github/workflows/        # ci.yml (lint+test), index.yml (agendado por patch)
 ```
 

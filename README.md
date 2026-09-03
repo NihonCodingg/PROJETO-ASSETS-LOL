@@ -22,8 +22,7 @@ apps/web/          front-end Next.js (Vercel)
 apps/api/          API FastAPI — opcional, fora do caminho crítico (ADR 0006)
 packages/indexer/  adaptadores de fonte, fusão, nomeação e publicação
 packages/schema/   contrato do índice (JSON Schema + tipos TS) e apelidos de busca
-prototype/         descartável — apagado no primeiro ticket da etapa 6
-docs/              kickoff, spikes, spec, tickets, ADRs e relatórios de sessão
+docs/              kickoff, spikes, spec, tickets, ADRs, evidências e sessões
 ```
 
 ## Como rodar

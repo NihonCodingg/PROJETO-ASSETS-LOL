@@ -39,7 +39,11 @@ comportamento passa nos testes, mesmo que a tela ainda esteja crua.
 > obrigaria a reescrever o cliente antes de existir o ticket dele (T-03). Invertendo,
 > T-02 custa ~120 linhas descartáveis e T-01 leva o resultado junto para a evidência.
 
-### T-02 — Spike D4: fechar o orçamento de armazenamento
+### ✅ T-02 — Spike D4: fechar o orçamento de armazenamento
+
+> **Concluído em 03/09/2026** (commit `388ea0a`). Resultado: **2,0 GB**, 20,1 % do tier
+> gratuito de 10 GB. A condição de parada **não** foi disparada. Ver a seção S4 de
+> [`SPIKES.md`](SPIKES.md).
 
 | | |
 |---|---|
@@ -79,7 +83,10 @@ comportamento passa nos testes, mesmo que a tela ainda esteja crua.
 
 ---
 
-### T-01 — Remover o protótipo e preservar a evidência
+### ✅ T-01 — Remover o protótipo e preservar a evidência
+
+> **Concluído em 03/09/2026.** As evidências foram para
+> [`docs/evidencias/spikes/`](evidencias/spikes/) e o `prototype/` deixou de existir.
 
 | | |
 |---|---|
@@ -105,7 +112,12 @@ comportamento passa nos testes, mesmo que a tela ainda esteja crua.
 **Critérios de aceite**
 1. `prototype/` não existe.
 2. `docs/SPIKES.md` aponta para `docs/evidencias/spikes/` e todos os links resolvem.
-3. `grep -r "prototype/"` só encontra ocorrências em `docs/sessoes/`.
+3. `grep -r "prototype/"` só encontra ocorrências **históricas**: relatórios em
+   `docs/sessoes/`, a descrição destes dois tickets, os prompts originais da Parte C do
+   KICKOFF e os `git show` que apontam para o código apagado. Nenhuma referência
+   operante — nenhum caminho que alguém possa tentar executar hoje.
+   *(Critério afrouxado na execução: a redação original — "só em `docs/sessoes/`" — não
+   previa que o próprio `TICKETS.md` descreve o trabalho de apagar o `prototype/`.)*
 4. `pnpm install`, `uv sync --all-packages` e a suíte inteira continuam verdes.
 
 **Testes que provam**
@@ -1290,7 +1302,7 @@ Todo requisito da Spec tem pelo menos um ticket.
 
 | Onda | Tickets | Paralelismo | Entrega |
 |---|---|---|---|
-| 0 | T-02 → T-01 | sequencial | Orçamento fechado, protótipo removido |
+| 0 | ✅ T-02 → T-01 | sequencial | **Concluída.** Orçamento fechado em 2,0 GB (20,1 % de 10 GB); protótipo removido |
 | 1 | (T-03 ∥ T-04) → (T-05 ∥ T-06) → T-07; T-08 ∥ | 2 frentes | **Esqueleto andante**: 1 campeão, 2 tipos, ponta a ponta |
 | 2 | T-09 → (T-10 ∥ T-11 ∥ T-12) → T-13; (T-14 ∥ T-15) ∥ | 2 frentes | Catálogo de campeões completo e automático |
 | 3 | (T-16 → T-17) ∥ (T-19 → T-20); T-18 ao final | 2 frentes | Grade de campeões, seletor de skin, chromas e a segunda fonte |
