@@ -251,6 +251,22 @@ exatamente com a contagem de `data/pt_BR/champion/*.json` do tarball.
 
 Exemplos: 1280×720 de 73 KB → 491 KB; 380×380 de 29 KB → 186 KB; 308×560 de 38 KB → 229 KB.
 
+**No navegador o custo é ainda maior.** Medido dentro do protótipo, com o mesmo caminho
+que o [ADR 0001](adr/0001-formato-de-entrega-dos-assets.md) define
+(`fetch` → `createImageBitmap` → `canvas` → `toBlob("image/png")`), na splash centralizada
+de Miss Fortune:
+
+| | Bytes | Razão |
+|---|---:|---:|
+| Origem (JPEG 1280×720, ddragon) | 123.478 | 1× |
+| PNG gerado pelo Chrome | 1.005.101 | **8,14×** |
+
+O encoder PNG do navegador é menos eficiente que o do Pillow com `optimize=True` (5,71×).
+Isso reforça a decisão: guardar PNG no bucket custaria 5,7× **e** o usuário receberia
+mesmo assim um PNG de 8,1× quando pedisse a conversão. Não há ganho em pré-gerar.
+Confirmado também que o canvas **não é contaminado**, porque o bitmap vem de um `Blob`
+obtido por `fetch` com CORS, não de um `<img>` de outra origem.
+
 Isso é **o número mais importante desta sessão**, porque a §A.4 promete "PNG sempre" e
 a §A.5 exige custo perto de zero. Converter não recupera qualidade nenhuma (a fonte é
 JPEG e não tem alfa), só multiplica o armazenamento e a banda por ~5,7.
