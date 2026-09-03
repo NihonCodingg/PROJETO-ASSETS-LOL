@@ -6,9 +6,15 @@ from pathlib import Path
 
 import pytest
 from jsonschema import Draft202012Validator
-from lol_assets_schema import ALIASES_FILE, MANIFEST_SCHEMA, SCHEMA_VERSION, SHARD_SCHEMA
+from lol_assets_schema import (
+    ALIASES_FILE,
+    CATALOG_SCHEMA,
+    MANIFEST_SCHEMA,
+    SCHEMA_VERSION,
+    SHARD_SCHEMA,
+)
 
-SCHEMAS = [MANIFEST_SCHEMA, SHARD_SCHEMA]
+SCHEMAS = [MANIFEST_SCHEMA, CATALOG_SCHEMA, SHARD_SCHEMA]
 
 
 def test_schema_version_is_exposed() -> None:
@@ -95,3 +101,87 @@ def test_shard_rejeita_alfa_em_jpeg() -> None:
         ],
     }
     assert not validador.is_valid(fatia)
+
+
+def test_catalog_valida_navegacao_e_busca() -> None:
+    """ADR 0010: campeões para navegar, skins para buscar, no mesmo documento."""
+    validador = Draft202012Validator(json.loads(CATALOG_SCHEMA.read_text(encoding="utf-8")))
+    catalogo = {
+        "schemaVersion": SCHEMA_VERSION,
+        "gameVersion": "16.17.1",
+        "generatedAt": "2026-09-03T12:00:00Z",
+        "assetsBaseUrl": "https://assets.example/lol",
+        "champions": [
+            {
+                "championKey": 24,
+                "championId": "Jax",
+                "names": {"pt_BR": "Jax", "en_US": "Jax"},
+                "title": {"pt_BR": "o Grão-Mestre das Armas"},
+                "tags": ["Fighter"],
+                "skinCount": 18,
+                "chromaCount": 31,
+                "baseSkinId": 24000,
+                "thumbnailKey": "16.17.1/champion/Jax_square.png",
+            }
+        ],
+        "skins": [
+            {
+                "skinId": 24000,
+                "skinNum": 0,
+                "championKey": 24,
+                "names": {"pt_BR": "Jax"},
+                "isBase": True,
+            },
+            {
+                "skinId": 24004,
+                "skinNum": 4,
+                "championKey": 24,
+                "names": {"pt_BR": "Jax Deus da Guerra"},
+                "isBase": False,
+                "chromaCount": 5,
+                "thumbnailKey": "16.17.1/champion/Jax_004_tile.jpg",
+            },
+        ],
+    }
+    validador.validate(catalogo)
+
+
+def test_catalog_rejeita_skin_sem_campeao() -> None:
+    """Sem `championKey` não dá para rotular o resultado de busca com o campeão."""
+    validador = Draft202012Validator(json.loads(CATALOG_SCHEMA.read_text(encoding="utf-8")))
+    catalogo = {
+        "schemaVersion": SCHEMA_VERSION,
+        "gameVersion": "16.17.1",
+        "generatedAt": "2026-09-03T12:00:00Z",
+        "champions": [],
+        "skins": [{"skinId": 24004, "skinNum": 4, "names": {"pt_BR": "x"}, "isBase": False}],
+    }
+    assert not validador.is_valid(catalogo)
+
+
+def test_manifesto_exige_catalogo_em_cada_versao() -> None:
+    """ADR 0010: sem catálogo o front não tem como desenhar a home nem buscar."""
+    validador = Draft202012Validator(json.loads(MANIFEST_SCHEMA.read_text(encoding="utf-8")))
+    versao = {
+        "gameVersion": "16.17.1",
+        "indexedAt": "2026-09-03T12:00:00Z",
+        "assetsCopied": True,
+        "shards": [
+            {"category": "champion", "url": "index-champion-abc.json", "assets": 10, "bytes": 100}
+        ],
+    }
+    manifesto = {
+        "schemaVersion": SCHEMA_VERSION,
+        "generatedAt": "2026-09-03T12:00:00Z",
+        "currentVersion": "16.17.1",
+        "versions": [versao],
+    }
+    assert not validador.is_valid(manifesto), "versão sem catálogo deveria falhar"
+
+    versao["catalog"] = {
+        "url": "catalog-abc123.json",
+        "champions": 173,
+        "skins": 2149,
+        "bytes": 340000,
+    }
+    validador.validate(manifesto)

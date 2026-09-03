@@ -6,21 +6,36 @@ Contrato único do índice de assets, compartilhado por `apps/web`, `apps/api` e
 | Caminho | Papel |
 |---|---|
 | `schemas/index-manifest.schema.json` | O `manifest.json` — único arquivo de nome fixo no bucket |
-| `schemas/index-shard.schema.json` | Uma fatia do índice por categoria e versão (`$defs.asset`) |
+| `schemas/catalog.schema.json` | Navegação (173 campeões) e busca (2.149 skins), sem asset |
+| `schemas/index-shard.schema.json` | Uma fatia de assets por categoria e versão (`$defs.asset`), carregada sob demanda |
 | `data/champion-aliases.json` | Apelidos de busca, mantidos à mão |
 | `src-ts/` | Tipos TypeScript (escritos à mão hoje; gerados em ticket futuro) |
 | `src/lol_assets_schema/` | Caminhos do contrato e `SCHEMA_VERSION` para o lado Python |
 
-Contrato atual: **1.0.0**. Qualquer mudança exige um ADR em `docs/adr/` e uma versão nova
+Contrato atual: **1.1.0**. Qualquer mudança exige um ADR em `docs/adr/` e uma versão nova
 (KICKOFF §0.3).
 
-## Duas regras que o schema impõe, não só documenta
+## Navegação e busca operam em níveis diferentes
+
+O `catalog` carrega as **duas** projeções, e nenhum asset:
+
+- `champions[]` — 173 entradas. É a grade padrão do site.
+- `skins[]` — 2.149 entradas. É o índice de busca, e é o que faz `"K/DA"` e `"Prestígio"`
+  retornarem skins de vários campeões sem nenhum campo extra: os nomes das skins já os
+  contêm.
+
+As fatias de asset vêm **depois**, sob demanda. Ver
+[ADR 0010](../../docs/adr/0010-navegacao-por-campeao-busca-por-skin.md).
+
+## Três regras que o schema impõe, não só documenta
 
 - `hasAlpha: true` obriga `format: "png"`. JPEG não carrega canal alfa
   ([ADR 0001](../../docs/adr/0001-formato-de-entrega-dos-assets.md) regra 4).
 - Cortes de splash exigem `skinId` e `skinNum`.
+- Toda skin do catálogo exige `championKey` — sem ela não dá para rotular o resultado de
+  busca com o campeão de origem.
 
-Ambas têm teste em `tests/test_schema_contract.py`, incluindo um teste negativo.
+As três têm teste em `tests/test_schema_contract.py`, cada uma com um caso negativo.
 
 ## Apelidos de busca
 

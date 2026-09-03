@@ -1,0 +1,114 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/NihonCodingg/PROJETO-ASSETS-LOL/schemas/catalog.schema.json",
+  "title": "Catálogo — projeção de navegação e busca",
+  "description": "Navegação e busca operam em níveis diferentes (ADR 0010): a grade padrão é de campeões, o índice de busca é de skins. Este documento carrega as duas projeções e nenhum asset. É o único arquivo pesado carregado na abertura do site; as fatias de asset vêm sob demanda.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "gameVersion", "generatedAt", "champions", "skins"],
+  "properties": {
+    "schemaVersion": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" },
+    "gameVersion": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" },
+    "generatedAt": { "type": "string", "format": "date-time" },
+    "assetsBaseUrl": {
+      "description": "Prefixo público para resolver as miniaturas. Ausente em versões sem assets copiados (ADR 0007).",
+      "type": "string",
+      "format": "uri"
+    },
+    "champions": {
+      "description": "Nível de NAVEGAÇÃO: uma entrada por campeão, ~173.",
+      "type": "array",
+      "items": { "$ref": "#/$defs/champion" }
+    },
+    "skins": {
+      "description": "Nível de BUSCA: uma entrada por skin, ~2.149. Inclui as skins base.",
+      "type": "array",
+      "items": { "$ref": "#/$defs/skin" }
+    }
+  },
+  "$defs": {
+    "names": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["pt_BR"],
+      "properties": {
+        "pt_BR": { "type": "string", "minLength": 1 },
+        "en_US": { "type": "string", "minLength": 1 }
+      }
+    },
+    "champion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["championKey", "championId", "names", "skinCount", "baseSkinId"],
+      "properties": {
+        "championKey": { "type": "integer", "minimum": 1 },
+        "championId": {
+          "description": "Id interno do ddragon. A grafia muda entre patches — nunca exibir.",
+          "type": "string"
+        },
+        "names": { "$ref": "#/$defs/names" },
+        "title": {
+          "description": "Subtítulo do campeão (\"o Grão-Mestre das Armas\").",
+          "$ref": "#/$defs/names"
+        },
+        "tags": {
+          "description": "Função e lane, para os filtros do RF-08.",
+          "type": "array",
+          "items": { "type": "string" },
+          "default": []
+        },
+        "aliases": {
+          "description": "Apelidos que valem só para este campeão. A tabela geral vive em data/champion-aliases.json (ADR 0009).",
+          "type": "array",
+          "items": { "type": "string" },
+          "default": []
+        },
+        "skinCount": {
+          "description": "Exibido no cartão da grade (RF-04). Conta as skins, não os chromas.",
+          "type": "integer",
+          "minimum": 1
+        },
+        "chromaCount": { "type": "integer", "minimum": 0, "default": 0 },
+        "baseSkinId": { "type": "integer", "minimum": 1 },
+        "thumbnailKey": {
+          "description": "storageKey do square, para desenhar o cartão sem carregar a fatia de assets.",
+          "type": "string"
+        },
+        "thumbnailUrl": {
+          "description": "Alternativa a thumbnailKey em versões sem assets copiados: URL na fonte.",
+          "type": "string",
+          "format": "uri"
+        }
+      }
+    },
+    "skin": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["skinId", "skinNum", "championKey", "names", "isBase"],
+      "properties": {
+        "skinId": {
+          "description": "{championKey}{skinNum:03d}. Ex.: Jax Deus da Guerra = 24004.",
+          "type": "integer",
+          "minimum": 1
+        },
+        "skinNum": { "type": "integer", "minimum": 0 },
+        "championKey": {
+          "description": "Junção com champions[]. O rótulo do campeão no resultado de busca vem daqui.",
+          "type": "integer",
+          "minimum": 1
+        },
+        "names": {
+          "description": "Nome da skin. É o que faz \"K/DA\" e \"Prestígio\" funcionarem sem campo extra.",
+          "$ref": "#/$defs/names"
+        },
+        "isBase": { "type": "boolean" },
+        "chromaCount": { "type": "integer", "minimum": 0, "default": 0 },
+        "thumbnailKey": {
+          "description": "storageKey do tile da skin.",
+          "type": "string"
+        },
+        "thumbnailUrl": { "type": "string", "format": "uri" }
+      }
+    }
+  }
+}

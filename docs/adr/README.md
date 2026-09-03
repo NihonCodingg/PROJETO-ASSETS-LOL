@@ -12,5 +12,6 @@ com contexto, decisão e consequências. A Spec referencia; não repete.
 | [0005](0005-arquitetura-estatica-custo-zero.md) | Arquitetura estática por padrão, custo de operação zero | aceito |
 | [0006](0006-api-como-componente-opcional.md) | API FastAPI fora do caminho crítico | aceito |
 | [0007](0007-politica-de-versoes-e-orcamento.md) | Assets só da versão atual; orçamento de 10 GB | aceito |
-| [0008](0008-catalogo-de-skins-e-seletor.md) | O catálogo é de skins; seletor de skin na v1 | aceito |
+| [0008](0008-catalogo-de-skins-e-seletor.md) | O catálogo é de skins; seletor de skin na v1 | ⚠️ emendado pelo 0010 |
 | [0009](0009-apelidos-de-busca-mantidos-a-mao.md) | Apelidos em JSON estático mantido à mão | aceito |
+| [0010](0010-navegacao-por-campeao-busca-por-skin.md) | Navegação por campeão, busca por skin; catálogo vira documento próprio | aceito — emenda o 0008 |

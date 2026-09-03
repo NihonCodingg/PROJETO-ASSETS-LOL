@@ -1,8 +1,13 @@
 # ADR 0008 — O catálogo é de skins, não de campeões
 
-- **Status:** aceito
+- **Status:** ⚠️ **parcialmente emendado** pelo [ADR 0010](0010-navegacao-por-campeao-busca-por-skin.md) (03/09/2026)
 - **Data:** 2026-09-03
 - **Evidência:** [SPIKES](../SPIKES.md) — S3; protótipo do bloco 3
+
+> **Leia o [ADR 0010](0010-navegacao-por-campeao-busca-por-skin.md) antes deste.**
+> A conclusão de que "a unidade do catálogo é a skin" vale para a **busca** e está
+> mantida. Vale **não** para a navegação: a grade padrão é de 173 campeões, não de
+> 2.149 skins. Os itens 2 e 3 abaixo estão corrigidos lá.
 
 ## Contexto
 
@@ -17,10 +22,12 @@ escala: **2.149 skins** e **7.037 chromas** contra 173 campeões.
 ## Decisão
 
 1. **O seletor de skin entra na v1.** A folga do terceiro clique é gasta nele.
-2. **A unidade do catálogo é a skin**, não o campeão. Busca, resultados, filtros e índice
-   trabalham com ~2.149 entradas.
-3. O campeão continua existindo como **agrupamento e como termo de busca**: buscar "jax"
-   traz todas as skins de Jax, com a base primeiro.
+2. ~~**A unidade do catálogo é a skin**, não o campeão. Busca, resultados, filtros e
+   índice trabalham com ~2.149 entradas.~~ → **Corrigido pelo [ADR 0010](0010-navegacao-por-campeao-busca-por-skin.md):**
+   só a **busca** opera no nível de skin. A navegação opera no nível de campeão (173).
+3. ~~O campeão continua existindo como **agrupamento e como termo de busca**: buscar "jax"
+   traz todas as skins de Jax, com a base primeiro.~~ → **Corrigido pelo ADR 0010:**
+   buscar "jax" traz **uma** entrada de campeão, não 18 de skin.
 4. **Chromas não são entradas de primeiro nível.** São 7.037 e poluiriam qualquer
    resultado. Ficam dentro da skin-mãe, atrás de um toggle, ligados por `parentSkinNum`.
 5. Fluxo de referência, dentro do orçamento de 3 cliques:

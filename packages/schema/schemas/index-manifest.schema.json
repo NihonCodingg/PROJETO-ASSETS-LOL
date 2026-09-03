@@ -2,13 +2,24 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://github.com/NihonCodingg/PROJETO-ASSETS-LOL/schemas/index-manifest.schema.json",
   "title": "Manifesto do índice",
-  "description": "Único arquivo com nome fixo em todo o bucket (manifest.json). É o ponto de entrada: diz quais versões existem, qual é a atual, quais fatias de índice cada uma tem e quais zips já estão pré-gerados. Tudo o mais é endereçado por hash.",
+  "description": "Único arquivo com nome fixo em todo o bucket (manifest.json). É o ponto de entrada: diz quais versões existem, qual é a atual, onde está o catálogo de navegação e busca de cada uma, quais fatias de índice ela tem e quais zips já estão pré-gerados. Tudo o mais é endereçado por hash.",
   "type": "object",
   "additionalProperties": false,
-  "required": ["schemaVersion", "generatedAt", "currentVersion", "versions"],
+  "required": [
+    "schemaVersion",
+    "generatedAt",
+    "currentVersion",
+    "versions"
+  ],
   "properties": {
-    "schemaVersion": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" },
-    "generatedAt": { "type": "string", "format": "date-time" },
+    "schemaVersion": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "generatedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
     "assetsBaseUrl": {
       "description": "Prefixo público do bucket. O front monta URL como `${assetsBaseUrl}/${storageKey}`.",
       "type": "string",
@@ -22,33 +33,61 @@
     "versions": {
       "type": "array",
       "minItems": 1,
-      "items": { "$ref": "#/$defs/version" }
+      "items": {
+        "$ref": "#/$defs/version"
+      }
     }
   },
   "$defs": {
     "version": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["gameVersion", "indexedAt", "assetsCopied", "shards"],
+      "required": [
+        "gameVersion",
+        "indexedAt",
+        "assetsCopied",
+        "catalog",
+        "shards"
+      ],
       "properties": {
-        "gameVersion": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" },
-        "indexedAt": { "type": "string", "format": "date-time" },
+        "gameVersion": {
+          "type": "string",
+          "pattern": "^\\d+\\.\\d+\\.\\d+$"
+        },
+        "indexedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
         "assetsCopied": {
           "description": "true = os bytes estão no bucket. false = só índice; o front usa sourceUrl do ddragon.",
           "type": "boolean"
         },
-        "totalAssets": { "type": "integer", "minimum": 0 },
-        "totalBytes": { "type": "integer", "minimum": 0 },
+        "catalog": {
+          "description": "A projeção de navegação e busca desta versão (ADR 0010). É o primeiro documento pesado que o front carrega; as fatias de asset vêm depois, sob demanda.",
+          "$ref": "#/$defs/catalogRef"
+        },
+        "totalAssets": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "totalBytes": {
+          "type": "integer",
+          "minimum": 0
+        },
         "shards": {
           "description": "Uma entrada por categoria presente nesta versão.",
           "type": "array",
           "minItems": 1,
-          "items": { "$ref": "#/$defs/shard" }
+          "items": {
+            "$ref": "#/$defs/shard"
+          }
         },
         "zips": {
           "description": "Zips por categoria pré-gerados pelo indexador. Ausentes em versões sem assets copiados.",
           "type": "array",
-          "items": { "$ref": "#/$defs/zip" },
+          "items": {
+            "$ref": "#/$defs/zip"
+          },
           "default": []
         }
       }
@@ -56,28 +95,93 @@
     "shard": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["category", "url", "assets", "bytes"],
+      "required": [
+        "category",
+        "url",
+        "assets",
+        "bytes"
+      ],
       "properties": {
-        "category": { "type": "string" },
+        "category": {
+          "type": "string"
+        },
         "url": {
           "description": "Caminho da fatia, com hash no nome para permitir cache imutável.",
           "type": "string"
         },
-        "assets": { "type": "integer", "minimum": 0 },
-        "bytes": { "type": "integer", "minimum": 0 },
-        "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+        "assets": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "bytes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
       }
     },
     "zip": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["category", "url", "bytes"],
+      "required": [
+        "category",
+        "url",
+        "bytes"
+      ],
       "properties": {
-        "category": { "type": "string" },
-        "url": { "type": "string" },
-        "bytes": { "type": "integer", "minimum": 0 },
-        "assets": { "type": "integer", "minimum": 0 },
-        "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+        "category": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        },
+        "bytes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "assets": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      }
+    },
+    "catalogRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "url",
+        "champions",
+        "skins",
+        "bytes"
+      ],
+      "properties": {
+        "url": {
+          "description": "Caminho do catálogo, com hash no nome para cache imutável.",
+          "type": "string"
+        },
+        "champions": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "skins": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "bytes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
       }
     }
   }

@@ -5,6 +5,10 @@
 > Se não couber, divide-se o ticket — nunca se infla o PR (regra 5 do [CLAUDE.md](../CLAUDE.md)).
 >
 > Data: 03/09/2026 · 33 tickets · 7 ondas
+>
+> **Revisão de 03/09/2026:** navegação passa a ser por campeão e busca por skin
+> ([ADR 0010](adr/0010-navegacao-por-campeao-busca-por-skin.md)). Afeta T-04, T-07,
+> T-08, T-10, T-14, T-19 e T-20. Nenhum ticket foi criado ou removido.
 
 ## Como ler
 
@@ -171,11 +175,13 @@ comportamento passa nos testes, mesmo que a tela ainda esteja crua.
 
 **Entra**
 - Modelos Pydantic v2 em `packages/schema/src/lol_assets_schema/models.py`: `Asset`,
-  `IndexShard`, `IndexManifest`, com os mesmos enums e as mesmas obrigatoriedades do schema.
-- `validate_shard()` e `validate_manifest()` que validam **contra o JSON Schema**, não só
-  contra o Pydantic — o schema continua sendo a fonte de verdade.
-- Fixture versionada `packages/schema/examples/`: um `manifest.json` e uma fatia
-  `index-champion-*.json` com um punhado de assets reais (medidos, não inventados).
+  `IndexShard`, `IndexManifest`, `Catalog`, `CatalogChampion` e `CatalogSkin`, com os
+  mesmos enums e as mesmas obrigatoriedades do schema.
+- `validate_shard()`, `validate_manifest()` e `validate_catalog()` que validam **contra o
+  JSON Schema**, não só contra o Pydantic — o schema continua sendo a fonte de verdade.
+- Fixture versionada `packages/schema/examples/`: um `manifest.json`, um
+  `catalog-*.json` (com campeões e skins) e uma fatia `index-champion-*.json` com um
+  punhado de assets reais (medidos, não inventados).
 - Exportar a fixture pelo pacote TS para o front importar nos testes.
 
 **NÃO entra**
@@ -186,7 +192,9 @@ comportamento passa nos testes, mesmo que a tela ainda esteja crua.
 **Critérios de aceite**
 1. Um `Asset` com `hasAlpha=True` e `format="jpeg"` é rejeitado pelas duas validações.
 2. Um corte de splash sem `skinId` é rejeitado.
-3. A fixture valida contra o JSON Schema.
+3. As três fixtures validam contra os respectivos JSON Schema.
+3b. Uma skin do catálogo sem `championKey` é rejeitada — sem ela não dá para rotular o
+   resultado de busca com o campeão ([ADR 0010](adr/0010-navegacao-por-campeao-busca-por-skin.md)).
 4. Serializar um modelo e validar contra o schema produz documento válido (ida e volta).
 5. Todo campo obrigatório do schema existe no modelo, e vice-versa — teste que compara as
    duas listas e falha quando divergem.
@@ -283,13 +291,15 @@ comportamento passa nos testes, mesmo que a tela ainda esteja crua.
 |---|---|
 | **Objetivo** | Um comando que faz o caminho inteiro e é o que o Actions vai chamar |
 | **Dependências** | T-05, T-06 |
-| **Estimativa** | ~130 linhas |
-| **Effort** | baixo |
-| **Cobre** | §5.3 da Spec |
+| **Estimativa** | ~180 linhas |
+| **Effort** | médio |
+| **Cobre** | §5.3 e §6.1 da Spec, [ADR 0010](adr/0010-navegacao-por-campeao-busca-por-skin.md) |
 
 **Entra**
 - `lol-assets-indexer index --champion Jax [--game-version X] [--dry-run]`: descobre a
-  versão, roda o adaptador, valida contra o schema, publica.
+  versão, roda o adaptador, projeta o **catálogo** (um campeão e as skins dele), valida
+  tudo contra o schema, publica.
+- A projeção do catálogo vive num módulo próprio, para T-10 escalá-la sem reescrever.
 - Falha ruidosa: qualquer registro inválido aborta **antes** de publicar qualquer coisa.
 - Log estruturado em JSON por linha, com `gameVersion` e `source` em todo evento.
 - Código de saída ≠ 0 em qualquer falha.
@@ -299,7 +309,9 @@ comportamento passa nos testes, mesmo que a tela ainda esteja crua.
 - Catálogo completo (T-09).
 
 **Critérios de aceite**
-1. `--dry-run` produz a árvore local completa e sai com 0.
+1. `--dry-run` produz a árvore local completa — manifesto, catálogo e fatia — e sai com 0.
+1b. O catálogo publicado tem 1 campeão em `champions[]` e as skins dele em `skins[]`, com
+   `skinCount` conferindo.
 2. Um asset inválido injetado aborta com saída ≠ 0 e **nada** é publicado.
 3. O log tem uma linha JSON por evento, com `gameVersion` presente.
 4. `--help` descreve todas as opções em português.
@@ -321,8 +333,10 @@ comportamento passa nos testes, mesmo que a tela ainda esteja crua.
 | **Cobre** | RF-09, RF-10, RF-11, RF-12, RF-13, RNF-07, [ADR 0001](adr/0001-formato-de-entrega-dos-assets.md) |
 
 **Entra**
-- Carregar `manifest.json`, escolher `currentVersion`, carregar a fatia `champion`.
-- Listar os assets da fatia e abrir um deles.
+- Carregar `manifest.json`, escolher `currentVersion`, carregar o **catálogo**.
+- Desenhar a grade a partir de `catalog.champions[]` (nível de navegação).
+- Ao abrir um campeão, carregar a fatia `champion` **sob demanda**, uma única vez, e
+  mostrar os assets.
 - Exibir formato, resolução, tamanho e fonte **antes** de qualquer download.
 - "Baixar original" (bytes de origem) e "Baixar PNG" (canvas no clique). Asset de origem
   PNG mostra o botão desabilitado.
@@ -334,7 +348,10 @@ comportamento passa nos testes, mesmo que a tela ainda esteja crua.
 - Qualquer decisão visual — ver a nota no topo. Tela crua é aceitável.
 
 **Critérios de aceite**
-1. Com a fixture servida, a lista renderiza sem erro e sem tocar ddragon ou cdragon.
+1. Com a fixture servida, a grade renderiza a partir do catálogo, sem erro e sem tocar
+   ddragon ou cdragon.
+1b. A fatia de assets **não** é buscada no carregamento da página; só ao abrir o primeiro
+   campeão, e só uma vez ([ADR 0010](adr/0010-navegacao-por-campeao-busca-por-skin.md)).
 2. A ficha mostra os quatro dados antes do primeiro clique de download.
 3. O arquivo baixado como original tem `sha256` igual ao do índice.
 4. O PNG convertido tem as mesmas dimensões e MIME `image/png`.
@@ -346,6 +363,8 @@ comportamento passa nos testes, mesmo que a tela ainda esteja crua.
 - Vitest no módulo de download: resolução de URL, nome do arquivo, conversão canvas→PNG
   com blob de fixture, caminho do "já é PNG".
 - Teste de que nenhum host externo é chamado no carregamento.
+- Teste de rede que conta as requisições: catálogo na abertura, fatia só depois do primeiro
+  clique em campeão, e não mais de uma vez.
 
 ---
 
@@ -397,16 +416,19 @@ comportamento passa nos testes, mesmo que a tela ainda esteja crua.
 
 | | |
 |---|---|
-| **Objetivo** | Manter a carga inicial enxuta e impedir que uma publicação estoure os 10 GB |
+| **Objetivo** | Projetar o catálogo completo, manter a carga inicial enxuta e impedir que uma publicação estoure os 10 GB |
 | **Dependências** | T-09 |
-| **Estimativa** | ~200 linhas |
+| **Estimativa** | ~280 linhas |
 | **Effort** | médio |
-| **Cobre** | RNF-03, RNF-05, §6.1 da Spec |
+| **Cobre** | RNF-03, RNF-05, §6.1 da Spec, [ADR 0010](adr/0010-navegacao-por-campeao-busca-por-skin.md) |
 
 **Entra**
-- Fatiar o índice por categoria, com hash no nome.
-- Calcular o tamanho comprimido de cada fatia e **falhar** se a fatia `champion` passar de
-  1,5 MB (RNF-03).
+- Escalar a projeção do catálogo de T-07 para o catálogo inteiro: **173 campeões** em
+  `champions[]` (com `skinCount`, `chromaCount`, `baseSkinId` e miniatura) e **2.149 skins**
+  em `skins[]`.
+- Fatiar o índice de assets por categoria, com hash no nome.
+- Calcular o tamanho comprimido e **falhar** se o catálogo passar de **150 KB** ou se a
+  fatia `champion` passar de 1,5 MB (RNF-03).
 - Somar os bytes projetados e **abortar antes de publicar** se passar de 8 GB, com
   mensagem dizendo qual categoria é a maior.
 - Preencher `shards[]` e os totais do manifesto.
@@ -417,9 +439,12 @@ comportamento passa nos testes, mesmo que a tela ainda esteja crua.
 
 **Critérios de aceite**
 1. Uma fatia por categoria presente, cada uma com `sha256` e contagem corretos.
-2. Fatia `champion` acima de 1,5 MB comprimida → build falha com mensagem clara.
+1b. O catálogo tem exatamente uma entrada por campeão e uma por skin; `skinCount` de cada
+   campeão bate com a contagem em `skins[]`; nenhum chroma aparece em nenhum dos dois.
+2. Catálogo acima de 150 KB ou fatia `champion` acima de 1,5 MB comprimida → build falha
+   com mensagem clara.
 3. Total projetado acima de 8 GB → aborta **antes** de qualquer upload.
-4. O manifesto lista todas as fatias e os totais batem com a soma delas.
+4. O manifesto lista o catálogo e todas as fatias, e os totais batem com a soma delas.
 
 **Testes que provam**
 - Unitários com índices sintéticos nos dois lados de cada limite.
@@ -533,18 +558,21 @@ comportamento passa nos testes, mesmo que a tela ainda esteja crua.
 
 | | |
 |---|---|
-| **Objetivo** | Fazer a busca acertar em primeiro lugar sem depender de busca inteligente |
+| **Objetivo** | Fazer a busca acertar em primeiro lugar sem depender de busca inteligente, operando no nível de skin sem inundar o resultado com skins do mesmo campeão |
 | **Dependências** | T-08 |
-| **Estimativa** | ~220 linhas |
+| **Estimativa** | ~260 linhas |
 | **Effort** | médio |
-| **Cobre** | RF-01, RF-02, RF-03, RF-07, RNF-01, [ADR 0009](adr/0009-apelidos-de-busca-mantidos-a-mao.md) |
+| **Cobre** | RF-01, RF-02, RF-03, RF-05, RF-07, RF-24, RNF-01, [ADR 0009](adr/0009-apelidos-de-busca-mantidos-a-mao.md), [ADR 0010](adr/0010-navegacao-por-campeao-busca-por-skin.md) |
 
 **Entra**
 - Normalização: NFD, remover diacríticos, minúsculas, remover não-alfanuméricos.
 - Importar `champion-aliases.json` de `packages/schema` **em tempo de build**.
-- Ranqueamento: casamento exato > prefixo > substring; skin base antes das demais.
+- Índice de busca sobre **`catalog.skins[]` (2.149) e `catalog.champions[]` (173)**,
+  montado uma vez, na carga do catálogo.
+- **Duas classes de resultado.** Campeão casado vira **uma** entrada de campeão, nunca 18
+  de skin. Skin casada vira entrada de skin, rotulada com o campeão de origem.
+- Ranqueamento: casamento exato de campeão > casamento exato de skin > prefixo > substring.
 - Foco automático no campo e atalho `/` sem inserir o caractere.
-- Índice de busca montado uma vez, na carga.
 
 **NÃO entra**
 - Fuse.js. Fica como segunda camada só se aparecer caso real de zero resultado (ticket novo).
@@ -554,13 +582,17 @@ comportamento passa nos testes, mesmo que a tela ainda esteja crua.
 **Critérios de aceite**
 1. `kaisa`→Kai'Sa, `belveth`→Bel'Veth, `chogath`→Cho'Gath, `KAI'SA`→Kai'Sa, em 1º lugar.
 2. `mf`, `tf`, `j4`, `asol` resolvem pelo arquivo de apelidos, em 1º lugar.
+2b. `jax` retorna **uma** entrada de campeão, não 18 de skin (RF-05).
+2c. `kda` e `prestigio` retornam skins de **≥ 3 campeões distintos**, cada uma rotulada com
+   o campeão de origem (RF-24).
 3. `/` foca o campo e o valor não muda.
-4. Com o catálogo completo carregado, a busca responde em < 50 ms (medido).
+4. Com 173 campeões e 2.149 skins no índice, a busca responde em < 50 ms (medido).
 5. Acrescentar uma linha ao JSON de apelidos passa a valer sem tocar em código.
 
 **Testes que provam**
-- Vitest com tabela de ≥ 20 pares consulta→esperado, incluindo os quatro apelidos citados.
-- Teste de performance com o catálogo completo sintético.
+- Vitest com tabela de ≥ 20 pares consulta→esperado, incluindo os quatro apelidos citados,
+  o caso `jax` (uma entrada) e os casos transversais `kda` e `prestigio`.
+- Teste de performance com o catálogo completo sintético (173 + 2.149).
 - Teste que adiciona um apelido à fixture e confirma que passa a resolver.
 
 ---
@@ -709,37 +741,45 @@ comportamento passa nos testes, mesmo que a tela ainda esteja crua.
 
 ---
 
-### T-19 — Front: catálogo de skins e seleção de skin
+### T-19 — Front: grade de campeões e painel com seletor de skin
 
 | | |
 |---|---|
-| **Objetivo** | Trocar a unidade do catálogo de campeão para skin, que é o que o usuário pede |
+| **Objetivo** | Dar a navegação no nível de campeão e o seletor de skin no nível certo — dentro do painel |
 | **Dependências** | T-14 |
-| **Estimativa** | ~250 linhas |
+| **Estimativa** | ~280 linhas |
 | **Effort** | alto |
-| **Cobre** | RF-04, RF-05, RF-15, [ADR 0008](adr/0008-catalogo-de-skins-e-seletor.md) |
+| **Cobre** | RF-04, RF-15, RF-25, [ADR 0010](adr/0010-navegacao-por-campeao-busca-por-skin.md) |
 
 **Entra**
-- Resultados por skin (~2.149), com o nome da skin como texto principal e o do campeão
-  como secundário.
-- Buscar pelo campeão traz todas as skins dele, base primeiro.
-- Buscar pelo nome da skin funciona.
+- **Grade padrão de 173 campeões**, a partir de `catalog.champions[]`, cada cartão com a
+  arte da skin base e o número de skins.
+- **Painel do campeão** com a lista de skins dele e o seletor; escolher uma skin troca os
+  assets exibidos.
+- **Resultado de skin abre o painel do campeão já com aquela skin selecionada** — o
+  resultado de busca é atalho para dentro do painel, não destino separado.
+- Carregar a fatia de assets sob demanda, na primeira abertura de painel.
 - Contagem de cliques do fluxo mantida em ≤ 3.
 
 **NÃO entra**
+- Grade de skins soltas. Foi o erro que o [ADR 0010](adr/0010-navegacao-por-campeao-busca-por-skin.md) corrigiu.
 - Chromas (T-20), filtros (T-24).
 - Decisão visual — ver a nota no topo.
 
 **Critérios de aceite**
-1. `jax` retorna ≥ 18 resultados, com a skin base em 1º.
-2. `deus da guerra` retorna a skin correspondente em 1º.
-3. Nenhum chroma aparece na lista.
-4. Do carregamento ao arquivo salvo: ≤ 3 cliques, contados por teste.
-5. Com 2.149 skins, a busca segue em < 50 ms.
+1. Sem nada digitado, a grade tem exatamente 173 cartões, cada um com contagem de skins.
+2. `deus da guerra` → clicar no resultado abre o painel de Jax com a skin 24004 já
+   selecionada.
+3. `jax` → clicar no resultado abre o painel de Jax na skin base.
+4. Trocar de skin no seletor troca os assets sem recarregar a fatia.
+5. Nenhum chroma aparece na grade nem na lista de skins do painel.
+6. Do carregamento ao arquivo salvo: ≤ 3 cliques nos quatro caminhos do ADR 0010,
+   contados por teste.
 
 **Testes que provam**
-- Vitest com catálogo de fixture completo: ranqueamento, contagem, ausência de chroma.
-- Teste que conta cliques do fluxo J1 e J2 e falha em > 3.
+- Vitest com catálogo de fixture completo: contagem da grade, atalho da busca para a skin
+  certa, troca de skin, ausência de chroma.
+- Teste que conta cliques dos quatro caminhos e falha em > 3.
 
 ---
 
@@ -751,10 +791,11 @@ comportamento passa nos testes, mesmo que a tela ainda esteja crua.
 | **Dependências** | T-19 |
 | **Estimativa** | ~120 linhas |
 | **Effort** | baixo |
-| **Cobre** | RF-06, [ADR 0008](adr/0008-catalogo-de-skins-e-seletor.md) |
+| **Cobre** | RF-06, [ADR 0008](adr/0008-catalogo-de-skins-e-seletor.md), [ADR 0010](adr/0010-navegacao-por-campeao-busca-por-skin.md) |
 
 **Entra**
-- Dentro da skin, um controle que revela os chromas dela, ligados por `parentSkinNum`.
+- Dentro do painel do campeão, na skin selecionada, um controle que revela os chromas dela,
+  ligados por `parentSkinNum`.
 - Chroma baixa como qualquer outro asset.
 
 **NÃO entra**
@@ -763,8 +804,9 @@ comportamento passa nos testes, mesmo que a tela ainda esteja crua.
 - Decisão visual — ver a nota no topo.
 
 **Critérios de aceite**
-1. Nenhum chroma aparece em resultado de busca.
-2. O controle revela exatamente os chromas cujo `parentSkinNum` casa com a skin.
+1. Nenhum chroma aparece em resultado de busca nem na grade de campeões.
+2. O controle revela exatamente os chromas cujo `parentSkinNum` casa com a skin selecionada.
+2b. `chromaCount` do catálogo bate com a quantidade revelada.
 3. Skin sem chroma não mostra o controle.
 4. Chroma revelado baixa com o `fileName` do índice.
 
@@ -1220,7 +1262,8 @@ Todo requisito da Spec tem pelo menos um ticket.
 | Requisito | Tickets |
 |---|---|
 | RF-01, RF-02, RF-03, RF-07 | T-14 |
-| RF-04, RF-05 | T-19 |
+| RF-04, RF-25 | T-19 |
+| RF-05, RF-24 | T-14 |
 | RF-06 | T-20 |
 | RF-08 | T-21, T-22, T-24 |
 | RF-09, RF-12, RF-13, RF-14 | T-08, T-15 |
@@ -1233,7 +1276,7 @@ Todo requisito da Spec tem pelo menos um ticket.
 | RF-23 | T-27, T-33 |
 | RNF-01 | T-14, T-19, T-29 |
 | RNF-02 | T-29 |
-| RNF-03 | T-10, T-24 |
+| RNF-03 | T-10, T-08, T-24 |
 | RNF-04 | T-13 |
 | RNF-05 | T-02, T-10, T-23 |
 | RNF-06 | T-12, T-13, T-31 |
@@ -1250,7 +1293,7 @@ Todo requisito da Spec tem pelo menos um ticket.
 | 0 | T-02 → T-01 | sequencial | Orçamento fechado, protótipo removido |
 | 1 | (T-03 ∥ T-04) → (T-05 ∥ T-06) → T-07; T-08 ∥ | 2 frentes | **Esqueleto andante**: 1 campeão, 2 tipos, ponta a ponta |
 | 2 | T-09 → (T-10 ∥ T-11 ∥ T-12) → T-13; (T-14 ∥ T-15) ∥ | 2 frentes | Catálogo de campeões completo e automático |
-| 3 | (T-16 → T-17) ∥ (T-19 → T-20); T-18 ao final | 2 frentes | Skins, chromas e a segunda fonte |
+| 3 | (T-16 → T-17) ∥ (T-19 → T-20); T-18 ao final | 2 frentes | Grade de campeões, seletor de skin, chromas e a segunda fonte |
 | 4 | (T-21 ∥ T-22) → T-23; (T-24 ∥ T-25 ∥ T-26) ∥ | 2 frentes | Catálogo inteiro e download em lote |
 | 5 | (T-27 ∥ T-28 ∥ T-31) → T-29 → T-30 | 3 frentes | Produto fechado e vestido |
 | 6 | T-32 | — | API opcional |

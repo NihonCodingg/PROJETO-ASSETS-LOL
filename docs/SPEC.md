@@ -5,7 +5,13 @@
 > ensinou. **Esta Spec tem precedência sobre o KICKOFF** (regra 1 do
 > [CLAUDE.md](../CLAUDE.md)); os ADRs têm precedência sobre ela nos pontos que decidem.
 >
-> Data: 03/09/2026 · patch de referência: 16.17.1 · contrato do índice: `1.0.0`
+> Data: 03/09/2026 · patch de referência: 16.17.1 · contrato do índice: `1.1.0`
+>
+> **Revisão de 03/09/2026:** navegação e busca passam a operar em níveis diferentes —
+> ver [ADR 0010](adr/0010-navegacao-por-campeao-busca-por-skin.md), que emenda o
+> [ADR 0008](adr/0008-catalogo-de-skins-e-seletor.md). Os requisitos são numerados de
+> forma incremental: RF-24 e RF-25 entram no fim para não invalidar as referências
+> já feitas em [`TICKETS.md`](TICKETS.md).
 
 ---
 
@@ -41,8 +47,9 @@ asset. Não vai ler nada.
 
 | # | Job to be done | O que a v1 entrega |
 |---|---|---|
-| J1 | "Preciso do square do Jax pro canto do vídeo" | Busca → card do campeão → baixar |
-| J2 | "Preciso da splash da skin Jax Deus da Guerra em alta" | Busca pelo nome da skin → skin → baixar ([ADR 0008](adr/0008-catalogo-de-skins-e-seletor.md)) |
+| J1 | "Preciso do square do Jax pro canto do vídeo" | Busca ou grade → campeão → baixar |
+| J2 | "Preciso da splash da skin Jax Deus da Guerra em alta" | Busca pelo nome da skin → abre o painel do campeão já naquela skin → baixar |
+| J7 | "Preciso das skins K/DA de vários campeões pra uma thumbnail temática" | Busca por termo transversal → skins de campeões diferentes ([ADR 0010](adr/0010-navegacao-por-campeao-busca-por-skin.md)) |
 | J3 | "Preciso de todos os ícones de item pra uma build animada" | Zip da categoria `item`, pré-gerado |
 | J4 | "Preciso do ícone de Diamante IV" | Categoria `rank` |
 | J5 | "Esse vídeo é de patch antigo, preciso do square antigo do Aatrox" | Seletor de versão — **só tipos versionados** |
@@ -62,11 +69,13 @@ implementa e pelo teste que o prova.
 | **RF-01** | A home é a busca, com foco automático e resultados enquanto digita | Ao carregar, `document.activeElement` é o campo de busca; digitar 1 caractere já altera a lista |
 | **RF-02** | A busca é tolerante a acento, maiúscula e apóstrofo | `kaisa`→Kai'Sa, `belveth`→Bel'Veth, `chogath`→Cho'Gath, `KAI'SA`→Kai'Sa, todos em 1º lugar |
 | **RF-03** | A busca resolve apelidos da tabela mantida à mão | `mf`→Miss Fortune, `tf`→Twisted Fate, `j4`→Jarvan IV, `asol`→Aurelion Sol em 1º lugar |
-| **RF-04** | A unidade do catálogo é a skin; buscar o campeão traz todas as skins dele com a base primeiro | Buscar `jax` retorna ≥ 18 resultados; o primeiro é a skin base |
-| **RF-05** | Buscar pelo nome da skin funciona | `deus da guerra` retorna a skin correspondente em 1º lugar |
-| **RF-06** | Chromas não aparecem como resultado de primeiro nível | Nenhum dos 7.037 chromas aparece na lista; ficam atrás de um toggle dentro da skin-mãe |
+| **RF-04** | **A navegação padrão é por campeão** — 173 entradas | Sem nada digitado, a grade tem 173 cartões, um por campeão, cada um com a arte da skin base e o número de skins |
+| **RF-05** | **A busca opera no nível de skin e também casa campeão**; um campeão casado aparece **uma** vez | `jax` retorna 1 entrada de campeão, não 18 de skin; `deus da guerra` retorna a skin em 1º lugar |
+| **RF-06** | Chromas não aparecem como resultado de primeiro nível | Nenhum dos 7.037 chromas aparece na lista; ficam atrás de um toggle dentro da skin, no painel do campeão |
 | **RF-07** | Atalho `/` foca a busca sem inserir o caractere | Após `/`, o foco é o campo e o valor não mudou |
 | **RF-08** | Navegação por categoria com filtros | Filtros de função, lane, comprável, mapa, árvore de runa e elo alteram a lista |
+| **RF-24** | **Busca por termo transversal a vários campeões** | `kda` e `prestigio` retornam skins de ≥ 3 campeões distintos, cada resultado rotulado com o campeão de origem |
+| **RF-25** | **O seletor de skin vive no painel do campeão** | Abrir um campeão lista as skins dele; clicar num resultado de skin abre o painel do campeão **já com aquela skin selecionada** |
 
 ### Asset e download
 
@@ -104,9 +113,9 @@ implementa e pelo teste que o prova.
 
 | # | Requisito | Meta mensurável | Como se mede |
 |---|---|---|---|
-| **RNF-01** | Busca responde rápido | < 50 ms do keystroke ao render, com 2.149 skins carregadas | `performance.measure` no e2e |
+| **RNF-01** | Busca responde rápido | < 50 ms do keystroke ao render, com 173 campeões e 2.149 skins no índice | `performance.measure` no e2e |
 | **RNF-02** | Imagem abre rápido | < 1 s para a prévia da splash em conexão de banda larga | e2e com timing |
-| **RNF-03** | Carga inicial enxuta | Fatia `champion` do índice < 1,5 MB comprimida | Falha o build se passar |
+| **RNF-03** | Carga inicial enxuta | **Catálogo ≤ 150 KB comprimido** (é o único documento pesado da abertura); fatia de assets ≤ 1,5 MB comprimida e carregada **sob demanda** | Falha o build se qualquer um passar |
 | **RNF-04** | Custo de operação | **R$ 0,00/mês**: Vercel Hobby + R2 free (10 GB) + Actions em repo público | Revisão mensal do painel |
 | **RNF-05** | Armazenamento | ≤ 10 GB; uma versão medida em ~1,9 GB | O indexador falha se o total projetado passar de 8 GB |
 | **RNF-06** | Atualização | Novo patch refletido em ≤ 24 h, sem intervenção | Workflow agendado + `status.json` |
@@ -138,7 +147,8 @@ flowchart LR
 
     subgraph r2["Cloudflare R2 + CDN · estático"]
         MAN[manifest.json]
-        SHARD[index-*-hash.json]
+        CAT["catalog-hash.json<br/>173 campeões · 2.149 skins"]
+        SHARD["index-*-hash.json<br/>assets · sob demanda"]
         ASSET[assets nos bytes de origem]
         ZIP[zips por categoria]
     end
@@ -153,9 +163,10 @@ flowchart LR
     CD --> IDX
     RS --> IDX
     WK -. bloqueado .-> IDX
-    IDX --> MAN & SHARD & ASSET & ZIP
+    IDX --> MAN & CAT & SHARD & ASSET & ZIP
     USER --> WEB
-    WEB --> MAN & SHARD
+    WEB --> MAN & CAT
+    WEB -. sob demanda .-> SHARD
     USER --> ASSET & ZIP
 
     API[apps/api · FastAPI<br/>opcional, local]
@@ -192,8 +203,9 @@ sequenceDiagram
     Note over A,C: só caminhos declarados no JSON; nunca montados à mão
     A->>P: mede width, height, format, hasAlpha, sha256
     A->>A: fusão por (identidade, tipo) → nomes canônicos
+    A->>A: projeta o catálogo: 173 campeões e 2.149 skins, sem asset
     A->>A: valida contra o JSON Schema; falha aborta tudo
-    A->>R: publica assets, fatias do índice e zips
+    A->>R: publica assets, catálogo, fatias do índice e zips
     A->>R: publica manifest.json (último passo, commit atômico)
     A->>R: remove os assets do patch anterior
     A->>A: escreve status.json e o resumo do job
@@ -213,11 +225,13 @@ sequenceDiagram
 
     U->>W: abre o site
     W->>R: GET manifest.json (TTL curto)
-    W->>R: GET index-champion-{hash}.json (imutável)
-    W->>W: monta o índice de busca normalizado + apelidos
-    U->>W: digita "mf"
+    W->>R: GET catalog-{hash}.json (imutável, ~150 KB)
+    W->>W: desenha 173 campeões e monta o índice de busca de 2.149 skins + apelidos
+    U->>W: digita "mf" ou "kda"
     W->>W: busca no cliente (< 50 ms, sem rede)
-    U->>W: clica na skin
+    U->>W: clica no campeão (ou num resultado de skin)
+    W->>R: GET index-champion-{hash}.json (sob demanda, uma vez)
+    W->>U: painel do campeão, com o seletor de skin
     W->>R: GET dos assets da skin (bytes de origem)
     W->>U: mostra formato, resolução, tamanho, fonte
     U->>W: "Baixar original" → salva o blob
@@ -251,7 +265,8 @@ Versão do contrato: **1.0.0**. Mudança exige ADR e nova versão.
 | Arquivo | Papel |
 |---|---|
 | `index-manifest.schema.json` | O `manifest.json` — único arquivo de nome fixo no bucket |
-| `index-shard.schema.json` | Uma fatia do índice por categoria e versão, com `$defs.asset` |
+| `catalog.schema.json` | **Projeção de navegação (173 campeões) e de busca (2.149 skins)**, sem nenhum asset. É o único documento pesado da abertura ([ADR 0010](adr/0010-navegacao-por-campeao-busca-por-skin.md)) |
+| `index-shard.schema.json` | Uma fatia de **assets** por categoria e versão, com `$defs.asset`. Carregada sob demanda |
 | `data/champion-aliases.json` | Apelidos de busca, mantidos à mão ([ADR 0009](adr/0009-apelidos-de-busca-mantidos-a-mao.md)) |
 
 O registro de asset carrega `id`, `type` (nome canônico), `category`, as chaves de
@@ -264,11 +279,20 @@ Duas regras estão **no schema**, não só na prosa, e há teste que prova cada 
 - `hasAlpha: true` obriga `format: "png"` — JPEG não carrega alfa ([ADR 0001](adr/0001-formato-de-entrega-dos-assets.md) regra 4).
 - Assets de corte de splash exigem `skinId` e `skinNum`.
 
-### 6.1 Fatiamento
+### 6.1 Ordem de carga e fatiamento
 
-Uma fatia por categoria, com hash no nome (`index-champion-{sha256:12}.json`). O front
-carrega **só** a fatia de que precisa. A fatia `champion` é a maior (~2.149 skins × 4 tipos
-+ 173 squares + ícones de habilidade) e é a única carregada na home.
+Três camadas, carregadas nesta ordem:
+
+1. **`manifest.json`** — nome fixo, TTL curto. Diz qual é a versão atual e onde está tudo.
+2. **`catalog-{hash}.json`** — as duas projeções do [ADR 0010](adr/0010-navegacao-por-campeao-busca-por-skin.md):
+   `champions[]` para navegar e `skins[]` para buscar. Sem asset, sem hash de arquivo, sem
+   URL de origem. É o que permite desenhar a home e ter busca funcionando **antes** de
+   qualquer asset ser baixado.
+3. **`index-{categoria}-{hash}.json`** — os assets, uma fatia por categoria, com hash no
+   nome. Carregadas **sob demanda**: a de `champion` na primeira vez que um painel abre, as
+   demais ao entrar na categoria.
+
+A home não carrega fatia de asset nenhuma. Isso é o que sustenta o RNF-03.
 
 ### 6.2 Convenção de nomes de arquivo
 
@@ -310,10 +334,18 @@ Nenhum requisito funcional depende destes endpoints.
 
 ## 8. Modelo de dados e política de versões
 
+**Dois níveis, de propósito** ([ADR 0010](adr/0010-navegacao-por-campeao-busca-por-skin.md)):
+
+| Nível | Onde vive | Entradas | Serve a |
+|---|---|---:|---|
+| Campeão | `catalog.champions[]` | 173 | Navegação: a grade padrão |
+| Skin | `catalog.skins[]` | 2.149 | Busca, inclusive por termo transversal ("K/DA") |
+| Asset | `index-{categoria}` | ~20 mil | Download; carregado sob demanda |
+
 **Identidade.** `championKey` numérico é a chave de fusão entre fontes;
 `skinId = {championKey}{skinNum:03d}` é a chave natural da skin (Jax Deus da Guerra =
-`24004`). Chromas são identificados por `parentSkinNum` e não são entradas de primeiro
-nível.
+`24004`) e a junção entre os dois níveis. Chromas são identificados por `parentSkinNum` e
+não são entradas de primeiro nível em nenhum dos dois.
 
 **Fusão.** Para cada `(identidade, tipo canônico)`, vence a maior resolução; empate
 favorece o ddragon. Os spikes mostraram que **para assets de campeão é sempre empate** — o
@@ -336,6 +368,7 @@ cdragon entra por cobertura (chromas, loading vintage), não por resolução.
 | Recurso | Nome | Cache-Control | Por quê |
 |---|---|---|---|
 | `manifest.json` | fixo | `max-age=300, stale-while-revalidate=86400` | Único ponto de invalidação |
+| Catálogo | com hash | `max-age=31536000, immutable` | Conteúdo novo = nome novo |
 | Fatias do índice | com hash | `max-age=31536000, immutable` | Conteúdo novo = nome novo |
 | Assets | `{versão}/{categoria}/{fileName}` | `max-age=31536000, immutable` | Nunca mudam dentro de uma versão |
 | Zips por categoria | com hash | `max-age=31536000, immutable` | Idem |
@@ -419,5 +452,6 @@ jeito de o site apodrecer.
 | [0005](adr/0005-arquitetura-estatica-custo-zero.md) estático, custo zero | §1.2, §5, RNF-04 |
 | [0006](adr/0006-api-como-componente-opcional.md) API opcional | §5.2, §7 |
 | [0007](adr/0007-politica-de-versoes-e-orcamento.md) versões e orçamento | RF-19, RF-20, RNF-05, §8 |
-| [0008](adr/0008-catalogo-de-skins-e-seletor.md) catálogo de skins | RF-04, RF-05, RF-06, §6.1 |
+| [0008](adr/0008-catalogo-de-skins-e-seletor.md) catálogo de skins | RF-06 — emendado pelo 0010 |
+| [0010](adr/0010-navegacao-por-campeao-busca-por-skin.md) navegação × busca | RF-04, RF-05, RF-24, RF-25, RNF-03, §5.4, §6, §6.1, §8 |
 | [0009](adr/0009-apelidos-de-busca-mantidos-a-mao.md) apelidos | RF-03, §6, §10 |
