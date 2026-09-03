@@ -170,20 +170,21 @@ Funcionalidades:
 
 1. **Busca é a home.** Campo de busca com foco automático; resultados aparecem enquanto digita.
 2. **Regra dos 3 cliques.** Do carregamento do site ao arquivo salvo no disco: no máximo 3 cliques.
-3. **PNG sempre.** O usuário nunca recebe JPG ou WebP, mesmo que a fonte seja JPG. (Nota honesta: converter JPG → PNG não recupera qualidade perdida; a promessa é "melhor fonte disponível, entregue sem perda adicional".)
+3. **Melhor fonte disponível, sem re-encode.** *(Revoga "PNG sempre" em 03/09/2026 — ver [ADR 0001](adr/0001-formato-de-entrega-dos-assets.md).)* O CDN guarda e serve os bytes originais; o indexador nunca re-encoda. O botão "Baixar PNG" converte no navegador (canvas) no momento do clique, e o card oferece as duas opções — original e PNG. Assets cuja origem já é PNG seguem PNG de ponta a ponta; runas e stat mods têm canal alfa e nunca podem virar JPG. Nunca há upscale. Motivo: os spikes mediram que converter os JPEGs da fonte para PNG multiplica o armazenamento por 5,7× sem ganhar um pixel, porque a fonte não tem canal alfa ([SPIKES](SPIKES.md)).
 4. **Nome de arquivo previsível.** `Jax_square.png`, `Jax_skin07_splash_centered.png`, `Item_3031_Infinity_Edge.png`, `Rank_Diamond_IV.png`.
 5. **Zero texto obrigatório.** Nenhuma tela exige leitura pra ser usada.
 6. **Funciona com o Premiere aberto.** Leve, rápido, sem animação pesada, atalho de teclado pra busca (`/`).
-7. **Transparência de qualidade.** Cada asset mostra resolução e fonte antes do download.
+7. **Transparência de qualidade.** Cada asset mostra **formato**, resolução e fonte antes do download.
+8. **`splash` e `centered` são cortes diferentes.** Os dois entram no catálogo. O padrão é `centered` (1280×720), por ser o maior. Os nomes são invertidos entre ddragon e cdragon — ver [ADR 0002](adr/0002-nomes-canonicos-de-corte-de-splash.md).
 
 ## A.5. Requisitos não funcionais
 
 - **Performance:** busca responde em < 50 ms (índice no cliente); imagem abre em < 1 s.
-- **Custo:** o site precisa ser sustentável de graça ou quase. Consequência: assets convertidos são pré-gerados e servidos como estáticos via CDN, não convertidos por requisição.
+- **Custo:** o site precisa ser sustentável de graça ou quase. Consequência: os assets são servidos como estáticos via CDN nos bytes de origem, sem conversão no servidor nem por requisição ([ADR 0001](adr/0001-formato-de-entrega-dos-assets.md)).
 - **Resiliência:** se ddragon/cdragon caírem, o site continua funcionando com o último índice publicado.
 - **Atualização:** novo patch refletido em até 24 h, sem intervenção manual.
 - **Abuso:** rate limit em geração de zip; zips de categoria inteira pré-gerados.
-- **Legal:** aviso obrigatório da Riot (Legal Jibber Jabber) visível; sem monetização direta dos assets; sem "Riot" ou "League of Legends" no nome do produto. Assets vindos da wiki exibem crédito à League of Legends Wiki / Weird Gloop (o texto da wiki é CC BY-SA; as imagens continuam sendo propriedade da Riot).
+- **Legal:** aviso obrigatório da Riot (Legal Jibber Jabber) visível; sem monetização direta dos assets; sem "Riot", "League of Legends" ou "LoL" no nome público do produto — o nome exibido está [A DECIDIR] até o lançamento ([ADR 0003](adr/0003-nome-publico-do-produto.md)); repositório e pacotes internos ficam como estão. Assets vindos da wiki exibem crédito à League of Legends Wiki / Weird Gloop (o texto da wiki é CC BY-SA; as imagens continuam sendo propriedade da Riot).
 - **Etiqueta com a wiki:** indexador usa a API oficial do MediaWiki com User-Agent identificado (nome do projeto + contato), rate limit conservador, cache agressivo e respeito aos termos de uso da Weird Gloop. O site nunca faz hotlink de imagens da wiki — tudo é copiado pro storage próprio no momento da indexação.
 - **Acessibilidade básica:** navegável por teclado, contraste adequado, alt em todas as imagens.
 

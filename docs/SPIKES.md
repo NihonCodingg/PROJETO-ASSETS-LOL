@@ -108,6 +108,23 @@ Só têm canal alfa de verdade (alpha mínimo 0 em amostras reais):
 feitiço, de passiva, de perfil, splashes, loading e tiles. Ou seja: converter esses
 para PNG **não** produz fundo transparente — só troca o container.
 
+### CORS — as duas fontes liberam leitura pelo navegador
+
+Medido com `Origin: http://localhost:3000` em JSONs e imagens das duas fontes:
+
+| Recurso | `Access-Control-Allow-Origin` |
+|---|---|
+| `ddragon /api/versions.json` | `*` |
+| `ddragon /cdn/{v}/data/pt_BR/champion.json` | `*` |
+| `ddragon /cdn/{v}/img/champion/Jax.png` | `*` |
+| `ddragon /cdn/img/champion/centered/Jax_0.jpg` | `*` |
+| `cdragon /…/v1/champion-icons/24.png` | `*` |
+
+O ddragon ainda manda `Access-Control-Allow-Methods: GET, HEAD`. Consequência prática:
+o navegador consegue desenhar essas imagens em `<canvas>` com `crossOrigin="anonymous"`
+sem contaminar o canvas, então **converter para PNG no cliente é viável sem proxy** —
+é a base técnica do [ADR 0001](adr/0001-formato-de-entrega-dos-assets.md).
+
 ### Conferência das URLs de §B.1.3 direto no CDN
 
 Todas responderam HTTP 200 com as dimensões acima. `/cdn/16.17.1/img/profileicon/1.png`
@@ -264,13 +281,11 @@ Somando o que o tarball já entrega em PNG e que está no escopo (ícones de per
 
 Recomendações para a Spec. Cada uma vira ADR.
 
-1. **Servir JPEG quando a fonte é JPEG, e oferecer PNG sob demanda.** Manter "PNG
-   sempre" como padrão custa 3× mais armazenamento e banda para entregar exatamente os
-   mesmos pixels — a fonte não tem alfa e o JPEG já está comprimido. Sugestão: botão
-   "Baixar PNG" continua existindo e converte **no cliente** (canvas), como o protótipo
-   vai demonstrar; o CDN guarda o original. Isso preserva a promessa da §A.4 sem pagar
-   por ela no bucket. **Precisa da sua decisão** — é a única recomendação que contraria
-   um princípio declarado não negociável.
+1. **Servir os bytes de origem e converter para PNG no cliente.** ✅ **Decidido em
+   03/09/2026** — ver [ADR 0001](adr/0001-formato-de-entrega-dos-assets.md), que revoga
+   o princípio "PNG sempre" da §A.4. O CDN guarda o original, o indexador nunca re-encoda,
+   e o botão "Baixar PNG" converte no navegador. Economia medida: ~76 % de armazenamento
+   e egress por versão.
 2. **ddragon como fonte única dos assets de campeão.** As dimensões empatam e o tarball
    entrega tudo em uma requisição. O cdragon entra para o que o ddragon não tem:
    chromas, loading vintage, emotes, ward skins, ícones de posição, elos.
@@ -282,7 +297,10 @@ Recomendações para a Spec. Cada uma vira ADR.
 6. **Teste de contrato obrigatório por adaptador** cobrindo exatamente os caminhos que
    este spike mediu — foi assim que se descobriu que três caminhos documentados estavam
    mortos.
-7. **Política de versões:** guardar assets completos só da versão atual; a anterior fica
+7. **Cortes de splash são dois tipos distintos**, com nomes canônicos próprios porque
+   ddragon e cdragon usam os nomes trocados — ver
+   [ADR 0002](adr/0002-nomes-canonicos-de-corte-de-splash.md).
+8. **Política de versões:** guardar assets completos só da versão atual; a anterior fica
    com índice e URLs apontando para o ddragon, que serve splash e loading sem versão na
    URL (portanto sempre disponíveis). Com ~1,7 GB por versão no formato de origem, cabe
    folgado no plano gratuito de um R2.
@@ -322,7 +340,9 @@ Descoberta relacionada: o pnpm 11 **não lê mais** o campo `pnpm` do `package.j
 ## Perguntas de A.9 que continuam abertas
 
 - Assets exclusivos da wiki (monstros, minions, torres, artes promocionais): dependem do
-  consentimento da Weird Gloop. Nada foi testado.
+  consentimento da Weird Gloop. Nada foi testado. **Virou prioridade de projeto em
+  03/09/2026** — a categoria HD da wiki é a única fonte conhecida acima de 1280×720
+  ([ADR 0004](adr/0004-consentimento-da-wiki-e-teto-de-resolucao.md)).
 - Base correta de `champion-abilities/…` no cdragon (ícones de habilidade por forma,
   tipo Jayce e Nidalee).
 - Histórico: o cdragon serve patches antigos em `raw.communitydragon.org/{patch}/`, mas o

@@ -5,7 +5,7 @@ import { siteConfig } from "@/lib/site-config";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: siteConfig.name,
+  title: siteConfig.displayName,
   description: siteConfig.description,
 };
 
