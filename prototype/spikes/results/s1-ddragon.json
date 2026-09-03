@@ -1,0 +1,5434 @@
+{
+  "spike": "s1-ddragon",
+  "started_at": "2026-09-03T13:41:11-0300",
+  "user_agent": "lol-assets-indexer/0.0.0-spike (+https://github.com/NihonCodingg/PROJETO-ASSETS-LOL; https://github.com/NihonCodingg/PROJETO-ASSETS-LOL/issues)",
+  "data": {
+    "descoberta": {
+      "versions_total": 498,
+      "versions_head": [
+        "16.17.1",
+        "16.16.1",
+        "16.15.1",
+        "16.14.1",
+        "16.13.1",
+        "16.12.1",
+        "16.11.1",
+        "16.10.1",
+        "16.9.1",
+        "16.8.1"
+      ],
+      "latest": "16.17.1",
+      "languages_total": 28,
+      "pt_BR_disponivel": true,
+      "realm_br": {
+        "v": "16.17.1",
+        "dd": "16.17.1",
+        "l": "pt_BR",
+        "cdn": "https://ddragon.leagueoflegends.com/cdn"
+      },
+      "tarballs": {
+        "dragontail-16.17.1.tgz": {
+          "url": "https://ddragon.leagueoflegends.com/cdn/dragontail-16.17.1.tgz",
+          "status": 200,
+          "bytes": 2564139878,
+          "content_type": "application/x-tar"
+        },
+        "cdragontail-16.17.1.tgz": {
+          "url": "https://ddragon.leagueoflegends.com/cdn/cdragontail-16.17.1.tgz",
+          "status": 403,
+          "bytes": 0,
+          "content_type": "application/xml"
+        }
+      }
+    },
+    "download": {
+      "cached": false,
+      "bytes": 2564139878,
+      "seconds": 83.7
+    },
+    "tarball": {
+      "arquivos_total": 34305,
+      "bytes_total": 2869828047,
+      "segundos": 63.3,
+      "por_grupo": [
+        {
+          "versionado": "versionado",
+          "grupo": "img/profileicon",
+          "ext": ".png",
+          "arquivos": 5021,
+          "bytes": 580928642,
+          "bytes_legivel": "554.0 MB",
+          "exemplo": "16.17.1/img/profileicon/0.png",
+          "dimensoes_top": [
+            {
+              "w": 300,
+              "h": 300,
+              "arquivos": 4543
+            },
+            {
+              "w": 128,
+              "h": 128,
+              "arquivos": 333
+            },
+            {
+              "w": 256,
+              "h": 256,
+              "arquivos": 117
+            },
+            {
+              "w": 240,
+              "h": 240,
+              "arquivos": 27
+            },
+            {
+              "w": 300,
+              "h": 303,
+              "arquivos": 1
+            }
+          ],
+          "dimensoes_distintas": 5,
+          "modos": {
+            "RGB": 5015,
+            "L": 6
+          },
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "nao-versionado",
+          "grupo": "img/challenges-images",
+          "ext": ".png",
+          "arquivos": 3388,
+          "bytes": 146442410,
+          "bytes_legivel": "139.7 MB",
+          "exemplo": "img/challenges-images/101000-BRONZE.png",
+          "dimensoes_top": [
+            {
+              "w": 256,
+              "h": 256,
+              "arquivos": 3388
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGBA": 3388
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "img/challenges-images/101000-BRONZE.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            },
+            {
+              "arquivo": "img/challenges-images/101000-CHALLENGER.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            },
+            {
+              "arquivo": "img/challenges-images/101000-DIAMOND.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            },
+            {
+              "arquivo": "img/challenges-images/101000-GOLD.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            },
+            {
+              "arquivo": "img/challenges-images/101000-GRANDMASTER.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            }
+          ]
+        },
+        {
+          "versionado": "nao-versionado",
+          "grupo": "img/champion/centered",
+          "ext": ".jpg",
+          "arquivos": 2118,
+          "bytes": 230249479,
+          "bytes_legivel": "219.6 MB",
+          "exemplo": "img/champion/centered/Aatrox_0.jpg",
+          "dimensoes_top": [
+            {
+              "w": 1280,
+              "h": 720,
+              "arquivos": 2118
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGB": 2118
+          },
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "nao-versionado",
+          "grupo": "img/champion/loading",
+          "ext": ".jpg",
+          "arquivos": 2118,
+          "bytes": 130493100,
+          "bytes_legivel": "124.4 MB",
+          "exemplo": "img/champion/loading/Aatrox_0.jpg",
+          "dimensoes_top": [
+            {
+              "w": 308,
+              "h": 560,
+              "arquivos": 2118
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGB": 2118
+          },
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "nao-versionado",
+          "grupo": "img/champion/splash",
+          "ext": ".jpg",
+          "arquivos": 2118,
+          "bytes": 385270717,
+          "bytes_legivel": "367.4 MB",
+          "exemplo": "img/champion/splash/Aatrox_0.jpg",
+          "dimensoes_top": [
+            {
+              "w": 1215,
+              "h": 717,
+              "arquivos": 2118
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGB": 2118
+          },
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "nao-versionado",
+          "grupo": "img/champion/tiles",
+          "ext": ".jpg",
+          "arquivos": 2118,
+          "bytes": 93749441,
+          "bytes_legivel": "89.4 MB",
+          "exemplo": "img/champion/tiles/Aatrox_0.jpg",
+          "dimensoes_top": [
+            {
+              "w": 380,
+              "h": 380,
+              "arquivos": 2118
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGB": 2118
+          },
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "img/tft-tactician",
+          "ext": ".png",
+          "arquivos": 2017,
+          "bytes": 520776246,
+          "bytes_legivel": "496.7 MB",
+          "exemplo": "16.17.1/img/tft-tactician/Tooltip_AkaliDragon_Beatmaker_Tier1.png",
+          "dimensoes_top": [
+            {
+              "w": 512,
+              "h": 344,
+              "arquivos": 2017
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "P": 270,
+            "RGBA": 1500,
+            "RGB": 247
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "16.17.1/img/tft-tactician/Tooltip_AkaliDragon_Beatmaker_Tier1.png",
+              "alpha_min": 191,
+              "alpha_max": 255
+            },
+            {
+              "arquivo": "16.17.1/img/tft-tactician/Tooltip_AkaliDragon_Beatmaker_Tier2.png",
+              "alpha_min": 191,
+              "alpha_max": 255
+            },
+            {
+              "arquivo": "16.17.1/img/tft-tactician/Tooltip_AkaliDragon_Beatmaker_Tier3.png",
+              "alpha_min": 191,
+              "alpha_max": 255
+            },
+            {
+              "arquivo": "16.17.1/img/tft-tactician/Tooltip_AkaliDragon_Ossia_Tier1.png",
+              "alpha_min": 191,
+              "alpha_max": 255
+            },
+            {
+              "arquivo": "16.17.1/img/tft-tactician/Tooltip_AkaliDragon_Ossia_Tier2.png",
+              "alpha_min": 191,
+              "alpha_max": 255
+            }
+          ]
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "img/tft-item",
+          "ext": ".png",
+          "arquivos": 1189,
+          "bytes": 45489795,
+          "bytes_legivel": "43.4 MB",
+          "exemplo": "16.17.1/img/tft-item/DA_18_EmblemBlackthorn.png",
+          "dimensoes_top": [
+            {
+              "w": 128,
+              "h": 128,
+              "arquivos": 911
+            },
+            {
+              "w": 64,
+              "h": 64,
+              "arquivos": 174
+            },
+            {
+              "w": 256,
+              "h": 256,
+              "arquivos": 101
+            },
+            {
+              "w": 32,
+              "h": 32,
+              "arquivos": 3
+            }
+          ],
+          "dimensoes_distintas": 4,
+          "modos": {
+            "RGB": 1188,
+            "P": 1
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "16.17.1/img/tft-item/TFT9_Item_CrownOfDemacia.png",
+              "alpha_min": 255,
+              "alpha_max": 255
+            }
+          ]
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "img/item",
+          "ext": ".png",
+          "arquivos": 868,
+          "bytes": 5802119,
+          "bytes_legivel": "5.5 MB",
+          "exemplo": "16.17.1/img/item/1001.png",
+          "dimensoes_top": [
+            {
+              "w": 64,
+              "h": 64,
+              "arquivos": 865
+            },
+            {
+              "w": 128,
+              "h": 128,
+              "arquivos": 2
+            },
+            {
+              "w": 512,
+              "h": 512,
+              "arquivos": 1
+            }
+          ],
+          "dimensoes_distintas": 3,
+          "modos": {
+            "RGB": 867,
+            "L": 1
+          },
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "img/spell",
+          "ext": ".png",
+          "arquivos": 726,
+          "bytes": 4392692,
+          "bytes_legivel": "4.2 MB",
+          "exemplo": "16.17.1/img/spell/AatroxE.png",
+          "dimensoes_top": [
+            {
+              "w": 64,
+              "h": 64,
+              "arquivos": 726
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGB": 726
+          },
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "img/sprite",
+          "ext": ".png",
+          "arquivos": 575,
+          "bytes": 95313614,
+          "bytes_legivel": "90.9 MB",
+          "exemplo": "16.17.1/img/sprite/champion0.png",
+          "dimensoes_top": [
+            {
+              "w": 480,
+              "h": 144,
+              "arquivos": 150
+            },
+            {
+              "w": 360,
+              "h": 108,
+              "arquivos": 150
+            },
+            {
+              "w": 240,
+              "h": 72,
+              "arquivos": 150
+            },
+            {
+              "w": 360,
+              "h": 144,
+              "arquivos": 19
+            },
+            {
+              "w": 480,
+              "h": 192,
+              "arquivos": 19
+            }
+          ],
+          "dimensoes_distintas": 30,
+          "modos": {
+            "RGB": 548,
+            "RGBA": 27
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "16.17.1/img/sprite/small_tft-queue0.png",
+              "alpha_min": 0,
+              "alpha_max": 254
+            },
+            {
+              "arquivo": "16.17.1/img/sprite/small_tft-regalia0.png",
+              "alpha_min": 0,
+              "alpha_max": 254
+            },
+            {
+              "arquivo": "16.17.1/img/sprite/small_tft-trait0.png",
+              "alpha_min": 0,
+              "alpha_max": 254
+            },
+            {
+              "arquivo": "16.17.1/img/sprite/small_tft-trait1.png",
+              "alpha_min": 0,
+              "alpha_max": 254
+            },
+            {
+              "arquivo": "16.17.1/img/sprite/small_tft-trait2.png",
+              "alpha_min": 0,
+              "alpha_max": 254
+            }
+          ]
+        },
+        {
+          "versionado": "nao-versionado",
+          "grupo": "img/mode/classic/champion/centered",
+          "ext": ".jpg",
+          "arquivos": 463,
+          "bytes": 49332615,
+          "bytes_legivel": "47.0 MB",
+          "exemplo": "img/mode/classic/champion/centered/Jade_Ahri_0.jpg",
+          "dimensoes_top": [
+            {
+              "w": 1280,
+              "h": 720,
+              "arquivos": 463
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGB": 463
+          },
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "nao-versionado",
+          "grupo": "img/mode/classic/champion/loading",
+          "ext": ".jpg",
+          "arquivos": 463,
+          "bytes": 22064570,
+          "bytes_legivel": "21.0 MB",
+          "exemplo": "img/mode/classic/champion/loading/Jade_Ahri_0.jpg",
+          "dimensoes_top": [
+            {
+              "w": 308,
+              "h": 560,
+              "arquivos": 463
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGB": 463
+          },
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "nao-versionado",
+          "grupo": "img/mode/classic/champion/splash",
+          "ext": ".jpg",
+          "arquivos": 463,
+          "bytes": 78344786,
+          "bytes_legivel": "74.7 MB",
+          "exemplo": "img/mode/classic/champion/splash/Jade_Ahri_0.jpg",
+          "dimensoes_top": [
+            {
+              "w": 1215,
+              "h": 717,
+              "arquivos": 463
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGB": 463
+          },
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "nao-versionado",
+          "grupo": "img/mode/classic/champion/tiles",
+          "ext": ".jpg",
+          "arquivos": 463,
+          "bytes": 19956040,
+          "bytes_legivel": "19.0 MB",
+          "exemplo": "img/mode/classic/champion/tiles/Jade_Ahri_0.jpg",
+          "dimensoes_top": [
+            {
+              "w": 380,
+              "h": 380,
+              "arquivos": 463
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGB": 463
+          },
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "img/tft-augment",
+          "ext": ".png",
+          "arquivos": 460,
+          "bytes": 4695435,
+          "bytes_legivel": "4.5 MB",
+          "exemplo": "16.17.1/img/tft-augment/A-Magical-Roll-II.png",
+          "dimensoes_top": [
+            {
+              "w": 128,
+              "h": 128,
+              "arquivos": 460
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGB": 132,
+            "RGBA": 328
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "16.17.1/img/tft-augment/AGoldenQuest_II.png",
+              "alpha_min": 191,
+              "alpha_max": 255
+            },
+            {
+              "arquivo": "16.17.1/img/tft-augment/ANobleSacrifice_II.png",
+              "alpha_min": 191,
+              "alpha_max": 255
+            },
+            {
+              "arquivo": "16.17.1/img/tft-augment/AatroxHero_I.png",
+              "alpha_min": 191,
+              "alpha_max": 255
+            },
+            {
+              "arquivo": "16.17.1/img/tft-augment/AdaptiveStyle_II.png",
+              "alpha_min": 191,
+              "alpha_max": 255
+            },
+            {
+              "arquivo": "16.17.1/img/tft-augment/AdvancedLoan_II.png",
+              "alpha_min": 191,
+              "alpha_max": 255
+            }
+          ]
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "img/tft-champion",
+          "ext": ".png",
+          "arquivos": 323,
+          "bytes": 44552522,
+          "bytes_legivel": "42.5 MB",
+          "exemplo": "16.17.1/img/tft-champion/TFT15_Aatrox.png",
+          "dimensoes_top": [
+            {
+              "w": 256,
+              "h": 128,
+              "arquivos": 264
+            },
+            {
+              "w": 1024,
+              "h": 512,
+              "arquivos": 59
+            }
+          ],
+          "dimensoes_distintas": 2,
+          "modos": {
+            "RGB": 323
+          },
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "img/mode/classic/spell",
+          "ext": ".png",
+          "arquivos": 268,
+          "bytes": 1639716,
+          "bytes_legivel": "1.6 MB",
+          "exemplo": "16.17.1/img/mode/classic/spell/Jade_AhriE.png",
+          "dimensoes_top": [
+            {
+              "w": 64,
+              "h": 64,
+              "arquivos": 268
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGB": 268
+          },
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "img/mission",
+          "ext": ".png",
+          "arquivos": 216,
+          "bytes": 51532055,
+          "bytes_legivel": "49.1 MB",
+          "exemplo": "16.17.1/img/mission/25_10_Brawl_BG.png",
+          "dimensoes_top": [
+            {
+              "w": 502,
+              "h": 176,
+              "arquivos": 98
+            },
+            {
+              "w": 1004,
+              "h": 352,
+              "arquivos": 35
+            },
+            {
+              "w": 256,
+              "h": 256,
+              "arquivos": 16
+            },
+            {
+              "w": 896,
+              "h": 896,
+              "arquivos": 13
+            },
+            {
+              "w": 1260,
+              "h": 212,
+              "arquivos": 9
+            }
+          ],
+          "dimensoes_distintas": 27,
+          "modos": {
+            "RGB": 135,
+            "RGBA": 81
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "16.17.1/img/mission/25_12_Lucian_BG.png",
+              "alpha_min": 1,
+              "alpha_max": 255
+            },
+            {
+              "arquivo": "16.17.1/img/mission/25_17_DoomBots_BG.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            },
+            {
+              "arquivo": "16.17.1/img/mission/25_17_S3_Act1_BG.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            },
+            {
+              "arquivo": "16.17.1/img/mission/25_23_Arcane_BG.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            },
+            {
+              "arquivo": "16.17.1/img/mission/26_02_Briar_BG.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            }
+          ]
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "img/tft-trait",
+          "ext": ".png",
+          "arquivos": 194,
+          "bytes": 182080,
+          "bytes_legivel": "177.8 KB",
+          "exemplo": "16.17.1/img/tft-trait/TeamUp_Trait_ChosenWolves.png",
+          "dimensoes_top": [
+            {
+              "w": 32,
+              "h": 32,
+              "arquivos": 194
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGBA": 191,
+            "P": 3
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "16.17.1/img/tft-trait/TeamUp_Trait_ChosenWolves.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            },
+            {
+              "arquivo": "16.17.1/img/tft-trait/TeamUp_Trait_PoisonPals.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            },
+            {
+              "arquivo": "16.17.1/img/tft-trait/TeamUp_Trait_SentinelsOfLight.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            },
+            {
+              "arquivo": "16.17.1/img/tft-trait/TeamUp_Trait_Timewinders.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            },
+            {
+              "arquivo": "16.17.1/img/tft-trait/TeamUp_Trait_UncompromisingWill.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            }
+          ]
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "img/mode/classic/item",
+          "ext": ".png",
+          "arquivos": 185,
+          "bytes": 1372640,
+          "bytes_legivel": "1.3 MB",
+          "exemplo": "16.17.1/img/mode/classic/item/1501.png",
+          "dimensoes_top": [
+            {
+              "w": 64,
+              "h": 64,
+              "arquivos": 184
+            },
+            {
+              "w": 512,
+              "h": 512,
+              "arquivos": 1
+            }
+          ],
+          "dimensoes_distintas": 2,
+          "modos": {
+            "RGB": 185
+          },
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/ar_AE/champion",
+          "ext": ".json",
+          "arquivos": 173,
+          "bytes": 2766196,
+          "bytes_legivel": "2.6 MB",
+          "exemplo": "16.17.1/data/ar_AE/champion/Aatrox.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/cs_CZ/champion",
+          "ext": ".json",
+          "arquivos": 173,
+          "bytes": 2445247,
+          "bytes_legivel": "2.3 MB",
+          "exemplo": "16.17.1/data/cs_CZ/champion/Aatrox.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/de_DE/champion",
+          "ext": ".json",
+          "arquivos": 173,
+          "bytes": 2407708,
+          "bytes_legivel": "2.3 MB",
+          "exemplo": "16.17.1/data/de_DE/champion/Aatrox.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/el_GR/champion",
+          "ext": ".json",
+          "arquivos": 173,
+          "bytes": 3245242,
+          "bytes_legivel": "3.1 MB",
+          "exemplo": "16.17.1/data/el_GR/champion/Aatrox.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/en_AU/champion",
+          "ext": ".json",
+          "arquivos": 173,
+          "bytes": 2234475,
+          "bytes_legivel": "2.1 MB",
+          "exemplo": "16.17.1/data/en_AU/champion/Aatrox.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/en_GB/champion",
+          "ext": ".json",
+          "arquivos": 173,
+          "bytes": 2234475,
+          "bytes_legivel": "2.1 MB",
+          "exemplo": "16.17.1/data/en_GB/champion/Aatrox.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/en_PH/champion",
+          "ext": ".json",
+          "arquivos": 173,
+          "bytes": 2234467,
+          "bytes_legivel": "2.1 MB",
+          "exemplo": "16.17.1/data/en_PH/champion/Aatrox.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/en_SG/champion",
+          "ext": ".json",
+          "arquivos": 173,
+          "bytes": 2234475,
+          "bytes_legivel": "2.1 MB",
+          "exemplo": "16.17.1/data/en_SG/champion/Aatrox.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/en_US/champion",
+          "ext": ".json",
+          "arquivos": 173,
+          "bytes": 2234640,
+          "bytes_legivel": "2.1 MB",
+          "exemplo": "16.17.1/data/en_US/champion/Aatrox.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/es_AR/champion",
+          "ext": ".json",
+          "arquivos": 173,
+          "bytes": 2362616,
+          "bytes_legivel": "2.3 MB",
+          "exemplo": "16.17.1/data/es_AR/champion/Aatrox.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/es_ES/champion",
+          "ext": ".json",
+          "arquivos": 173,
+          "bytes": 2368724,
+          "bytes_legivel": "2.3 MB",
+          "exemplo": "16.17.1/data/es_ES/champion/Aatrox.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/es_MX/champion",
+          "ext": ".json",
+          "arquivos": 173,
+          "bytes": 2362550,
+          "bytes_legivel": "2.3 MB",
+          "exemplo": "16.17.1/data/es_MX/champion/Aatrox.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/fr_FR/champion",
+          "ext": ".json",
+          "arquivos": 173,
+          "bytes": 2402113,
+          "bytes_legivel": "2.3 MB",
+          "exemplo": "16.17.1/data/fr_FR/champion/Aatrox.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/hu_HU/champion",
+          "ext": ".json",
+          "arquivos": 173,
+          "bytes": 2392966,
+          "bytes_legivel": "2.3 MB",
+          "exemplo": "16.17.1/data/hu_HU/champion/Aatrox.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/id_ID/champion",
+          "ext": ".json",
+          "arquivos": 173,
+          "bytes": 2289992,
+          "bytes_legivel": "2.2 MB",
+          "exemplo": "16.17.1/data/id_ID/champion/Aatrox.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/it_IT/champion",
+          "ext": ".json",
+          "arquivos": 173,
+          "bytes": 2344228,
+          "bytes_legivel": "2.2 MB",
+          "exemplo": "16.17.1/data/it_IT/champion/Aatrox.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/ja_JP/champion",
+          "ext": ".json",
+          "arquivos": 173,
+          "bytes": 2648120,
+          "bytes_legivel": "2.5 MB",
+          "exemplo": "16.17.1/data/ja_JP/champion/Aatrox.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/ko_KR/champion",
+          "ext": ".json",
+          "arquivos": 173,
+          "bytes": 2508550,
+          "bytes_legivel": "2.4 MB",
+          "exemplo": "16.17.1/data/ko_KR/champion/Aatrox.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/pl_PL/champion",
+          "ext": ".json",
+          "arquivos": 173,
+          "bytes": 2391751,
+          "bytes_legivel": "2.3 MB",
+          "exemplo": "16.17.1/data/pl_PL/champion/Aatrox.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/pt_BR/champion",
+          "ext": ".json",
+          "arquivos": 173,
+          "bytes": 2346571,
+          "bytes_legivel": "2.2 MB",
+          "exemplo": "16.17.1/data/pt_BR/champion/Aatrox.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/ro_RO/champion",
+          "ext": ".json",
+          "arquivos": 173,
+          "bytes": 2417698,
+          "bytes_legivel": "2.3 MB",
+          "exemplo": "16.17.1/data/ro_RO/champion/Aatrox.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/ru_RU/champion",
+          "ext": ".json",
+          "arquivos": 173,
+          "bytes": 3092099,
+          "bytes_legivel": "2.9 MB",
+          "exemplo": "16.17.1/data/ru_RU/champion/Aatrox.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/th_TH/champion",
+          "ext": ".json",
+          "arquivos": 173,
+          "bytes": 3238069,
+          "bytes_legivel": "3.1 MB",
+          "exemplo": "16.17.1/data/th_TH/champion/Aatrox.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/tr_TR/champion",
+          "ext": ".json",
+          "arquivos": 173,
+          "bytes": 2370777,
+          "bytes_legivel": "2.3 MB",
+          "exemplo": "16.17.1/data/tr_TR/champion/Aatrox.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/vi_VN/champion",
+          "ext": ".json",
+          "arquivos": 173,
+          "bytes": 2524447,
+          "bytes_legivel": "2.4 MB",
+          "exemplo": "16.17.1/data/vi_VN/champion/Aatrox.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/zh_CN/champion",
+          "ext": ".json",
+          "arquivos": 173,
+          "bytes": 2335949,
+          "bytes_legivel": "2.2 MB",
+          "exemplo": "16.17.1/data/zh_CN/champion/Aatrox.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/zh_MY/champion",
+          "ext": ".json",
+          "arquivos": 173,
+          "bytes": 2305385,
+          "bytes_legivel": "2.2 MB",
+          "exemplo": "16.17.1/data/zh_MY/champion/Aatrox.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/zh_TW/champion",
+          "ext": ".json",
+          "arquivos": 173,
+          "bytes": 2289572,
+          "bytes_legivel": "2.2 MB",
+          "exemplo": "16.17.1/data/zh_TW/champion/Aatrox.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "img/champion",
+          "ext": ".png",
+          "arquivos": 173,
+          "bytes": 4866217,
+          "bytes_legivel": "4.6 MB",
+          "exemplo": "16.17.1/img/champion/Aatrox.png",
+          "dimensoes_top": [
+            {
+              "w": 128,
+              "h": 128,
+              "arquivos": 173
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGB": 173
+          },
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "img/passive",
+          "ext": ".png",
+          "arquivos": 173,
+          "bytes": 1038351,
+          "bytes_legivel": "1014.0 KB",
+          "exemplo": "16.17.1/img/passive/Aatrox_Passive.png",
+          "dimensoes_top": [
+            {
+              "w": 64,
+              "h": 64,
+              "arquivos": 173
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGB": 173
+          },
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "img/tft-arena",
+          "ext": ".png",
+          "arquivos": 138,
+          "bytes": 47005387,
+          "bytes_legivel": "44.8 MB",
+          "exemplo": "16.17.1/img/tft-arena/1.png",
+          "dimensoes_top": [
+            {
+              "w": 512,
+              "h": 512,
+              "arquivos": 138
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGB": 131,
+            "P": 7
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "16.17.1/img/tft-arena/13.png",
+              "alpha_min": 255,
+              "alpha_max": 255
+            },
+            {
+              "arquivo": "16.17.1/img/tft-arena/14.png",
+              "alpha_min": 255,
+              "alpha_max": 255
+            },
+            {
+              "arquivo": "16.17.1/img/tft-arena/15.png",
+              "alpha_min": 255,
+              "alpha_max": 255
+            },
+            {
+              "arquivo": "16.17.1/img/tft-arena/22.png",
+              "alpha_min": 255,
+              "alpha_max": 255
+            },
+            {
+              "arquivo": "16.17.1/img/tft-arena/29.png",
+              "alpha_min": 255,
+              "alpha_max": 255
+            }
+          ]
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/ar_AE/mode/classic/champion",
+          "ext": ".json",
+          "arquivos": 63,
+          "bytes": 655523,
+          "bytes_legivel": "640.2 KB",
+          "exemplo": "16.17.1/data/ar_AE/mode/classic/champion/Jade_Ahri.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/cs_CZ/mode/classic/champion",
+          "ext": ".json",
+          "arquivos": 63,
+          "bytes": 597899,
+          "bytes_legivel": "583.9 KB",
+          "exemplo": "16.17.1/data/cs_CZ/mode/classic/champion/Jade_Ahri.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/de_DE/mode/classic/champion",
+          "ext": ".json",
+          "arquivos": 63,
+          "bytes": 590652,
+          "bytes_legivel": "576.8 KB",
+          "exemplo": "16.17.1/data/de_DE/mode/classic/champion/Jade_Ahri.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/el_GR/mode/classic/champion",
+          "ext": ".json",
+          "arquivos": 63,
+          "bytes": 749830,
+          "bytes_legivel": "732.3 KB",
+          "exemplo": "16.17.1/data/el_GR/mode/classic/champion/Jade_Ahri.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/en_AU/mode/classic/champion",
+          "ext": ".json",
+          "arquivos": 63,
+          "bytes": 558417,
+          "bytes_legivel": "545.3 KB",
+          "exemplo": "16.17.1/data/en_AU/mode/classic/champion/Jade_Ahri.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/en_GB/mode/classic/champion",
+          "ext": ".json",
+          "arquivos": 63,
+          "bytes": 558417,
+          "bytes_legivel": "545.3 KB",
+          "exemplo": "16.17.1/data/en_GB/mode/classic/champion/Jade_Ahri.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/en_PH/mode/classic/champion",
+          "ext": ".json",
+          "arquivos": 63,
+          "bytes": 558417,
+          "bytes_legivel": "545.3 KB",
+          "exemplo": "16.17.1/data/en_PH/mode/classic/champion/Jade_Ahri.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/en_SG/mode/classic/champion",
+          "ext": ".json",
+          "arquivos": 63,
+          "bytes": 558417,
+          "bytes_legivel": "545.3 KB",
+          "exemplo": "16.17.1/data/en_SG/mode/classic/champion/Jade_Ahri.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/en_US/mode/classic/champion",
+          "ext": ".json",
+          "arquivos": 63,
+          "bytes": 558417,
+          "bytes_legivel": "545.3 KB",
+          "exemplo": "16.17.1/data/en_US/mode/classic/champion/Jade_Ahri.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/es_AR/mode/classic/champion",
+          "ext": ".json",
+          "arquivos": 63,
+          "bytes": 589376,
+          "bytes_legivel": "575.6 KB",
+          "exemplo": "16.17.1/data/es_AR/mode/classic/champion/Jade_Ahri.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/es_ES/mode/classic/champion",
+          "ext": ".json",
+          "arquivos": 63,
+          "bytes": 586215,
+          "bytes_legivel": "572.5 KB",
+          "exemplo": "16.17.1/data/es_ES/mode/classic/champion/Jade_Ahri.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/es_MX/mode/classic/champion",
+          "ext": ".json",
+          "arquivos": 63,
+          "bytes": 589376,
+          "bytes_legivel": "575.6 KB",
+          "exemplo": "16.17.1/data/es_MX/mode/classic/champion/Jade_Ahri.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/fr_FR/mode/classic/champion",
+          "ext": ".json",
+          "arquivos": 63,
+          "bytes": 592998,
+          "bytes_legivel": "579.1 KB",
+          "exemplo": "16.17.1/data/fr_FR/mode/classic/champion/Jade_Ahri.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/hu_HU/mode/classic/champion",
+          "ext": ".json",
+          "arquivos": 63,
+          "bytes": 592449,
+          "bytes_legivel": "578.6 KB",
+          "exemplo": "16.17.1/data/hu_HU/mode/classic/champion/Jade_Ahri.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/id_ID/mode/classic/champion",
+          "ext": ".json",
+          "arquivos": 63,
+          "bytes": 570833,
+          "bytes_legivel": "557.5 KB",
+          "exemplo": "16.17.1/data/id_ID/mode/classic/champion/Jade_Ahri.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/it_IT/mode/classic/champion",
+          "ext": ".json",
+          "arquivos": 63,
+          "bytes": 582682,
+          "bytes_legivel": "569.0 KB",
+          "exemplo": "16.17.1/data/it_IT/mode/classic/champion/Jade_Ahri.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/ja_JP/mode/classic/champion",
+          "ext": ".json",
+          "arquivos": 63,
+          "bytes": 621780,
+          "bytes_legivel": "607.2 KB",
+          "exemplo": "16.17.1/data/ja_JP/mode/classic/champion/Jade_Ahri.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/ko_KR/mode/classic/champion",
+          "ext": ".json",
+          "arquivos": 63,
+          "bytes": 599514,
+          "bytes_legivel": "585.5 KB",
+          "exemplo": "16.17.1/data/ko_KR/mode/classic/champion/Jade_Ahri.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/pl_PL/mode/classic/champion",
+          "ext": ".json",
+          "arquivos": 63,
+          "bytes": 590899,
+          "bytes_legivel": "577.0 KB",
+          "exemplo": "16.17.1/data/pl_PL/mode/classic/champion/Jade_Ahri.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/pt_BR/mode/classic/champion",
+          "ext": ".json",
+          "arquivos": 63,
+          "bytes": 580796,
+          "bytes_legivel": "567.2 KB",
+          "exemplo": "16.17.1/data/pt_BR/mode/classic/champion/Jade_Ahri.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/ro_RO/mode/classic/champion",
+          "ext": ".json",
+          "arquivos": 63,
+          "bytes": 592676,
+          "bytes_legivel": "578.8 KB",
+          "exemplo": "16.17.1/data/ro_RO/mode/classic/champion/Jade_Ahri.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/ru_RU/mode/classic/champion",
+          "ext": ".json",
+          "arquivos": 63,
+          "bytes": 703170,
+          "bytes_legivel": "686.7 KB",
+          "exemplo": "16.17.1/data/ru_RU/mode/classic/champion/Jade_Ahri.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/th_TH/mode/classic/champion",
+          "ext": ".json",
+          "arquivos": 63,
+          "bytes": 730172,
+          "bytes_legivel": "713.1 KB",
+          "exemplo": "16.17.1/data/th_TH/mode/classic/champion/Jade_Ahri.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/tr_TR/mode/classic/champion",
+          "ext": ".json",
+          "arquivos": 63,
+          "bytes": 579809,
+          "bytes_legivel": "566.2 KB",
+          "exemplo": "16.17.1/data/tr_TR/mode/classic/champion/Jade_Ahri.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/vi_VN/mode/classic/champion",
+          "ext": ".json",
+          "arquivos": 63,
+          "bytes": 612750,
+          "bytes_legivel": "598.4 KB",
+          "exemplo": "16.17.1/data/vi_VN/mode/classic/champion/Jade_Ahri.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/zh_CN/mode/classic/champion",
+          "ext": ".json",
+          "arquivos": 63,
+          "bytes": 563353,
+          "bytes_legivel": "550.1 KB",
+          "exemplo": "16.17.1/data/zh_CN/mode/classic/champion/Jade_Ahri.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/zh_MY/mode/classic/champion",
+          "ext": ".json",
+          "arquivos": 63,
+          "bytes": 560584,
+          "bytes_legivel": "547.4 KB",
+          "exemplo": "16.17.1/data/zh_MY/mode/classic/champion/Jade_Ahri.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/zh_TW/mode/classic/champion",
+          "ext": ".json",
+          "arquivos": 63,
+          "bytes": 552813,
+          "bytes_legivel": "539.9 KB",
+          "exemplo": "16.17.1/data/zh_TW/mode/classic/champion/Jade_Ahri.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "img/mode/classic/champion",
+          "ext": ".png",
+          "arquivos": 63,
+          "bytes": 2220546,
+          "bytes_legivel": "2.1 MB",
+          "exemplo": "16.17.1/img/mode/classic/champion/Jade_Ahri.png",
+          "dimensoes_top": [
+            {
+              "w": 128,
+              "h": 128,
+              "arquivos": 63
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGB": 63
+          },
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "img/mode/classic/passive",
+          "ext": ".png",
+          "arquivos": 63,
+          "bytes": 389486,
+          "bytes_legivel": "380.4 KB",
+          "exemplo": "16.17.1/img/mode/classic/passive/Armordillo_ScavengeArmor.png",
+          "dimensoes_top": [
+            {
+              "w": 64,
+              "h": 64,
+              "arquivos": 63
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGB": 63
+          },
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "img/mode/classic/sprite",
+          "ext": ".png",
+          "arquivos": 51,
+          "bytes": 5553725,
+          "bytes_legivel": "5.3 MB",
+          "exemplo": "16.17.1/img/mode/classic/sprite/champion0.png",
+          "dimensoes_top": [
+            {
+              "w": 360,
+              "h": 144,
+              "arquivos": 6
+            },
+            {
+              "w": 480,
+              "h": 192,
+              "arquivos": 6
+            },
+            {
+              "w": 240,
+              "h": 96,
+              "arquivos": 6
+            },
+            {
+              "w": 480,
+              "h": 144,
+              "arquivos": 5
+            },
+            {
+              "w": 360,
+              "h": 108,
+              "arquivos": 5
+            }
+          ],
+          "dimensoes_distintas": 18,
+          "modos": {
+            "RGB": 51
+          },
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "img/tft-stage-round-data",
+          "ext": ".png",
+          "arquivos": 31,
+          "bytes": 43814,
+          "bytes_legivel": "42.8 KB",
+          "exemplo": "16.17.1/img/tft-stage-round-data/DraftCurrent.png",
+          "dimensoes_top": [
+            {
+              "w": 32,
+              "h": 32,
+              "arquivos": 31
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "P": 31
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "16.17.1/img/tft-stage-round-data/DraftCurrent.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            },
+            {
+              "arquivo": "16.17.1/img/tft-stage-round-data/DraftDefeat.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            },
+            {
+              "arquivo": "16.17.1/img/tft-stage-round-data/DraftUpcoming.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            },
+            {
+              "arquivo": "16.17.1/img/tft-stage-round-data/DragonCurrent.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            },
+            {
+              "arquivo": "16.17.1/img/tft-stage-round-data/DragonDefeat.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            }
+          ]
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/ar_AE",
+          "ext": ".json",
+          "arquivos": 29,
+          "bytes": 6555019,
+          "bytes_legivel": "6.3 MB",
+          "exemplo": "16.17.1/data/ar_AE/challenges.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/cs_CZ",
+          "ext": ".json",
+          "arquivos": 29,
+          "bytes": 6031080,
+          "bytes_legivel": "5.8 MB",
+          "exemplo": "16.17.1/data/cs_CZ/challenges.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/de_DE",
+          "ext": ".json",
+          "arquivos": 29,
+          "bytes": 5980700,
+          "bytes_legivel": "5.7 MB",
+          "exemplo": "16.17.1/data/de_DE/challenges.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/el_GR",
+          "ext": ".json",
+          "arquivos": 29,
+          "bytes": 7273226,
+          "bytes_legivel": "6.9 MB",
+          "exemplo": "16.17.1/data/el_GR/challenges.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/en_AU",
+          "ext": ".json",
+          "arquivos": 29,
+          "bytes": 5652221,
+          "bytes_legivel": "5.4 MB",
+          "exemplo": "16.17.1/data/en_AU/challenges.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/en_GB",
+          "ext": ".json",
+          "arquivos": 29,
+          "bytes": 5652221,
+          "bytes_legivel": "5.4 MB",
+          "exemplo": "16.17.1/data/en_GB/challenges.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/en_PH",
+          "ext": ".json",
+          "arquivos": 29,
+          "bytes": 5652213,
+          "bytes_legivel": "5.4 MB",
+          "exemplo": "16.17.1/data/en_PH/challenges.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/en_SG",
+          "ext": ".json",
+          "arquivos": 29,
+          "bytes": 5652221,
+          "bytes_legivel": "5.4 MB",
+          "exemplo": "16.17.1/data/en_SG/challenges.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/en_US",
+          "ext": ".json",
+          "arquivos": 29,
+          "bytes": 5652140,
+          "bytes_legivel": "5.4 MB",
+          "exemplo": "16.17.1/data/en_US/challenges.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/es_AR",
+          "ext": ".json",
+          "arquivos": 29,
+          "bytes": 5915494,
+          "bytes_legivel": "5.6 MB",
+          "exemplo": "16.17.1/data/es_AR/challenges.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/es_ES",
+          "ext": ".json",
+          "arquivos": 29,
+          "bytes": 5921094,
+          "bytes_legivel": "5.6 MB",
+          "exemplo": "16.17.1/data/es_ES/challenges.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/es_MX",
+          "ext": ".json",
+          "arquivos": 29,
+          "bytes": 5915789,
+          "bytes_legivel": "5.6 MB",
+          "exemplo": "16.17.1/data/es_MX/challenges.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/fr_FR",
+          "ext": ".json",
+          "arquivos": 29,
+          "bytes": 5983057,
+          "bytes_legivel": "5.7 MB",
+          "exemplo": "16.17.1/data/fr_FR/challenges.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/hu_HU",
+          "ext": ".json",
+          "arquivos": 29,
+          "bytes": 5956762,
+          "bytes_legivel": "5.7 MB",
+          "exemplo": "16.17.1/data/hu_HU/challenges.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/id_ID",
+          "ext": ".json",
+          "arquivos": 29,
+          "bytes": 5741266,
+          "bytes_legivel": "5.5 MB",
+          "exemplo": "16.17.1/data/id_ID/challenges.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/it_IT",
+          "ext": ".json",
+          "arquivos": 29,
+          "bytes": 5874010,
+          "bytes_legivel": "5.6 MB",
+          "exemplo": "16.17.1/data/it_IT/challenges.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/ja_JP",
+          "ext": ".json",
+          "arquivos": 29,
+          "bytes": 6412469,
+          "bytes_legivel": "6.1 MB",
+          "exemplo": "16.17.1/data/ja_JP/challenges.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/ko_KR",
+          "ext": ".json",
+          "arquivos": 29,
+          "bytes": 6113609,
+          "bytes_legivel": "5.8 MB",
+          "exemplo": "16.17.1/data/ko_KR/challenges.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/pl_PL",
+          "ext": ".json",
+          "arquivos": 29,
+          "bytes": 5962320,
+          "bytes_legivel": "5.7 MB",
+          "exemplo": "16.17.1/data/pl_PL/challenges.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/pt_BR",
+          "ext": ".json",
+          "arquivos": 29,
+          "bytes": 5870502,
+          "bytes_legivel": "5.6 MB",
+          "exemplo": "16.17.1/data/pt_BR/challenges.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/ro_RO",
+          "ext": ".json",
+          "arquivos": 29,
+          "bytes": 5974497,
+          "bytes_legivel": "5.7 MB",
+          "exemplo": "16.17.1/data/ro_RO/challenges.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/ru_RU",
+          "ext": ".json",
+          "arquivos": 29,
+          "bytes": 7099938,
+          "bytes_legivel": "6.8 MB",
+          "exemplo": "16.17.1/data/ru_RU/challenges.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/th_TH",
+          "ext": ".json",
+          "arquivos": 29,
+          "bytes": 7351718,
+          "bytes_legivel": "7.0 MB",
+          "exemplo": "16.17.1/data/th_TH/challenges.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/tr_TR",
+          "ext": ".json",
+          "arquivos": 29,
+          "bytes": 5901846,
+          "bytes_legivel": "5.6 MB",
+          "exemplo": "16.17.1/data/tr_TR/challenges.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/vi_VN",
+          "ext": ".json",
+          "arquivos": 29,
+          "bytes": 6157300,
+          "bytes_legivel": "5.9 MB",
+          "exemplo": "16.17.1/data/vi_VN/challenges.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/zh_CN",
+          "ext": ".json",
+          "arquivos": 29,
+          "bytes": 5822558,
+          "bytes_legivel": "5.6 MB",
+          "exemplo": "16.17.1/data/zh_CN/challenges.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/zh_MY",
+          "ext": ".json",
+          "arquivos": 29,
+          "bytes": 5774951,
+          "bytes_legivel": "5.5 MB",
+          "exemplo": "16.17.1/data/zh_MY/challenges.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/zh_TW",
+          "ext": ".json",
+          "arquivos": 29,
+          "bytes": 5741937,
+          "bytes_legivel": "5.5 MB",
+          "exemplo": "16.17.1/data/zh_TW/challenges.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "img/mission/TFT/BattlePass/Common",
+          "ext": ".png",
+          "arquivos": 22,
+          "bytes": 2137739,
+          "bytes_legivel": "2.0 MB",
+          "exemplo": "16.17.1/img/mission/TFT/BattlePass/Common/TFT_Set8_EggIcon_Grizzle.png",
+          "dimensoes_top": [
+            {
+              "w": 512,
+              "h": 512,
+              "arquivos": 13
+            },
+            {
+              "w": 256,
+              "h": 256,
+              "arquivos": 9
+            }
+          ],
+          "dimensoes_distintas": 2,
+          "modos": {
+            "RGBA": 6,
+            "P": 13,
+            "RGB": 3
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "16.17.1/img/mission/TFT/BattlePass/Common/TFT_Set8_EggIcon_Grizzle.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            },
+            {
+              "arquivo": "16.17.1/img/mission/TFT/BattlePass/Common/TFT_Set8_EggIcon_Whiskers.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            },
+            {
+              "arquivo": "16.17.1/img/mission/TFT/BattlePass/Common/egg_ll_large.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            },
+            {
+              "arquivo": "16.17.1/img/mission/TFT/BattlePass/Common/egg_ll_legendary_large.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            },
+            {
+              "arquivo": "16.17.1/img/mission/TFT/BattlePass/Common/egg_ll_legendary_small.png",
+              "alpha_min": 255,
+              "alpha_max": 255
+            }
+          ]
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "img/tft-regalia",
+          "ext": ".png",
+          "arquivos": 16,
+          "bytes": 1974738,
+          "bytes_legivel": "1.9 MB",
+          "exemplo": "16.17.1/img/tft-regalia/PostGameScene_RatedIcon_Blue.png",
+          "dimensoes_top": [
+            {
+              "w": 512,
+              "h": 512,
+              "arquivos": 16
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGBA": 16
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "16.17.1/img/tft-regalia/PostGameScene_RatedIcon_Blue.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            },
+            {
+              "arquivo": "16.17.1/img/tft-regalia/PostGameScene_RatedIcon_Green.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            },
+            {
+              "arquivo": "16.17.1/img/tft-regalia/PostGameScene_RatedIcon_Grey.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            },
+            {
+              "arquivo": "16.17.1/img/tft-regalia/PostGameScene_RatedIcon_Hyper.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            },
+            {
+              "arquivo": "16.17.1/img/tft-regalia/PostGameScene_RatedIcon_Purple.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            }
+          ]
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "img/mission/newPlayerExperience",
+          "ext": ".png",
+          "arquivos": 14,
+          "bytes": 2003470,
+          "bytes_legivel": "1.9 MB",
+          "exemplo": "16.17.1/img/mission/newPlayerExperience/NPEMission_ARAM.png",
+          "dimensoes_top": [
+            {
+              "w": 256,
+              "h": 256,
+              "arquivos": 11
+            },
+            {
+              "w": 512,
+              "h": 512,
+              "arquivos": 3
+            }
+          ],
+          "dimensoes_distintas": 2,
+          "modos": {
+            "RGB": 13,
+            "RGBA": 1
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "16.17.1/img/mission/newPlayerExperience/NPE_Mission_Jungle.png",
+              "alpha_min": 230,
+              "alpha_max": 255
+            }
+          ]
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "img/mission/TFT/Celebration",
+          "ext": ".png",
+          "arquivos": 12,
+          "bytes": 846571,
+          "bytes_legivel": "826.7 KB",
+          "exemplo": "16.17.1/img/mission/TFT/Celebration/BP_Map_Arrowhead.png",
+          "dimensoes_top": [
+            {
+              "w": 256,
+              "h": 256,
+              "arquivos": 12
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGBA": 10,
+            "P": 2
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "16.17.1/img/mission/TFT/Celebration/BP_Map_Arrowhead.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            },
+            {
+              "arquivo": "16.17.1/img/mission/TFT/Celebration/BP_Map_Chromas_DragCloud.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            },
+            {
+              "arquivo": "16.17.1/img/mission/TFT/Celebration/BP_Map_Chromas_DragInfernal.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            },
+            {
+              "arquivo": "16.17.1/img/mission/TFT/Celebration/BP_Map_Chromas_DragMountain.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            },
+            {
+              "arquivo": "16.17.1/img/mission/TFT/Celebration/BP_Map_Chromas_DragOcean.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            }
+          ]
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "img/mission/TFT/Events/ObjectiveBkgds/LNY",
+          "ext": ".png",
+          "arquivos": 10,
+          "bytes": 656946,
+          "bytes_legivel": "641.5 KB",
+          "exemplo": "16.17.1/img/mission/TFT/Events/ObjectiveBkgds/LNY/LNY_Obj_Bkgd.png",
+          "dimensoes_top": [
+            {
+              "w": 502,
+              "h": 176,
+              "arquivos": 10
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGB": 10
+          },
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "img/tft-queue",
+          "ext": ".png",
+          "arquivos": 10,
+          "bytes": 41310,
+          "bytes_legivel": "40.3 KB",
+          "exemplo": "16.17.1/img/tft-queue/TFTM_ModeIcon_5YA.png",
+          "dimensoes_top": [
+            {
+              "w": 64,
+              "h": 64,
+              "arquivos": 10
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGBA": 10
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "16.17.1/img/tft-queue/TFTM_ModeIcon_5YA.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            },
+            {
+              "arquivo": "16.17.1/img/tft-queue/TFTM_ModeIcon_CT.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            },
+            {
+              "arquivo": "16.17.1/img/tft-queue/TFTM_ModeIcon_DoubleUp.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            },
+            {
+              "arquivo": "16.17.1/img/tft-queue/TFTM_ModeIcon_LNY.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            },
+            {
+              "arquivo": "16.17.1/img/tft-queue/TFTM_ModeIcon_Normal.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            }
+          ]
+        },
+        {
+          "versionado": "nao-versionado",
+          "grupo": "img/perk-images/StatMods",
+          "ext": ".png",
+          "arquivos": 10,
+          "bytes": 6728,
+          "bytes_legivel": "6.6 KB",
+          "exemplo": "img/perk-images/StatMods/StatModsAdaptiveForceIcon.png",
+          "dimensoes_top": [
+            {
+              "w": 32,
+              "h": 32,
+              "arquivos": 10
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGBA": 10
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "img/perk-images/StatMods/StatModsAdaptiveForceIcon.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            },
+            {
+              "arquivo": "img/perk-images/StatMods/StatModsAdaptiveForceScalingIcon.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            },
+            {
+              "arquivo": "img/perk-images/StatMods/StatModsArmorIcon.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            },
+            {
+              "arquivo": "img/perk-images/StatMods/StatModsAttackSpeedIcon.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            },
+            {
+              "arquivo": "img/perk-images/StatMods/StatModsCDRScalingIcon.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            }
+          ]
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "img/item-modifiers",
+          "ext": ".png",
+          "arquivos": 9,
+          "bytes": 21454,
+          "bytes_legivel": "21.0 KB",
+          "exemplo": "16.17.1/img/item-modifiers/BloodMoonModifier.png",
+          "dimensoes_top": [
+            {
+              "w": 64,
+              "h": 64,
+              "arquivos": 9
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGBA": 8,
+            "RGB": 1
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "16.17.1/img/item-modifiers/BloodMoonModifier.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            },
+            {
+              "arquivo": "16.17.1/img/item-modifiers/BorderTreatmentMythic.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            },
+            {
+              "arquivo": "16.17.1/img/item-modifiers/BorderTreatmentOrnn.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            },
+            {
+              "arquivo": "16.17.1/img/item-modifiers/BorderTreatmentPrismatic.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            },
+            {
+              "arquivo": "16.17.1/img/item-modifiers/GoldCornersOverlay.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            }
+          ]
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "img/mission/TFT/Events/SkyGlass",
+          "ext": ".png",
+          "arquivos": 9,
+          "bytes": 1531988,
+          "bytes_legivel": "1.5 MB",
+          "exemplo": "16.17.1/img/mission/TFT/Events/SkyGlass/egg_ll_skyglass_large.png",
+          "dimensoes_top": [
+            {
+              "w": 256,
+              "h": 256,
+              "arquivos": 5
+            },
+            {
+              "w": 1024,
+              "h": 1024,
+              "arquivos": 2
+            },
+            {
+              "w": 512,
+              "h": 512,
+              "arquivos": 1
+            },
+            {
+              "w": 129,
+              "h": 129,
+              "arquivos": 1
+            }
+          ],
+          "dimensoes_distintas": 4,
+          "modos": {
+            "RGBA": 4,
+            "RGB": 5
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "16.17.1/img/mission/TFT/Events/SkyGlass/egg_ll_skyglass_large.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            },
+            {
+              "arquivo": "16.17.1/img/mission/TFT/Events/SkyGlass/emote_skyglass_1_large.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            },
+            {
+              "arquivo": "16.17.1/img/mission/TFT/Events/SkyGlass/emote_skyglass_2_large.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            },
+            {
+              "arquivo": "16.17.1/img/mission/TFT/Events/SkyGlass/series_icon.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            }
+          ]
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "img/mode/classic/item-modifiers",
+          "ext": ".png",
+          "arquivos": 9,
+          "bytes": 21454,
+          "bytes_legivel": "21.0 KB",
+          "exemplo": "16.17.1/img/mode/classic/item-modifiers/BloodMoonModifier.png",
+          "dimensoes_top": [
+            {
+              "w": 64,
+              "h": 64,
+              "arquivos": 9
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGBA": 8,
+            "RGB": 1
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "16.17.1/img/mode/classic/item-modifiers/BloodMoonModifier.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            },
+            {
+              "arquivo": "16.17.1/img/mode/classic/item-modifiers/BorderTreatmentMythic.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            },
+            {
+              "arquivo": "16.17.1/img/mode/classic/item-modifiers/BorderTreatmentOrnn.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            },
+            {
+              "arquivo": "16.17.1/img/mode/classic/item-modifiers/BorderTreatmentPrismatic.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            },
+            {
+              "arquivo": "16.17.1/img/mode/classic/item-modifiers/GoldCornersOverlay.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            }
+          ]
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "img/tft-region-portal",
+          "ext": ".png",
+          "arquivos": 9,
+          "bytes": 9062,
+          "bytes_legivel": "8.8 KB",
+          "exemplo": "16.17.1/img/tft-region-portal/AugmentCards_Icon.png",
+          "dimensoes_top": [
+            {
+              "w": 32,
+              "h": 32,
+              "arquivos": 8
+            },
+            {
+              "w": 64,
+              "h": 64,
+              "arquivos": 1
+            }
+          ],
+          "dimensoes_distintas": 2,
+          "modos": {
+            "RGBA": 9
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "16.17.1/img/tft-region-portal/AugmentCards_Icon.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            },
+            {
+              "arquivo": "16.17.1/img/tft-region-portal/Champ_Icon.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            },
+            {
+              "arquivo": "16.17.1/img/tft-region-portal/Coins_Icon.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            },
+            {
+              "arquivo": "16.17.1/img/tft-region-portal/GodRealm_Icon.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            },
+            {
+              "arquivo": "16.17.1/img/tft-region-portal/Item_Icon.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            }
+          ]
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "img/mission/seriesIcons",
+          "ext": ".png",
+          "arquivos": 8,
+          "bytes": 16640,
+          "bytes_legivel": "16.2 KB",
+          "exemplo": "16.17.1/img/mission/seriesIcons/ImmortalJourney23_TrackerIcon.png",
+          "dimensoes_top": [
+            {
+              "w": 20,
+              "h": 20,
+              "arquivos": 3
+            },
+            {
+              "w": 128,
+              "h": 128,
+              "arquivos": 3
+            },
+            {
+              "w": 16,
+              "h": 20,
+              "arquivos": 1
+            },
+            {
+              "w": 20,
+              "h": 14,
+              "arquivos": 1
+            }
+          ],
+          "dimensoes_distintas": 4,
+          "modos": {
+            "RGBA": 8
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "16.17.1/img/mission/seriesIcons/ImmortalJourney23_TrackerIcon.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            },
+            {
+              "arquivo": "16.17.1/img/mission/seriesIcons/QS_Mask_TrackerIcon.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            },
+            {
+              "arquivo": "16.17.1/img/mission/seriesIcons/SoulFighter_Tracker_icon.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            },
+            {
+              "arquivo": "16.17.1/img/mission/seriesIcons/champion_series_icon.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            },
+            {
+              "arquivo": "16.17.1/img/mission/seriesIcons/daily_series_icon.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            }
+          ]
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/ar_AE/mode/classic",
+          "ext": ".json",
+          "arquivos": 7,
+          "bytes": 1078871,
+          "bytes_legivel": "1.0 MB",
+          "exemplo": "16.17.1/data/ar_AE/mode/classic/champion.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/cs_CZ/mode/classic",
+          "ext": ".json",
+          "arquivos": 7,
+          "bytes": 980622,
+          "bytes_legivel": "957.6 KB",
+          "exemplo": "16.17.1/data/cs_CZ/mode/classic/champion.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/de_DE/mode/classic",
+          "ext": ".json",
+          "arquivos": 7,
+          "bytes": 972020,
+          "bytes_legivel": "949.2 KB",
+          "exemplo": "16.17.1/data/de_DE/mode/classic/champion.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/el_GR/mode/classic",
+          "ext": ".json",
+          "arquivos": 7,
+          "bytes": 1228637,
+          "bytes_legivel": "1.2 MB",
+          "exemplo": "16.17.1/data/el_GR/mode/classic/champion.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/en_AU/mode/classic",
+          "ext": ".json",
+          "arquivos": 7,
+          "bytes": 918370,
+          "bytes_legivel": "896.8 KB",
+          "exemplo": "16.17.1/data/en_AU/mode/classic/champion.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/en_GB/mode/classic",
+          "ext": ".json",
+          "arquivos": 7,
+          "bytes": 918370,
+          "bytes_legivel": "896.8 KB",
+          "exemplo": "16.17.1/data/en_GB/mode/classic/champion.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/en_PH/mode/classic",
+          "ext": ".json",
+          "arquivos": 7,
+          "bytes": 918370,
+          "bytes_legivel": "896.8 KB",
+          "exemplo": "16.17.1/data/en_PH/mode/classic/champion.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/en_SG/mode/classic",
+          "ext": ".json",
+          "arquivos": 7,
+          "bytes": 918370,
+          "bytes_legivel": "896.8 KB",
+          "exemplo": "16.17.1/data/en_SG/mode/classic/champion.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/en_US/mode/classic",
+          "ext": ".json",
+          "arquivos": 7,
+          "bytes": 918342,
+          "bytes_legivel": "896.8 KB",
+          "exemplo": "16.17.1/data/en_US/mode/classic/champion.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/es_AR/mode/classic",
+          "ext": ".json",
+          "arquivos": 7,
+          "bytes": 974293,
+          "bytes_legivel": "951.5 KB",
+          "exemplo": "16.17.1/data/es_AR/mode/classic/champion.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/es_ES/mode/classic",
+          "ext": ".json",
+          "arquivos": 7,
+          "bytes": 970126,
+          "bytes_legivel": "947.4 KB",
+          "exemplo": "16.17.1/data/es_ES/mode/classic/champion.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/es_MX/mode/classic",
+          "ext": ".json",
+          "arquivos": 7,
+          "bytes": 974644,
+          "bytes_legivel": "951.8 KB",
+          "exemplo": "16.17.1/data/es_MX/mode/classic/champion.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/fr_FR/mode/classic",
+          "ext": ".json",
+          "arquivos": 7,
+          "bytes": 976528,
+          "bytes_legivel": "953.6 KB",
+          "exemplo": "16.17.1/data/fr_FR/mode/classic/champion.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/hu_HU/mode/classic",
+          "ext": ".json",
+          "arquivos": 7,
+          "bytes": 973914,
+          "bytes_legivel": "951.1 KB",
+          "exemplo": "16.17.1/data/hu_HU/mode/classic/champion.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/id_ID/mode/classic",
+          "ext": ".json",
+          "arquivos": 7,
+          "bytes": 934903,
+          "bytes_legivel": "913.0 KB",
+          "exemplo": "16.17.1/data/id_ID/mode/classic/champion.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/it_IT/mode/classic",
+          "ext": ".json",
+          "arquivos": 7,
+          "bytes": 962916,
+          "bytes_legivel": "940.3 KB",
+          "exemplo": "16.17.1/data/it_IT/mode/classic/champion.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/ja_JP/mode/classic",
+          "ext": ".json",
+          "arquivos": 7,
+          "bytes": 1021083,
+          "bytes_legivel": "997.2 KB",
+          "exemplo": "16.17.1/data/ja_JP/mode/classic/champion.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/ko_KR/mode/classic",
+          "ext": ".json",
+          "arquivos": 7,
+          "bytes": 978423,
+          "bytes_legivel": "955.5 KB",
+          "exemplo": "16.17.1/data/ko_KR/mode/classic/champion.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/pl_PL/mode/classic",
+          "ext": ".json",
+          "arquivos": 7,
+          "bytes": 972737,
+          "bytes_legivel": "949.9 KB",
+          "exemplo": "16.17.1/data/pl_PL/mode/classic/champion.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/pt_BR/mode/classic",
+          "ext": ".json",
+          "arquivos": 7,
+          "bytes": 960673,
+          "bytes_legivel": "938.2 KB",
+          "exemplo": "16.17.1/data/pt_BR/mode/classic/champion.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/ro_RO/mode/classic",
+          "ext": ".json",
+          "arquivos": 7,
+          "bytes": 978098,
+          "bytes_legivel": "955.2 KB",
+          "exemplo": "16.17.1/data/ro_RO/mode/classic/champion.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/ru_RU/mode/classic",
+          "ext": ".json",
+          "arquivos": 7,
+          "bytes": 1158163,
+          "bytes_legivel": "1.1 MB",
+          "exemplo": "16.17.1/data/ru_RU/mode/classic/champion.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/th_TH/mode/classic",
+          "ext": ".json",
+          "arquivos": 7,
+          "bytes": 1158419,
+          "bytes_legivel": "1.1 MB",
+          "exemplo": "16.17.1/data/th_TH/mode/classic/champion.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/tr_TR/mode/classic",
+          "ext": ".json",
+          "arquivos": 7,
+          "bytes": 954216,
+          "bytes_legivel": "931.9 KB",
+          "exemplo": "16.17.1/data/tr_TR/mode/classic/champion.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/vi_VN/mode/classic",
+          "ext": ".json",
+          "arquivos": 7,
+          "bytes": 1010423,
+          "bytes_legivel": "986.7 KB",
+          "exemplo": "16.17.1/data/vi_VN/mode/classic/champion.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/zh_CN/mode/classic",
+          "ext": ".json",
+          "arquivos": 7,
+          "bytes": 919647,
+          "bytes_legivel": "898.1 KB",
+          "exemplo": "16.17.1/data/zh_CN/mode/classic/champion.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/zh_MY/mode/classic",
+          "ext": ".json",
+          "arquivos": 7,
+          "bytes": 916869,
+          "bytes_legivel": "895.4 KB",
+          "exemplo": "16.17.1/data/zh_MY/mode/classic/champion.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "data/zh_TW/mode/classic",
+          "ext": ".json",
+          "arquivos": 7,
+          "bytes": 906871,
+          "bytes_legivel": "885.6 KB",
+          "exemplo": "16.17.1/data/zh_TW/mode/classic/champion.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "nao-versionado",
+          "grupo": "img/perk-images/Styles",
+          "ext": ".png",
+          "arquivos": 6,
+          "bytes": 7650,
+          "bytes_legivel": "7.5 KB",
+          "exemplo": "img/perk-images/Styles/7200_Domination.png",
+          "dimensoes_top": [
+            {
+              "w": 32,
+              "h": 32,
+              "arquivos": 6
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGBA": 6
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "img/perk-images/Styles/7200_Domination.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            },
+            {
+              "arquivo": "img/perk-images/Styles/7201_Precision.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            },
+            {
+              "arquivo": "img/perk-images/Styles/7202_Sorcery.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            },
+            {
+              "arquivo": "img/perk-images/Styles/7203_Whimsy.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            },
+            {
+              "arquivo": "img/perk-images/Styles/7204_Resolve.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            }
+          ]
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "img/map",
+          "ext": ".png",
+          "arquivos": 5,
+          "bytes": 591747,
+          "bytes_legivel": "577.9 KB",
+          "exemplo": "16.17.1/img/map/map11.png",
+          "dimensoes_top": [
+            {
+              "w": 512,
+              "h": 512,
+              "arquivos": 3
+            },
+            {
+              "w": 1024,
+              "h": 1024,
+              "arquivos": 2
+            }
+          ],
+          "dimensoes_distintas": 2,
+          "modos": {
+            "RGB": 4,
+            "P": 1
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "16.17.1/img/map/map453.png",
+              "alpha_min": 255,
+              "alpha_max": 255
+            }
+          ]
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "js",
+          "ext": ".js",
+          "arquivos": 4,
+          "bytes": 202151,
+          "bytes_legivel": "197.4 KB",
+          "exemplo": "16.17.1/js/dragonmagic.js",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "img/tft-charms",
+          "ext": ".png",
+          "arquivos": 3,
+          "bytes": 22841,
+          "bytes_legivel": "22.3 KB",
+          "exemplo": "16.17.1/img/tft-charms/Set18_MechanicIcon.TFT_Set18.png",
+          "dimensoes_top": [
+            {
+              "w": 64,
+              "h": 64,
+              "arquivos": 2
+            },
+            {
+              "w": 128,
+              "h": 128,
+              "arquivos": 1
+            }
+          ],
+          "dimensoes_distintas": 2,
+          "modos": {
+            "RGBA": 3
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "16.17.1/img/tft-charms/Set18_MechanicIcon.TFT_Set18.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            },
+            {
+              "arquivo": "16.17.1/img/tft-charms/ZAPS_ScoreboardBadge_EconWand_Self.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            },
+            {
+              "arquivo": "16.17.1/img/tft-charms/ZAPS_ScoreboardBadge_XerathWand_Self.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            }
+          ]
+        },
+        {
+          "versionado": "nao-versionado",
+          "grupo": "(raiz)",
+          "ext": ".js",
+          "arquivos": 2,
+          "bytes": 6515,
+          "bytes_legivel": "6.4 KB",
+          "exemplo": "dragonhead.js",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "nao-versionado",
+          "grupo": "img/bg",
+          "ext": ".png",
+          "arquivos": 2,
+          "bytes": 2151,
+          "bytes_legivel": "2.1 KB",
+          "exemplo": "img/bg/A6000000.png",
+          "dimensoes_top": [
+            {
+              "w": 100,
+              "h": 100,
+              "arquivos": 2
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGBA": 2
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "img/bg/A6000000.png",
+              "alpha_min": 166,
+              "alpha_max": 166
+            },
+            {
+              "arquivo": "img/bg/F5141416.png",
+              "alpha_min": 245,
+              "alpha_max": 245
+            }
+          ]
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "css",
+          "ext": ".css",
+          "arquivos": 1,
+          "bytes": 5520,
+          "bytes_legivel": "5.4 KB",
+          "exemplo": "16.17.1/css/view.css",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "img/mission/eog/rewards/leveling/features",
+          "ext": ".png",
+          "arquivos": 1,
+          "bytes": 609555,
+          "bytes_legivel": "595.3 KB",
+          "exemplo": "16.17.1/img/mission/eog/rewards/leveling/features/Feature_FWoTD.png",
+          "dimensoes_top": [
+            {
+              "w": 896,
+              "h": 896,
+              "arquivos": 1
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGBA": 1
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "16.17.1/img/mission/eog/rewards/leveling/features/Feature_FWoTD.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            }
+          ]
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "img/mode/classic/map",
+          "ext": ".png",
+          "arquivos": 1,
+          "bytes": 206052,
+          "bytes_legivel": "201.2 KB",
+          "exemplo": "16.17.1/img/mode/classic/map/map453.png",
+          "dimensoes_top": [
+            {
+              "w": 512,
+              "h": 512,
+              "arquivos": 1
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "P": 1
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "16.17.1/img/mode/classic/map/map453.png",
+              "alpha_min": 255,
+              "alpha_max": 255
+            }
+          ]
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "img/tft-augment-container",
+          "ext": ".png",
+          "arquivos": 1,
+          "bytes": 5809,
+          "bytes_legivel": "5.7 KB",
+          "exemplo": "16.17.1/img/tft-augment-container/gear.png",
+          "dimensoes_top": [
+            {
+              "w": 64,
+              "h": 64,
+              "arquivos": 1
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGB": 1
+          },
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "(raiz)",
+          "ext": ".js",
+          "arquivos": 1,
+          "bytes": 303,
+          "bytes_legivel": "303.0 B",
+          "exemplo": "16.17.1/manifest.js",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "versionado",
+          "grupo": "(raiz)",
+          "ext": ".json",
+          "arquivos": 1,
+          "bytes": 287,
+          "bytes_legivel": "287.0 B",
+          "exemplo": "16.17.1/manifest.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "nao-versionado",
+          "grupo": "img/global",
+          "ext": ".gif",
+          "arquivos": 1,
+          "bytes": 2349,
+          "bytes_legivel": "2.3 KB",
+          "exemplo": "img/global/load01.gif",
+          "dimensoes_top": [
+            {
+              "w": 32,
+              "h": 22,
+              "arquivos": 1
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "P": 1
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "img/global/load01.gif",
+              "alpha_min": 0,
+              "alpha_max": 255
+            }
+          ]
+        },
+        {
+          "versionado": "nao-versionado",
+          "grupo": "img/global",
+          "ext": ".png",
+          "arquivos": 1,
+          "bytes": 30308,
+          "bytes_legivel": "29.6 KB",
+          "exemplo": "img/global/mastersprite.png",
+          "dimensoes_top": [
+            {
+              "w": 325,
+              "h": 150,
+              "arquivos": 1
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGBA": 1
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "img/global/mastersprite.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            }
+          ]
+        },
+        {
+          "versionado": "nao-versionado",
+          "grupo": "img/perk-images/Styles/Domination/CheapShot",
+          "ext": ".png",
+          "arquivos": 1,
+          "bytes": 5943,
+          "bytes_legivel": "5.8 KB",
+          "exemplo": "img/perk-images/Styles/Domination/CheapShot/CheapShot.png",
+          "dimensoes_top": [
+            {
+              "w": 64,
+              "h": 64,
+              "arquivos": 1
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGBA": 1
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "img/perk-images/Styles/Domination/CheapShot/CheapShot.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            }
+          ]
+        },
+        {
+          "versionado": "nao-versionado",
+          "grupo": "img/perk-images/Styles/Domination/DarkHarvest",
+          "ext": ".png",
+          "arquivos": 1,
+          "bytes": 51567,
+          "bytes_legivel": "50.4 KB",
+          "exemplo": "img/perk-images/Styles/Domination/DarkHarvest/DarkHarvest.png",
+          "dimensoes_top": [
+            {
+              "w": 256,
+              "h": 256,
+              "arquivos": 1
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGBA": 1
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "img/perk-images/Styles/Domination/DarkHarvest/DarkHarvest.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            }
+          ]
+        },
+        {
+          "versionado": "nao-versionado",
+          "grupo": "img/perk-images/Styles/Domination/DeepWard",
+          "ext": ".png",
+          "arquivos": 1,
+          "bytes": 5288,
+          "bytes_legivel": "5.2 KB",
+          "exemplo": "img/perk-images/Styles/Domination/DeepWard/DeepWard.png",
+          "dimensoes_top": [
+            {
+              "w": 64,
+              "h": 64,
+              "arquivos": 1
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGBA": 1
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "img/perk-images/Styles/Domination/DeepWard/DeepWard.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            }
+          ]
+        },
+        {
+          "versionado": "nao-versionado",
+          "grupo": "img/perk-images/Styles/Domination/Electrocute",
+          "ext": ".png",
+          "arquivos": 1,
+          "bytes": 58055,
+          "bytes_legivel": "56.7 KB",
+          "exemplo": "img/perk-images/Styles/Domination/Electrocute/Electrocute.png",
+          "dimensoes_top": [
+            {
+              "w": 256,
+              "h": 256,
+              "arquivos": 1
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGBA": 1
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "img/perk-images/Styles/Domination/Electrocute/Electrocute.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            }
+          ]
+        },
+        {
+          "versionado": "nao-versionado",
+          "grupo": "img/perk-images/Styles/Domination/EyeballCollection",
+          "ext": ".png",
+          "arquivos": 1,
+          "bytes": 4723,
+          "bytes_legivel": "4.6 KB",
+          "exemplo": "img/perk-images/Styles/Domination/EyeballCollection/EyeballCollection.png",
+          "dimensoes_top": [
+            {
+              "w": 64,
+              "h": 64,
+              "arquivos": 1
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGBA": 1
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "img/perk-images/Styles/Domination/EyeballCollection/EyeballCollection.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            }
+          ]
+        },
+        {
+          "versionado": "nao-versionado",
+          "grupo": "img/perk-images/Styles/Domination/GhostPoro",
+          "ext": ".png",
+          "arquivos": 1,
+          "bytes": 5025,
+          "bytes_legivel": "4.9 KB",
+          "exemplo": "img/perk-images/Styles/Domination/GhostPoro/GhostPoro.png",
+          "dimensoes_top": [
+            {
+              "w": 64,
+              "h": 64,
+              "arquivos": 1
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGBA": 1
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "img/perk-images/Styles/Domination/GhostPoro/GhostPoro.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            }
+          ]
+        },
+        {
+          "versionado": "nao-versionado",
+          "grupo": "img/perk-images/Styles/Domination/GrislyMementos",
+          "ext": ".png",
+          "arquivos": 1,
+          "bytes": 5337,
+          "bytes_legivel": "5.2 KB",
+          "exemplo": "img/perk-images/Styles/Domination/GrislyMementos/GrislyMementos.png",
+          "dimensoes_top": [
+            {
+              "w": 64,
+              "h": 64,
+              "arquivos": 1
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGBA": 1
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "img/perk-images/Styles/Domination/GrislyMementos/GrislyMementos.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            }
+          ]
+        },
+        {
+          "versionado": "nao-versionado",
+          "grupo": "img/perk-images/Styles/Domination/HailOfBlades",
+          "ext": ".png",
+          "arquivos": 1,
+          "bytes": 60768,
+          "bytes_legivel": "59.3 KB",
+          "exemplo": "img/perk-images/Styles/Domination/HailOfBlades/HailOfBlades.png",
+          "dimensoes_top": [
+            {
+              "w": 256,
+              "h": 256,
+              "arquivos": 1
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGBA": 1
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "img/perk-images/Styles/Domination/HailOfBlades/HailOfBlades.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            }
+          ]
+        },
+        {
+          "versionado": "nao-versionado",
+          "grupo": "img/perk-images/Styles/Domination/IngeniousHunter",
+          "ext": ".png",
+          "arquivos": 1,
+          "bytes": 4122,
+          "bytes_legivel": "4.0 KB",
+          "exemplo": "img/perk-images/Styles/Domination/IngeniousHunter/IngeniousHunter.png",
+          "dimensoes_top": [
+            {
+              "w": 64,
+              "h": 64,
+              "arquivos": 1
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGBA": 1
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "img/perk-images/Styles/Domination/IngeniousHunter/IngeniousHunter.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            }
+          ]
+        },
+        {
+          "versionado": "nao-versionado",
+          "grupo": "img/perk-images/Styles/Domination/Predator",
+          "ext": ".png",
+          "arquivos": 1,
+          "bytes": 82752,
+          "bytes_legivel": "80.8 KB",
+          "exemplo": "img/perk-images/Styles/Domination/Predator/Predator.png",
+          "dimensoes_top": [
+            {
+              "w": 256,
+              "h": 256,
+              "arquivos": 1
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGBA": 1
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "img/perk-images/Styles/Domination/Predator/Predator.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            }
+          ]
+        },
+        {
+          "versionado": "nao-versionado",
+          "grupo": "img/perk-images/Styles/Domination/RelentlessHunter",
+          "ext": ".png",
+          "arquivos": 1,
+          "bytes": 5208,
+          "bytes_legivel": "5.1 KB",
+          "exemplo": "img/perk-images/Styles/Domination/RelentlessHunter/RelentlessHunter.png",
+          "dimensoes_top": [
+            {
+              "w": 64,
+              "h": 64,
+              "arquivos": 1
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGBA": 1
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "img/perk-images/Styles/Domination/RelentlessHunter/RelentlessHunter.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            }
+          ]
+        },
+        {
+          "versionado": "nao-versionado",
+          "grupo": "img/perk-images/Styles/Domination/SixthSense",
+          "ext": ".png",
+          "arquivos": 1,
+          "bytes": 5091,
+          "bytes_legivel": "5.0 KB",
+          "exemplo": "img/perk-images/Styles/Domination/SixthSense/SixthSense.png",
+          "dimensoes_top": [
+            {
+              "w": 64,
+              "h": 64,
+              "arquivos": 1
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGBA": 1
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "img/perk-images/Styles/Domination/SixthSense/SixthSense.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            }
+          ]
+        },
+        {
+          "versionado": "nao-versionado",
+          "grupo": "img/perk-images/Styles/Domination/SuddenImpact",
+          "ext": ".png",
+          "arquivos": 1,
+          "bytes": 4800,
+          "bytes_legivel": "4.7 KB",
+          "exemplo": "img/perk-images/Styles/Domination/SuddenImpact/SuddenImpact.png",
+          "dimensoes_top": [
+            {
+              "w": 64,
+              "h": 64,
+              "arquivos": 1
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGBA": 1
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "img/perk-images/Styles/Domination/SuddenImpact/SuddenImpact.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            }
+          ]
+        },
+        {
+          "versionado": "nao-versionado",
+          "grupo": "img/perk-images/Styles/Domination/TasteOfBlood",
+          "ext": ".png",
+          "arquivos": 1,
+          "bytes": 5000,
+          "bytes_legivel": "4.9 KB",
+          "exemplo": "img/perk-images/Styles/Domination/TasteOfBlood/GreenTerror_TasteOfBlood.png",
+          "dimensoes_top": [
+            {
+              "w": 64,
+              "h": 64,
+              "arquivos": 1
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGBA": 1
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "img/perk-images/Styles/Domination/TasteOfBlood/GreenTerror_TasteOfBlood.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            }
+          ]
+        },
+        {
+          "versionado": "nao-versionado",
+          "grupo": "img/perk-images/Styles/Domination/TreasureHunter",
+          "ext": ".png",
+          "arquivos": 1,
+          "bytes": 5206,
+          "bytes_legivel": "5.1 KB",
+          "exemplo": "img/perk-images/Styles/Domination/TreasureHunter/TreasureHunter.png",
+          "dimensoes_top": [
+            {
+              "w": 64,
+              "h": 64,
+              "arquivos": 1
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGBA": 1
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "img/perk-images/Styles/Domination/TreasureHunter/TreasureHunter.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            }
+          ]
+        },
+        {
+          "versionado": "nao-versionado",
+          "grupo": "img/perk-images/Styles/Domination/UltimateHunter",
+          "ext": ".png",
+          "arquivos": 1,
+          "bytes": 14739,
+          "bytes_legivel": "14.4 KB",
+          "exemplo": "img/perk-images/Styles/Domination/UltimateHunter/UltimateHunter.png",
+          "dimensoes_top": [
+            {
+              "w": 128,
+              "h": 128,
+              "arquivos": 1
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGBA": 1
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "img/perk-images/Styles/Domination/UltimateHunter/UltimateHunter.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            }
+          ]
+        },
+        {
+          "versionado": "nao-versionado",
+          "grupo": "img/perk-images/Styles/Domination/ZombieWard",
+          "ext": ".png",
+          "arquivos": 1,
+          "bytes": 5677,
+          "bytes_legivel": "5.5 KB",
+          "exemplo": "img/perk-images/Styles/Domination/ZombieWard/ZombieWard.png",
+          "dimensoes_top": [
+            {
+              "w": 64,
+              "h": 64,
+              "arquivos": 1
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGBA": 1
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "img/perk-images/Styles/Domination/ZombieWard/ZombieWard.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            }
+          ]
+        },
+        {
+          "versionado": "nao-versionado",
+          "grupo": "img/perk-images/Styles/Inspiration/BiscuitDelivery",
+          "ext": ".png",
+          "arquivos": 1,
+          "bytes": 4921,
+          "bytes_legivel": "4.8 KB",
+          "exemplo": "img/perk-images/Styles/Inspiration/BiscuitDelivery/BiscuitDelivery.png",
+          "dimensoes_top": [
+            {
+              "w": 64,
+              "h": 64,
+              "arquivos": 1
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGBA": 1
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "img/perk-images/Styles/Inspiration/BiscuitDelivery/BiscuitDelivery.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            }
+          ]
+        },
+        {
+          "versionado": "nao-versionado",
+          "grupo": "img/perk-images/Styles/Inspiration/CashBack",
+          "ext": ".png",
+          "arquivos": 1,
+          "bytes": 7796,
+          "bytes_legivel": "7.6 KB",
+          "exemplo": "img/perk-images/Styles/Inspiration/CashBack/CashBack2.png",
+          "dimensoes_top": [
+            {
+              "w": 64,
+              "h": 64,
+              "arquivos": 1
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGBA": 1
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "img/perk-images/Styles/Inspiration/CashBack/CashBack2.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            }
+          ]
+        },
+        {
+          "versionado": "nao-versionado",
+          "grupo": "img/perk-images/Styles/Inspiration/CelestialBody",
+          "ext": ".png",
+          "arquivos": 1,
+          "bytes": 5974,
+          "bytes_legivel": "5.8 KB",
+          "exemplo": "img/perk-images/Styles/Inspiration/CelestialBody/CelestialBody.png",
+          "dimensoes_top": [
+            {
+              "w": 64,
+              "h": 64,
+              "arquivos": 1
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGBA": 1
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "img/perk-images/Styles/Inspiration/CelestialBody/CelestialBody.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            }
+          ]
+        },
+        {
+          "versionado": "nao-versionado",
+          "grupo": "img/perk-images/Styles/Inspiration/CosmicInsight",
+          "ext": ".png",
+          "arquivos": 1,
+          "bytes": 4771,
+          "bytes_legivel": "4.7 KB",
+          "exemplo": "img/perk-images/Styles/Inspiration/CosmicInsight/CosmicInsight.png",
+          "dimensoes_top": [
+            {
+              "w": 64,
+              "h": 64,
+              "arquivos": 1
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGBA": 1
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "img/perk-images/Styles/Inspiration/CosmicInsight/CosmicInsight.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            }
+          ]
+        },
+        {
+          "versionado": "nao-versionado",
+          "grupo": "img/perk-images/Styles/Inspiration/FirstStrike",
+          "ext": ".png",
+          "arquivos": 1,
+          "bytes": 51271,
+          "bytes_legivel": "50.1 KB",
+          "exemplo": "img/perk-images/Styles/Inspiration/FirstStrike/FirstStrike.png",
+          "dimensoes_top": [
+            {
+              "w": 256,
+              "h": 256,
+              "arquivos": 1
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGBA": 1
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "img/perk-images/Styles/Inspiration/FirstStrike/FirstStrike.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            }
+          ]
+        },
+        {
+          "versionado": "nao-versionado",
+          "grupo": "img/perk-images/Styles/Inspiration/GlacialAugment",
+          "ext": ".png",
+          "arquivos": 1,
+          "bytes": 73350,
+          "bytes_legivel": "71.6 KB",
+          "exemplo": "img/perk-images/Styles/Inspiration/GlacialAugment/GlacialAugment.png",
+          "dimensoes_top": [
+            {
+              "w": 256,
+              "h": 256,
+              "arquivos": 1
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGBA": 1
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "img/perk-images/Styles/Inspiration/GlacialAugment/GlacialAugment.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            }
+          ]
+        },
+        {
+          "versionado": "nao-versionado",
+          "grupo": "img/perk-images/Styles/Inspiration/HextechFlashtraption",
+          "ext": ".png",
+          "arquivos": 1,
+          "bytes": 5183,
+          "bytes_legivel": "5.1 KB",
+          "exemplo": "img/perk-images/Styles/Inspiration/HextechFlashtraption/HextechFlashtraption.png",
+          "dimensoes_top": [
+            {
+              "w": 64,
+              "h": 64,
+              "arquivos": 1
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGBA": 1
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "img/perk-images/Styles/Inspiration/HextechFlashtraption/HextechFlashtraption.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            }
+          ]
+        },
+        {
+          "versionado": "nao-versionado",
+          "grupo": "img/perk-images/Styles/Inspiration/JackOfAllTrades",
+          "ext": ".png",
+          "arquivos": 1,
+          "bytes": 7010,
+          "bytes_legivel": "6.8 KB",
+          "exemplo": "img/perk-images/Styles/Inspiration/JackOfAllTrades/JackofAllTrades2.png",
+          "dimensoes_top": [
+            {
+              "w": 64,
+              "h": 64,
+              "arquivos": 1
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGBA": 1
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "img/perk-images/Styles/Inspiration/JackOfAllTrades/JackofAllTrades2.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            }
+          ]
+        },
+        {
+          "versionado": "nao-versionado",
+          "grupo": "img/perk-images/Styles/Inspiration/Kleptomancy",
+          "ext": ".png",
+          "arquivos": 1,
+          "bytes": 98571,
+          "bytes_legivel": "96.3 KB",
+          "exemplo": "img/perk-images/Styles/Inspiration/Kleptomancy/Kleptomancy.png",
+          "dimensoes_top": [
+            {
+              "w": 256,
+              "h": 256,
+              "arquivos": 1
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGBA": 1
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "img/perk-images/Styles/Inspiration/Kleptomancy/Kleptomancy.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            }
+          ]
+        },
+        {
+          "versionado": "nao-versionado",
+          "grupo": "img/perk-images/Styles/Inspiration/MagicalFootwear",
+          "ext": ".png",
+          "arquivos": 1,
+          "bytes": 5073,
+          "bytes_legivel": "5.0 KB",
+          "exemplo": "img/perk-images/Styles/Inspiration/MagicalFootwear/MagicalFootwear.png",
+          "dimensoes_top": [
+            {
+              "w": 64,
+              "h": 64,
+              "arquivos": 1
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGBA": 1
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "img/perk-images/Styles/Inspiration/MagicalFootwear/MagicalFootwear.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            }
+          ]
+        },
+        {
+          "versionado": "nao-versionado",
+          "grupo": "img/perk-images/Styles/Inspiration/PerfectTiming",
+          "ext": ".png",
+          "arquivos": 1,
+          "bytes": 5953,
+          "bytes_legivel": "5.8 KB",
+          "exemplo": "img/perk-images/Styles/Inspiration/PerfectTiming/AlchemistCabinet.png",
+          "dimensoes_top": [
+            {
+              "w": 64,
+              "h": 64,
+              "arquivos": 1
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGBA": 1
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "img/perk-images/Styles/Inspiration/PerfectTiming/AlchemistCabinet.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            }
+          ]
+        },
+        {
+          "versionado": "nao-versionado",
+          "grupo": "img/perk-images/Styles/Inspiration/TimeWarpTonic",
+          "ext": ".png",
+          "arquivos": 1,
+          "bytes": 14341,
+          "bytes_legivel": "14.0 KB",
+          "exemplo": "img/perk-images/Styles/Inspiration/TimeWarpTonic/TimeWarpTonic.png",
+          "dimensoes_top": [
+            {
+              "w": 128,
+              "h": 128,
+              "arquivos": 1
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGBA": 1
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "img/perk-images/Styles/Inspiration/TimeWarpTonic/TimeWarpTonic.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            }
+          ]
+        },
+        {
+          "versionado": "nao-versionado",
+          "grupo": "img/perk-images/Styles/Inspiration/UnsealedSpellbook",
+          "ext": ".png",
+          "arquivos": 1,
+          "bytes": 72267,
+          "bytes_legivel": "70.6 KB",
+          "exemplo": "img/perk-images/Styles/Inspiration/UnsealedSpellbook/UnsealedSpellbook.png",
+          "dimensoes_top": [
+            {
+              "w": 256,
+              "h": 256,
+              "arquivos": 1
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGBA": 1
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "img/perk-images/Styles/Inspiration/UnsealedSpellbook/UnsealedSpellbook.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            }
+          ]
+        },
+        {
+          "versionado": "nao-versionado",
+          "grupo": "img/perk-images/Styles/Precision/AbsorbLife",
+          "ext": ".png",
+          "arquivos": 1,
+          "bytes": 7132,
+          "bytes_legivel": "7.0 KB",
+          "exemplo": "img/perk-images/Styles/Precision/AbsorbLife/AbsorbLife.png",
+          "dimensoes_top": [
+            {
+              "w": 64,
+              "h": 64,
+              "arquivos": 1
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGBA": 1
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "img/perk-images/Styles/Precision/AbsorbLife/AbsorbLife.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            }
+          ]
+        },
+        {
+          "versionado": "nao-versionado",
+          "grupo": "img/perk-images/Styles/Precision/Conqueror",
+          "ext": ".png",
+          "arquivos": 1,
+          "bytes": 51100,
+          "bytes_legivel": "49.9 KB",
+          "exemplo": "img/perk-images/Styles/Precision/Conqueror/Conqueror.png",
+          "dimensoes_top": [
+            {
+              "w": 256,
+              "h": 256,
+              "arquivos": 1
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGBA": 1
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "img/perk-images/Styles/Precision/Conqueror/Conqueror.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            }
+          ]
+        },
+        {
+          "versionado": "nao-versionado",
+          "grupo": "img/perk-images/Styles/Precision/CoupDeGrace",
+          "ext": ".png",
+          "arquivos": 1,
+          "bytes": 4762,
+          "bytes_legivel": "4.7 KB",
+          "exemplo": "img/perk-images/Styles/Precision/CoupDeGrace/CoupDeGrace.png",
+          "dimensoes_top": [
+            {
+              "w": 64,
+              "h": 64,
+              "arquivos": 1
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGBA": 1
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "img/perk-images/Styles/Precision/CoupDeGrace/CoupDeGrace.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            }
+          ]
+        },
+        {
+          "versionado": "nao-versionado",
+          "grupo": "img/perk-images/Styles/Precision/CutDown",
+          "ext": ".png",
+          "arquivos": 1,
+          "bytes": 4940,
+          "bytes_legivel": "4.8 KB",
+          "exemplo": "img/perk-images/Styles/Precision/CutDown/CutDown.png",
+          "dimensoes_top": [
+            {
+              "w": 64,
+              "h": 64,
+              "arquivos": 1
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGBA": 1
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "img/perk-images/Styles/Precision/CutDown/CutDown.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            }
+          ]
+        },
+        {
+          "versionado": "nao-versionado",
+          "grupo": "img/perk-images/Styles/Precision/FleetFootwork",
+          "ext": ".png",
+          "arquivos": 1,
+          "bytes": 88296,
+          "bytes_legivel": "86.2 KB",
+          "exemplo": "img/perk-images/Styles/Precision/FleetFootwork/FleetFootwork.png",
+          "dimensoes_top": [
+            {
+              "w": 256,
+              "h": 256,
+              "arquivos": 1
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGBA": 1
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "img/perk-images/Styles/Precision/FleetFootwork/FleetFootwork.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            }
+          ]
+        },
+        {
+          "versionado": "nao-versionado",
+          "grupo": "img/perk-images/Styles/Precision/LegendAlacrity",
+          "ext": ".png",
+          "arquivos": 1,
+          "bytes": 5128,
+          "bytes_legivel": "5.0 KB",
+          "exemplo": "img/perk-images/Styles/Precision/LegendAlacrity/LegendAlacrity.png",
+          "dimensoes_top": [
+            {
+              "w": 64,
+              "h": 64,
+              "arquivos": 1
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGBA": 1
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "img/perk-images/Styles/Precision/LegendAlacrity/LegendAlacrity.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            }
+          ]
+        },
+        {
+          "versionado": "nao-versionado",
+          "grupo": "img/perk-images/Styles/Precision/LegendBloodline",
+          "ext": ".png",
+          "arquivos": 1,
+          "bytes": 4587,
+          "bytes_legivel": "4.5 KB",
+          "exemplo": "img/perk-images/Styles/Precision/LegendBloodline/LegendBloodline.png",
+          "dimensoes_top": [
+            {
+              "w": 64,
+              "h": 64,
+              "arquivos": 1
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGBA": 1
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "img/perk-images/Styles/Precision/LegendBloodline/LegendBloodline.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            }
+          ]
+        },
+        {
+          "versionado": "nao-versionado",
+          "grupo": "img/perk-images/Styles/Precision/LegendHaste",
+          "ext": ".png",
+          "arquivos": 1,
+          "bytes": 6696,
+          "bytes_legivel": "6.5 KB",
+          "exemplo": "img/perk-images/Styles/Precision/LegendHaste/LegendHaste.png",
+          "dimensoes_top": [
+            {
+              "w": 64,
+              "h": 64,
+              "arquivos": 1
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGBA": 1
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "img/perk-images/Styles/Precision/LegendHaste/LegendHaste.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            }
+          ]
+        },
+        {
+          "versionado": "nao-versionado",
+          "grupo": "img/perk-images/Styles/Precision/LethalTempo",
+          "ext": ".png",
+          "arquivos": 1,
+          "bytes": 55298,
+          "bytes_legivel": "54.0 KB",
+          "exemplo": "img/perk-images/Styles/Precision/LethalTempo/LethalTempoTemp.png",
+          "dimensoes_top": [
+            {
+              "w": 256,
+              "h": 256,
+              "arquivos": 1
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGBA": 1
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "img/perk-images/Styles/Precision/LethalTempo/LethalTempoTemp.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            }
+          ]
+        },
+        {
+          "versionado": "nao-versionado",
+          "grupo": "img/perk-images/Styles/Precision/PresenceOfMind",
+          "ext": ".png",
+          "arquivos": 1,
+          "bytes": 4806,
+          "bytes_legivel": "4.7 KB",
+          "exemplo": "img/perk-images/Styles/Precision/PresenceOfMind/PresenceOfMind.png",
+          "dimensoes_top": [
+            {
+              "w": 64,
+              "h": 64,
+              "arquivos": 1
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGBA": 1
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "img/perk-images/Styles/Precision/PresenceOfMind/PresenceOfMind.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            }
+          ]
+        },
+        {
+          "versionado": "nao-versionado",
+          "grupo": "img/perk-images/Styles/Precision/PressTheAttack",
+          "ext": ".png",
+          "arquivos": 1,
+          "bytes": 101210,
+          "bytes_legivel": "98.8 KB",
+          "exemplo": "img/perk-images/Styles/Precision/PressTheAttack/PressTheAttack.png",
+          "dimensoes_top": [
+            {
+              "w": 256,
+              "h": 256,
+              "arquivos": 1
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGBA": 1
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "img/perk-images/Styles/Precision/PressTheAttack/PressTheAttack.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            }
+          ]
+        },
+        {
+          "versionado": "nao-versionado",
+          "grupo": "img/perk-images/Styles/Precision",
+          "ext": ".png",
+          "arquivos": 1,
+          "bytes": 4200,
+          "bytes_legivel": "4.1 KB",
+          "exemplo": "img/perk-images/Styles/Precision/Triumph.png",
+          "dimensoes_top": [
+            {
+              "w": 64,
+              "h": 64,
+              "arquivos": 1
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGBA": 1
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "img/perk-images/Styles/Precision/Triumph.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            }
+          ]
+        },
+        {
+          "versionado": "nao-versionado",
+          "grupo": "img/perk-images/Styles/Resolve/ApproachVelocity",
+          "ext": ".png",
+          "arquivos": 1,
+          "bytes": 5054,
+          "bytes_legivel": "4.9 KB",
+          "exemplo": "img/perk-images/Styles/Resolve/ApproachVelocity/ApproachVelocity.png",
+          "dimensoes_top": [
+            {
+              "w": 64,
+              "h": 64,
+              "arquivos": 1
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGBA": 1
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "img/perk-images/Styles/Resolve/ApproachVelocity/ApproachVelocity.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            }
+          ]
+        },
+        {
+          "versionado": "nao-versionado",
+          "grupo": "img/perk-images/Styles/Resolve/BonePlating",
+          "ext": ".png",
+          "arquivos": 1,
+          "bytes": 14860,
+          "bytes_legivel": "14.5 KB",
+          "exemplo": "img/perk-images/Styles/Resolve/BonePlating/BonePlating.png",
+          "dimensoes_top": [
+            {
+              "w": 128,
+              "h": 128,
+              "arquivos": 1
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGBA": 1
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "img/perk-images/Styles/Resolve/BonePlating/BonePlating.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            }
+          ]
+        },
+        {
+          "versionado": "nao-versionado",
+          "grupo": "img/perk-images/Styles/Resolve/Chrysalis",
+          "ext": ".png",
+          "arquivos": 1,
+          "bytes": 15853,
+          "bytes_legivel": "15.5 KB",
+          "exemplo": "img/perk-images/Styles/Resolve/Chrysalis/Chrysalis.png",
+          "dimensoes_top": [
+            {
+              "w": 128,
+              "h": 128,
+              "arquivos": 1
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGBA": 1
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "img/perk-images/Styles/Resolve/Chrysalis/Chrysalis.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            }
+          ]
+        },
+        {
+          "versionado": "nao-versionado",
+          "grupo": "img/perk-images/Styles/Resolve/Conditioning",
+          "ext": ".png",
+          "arquivos": 1,
+          "bytes": 5300,
+          "bytes_legivel": "5.2 KB",
+          "exemplo": "img/perk-images/Styles/Resolve/Conditioning/Conditioning.png",
+          "dimensoes_top": [
+            {
+              "w": 64,
+              "h": 64,
+              "arquivos": 1
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGBA": 1
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "img/perk-images/Styles/Resolve/Conditioning/Conditioning.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            }
+          ]
+        },
+        {
+          "versionado": "nao-versionado",
+          "grupo": "img/perk-images/Styles/Resolve/Demolish",
+          "ext": ".png",
+          "arquivos": 1,
+          "bytes": 5106,
+          "bytes_legivel": "5.0 KB",
+          "exemplo": "img/perk-images/Styles/Resolve/Demolish/Demolish.png",
+          "dimensoes_top": [
+            {
+              "w": 64,
+              "h": 64,
+              "arquivos": 1
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGBA": 1
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "img/perk-images/Styles/Resolve/Demolish/Demolish.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            }
+          ]
+        },
+        {
+          "versionado": "nao-versionado",
+          "grupo": "img/perk-images/Styles/Resolve/FontOfLife",
+          "ext": ".png",
+          "arquivos": 1,
+          "bytes": 4429,
+          "bytes_legivel": "4.3 KB",
+          "exemplo": "img/perk-images/Styles/Resolve/FontOfLife/FontOfLife.png",
+          "dimensoes_top": [
+            {
+              "w": 64,
+              "h": 64,
+              "arquivos": 1
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGBA": 1
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "img/perk-images/Styles/Resolve/FontOfLife/FontOfLife.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            }
+          ]
+        },
+        {
+          "versionado": "nao-versionado",
+          "grupo": "img/perk-images/Styles/Resolve/GraspOfTheUndying",
+          "ext": ".png",
+          "arquivos": 1,
+          "bytes": 78682,
+          "bytes_legivel": "76.8 KB",
+          "exemplo": "img/perk-images/Styles/Resolve/GraspOfTheUndying/GraspOfTheUndying.png",
+          "dimensoes_top": [
+            {
+              "w": 256,
+              "h": 256,
+              "arquivos": 1
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGBA": 1
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "img/perk-images/Styles/Resolve/GraspOfTheUndying/GraspOfTheUndying.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            }
+          ]
+        },
+        {
+          "versionado": "nao-versionado",
+          "grupo": "img/perk-images/Styles/Resolve/Guardian",
+          "ext": ".png",
+          "arquivos": 1,
+          "bytes": 73504,
+          "bytes_legivel": "71.8 KB",
+          "exemplo": "img/perk-images/Styles/Resolve/Guardian/Guardian.png",
+          "dimensoes_top": [
+            {
+              "w": 256,
+              "h": 256,
+              "arquivos": 1
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGBA": 1
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "img/perk-images/Styles/Resolve/Guardian/Guardian.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            }
+          ]
+        },
+        {
+          "versionado": "nao-versionado",
+          "grupo": "img/perk-images/Styles/Resolve/IronSkin",
+          "ext": ".png",
+          "arquivos": 1,
+          "bytes": 5672,
+          "bytes_legivel": "5.5 KB",
+          "exemplo": "img/perk-images/Styles/Resolve/IronSkin/IronSkin.png",
+          "dimensoes_top": [
+            {
+              "w": 64,
+              "h": 64,
+              "arquivos": 1
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGBA": 1
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "img/perk-images/Styles/Resolve/IronSkin/IronSkin.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            }
+          ]
+        },
+        {
+          "versionado": "nao-versionado",
+          "grupo": "img/perk-images/Styles/Resolve/MirrorShell",
+          "ext": ".png",
+          "arquivos": 1,
+          "bytes": 5568,
+          "bytes_legivel": "5.4 KB",
+          "exemplo": "img/perk-images/Styles/Resolve/MirrorShell/MirrorShell.png",
+          "dimensoes_top": [
+            {
+              "w": 64,
+              "h": 64,
+              "arquivos": 1
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGBA": 1
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "img/perk-images/Styles/Resolve/MirrorShell/MirrorShell.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            }
+          ]
+        },
+        {
+          "versionado": "nao-versionado",
+          "grupo": "img/perk-images/Styles/Resolve/Overgrowth",
+          "ext": ".png",
+          "arquivos": 1,
+          "bytes": 5741,
+          "bytes_legivel": "5.6 KB",
+          "exemplo": "img/perk-images/Styles/Resolve/Overgrowth/Overgrowth.png",
+          "dimensoes_top": [
+            {
+              "w": 64,
+              "h": 64,
+              "arquivos": 1
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGBA": 1
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "img/perk-images/Styles/Resolve/Overgrowth/Overgrowth.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            }
+          ]
+        },
+        {
+          "versionado": "nao-versionado",
+          "grupo": "img/perk-images/Styles/Resolve/Revitalize",
+          "ext": ".png",
+          "arquivos": 1,
+          "bytes": 4880,
+          "bytes_legivel": "4.8 KB",
+          "exemplo": "img/perk-images/Styles/Resolve/Revitalize/Revitalize.png",
+          "dimensoes_top": [
+            {
+              "w": 64,
+              "h": 64,
+              "arquivos": 1
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGBA": 1
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "img/perk-images/Styles/Resolve/Revitalize/Revitalize.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            }
+          ]
+        },
+        {
+          "versionado": "nao-versionado",
+          "grupo": "img/perk-images/Styles/Resolve/SecondWind",
+          "ext": ".png",
+          "arquivos": 1,
+          "bytes": 4077,
+          "bytes_legivel": "4.0 KB",
+          "exemplo": "img/perk-images/Styles/Resolve/SecondWind/SecondWind.png",
+          "dimensoes_top": [
+            {
+              "w": 64,
+              "h": 64,
+              "arquivos": 1
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGBA": 1
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "img/perk-images/Styles/Resolve/SecondWind/SecondWind.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            }
+          ]
+        },
+        {
+          "versionado": "nao-versionado",
+          "grupo": "img/perk-images/Styles/Resolve/VeteranAftershock",
+          "ext": ".png",
+          "arquivos": 1,
+          "bytes": 63340,
+          "bytes_legivel": "61.9 KB",
+          "exemplo": "img/perk-images/Styles/Resolve/VeteranAftershock/VeteranAftershock.png",
+          "dimensoes_top": [
+            {
+              "w": 256,
+              "h": 256,
+              "arquivos": 1
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGBA": 1
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "img/perk-images/Styles/Resolve/VeteranAftershock/VeteranAftershock.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            }
+          ]
+        },
+        {
+          "versionado": "nao-versionado",
+          "grupo": "img/perk-images/Styles/Sorcery/AbsoluteFocus",
+          "ext": ".png",
+          "arquivos": 1,
+          "bytes": 4688,
+          "bytes_legivel": "4.6 KB",
+          "exemplo": "img/perk-images/Styles/Sorcery/AbsoluteFocus/AbsoluteFocus.png",
+          "dimensoes_top": [
+            {
+              "w": 64,
+              "h": 64,
+              "arquivos": 1
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGBA": 1
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "img/perk-images/Styles/Sorcery/AbsoluteFocus/AbsoluteFocus.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            }
+          ]
+        },
+        {
+          "versionado": "nao-versionado",
+          "grupo": "img/perk-images/Styles/Sorcery/ArcaneComet",
+          "ext": ".png",
+          "arquivos": 1,
+          "bytes": 45377,
+          "bytes_legivel": "44.3 KB",
+          "exemplo": "img/perk-images/Styles/Sorcery/ArcaneComet/ArcaneComet.png",
+          "dimensoes_top": [
+            {
+              "w": 256,
+              "h": 256,
+              "arquivos": 1
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGBA": 1
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "img/perk-images/Styles/Sorcery/ArcaneComet/ArcaneComet.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            }
+          ]
+        },
+        {
+          "versionado": "nao-versionado",
+          "grupo": "img/perk-images/Styles/Sorcery/Celerity",
+          "ext": ".png",
+          "arquivos": 1,
+          "bytes": 6068,
+          "bytes_legivel": "5.9 KB",
+          "exemplo": "img/perk-images/Styles/Sorcery/Celerity/CelerityTemp.png",
+          "dimensoes_top": [
+            {
+              "w": 64,
+              "h": 64,
+              "arquivos": 1
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGBA": 1
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "img/perk-images/Styles/Sorcery/Celerity/CelerityTemp.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            }
+          ]
+        },
+        {
+          "versionado": "nao-versionado",
+          "grupo": "img/perk-images/Styles/Sorcery/DeathfireTouch",
+          "ext": ".png",
+          "arquivos": 1,
+          "bytes": 365963,
+          "bytes_legivel": "357.4 KB",
+          "exemplo": "img/perk-images/Styles/Sorcery/DeathfireTouch/DEATHFIRE_TOUCH_KEYSTONE.png",
+          "dimensoes_top": [
+            {
+              "w": 512,
+              "h": 512,
+              "arquivos": 1
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGBA": 1
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "img/perk-images/Styles/Sorcery/DeathfireTouch/DEATHFIRE_TOUCH_KEYSTONE.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            }
+          ]
+        },
+        {
+          "versionado": "nao-versionado",
+          "grupo": "img/perk-images/Styles/Sorcery/GatheringStorm",
+          "ext": ".png",
+          "arquivos": 1,
+          "bytes": 4910,
+          "bytes_legivel": "4.8 KB",
+          "exemplo": "img/perk-images/Styles/Sorcery/GatheringStorm/GatheringStorm.png",
+          "dimensoes_top": [
+            {
+              "w": 64,
+              "h": 64,
+              "arquivos": 1
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGBA": 1
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "img/perk-images/Styles/Sorcery/GatheringStorm/GatheringStorm.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            }
+          ]
+        },
+        {
+          "versionado": "nao-versionado",
+          "grupo": "img/perk-images/Styles/Sorcery/LastStand",
+          "ext": ".png",
+          "arquivos": 1,
+          "bytes": 4902,
+          "bytes_legivel": "4.8 KB",
+          "exemplo": "img/perk-images/Styles/Sorcery/LastStand/LastStand.png",
+          "dimensoes_top": [
+            {
+              "w": 64,
+              "h": 64,
+              "arquivos": 1
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGBA": 1
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "img/perk-images/Styles/Sorcery/LastStand/LastStand.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            }
+          ]
+        },
+        {
+          "versionado": "nao-versionado",
+          "grupo": "img/perk-images/Styles/Sorcery/ManaflowBand",
+          "ext": ".png",
+          "arquivos": 1,
+          "bytes": 5767,
+          "bytes_legivel": "5.6 KB",
+          "exemplo": "img/perk-images/Styles/Sorcery/ManaflowBand/ManaflowBand.png",
+          "dimensoes_top": [
+            {
+              "w": 64,
+              "h": 64,
+              "arquivos": 1
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGBA": 1
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "img/perk-images/Styles/Sorcery/ManaflowBand/ManaflowBand.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            }
+          ]
+        },
+        {
+          "versionado": "nao-versionado",
+          "grupo": "img/perk-images/Styles/Sorcery/NimbusCloak",
+          "ext": ".png",
+          "arquivos": 1,
+          "bytes": 14057,
+          "bytes_legivel": "13.7 KB",
+          "exemplo": "img/perk-images/Styles/Sorcery/NimbusCloak/6361.png",
+          "dimensoes_top": [
+            {
+              "w": 128,
+              "h": 128,
+              "arquivos": 1
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGBA": 1
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "img/perk-images/Styles/Sorcery/NimbusCloak/6361.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            }
+          ]
+        },
+        {
+          "versionado": "nao-versionado",
+          "grupo": "img/perk-images/Styles/Sorcery/NullifyingOrb",
+          "ext": ".png",
+          "arquivos": 1,
+          "bytes": 6109,
+          "bytes_legivel": "6.0 KB",
+          "exemplo": "img/perk-images/Styles/Sorcery/NullifyingOrb/Axiom_Arcanist.png",
+          "dimensoes_top": [
+            {
+              "w": 64,
+              "h": 64,
+              "arquivos": 1
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGBA": 1
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "img/perk-images/Styles/Sorcery/NullifyingOrb/Axiom_Arcanist.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            }
+          ]
+        },
+        {
+          "versionado": "nao-versionado",
+          "grupo": "img/perk-images/Styles/Sorcery/PhaseRush",
+          "ext": ".png",
+          "arquivos": 1,
+          "bytes": 363282,
+          "bytes_legivel": "354.8 KB",
+          "exemplo": "img/perk-images/Styles/Sorcery/PhaseRush/StormraidersSurgeRuneIcon2.png",
+          "dimensoes_top": [
+            {
+              "w": 512,
+              "h": 512,
+              "arquivos": 1
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGBA": 1
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "img/perk-images/Styles/Sorcery/PhaseRush/StormraidersSurgeRuneIcon2.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            }
+          ]
+        },
+        {
+          "versionado": "nao-versionado",
+          "grupo": "img/perk-images/Styles/Sorcery/Scorch",
+          "ext": ".png",
+          "arquivos": 1,
+          "bytes": 5029,
+          "bytes_legivel": "4.9 KB",
+          "exemplo": "img/perk-images/Styles/Sorcery/Scorch/Scorch.png",
+          "dimensoes_top": [
+            {
+              "w": 64,
+              "h": 64,
+              "arquivos": 1
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGBA": 1
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "img/perk-images/Styles/Sorcery/Scorch/Scorch.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            }
+          ]
+        },
+        {
+          "versionado": "nao-versionado",
+          "grupo": "img/perk-images/Styles/Sorcery/SummonAery",
+          "ext": ".png",
+          "arquivos": 1,
+          "bytes": 49583,
+          "bytes_legivel": "48.4 KB",
+          "exemplo": "img/perk-images/Styles/Sorcery/SummonAery/SummonAery.png",
+          "dimensoes_top": [
+            {
+              "w": 256,
+              "h": 256,
+              "arquivos": 1
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGBA": 1
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "img/perk-images/Styles/Sorcery/SummonAery/SummonAery.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            }
+          ]
+        },
+        {
+          "versionado": "nao-versionado",
+          "grupo": "img/perk-images/Styles/Sorcery/Transcendence",
+          "ext": ".png",
+          "arquivos": 1,
+          "bytes": 5942,
+          "bytes_legivel": "5.8 KB",
+          "exemplo": "img/perk-images/Styles/Sorcery/Transcendence/Transcendence.png",
+          "dimensoes_top": [
+            {
+              "w": 64,
+              "h": 64,
+              "arquivos": 1
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGBA": 1
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "img/perk-images/Styles/Sorcery/Transcendence/Transcendence.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            }
+          ]
+        },
+        {
+          "versionado": "nao-versionado",
+          "grupo": "img/perk-images/Styles/Sorcery/Unflinching",
+          "ext": ".png",
+          "arquivos": 1,
+          "bytes": 4609,
+          "bytes_legivel": "4.5 KB",
+          "exemplo": "img/perk-images/Styles/Sorcery/Unflinching/Unflinching.png",
+          "dimensoes_top": [
+            {
+              "w": 64,
+              "h": 64,
+              "arquivos": 1
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGBA": 1
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "img/perk-images/Styles/Sorcery/Unflinching/Unflinching.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            }
+          ]
+        },
+        {
+          "versionado": "nao-versionado",
+          "grupo": "img/perk-images/Styles/Sorcery/Waterwalking",
+          "ext": ".png",
+          "arquivos": 1,
+          "bytes": 4590,
+          "bytes_legivel": "4.5 KB",
+          "exemplo": "img/perk-images/Styles/Sorcery/Waterwalking/Waterwalking.png",
+          "dimensoes_top": [
+            {
+              "w": 64,
+              "h": 64,
+              "arquivos": 1
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGBA": 1
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "img/perk-images/Styles/Sorcery/Waterwalking/Waterwalking.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            }
+          ]
+        },
+        {
+          "versionado": "nao-versionado",
+          "grupo": "img/perk-images/Template",
+          "ext": ".png",
+          "arquivos": 1,
+          "bytes": 6207,
+          "bytes_legivel": "6.1 KB",
+          "exemplo": "img/perk-images/Template/7000.png",
+          "dimensoes_top": [
+            {
+              "w": 64,
+              "h": 64,
+              "arquivos": 1
+            }
+          ],
+          "dimensoes_distintas": 1,
+          "modos": {
+            "RGBA": 1
+          },
+          "alpha_amostra": [
+            {
+              "arquivo": "img/perk-images/Template/7000.png",
+              "alpha_min": 0,
+              "alpha_max": 255
+            }
+          ]
+        },
+        {
+          "versionado": "nao-versionado",
+          "grupo": "(raiz)",
+          "ext": ".json",
+          "arquivos": 1,
+          "bytes": 225,
+          "bytes_legivel": "225.0 B",
+          "exemplo": "languages.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "nao-versionado",
+          "grupo": "lolpatch_16.17",
+          "ext": ".js",
+          "arquivos": 1,
+          "bytes": 381,
+          "bytes_legivel": "381.0 B",
+          "exemplo": "lolpatch_16.17/manifest.js",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        },
+        {
+          "versionado": "nao-versionado",
+          "grupo": "lolpatch_16.17",
+          "ext": ".json",
+          "arquivos": 1,
+          "bytes": 365,
+          "bytes_legivel": "365.0 B",
+          "exemplo": "lolpatch_16.17/manifest.json",
+          "dimensoes_top": [],
+          "dimensoes_distintas": 0,
+          "modos": {},
+          "alpha_amostra": []
+        }
+      ],
+      "recortes": {
+        "data_pt_BR": 9758542,
+        "data_en_US": 9363539,
+        "data_todos_idiomas": 282954412,
+        "img_versionado": 1428492458,
+        "img_nao_versionado": 1158165430
+      },
+      "falhas": {}
+    },
+    "crosscheck_cdn": [
+      {
+        "url": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Jax.png",
+        "status": 200,
+        "content_type": "image/png",
+        "bytes": 27107,
+        "format": "PNG",
+        "width": 128,
+        "height": 128,
+        "mode": "RGB",
+        "note": ""
+      },
+      {
+        "url": "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/Jax_0.jpg",
+        "status": 200,
+        "content_type": "image/jpeg",
+        "bytes": 139824,
+        "format": "JPEG",
+        "width": 1215,
+        "height": 717,
+        "mode": "RGB",
+        "note": ""
+      },
+      {
+        "url": "https://ddragon.leagueoflegends.com/cdn/img/champion/loading/Jax_0.jpg",
+        "status": 200,
+        "content_type": "image/jpeg",
+        "bytes": 40380,
+        "format": "JPEG",
+        "width": 308,
+        "height": 560,
+        "mode": "RGB",
+        "note": ""
+      },
+      {
+        "url": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/item/3031.png",
+        "status": 200,
+        "content_type": "image/png",
+        "bytes": 7104,
+        "format": "PNG",
+        "width": 64,
+        "height": 64,
+        "mode": "RGB",
+        "note": ""
+      },
+      {
+        "url": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/spell/SummonerFlash.png",
+        "status": 200,
+        "content_type": "image/png",
+        "bytes": 6403,
+        "format": "PNG",
+        "width": 64,
+        "height": 64,
+        "mode": "RGB",
+        "note": ""
+      },
+      {
+        "url": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/profileicon/1.png",
+        "status": 200,
+        "content_type": "image/png",
+        "bytes": 32282,
+        "format": "PNG",
+        "width": 128,
+        "height": 128,
+        "mode": "RGB",
+        "note": ""
+      },
+      {
+        "url": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/map/map11.png",
+        "status": 200,
+        "content_type": "image/png",
+        "bytes": 70985,
+        "format": "PNG",
+        "width": 512,
+        "height": 512,
+        "mode": "RGB",
+        "note": ""
+      },
+      {
+        "url": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/7201_Precision.png",
+        "status": 200,
+        "content_type": "image/png",
+        "bytes": 1398,
+        "format": "PNG",
+        "width": 32,
+        "height": 32,
+        "mode": "RGBA",
+        "note": ""
+      }
+    ]
+  }
+}

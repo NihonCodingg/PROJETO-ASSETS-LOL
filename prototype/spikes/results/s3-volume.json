@@ -1,0 +1,405 @@
+{
+  "spike": "s3-volume",
+  "started_at": "2026-09-03T13:54:04-0300",
+  "user_agent": "lol-assets-indexer/0.0.0-spike (+https://github.com/NihonCodingg/PROJETO-ASSETS-LOL; https://github.com/NihonCodingg/PROJETO-ASSETS-LOL/issues)",
+  "data": {
+    "contagens_reais": {
+      "skins": {
+        "url": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/skins.json",
+        "status": 200,
+        "total": 2149,
+        "chromas": 7037,
+        "skins_base": 173
+      },
+      "champion_summary": {
+        "url": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/champion-summary.json",
+        "status": 200,
+        "total": 237,
+        "campeoes": 173,
+        "modo_classic": 63
+      },
+      "items": {
+        "url": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/items.json",
+        "status": 200,
+        "total": 868
+      },
+      "profile_icons": {
+        "url": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/profile-icons.json",
+        "status": 200,
+        "total": 5078
+      },
+      "summoner_emotes": {
+        "url": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/summoner-emotes.json",
+        "status": 200,
+        "total": 2347
+      },
+      "ward_skins": {
+        "url": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/ward-skins.json",
+        "status": 200,
+        "total": 265
+      },
+      "perks": {
+        "url": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/v1/perks.json",
+        "status": 200,
+        "total": 103
+      }
+    },
+    "medias_por_tipo": {
+      "B.2.3 champion-icons": {
+        "amostras": 3,
+        "bytes_medio": 27319,
+        "bytes_mediano": 27100,
+        "dimensao_mais_comum": [
+          128,
+          128
+        ]
+      },
+      "passive.abilityIconPath": {
+        "amostras": 3,
+        "bytes_medio": 4489,
+        "bytes_mediano": 4620,
+        "dimensao_mais_comum": [
+          64,
+          64
+        ]
+      },
+      "skins[].chromaPath": {
+        "amostras": 18,
+        "bytes_medio": 61448,
+        "bytes_mediano": 59583,
+        "dimensao_mais_comum": [
+          270,
+          303
+        ]
+      },
+      "skins[].chromas[].chromaPath": {
+        "amostras": 126,
+        "bytes_medio": 62082,
+        "bytes_mediano": 60904,
+        "dimensao_mais_comum": [
+          270,
+          303
+        ]
+      },
+      "skins[].chromas[].tilePath": {
+        "amostras": 126,
+        "bytes_medio": 62082,
+        "bytes_mediano": 60904,
+        "dimensao_mais_comum": [
+          270,
+          303
+        ]
+      },
+      "skins[].loadScreenPath": {
+        "amostras": 54,
+        "bytes_medio": 48848,
+        "bytes_mediano": 49682,
+        "dimensao_mais_comum": [
+          308,
+          560
+        ]
+      },
+      "skins[].loadScreenVintagePath": {
+        "amostras": 23,
+        "bytes_medio": 57468,
+        "bytes_mediano": 58533,
+        "dimensao_mais_comum": [
+          308,
+          560
+        ]
+      },
+      "skins[].splashPath": {
+        "amostras": 54,
+        "bytes_medio": 98048,
+        "bytes_mediano": 95821,
+        "dimensao_mais_comum": [
+          1280,
+          720
+        ]
+      },
+      "skins[].tilePath": {
+        "amostras": 54,
+        "bytes_medio": 44164,
+        "bytes_mediano": 41096,
+        "dimensao_mais_comum": [
+          380,
+          380
+        ]
+      },
+      "skins[].uncenteredSplashPath": {
+        "amostras": 54,
+        "bytes_medio": 183670,
+        "bytes_mediano": 181545,
+        "dimensao_mais_comum": [
+          1215,
+          717
+        ]
+      },
+      "spells[].abilityIconPath": {
+        "amostras": 12,
+        "bytes_medio": 4591,
+        "bytes_mediano": 4683,
+        "dimensao_mais_comum": [
+          64,
+          64
+        ]
+      },
+      "squarePortraitPath": {
+        "amostras": 3,
+        "bytes_medio": 27319,
+        "bytes_mediano": 27100,
+        "dimensao_mais_comum": [
+          128,
+          128
+        ]
+      }
+    },
+    "conversao_png": {
+      "amostras": [
+        {
+          "url": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/characters/jax/skins/base/images/jax_splash_centered_0.jpg",
+          "formato_origem": "JPEG",
+          "w": 1280,
+          "h": 720,
+          "bytes_origem": 75178,
+          "bytes_png": 503296,
+          "razao": 6.695
+        },
+        {
+          "url": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/characters/jax/skins/base/images/jax_splash_tile_0.jpg",
+          "formato_origem": "JPEG",
+          "w": 380,
+          "h": 380,
+          "bytes_origem": 30154,
+          "bytes_png": 191025,
+          "razao": 6.335
+        },
+        {
+          "url": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/characters/jax/skins/base/jaxloadscreen_0.jpg",
+          "formato_origem": "JPEG",
+          "w": 308,
+          "h": 560,
+          "bytes_origem": 39158,
+          "bytes_png": 235355,
+          "razao": 6.01
+        },
+        {
+          "url": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/characters/jax/skins/skin01/images/jax_splash_centered_1.jpg",
+          "formato_origem": "JPEG",
+          "w": 1280,
+          "h": 720,
+          "bytes_origem": 84318,
+          "bytes_png": 588058,
+          "razao": 6.974
+        },
+        {
+          "url": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/characters/jax/skins/skin01/images/jax_splash_tile_1.jpg",
+          "formato_origem": "JPEG",
+          "w": 380,
+          "h": 380,
+          "bytes_origem": 32569,
+          "bytes_png": 197831,
+          "razao": 6.074
+        },
+        {
+          "url": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/characters/jax/skins/base/images/jax_splash_uncentered_0.jpg",
+          "formato_origem": "JPEG",
+          "w": 1215,
+          "h": 717,
+          "bytes_origem": 121940,
+          "bytes_png": 802532,
+          "razao": 6.581
+        },
+        {
+          "url": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/characters/jax/skins/skin01/jaxloadscreen_1.jpg",
+          "formato_origem": "JPEG",
+          "w": 308,
+          "h": 560,
+          "bytes_origem": 54193,
+          "bytes_png": 293342,
+          "razao": 5.413
+        },
+        {
+          "url": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/characters/jax/skins/skin01/images/jax_splash_uncentered_1.jpg",
+          "formato_origem": "JPEG",
+          "w": 1215,
+          "h": 717,
+          "bytes_origem": 241251,
+          "bytes_png": 1215580,
+          "razao": 5.039
+        },
+        {
+          "url": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/characters/jax/skins/skin01/jaxloadscreen_1_le.jpg",
+          "formato_origem": "JPEG",
+          "w": 308,
+          "h": 560,
+          "bytes_origem": 41718,
+          "bytes_png": 222190,
+          "razao": 5.326
+        },
+        {
+          "url": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/characters/jax/skins/skin02/images/jax_splash_centered_2.jpg",
+          "formato_origem": "JPEG",
+          "w": 1280,
+          "h": 720,
+          "bytes_origem": 129383,
+          "bytes_png": 652917,
+          "razao": 5.046
+        },
+        {
+          "url": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/characters/jax/skins/skin02/images/jax_splash_tile_2.jpg",
+          "formato_origem": "JPEG",
+          "w": 380,
+          "h": 380,
+          "bytes_origem": 62924,
+          "bytes_png": 214727,
+          "razao": 3.412
+        },
+        {
+          "url": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/characters/jax/skins/skin02/images/jax_splash_uncentered_2.jpg",
+          "formato_origem": "JPEG",
+          "w": 1215,
+          "h": 717,
+          "bytes_origem": 235277,
+          "bytes_png": 995382,
+          "razao": 4.231
+        }
+      ],
+      "razao_mediana": 5.712,
+      "razao_media": 5.595,
+      "razao_min": 3.412,
+      "razao_max": 6.974
+    },
+    "extrapolacao": {
+      "campeoes": 173,
+      "skins": 2149,
+      "chromas": 7037,
+      "razao_png_usada": 5.712,
+      "linhas": [
+        {
+          "tipo": "skins[].splashPath",
+          "formato_fonte": "JPEG",
+          "unidades": 2149,
+          "bytes_medianos": 95821,
+          "dimensao": [
+            1280,
+            720
+          ],
+          "bytes_origem": 205919329,
+          "origem_legivel": "196.4 MB",
+          "bytes_png": 1176211207,
+          "png_legivel": "1.1 GB"
+        },
+        {
+          "tipo": "skins[].uncenteredSplashPath",
+          "formato_fonte": "JPEG",
+          "unidades": 2149,
+          "bytes_medianos": 181545,
+          "dimensao": [
+            1215,
+            717
+          ],
+          "bytes_origem": 390140205,
+          "origem_legivel": "372.1 MB",
+          "bytes_png": 2228480850,
+          "png_legivel": "2.1 GB"
+        },
+        {
+          "tipo": "skins[].tilePath",
+          "formato_fonte": "JPEG",
+          "unidades": 2149,
+          "bytes_medianos": 41096,
+          "dimensao": [
+            380,
+            380
+          ],
+          "bytes_origem": 88315304,
+          "origem_legivel": "84.2 MB",
+          "bytes_png": 504457016,
+          "png_legivel": "481.1 MB"
+        },
+        {
+          "tipo": "skins[].loadScreenPath",
+          "formato_fonte": "JPEG",
+          "unidades": 2149,
+          "bytes_medianos": 49682,
+          "dimensao": [
+            308,
+            560
+          ],
+          "bytes_origem": 106766618,
+          "origem_legivel": "101.8 MB",
+          "bytes_png": 609850922,
+          "png_legivel": "581.6 MB"
+        },
+        {
+          "tipo": "skins[].chromas[].chromaPath",
+          "formato_fonte": "PNG",
+          "unidades": 7037,
+          "bytes_medianos": 60904,
+          "dimensao": [
+            270,
+            303
+          ],
+          "bytes_origem": 428581448,
+          "origem_legivel": "408.7 MB",
+          "bytes_png": 428581448,
+          "png_legivel": "408.7 MB"
+        },
+        {
+          "tipo": "squarePortraitPath",
+          "formato_fonte": "PNG",
+          "unidades": 173,
+          "bytes_medianos": 27100,
+          "dimensao": [
+            128,
+            128
+          ],
+          "bytes_origem": 4688300,
+          "origem_legivel": "4.5 MB",
+          "bytes_png": 4688300,
+          "png_legivel": "4.5 MB"
+        },
+        {
+          "tipo": "spells[].abilityIconPath",
+          "formato_fonte": "PNG",
+          "unidades": 692,
+          "bytes_medianos": 4683,
+          "dimensao": [
+            64,
+            64
+          ],
+          "bytes_origem": 3240636,
+          "origem_legivel": "3.1 MB",
+          "bytes_png": 3240636,
+          "png_legivel": "3.1 MB"
+        },
+        {
+          "tipo": "passive.abilityIconPath",
+          "formato_fonte": "PNG",
+          "unidades": 173,
+          "bytes_medianos": 4620,
+          "dimensao": [
+            64,
+            64
+          ],
+          "bytes_origem": 799260,
+          "origem_legivel": "780.5 KB",
+          "bytes_png": 799260,
+          "png_legivel": "780.5 KB"
+        }
+      ],
+      "total_origem_bytes": 1228451100,
+      "total_origem_legivel": "1.1 GB",
+      "total_png_bytes": 4956309639,
+      "total_png_legivel": "4.6 GB"
+    },
+    "ddragon_recortes": {
+      "data_pt_BR": 9758542,
+      "data_en_US": 9363539,
+      "data_todos_idiomas": 282954412,
+      "img_versionado": 1428492458,
+      "img_nao_versionado": 1158165430
+    }
+  }
+}
