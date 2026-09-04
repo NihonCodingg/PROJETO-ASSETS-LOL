@@ -4,7 +4,7 @@
 > Cada ticket cabe em **≤ 500 linhas de lógica** (exclui lockfiles, fixtures e snapshots).
 > Se não couber, divide-se o ticket — nunca se infla o PR (regra 5 do [CLAUDE.md](../CLAUDE.md)).
 >
-> Data: 03/09/2026 · 34 tickets · 7 ondas
+> Data: 03/09/2026 · 35 tickets · 7 ondas
 >
 > **Revisão de 03/09/2026:** navegação passa a ser por campeão e busca por skin
 > ([ADR 0010](adr/0010-navegacao-por-campeao-busca-por-skin.md)). Afeta T-04, T-07,
@@ -1262,6 +1262,42 @@ limite de 500 linhas.
 
 ---
 
+### T-35 — Tirar o `next-env.d.ts` do controle de versão
+
+| | |
+|---|---|
+| **Objetivo** | Remover uma armadilha que quebra a CI em silêncio |
+| **Dependências** | nenhuma |
+| **Estimativa** | ~15 linhas (configuração) |
+| **Effort** | baixo |
+| **Cobre** | RNF-12 |
+
+> Descoberto durante o **T-08**. O `next dev` acrescenta sozinho
+> `/// <reference path="./.next/types/routes.d.ts" />` ao `next-env.d.ts`. Como `.next/` é
+> gerado e ignorado pelo Git, commitar essa linha faz o `tsc` da CI falhar procurando um
+> arquivo que não existe lá. Hoje o arquivo está versionado e alguém vai commitar a
+> alteração sem perceber.
+
+**Entra**
+- `next-env.d.ts` sai do controle de versão e entra no `.gitignore`, como o Next faz por
+  padrão.
+- Uma declaração ambiente própria em `apps/web/src/types/` para o que o `tsc` realmente
+  precisa sem os tipos gerados — hoje, só `declare module "*.css"`.
+- Ajuste do `include` do tsconfig.
+
+**NÃO entra**
+- Rodar `next build` na CI. O ticket é sobre o `tsc`, que é o que a CI já roda.
+
+**Critérios de aceite**
+1. `tsc --noEmit` passa com `.next/` ausente e com `next-env.d.ts` ausente.
+2. `next dev` não deixa mais a árvore suja.
+3. A CI continua verde.
+
+**Testes que provam**
+- A própria CI, que roda a partir de um clone limpo, sem `.next/`.
+
+---
+
 # Onda 6 — componente opcional
 
 ### T-32 — API FastAPI
@@ -1374,7 +1410,7 @@ Todo requisito da Spec tem pelo menos um ticket.
 | RNF-08, RNF-09 | T-03 |
 | RNF-10 | T-27, T-33 |
 | RNF-11 | T-28, T-30 |
-| RNF-12 | CI, em todo ticket |
+| RNF-12 | CI, em todo ticket; **T-35** |
 
 ## Resumo das ondas
 
