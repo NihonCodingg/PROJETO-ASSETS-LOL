@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "1.1.0",
+  "gameVersion": "16.17.1",
+  "category": "rune",
+  "generatedAt": "2026-09-04T00:00:00Z",
+  "assetsBaseUrl": "https://assets.exemplo.invalido/lol",
+  "assets": [
+    {
+      "id": "rune_icon:8010",
+      "type": "rune_icon",
+      "category": "rune",
+      "refId": "8010",
+      "names": {
+        "pt_BR": "Conquistador",
+        "en_US": "Conqueror"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Precision/Conqueror/Conqueror.png",
+      "storageKey": "16.17.1/rune/Rune_8010.png",
+      "fileName": "Rune_8010.png",
+      "width": 256,
+      "height": 256,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 51100,
+      "sha256": "2b6c32a35a7df8cf9f0fe1f7c5d931ddb37307c1bafd66bac7e8979ad6fa0b86"
+    }
+  ]
+}

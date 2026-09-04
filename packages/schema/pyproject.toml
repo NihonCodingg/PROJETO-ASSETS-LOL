@@ -3,7 +3,7 @@ name = "lol-assets-schema"
 version = "0.0.0"
 description = "Contrato do índice de assets: JSON Schema, modelos Pydantic e tipos TypeScript."
 requires-python = ">=3.12"
-dependencies = ["pydantic>=2.9.0"]
+dependencies = ["pydantic>=2.9.0", "jsonschema>=4.23.0"]
 
 [build-system]
 requires = ["hatchling"]
