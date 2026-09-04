@@ -6,7 +6,8 @@
   "main": "./src-ts/index.ts",
   "types": "./src-ts/index.ts",
   "exports": {
-    ".": "./src-ts/index.ts"
+    ".": "./src-ts/index.ts",
+    "./examples": "./src-ts/examples.ts"
   },
   "scripts": {
     "typecheck": "tsc --noEmit",

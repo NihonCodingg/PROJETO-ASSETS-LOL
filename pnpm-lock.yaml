@@ -10,6 +10,9 @@ importers:
 
   apps/web:
     dependencies:
+      '@lol-assets/schema':
+        specifier: workspace:*
+        version: link:../../packages/schema
       next:
         specifier: ^15.5.0
         version: 15.5.25(@types/node@22.20.1)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
