@@ -51,6 +51,8 @@ class IndexerSettings(BaseSettings):
     indexer_max_concurrency: int = Field(default=4, ge=1, le=MAX_CONCURRENCY_ALLOWED)
     indexer_timeout_seconds: float = Field(default=30.0, gt=0)
     indexer_max_retries: int = Field(default=5, ge=1)
+    ddragon_base_url: str = "https://ddragon.leagueoflegends.com"
+    cdragon_base_url: str = "https://raw.communitydragon.org"
     #: Só vira `True` depois de o consentimento estar registrado em `docs/SPIKES.md`.
     wiki_consent_granted: bool = False
 
