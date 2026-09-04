@@ -53,6 +53,20 @@ class IndexerSettings(BaseSettings):
     indexer_max_retries: int = Field(default=5, ge=1)
     ddragon_base_url: str = "https://ddragon.leagueoflegends.com"
     cdragon_base_url: str = "https://raw.communitydragon.org"
+
+    #: Bucket compatível com S3 (Cloudflare R2 — ADR 0005). Vazio = só `--dry-run`.
+    s3_endpoint_url: str = ""
+    s3_region: str = "auto"
+    s3_bucket: str = "lol-assets"
+    s3_access_key_id: str = ""
+    s3_secret_access_key: str = ""
+    #: Base pública servida por CDN, usada para montar as URLs do índice.
+    assets_public_base_url: str = ""
+
+    def has_bucket_credentials(self) -> bool:
+        """Sem isto só dá para rodar `--dry-run`."""
+        return bool(self.s3_endpoint_url and self.s3_access_key_id and self.s3_secret_access_key)
+
     #: Só vira `True` depois de o consentimento estar registrado em `docs/SPIKES.md`.
     wiki_consent_granted: bool = False
 
