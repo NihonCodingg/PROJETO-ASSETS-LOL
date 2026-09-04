@@ -145,7 +145,14 @@ limite de 500 linhas.
 
 **Execução: (T-03 ∥ T-04) → (T-05 ∥ T-06) → T-07**, com **T-08 ∥ tudo** (usa a fixture de T-04).
 
-### T-03 — Cliente HTTP com a etiqueta de rede
+> ✅ **Onda concluída em 04/09/2026**, um PR por ticket, CI verde antes de cada merge.
+> Executada em sequência em vez de em paralelo — uma sessão só, sem ganho em paralelizar.
+> **Pendente:** a publicação real no R2, que precisa de credencial. Tudo o mais foi
+> verificado ao vivo: a CLI contra o ddragon e o front contra a saída dela.
+
+### ✅ T-03 — Cliente HTTP com a etiqueta de rede
+
+> **Concluído em 04/09/2026** (PR #2).
 
 | | |
 |---|---|
@@ -185,7 +192,9 @@ limite de 500 linhas.
 
 ---
 
-### T-04 — Contrato em código: modelos, validação e fixture
+### ✅ T-04 — Contrato em código: modelos, validação e fixture
+
+> **Concluído em 04/09/2026** (PR #3).
 
 | | |
 |---|---|
@@ -227,7 +236,9 @@ limite de 500 linhas.
 
 ---
 
-### T-05 — Adaptador ddragon mínimo: um campeão, dois tipos
+### ✅ T-05 — Adaptador ddragon mínimo: um campeão, dois tipos
+
+> **Concluído em 04/09/2026** (PR #4).
 
 | | |
 |---|---|
@@ -266,7 +277,9 @@ limite de 500 linhas.
 
 ---
 
-### T-06 — Publicador no R2 com manifesto atômico
+### ✅ T-06 — Publicador no R2 com manifesto atômico
+
+> **Concluído em 04/09/2026** (PR #5).
 
 | | |
 |---|---|
@@ -307,7 +320,9 @@ limite de 500 linhas.
 
 ---
 
-### T-07 — CLI do indexador ligando as pontas
+### ✅ T-07 — CLI do indexador ligando as pontas
+
+> **Concluído em 04/09/2026** (PR #6).
 
 | | |
 |---|---|
@@ -344,7 +359,9 @@ limite de 500 linhas.
 
 ---
 
-### T-08 — Front: carregar o índice, listar e baixar um asset
+### ✅ T-08 — Front: carregar o índice, listar e baixar um asset
+
+> **Concluído em 04/09/2026** (PR #7).
 
 | | |
 |---|---|
@@ -1417,7 +1434,7 @@ Todo requisito da Spec tem pelo menos um ticket.
 | Onda | Tickets | Paralelismo | Entrega |
 |---|---|---|---|
 | 0 | ✅ T-02 → T-01 | sequencial | **Concluída.** Orçamento fechado em 2,0 GB (20,1 % de 10 GB); protótipo removido |
-| 1 | (T-03 ∥ T-04) → (T-05 ∥ T-06) → T-07; T-08 ∥ | 2 frentes | **Esqueleto andante**: 1 campeão, 2 tipos, ponta a ponta |
+| 1 | ✅ (T-03 ∥ T-04) → (T-05 ∥ T-06) → T-07; T-08 ∥ | 2 frentes | **Concluída.** Esqueleto andante: 1 campeão, 2 tipos, ponta a ponta — falta só publicar no R2 de verdade |
 | 2 | T-09 → (T-10 ∥ T-11 ∥ T-12) → T-13; (T-14 ∥ T-15) ∥; 🚧 T-34 quando o design chegar | 2 frentes | Catálogo de campeões completo e automático |
 | 3 | (T-16 → T-17) ∥ (T-19 → T-20); T-18 ao final | 2 frentes | Grade de campeões, seletor de skin, chromas e a segunda fonte |
 | 4 | (T-21 ∥ T-22) → T-23; (T-24 ∥ T-25 ∥ T-26) ∥ | 2 frentes | Catálogo inteiro e download em lote |
