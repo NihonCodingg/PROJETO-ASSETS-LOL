@@ -5,8 +5,10 @@ servidos sem re-encode e com PNG gerado no navegador sob demanda — pensado par
 editores de vídeo e thumbnail que precisam do arquivo agora, sem login e sem
 navegar por wiki.
 
-> Status: **etapa 5 das 7** (tickets escritos, aguardando aprovação). Ainda não há
-> produto rodando. A fonte de verdade é [`docs/SPEC.md`](docs/SPEC.md), quebrada em
+> Status: **etapa 6 das 7** — Onda 1 concluída: o esqueleto andante indexa um campeão do
+> ddragon, publica índice e assets, e o front carrega, lista e baixa. Falta a publicação
+> real no R2, que depende de credencial.
+> A fonte de verdade é [`docs/SPEC.md`](docs/SPEC.md), quebrada em
 > [`docs/TICKETS.md`](docs/TICKETS.md) e apoiada pelos [ADRs](docs/adr/README.md) e
 > pelos números de [`docs/SPIKES.md`](docs/SPIKES.md).
 > O [`docs/KICKOFF.md`](docs/KICKOFF.md) guarda a ideia e a pesquisa originais.
