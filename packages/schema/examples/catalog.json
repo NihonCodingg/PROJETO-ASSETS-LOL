@@ -1,0 +1,717 @@
+{
+  "schemaVersion": "1.1.0",
+  "gameVersion": "16.17.1",
+  "generatedAt": "2026-09-04T00:00:00Z",
+  "assetsBaseUrl": "https://assets.exemplo.invalido/lol",
+  "champions": [
+    {
+      "championKey": 24,
+      "championId": "Jax",
+      "names": {
+        "pt_BR": "Jax",
+        "en_US": "Jax"
+      },
+      "title": {
+        "pt_BR": "o Grão-Mestre das Armas",
+        "en_US": "Grandmaster at Arms"
+      },
+      "tags": [
+        "Fighter"
+      ],
+      "skinCount": 18,
+      "chromaCount": 26,
+      "baseSkinId": 24000,
+      "thumbnailKey": "16.17.1/champion/Jax_square.png"
+    },
+    {
+      "championKey": 99,
+      "championId": "Lux",
+      "names": {
+        "pt_BR": "Lux",
+        "en_US": "Lux"
+      },
+      "title": {
+        "pt_BR": "a Dama da Luz",
+        "en_US": "the Lady of Luminosity"
+      },
+      "tags": [
+        "Mage",
+        "Support"
+      ],
+      "skinCount": 23,
+      "chromaCount": 59,
+      "baseSkinId": 99000,
+      "thumbnailKey": "16.17.1/champion/Lux_square.png"
+    },
+    {
+      "championKey": 20,
+      "championId": "Nunu",
+      "names": {
+        "pt_BR": "Nunu e Willump",
+        "en_US": "Nunu & Willump"
+      },
+      "title": {
+        "pt_BR": "o Garoto e seu Yeti",
+        "en_US": "the Boy and His Yeti"
+      },
+      "tags": [
+        "Tank",
+        "Mage"
+      ],
+      "skinCount": 13,
+      "chromaCount": 41,
+      "baseSkinId": 20000,
+      "thumbnailKey": "16.17.1/champion/Nunu_square.png"
+    }
+  ],
+  "skins": [
+    {
+      "skinId": 24000,
+      "skinNum": 0,
+      "championKey": 24,
+      "names": {
+        "pt_BR": "Jax",
+        "en_US": "Jax"
+      },
+      "isBase": true,
+      "chromaCount": 0,
+      "thumbnailKey": "16.17.1/champion/Jax_000_tile.jpg"
+    },
+    {
+      "skinId": 24001,
+      "skinNum": 1,
+      "championKey": 24,
+      "names": {
+        "pt_BR": "O Super Jax",
+        "en_US": "The Mighty Jax"
+      },
+      "isBase": false,
+      "chromaCount": 0,
+      "thumbnailKey": "16.17.1/champion/Jax_001_tile.jpg"
+    },
+    {
+      "skinId": 24002,
+      "skinNum": 2,
+      "championKey": 24,
+      "names": {
+        "pt_BR": "Jax Vândalo",
+        "en_US": "Vandal Jax"
+      },
+      "isBase": false,
+      "chromaCount": 0,
+      "thumbnailKey": "16.17.1/champion/Jax_002_tile.jpg"
+    },
+    {
+      "skinId": 24003,
+      "skinNum": 3,
+      "championKey": 24,
+      "names": {
+        "pt_BR": "Jax Pescador",
+        "en_US": "Angler Jax"
+      },
+      "isBase": false,
+      "chromaCount": 0,
+      "thumbnailKey": "16.17.1/champion/Jax_003_tile.jpg"
+    },
+    {
+      "skinId": 24004,
+      "skinNum": 4,
+      "championKey": 24,
+      "names": {
+        "pt_BR": "PAX Jax",
+        "en_US": "PAX Jax"
+      },
+      "isBase": false,
+      "chromaCount": 0,
+      "thumbnailKey": "16.17.1/champion/Jax_004_tile.jpg"
+    },
+    {
+      "skinId": 24005,
+      "skinNum": 5,
+      "championKey": 24,
+      "names": {
+        "pt_BR": "Jaximus",
+        "en_US": "Jaximus"
+      },
+      "isBase": false,
+      "chromaCount": 0,
+      "thumbnailKey": "16.17.1/champion/Jax_005_tile.jpg"
+    },
+    {
+      "skinId": 24006,
+      "skinNum": 6,
+      "championKey": 24,
+      "names": {
+        "pt_BR": "Jax Oriental",
+        "en_US": "Temple Jax"
+      },
+      "isBase": false,
+      "chromaCount": 0,
+      "thumbnailKey": "16.17.1/champion/Jax_006_tile.jpg"
+    },
+    {
+      "skinId": 24007,
+      "skinNum": 7,
+      "championKey": 24,
+      "names": {
+        "pt_BR": "Jax Nêmesis",
+        "en_US": "Nemesis Jax"
+      },
+      "isBase": false,
+      "chromaCount": 3,
+      "thumbnailKey": "16.17.1/champion/Jax_007_tile.jpg"
+    },
+    {
+      "skinId": 24008,
+      "skinNum": 8,
+      "championKey": 24,
+      "names": {
+        "pt_BR": "SKT T1 Jax",
+        "en_US": "SKT T1 Jax"
+      },
+      "isBase": false,
+      "chromaCount": 0,
+      "thumbnailKey": "16.17.1/champion/Jax_008_tile.jpg"
+    },
+    {
+      "skinId": 24012,
+      "skinNum": 12,
+      "championKey": 24,
+      "names": {
+        "pt_BR": "Jax Vigia",
+        "en_US": "Warden Jax"
+      },
+      "isBase": false,
+      "chromaCount": 0,
+      "thumbnailKey": "16.17.1/champion/Jax_012_tile.jpg"
+    },
+    {
+      "skinId": 24013,
+      "skinNum": 13,
+      "championKey": 24,
+      "names": {
+        "pt_BR": "Jax Cajado Divino",
+        "en_US": "God Staff Jax"
+      },
+      "isBase": false,
+      "chromaCount": 0,
+      "thumbnailKey": "16.17.1/champion/Jax_013_tile.jpg"
+    },
+    {
+      "skinId": 24014,
+      "skinNum": 14,
+      "championKey": 24,
+      "names": {
+        "pt_BR": "Jax Reinos Mech",
+        "en_US": "Mecha Kingdoms Jax"
+      },
+      "isBase": false,
+      "chromaCount": 5,
+      "thumbnailKey": "16.17.1/champion/Jax_014_tile.jpg"
+    },
+    {
+      "skinId": 24020,
+      "skinNum": 20,
+      "championKey": 24,
+      "names": {
+        "pt_BR": "Jax Conquistador",
+        "en_US": "Conqueror Jax"
+      },
+      "isBase": false,
+      "chromaCount": 0,
+      "thumbnailKey": "16.17.1/champion/Jax_020_tile.jpg"
+    },
+    {
+      "skinId": 24021,
+      "skinNum": 21,
+      "championKey": 24,
+      "names": {
+        "pt_BR": "Jax Conquistador de Prestígio",
+        "en_US": "Prestige Conqueror Jax"
+      },
+      "isBase": false,
+      "chromaCount": 0,
+      "thumbnailKey": "16.17.1/champion/Jax_021_tile.jpg"
+    },
+    {
+      "skinId": 24022,
+      "skinNum": 22,
+      "championKey": 24,
+      "names": {
+        "pt_BR": "Jax Empíreo",
+        "en_US": "Empyrean Jax"
+      },
+      "isBase": false,
+      "chromaCount": 9,
+      "thumbnailKey": "16.17.1/champion/Jax_022_tile.jpg"
+    },
+    {
+      "skinId": 24032,
+      "skinNum": 32,
+      "championKey": 24,
+      "names": {
+        "pt_BR": "Neo PAX Jax",
+        "en_US": "Neo PAX Jax"
+      },
+      "isBase": false,
+      "chromaCount": 0,
+      "thumbnailKey": "16.17.1/champion/Jax_032_tile.jpg"
+    },
+    {
+      "skinId": 24033,
+      "skinNum": 33,
+      "championKey": 24,
+      "names": {
+        "pt_BR": "PROJETO: Jax",
+        "en_US": "PROJECT: Jax"
+      },
+      "isBase": false,
+      "chromaCount": 8,
+      "thumbnailKey": "16.17.1/champion/Jax_033_tile.jpg"
+    },
+    {
+      "skinId": 24042,
+      "skinNum": 42,
+      "championKey": 24,
+      "names": {
+        "pt_BR": "Jax Cripta de Magma de Prestígio",
+        "en_US": "Prestige Magma Chamber Jax"
+      },
+      "isBase": false,
+      "chromaCount": 1,
+      "thumbnailKey": "16.17.1/champion/Jax_042_tile.jpg"
+    },
+    {
+      "skinId": 99000,
+      "skinNum": 0,
+      "championKey": 99,
+      "names": {
+        "pt_BR": "Lux",
+        "en_US": "Lux"
+      },
+      "isBase": true,
+      "chromaCount": 0,
+      "thumbnailKey": "16.17.1/champion/Lux_000_tile.jpg"
+    },
+    {
+      "skinId": 99001,
+      "skinNum": 1,
+      "championKey": 99,
+      "names": {
+        "pt_BR": "Lux Maga Aspirante",
+        "en_US": "Sorceress Lux"
+      },
+      "isBase": false,
+      "chromaCount": 0,
+      "thumbnailKey": "16.17.1/champion/Lux_001_tile.jpg"
+    },
+    {
+      "skinId": 99002,
+      "skinNum": 2,
+      "championKey": 99,
+      "names": {
+        "pt_BR": "Lux Ladra Arcana",
+        "en_US": "Spellthief Lux"
+      },
+      "isBase": false,
+      "chromaCount": 0,
+      "thumbnailKey": "16.17.1/champion/Lux_002_tile.jpg"
+    },
+    {
+      "skinId": 99003,
+      "skinNum": 3,
+      "championKey": 99,
+      "names": {
+        "pt_BR": "Patrulheira Lux",
+        "en_US": "Commando Lux"
+      },
+      "isBase": false,
+      "chromaCount": 0,
+      "thumbnailKey": "16.17.1/champion/Lux_003_tile.jpg"
+    },
+    {
+      "skinId": 99004,
+      "skinNum": 4,
+      "championKey": 99,
+      "names": {
+        "pt_BR": "Lux Imperial",
+        "en_US": "Imperial Lux"
+      },
+      "isBase": false,
+      "chromaCount": 0,
+      "thumbnailKey": "16.17.1/champion/Lux_004_tile.jpg"
+    },
+    {
+      "skinId": 99005,
+      "skinNum": 5,
+      "championKey": 99,
+      "names": {
+        "pt_BR": "Lux Legionária de Aço",
+        "en_US": "Steel Legion Lux"
+      },
+      "isBase": false,
+      "chromaCount": 0,
+      "thumbnailKey": "16.17.1/champion/Lux_005_tile.jpg"
+    },
+    {
+      "skinId": 99006,
+      "skinNum": 6,
+      "championKey": 99,
+      "names": {
+        "pt_BR": "Lux Guardiã Estelar",
+        "en_US": "Star Guardian Lux"
+      },
+      "isBase": false,
+      "chromaCount": 0,
+      "thumbnailKey": "16.17.1/champion/Lux_006_tile.jpg"
+    },
+    {
+      "skinId": 99007,
+      "skinNum": 7,
+      "championKey": 99,
+      "names": {
+        "pt_BR": "Lux Elementalista",
+        "en_US": "Elementalist Lux"
+      },
+      "isBase": false,
+      "chromaCount": 0,
+      "thumbnailKey": "16.17.1/champion/Lux_007_tile.jpg"
+    },
+    {
+      "skinId": 99008,
+      "skinNum": 8,
+      "championKey": 99,
+      "names": {
+        "pt_BR": "Lux Imperatriz Lunar",
+        "en_US": "Lunar Empress Lux"
+      },
+      "isBase": false,
+      "chromaCount": 5,
+      "thumbnailKey": "16.17.1/champion/Lux_008_tile.jpg"
+    },
+    {
+      "skinId": 99014,
+      "skinNum": 14,
+      "championKey": 99,
+      "names": {
+        "pt_BR": "Lux Pijaminha Estelar",
+        "en_US": "Pajama Guardian Lux"
+      },
+      "isBase": false,
+      "chromaCount": 0,
+      "thumbnailKey": "16.17.1/champion/Lux_014_tile.jpg"
+    },
+    {
+      "skinId": 99015,
+      "skinNum": 15,
+      "championKey": 99,
+      "names": {
+        "pt_BR": "Lux Academia de Batalha",
+        "en_US": "Battle Academia Lux"
+      },
+      "isBase": false,
+      "chromaCount": 0,
+      "thumbnailKey": "16.17.1/champion/Lux_015_tile.jpg"
+    },
+    {
+      "skinId": 99016,
+      "skinNum": 16,
+      "championKey": 99,
+      "names": {
+        "pt_BR": "Lux Academia de Batalha de Prestígio",
+        "en_US": "Prestige Battle Academia Lux"
+      },
+      "isBase": false,
+      "chromaCount": 0,
+      "thumbnailKey": "16.17.1/champion/Lux_016_tile.jpg"
+    },
+    {
+      "skinId": 99017,
+      "skinNum": 17,
+      "championKey": 99,
+      "names": {
+        "pt_BR": "Lux Cosmos Negro",
+        "en_US": "Dark Cosmic Lux"
+      },
+      "isBase": false,
+      "chromaCount": 0,
+      "thumbnailKey": "16.17.1/champion/Lux_017_tile.jpg"
+    },
+    {
+      "skinId": 99018,
+      "skinNum": 18,
+      "championKey": 99,
+      "names": {
+        "pt_BR": "Lux Cósmica",
+        "en_US": "Cosmic Lux"
+      },
+      "isBase": false,
+      "chromaCount": 0,
+      "thumbnailKey": "16.17.1/champion/Lux_018_tile.jpg"
+    },
+    {
+      "skinId": 99019,
+      "skinNum": 19,
+      "championKey": 99,
+      "names": {
+        "pt_BR": "Lux Embalos no Espaço",
+        "en_US": "Space Groove Lux"
+      },
+      "isBase": false,
+      "chromaCount": 9,
+      "thumbnailKey": "16.17.1/champion/Lux_019_tile.jpg"
+    },
+    {
+      "skinId": 99029,
+      "skinNum": 29,
+      "championKey": 99,
+      "names": {
+        "pt_BR": "Lux de Porcelana",
+        "en_US": "Porcelain Lux"
+      },
+      "isBase": false,
+      "chromaCount": 10,
+      "thumbnailKey": "16.17.1/champion/Lux_029_tile.jpg"
+    },
+    {
+      "skinId": 99038,
+      "skinNum": 38,
+      "championKey": 99,
+      "names": {
+        "pt_BR": "Lux Soul Fighter",
+        "en_US": "Soul Fighter Lux"
+      },
+      "isBase": false,
+      "chromaCount": 9,
+      "thumbnailKey": "16.17.1/champion/Lux_038_tile.jpg"
+    },
+    {
+      "skinId": 99039,
+      "skinNum": 39,
+      "championKey": 99,
+      "names": {
+        "pt_BR": "Lux Academia de Batalha de Prestígio (2022)",
+        "en_US": "Prestige Battle Academia Lux (2022)"
+      },
+      "isBase": false,
+      "chromaCount": 0,
+      "thumbnailKey": "16.17.1/champion/Lux_039_tile.jpg"
+    },
+    {
+      "skinId": 99040,
+      "skinNum": 40,
+      "championKey": 99,
+      "names": {
+        "pt_BR": "Lux de Porcelana de Prestígio",
+        "en_US": "Prestige Porcelain Lux"
+      },
+      "isBase": false,
+      "chromaCount": 0,
+      "thumbnailKey": "16.17.1/champion/Lux_040_tile.jpg"
+    },
+    {
+      "skinId": 99042,
+      "skinNum": 42,
+      "championKey": 99,
+      "names": {
+        "pt_BR": "Lux Empírea",
+        "en_US": "Empyrean Lux"
+      },
+      "isBase": false,
+      "chromaCount": 9,
+      "thumbnailKey": "16.17.1/champion/Lux_042_tile.jpg"
+    },
+    {
+      "skinId": 99061,
+      "skinNum": 61,
+      "championKey": 99,
+      "names": {
+        "pt_BR": "Lux Corte das Fadas",
+        "en_US": "Faerie Court Lux"
+      },
+      "isBase": false,
+      "chromaCount": 8,
+      "thumbnailKey": "16.17.1/champion/Lux_061_tile.jpg"
+    },
+    {
+      "skinId": 99070,
+      "skinNum": 70,
+      "championKey": 99,
+      "names": {
+        "pt_BR": "Lux Florescer Espiritual de Prestígio",
+        "en_US": "Prestige Spirit Blossom Lux"
+      },
+      "isBase": false,
+      "chromaCount": 1,
+      "thumbnailKey": "16.17.1/champion/Lux_070_tile.jpg"
+    },
+    {
+      "skinId": 99072,
+      "skinNum": 72,
+      "championKey": 99,
+      "names": {
+        "pt_BR": "Lux Pandinha",
+        "en_US": "Panda Pal Lux"
+      },
+      "isBase": false,
+      "chromaCount": 8,
+      "thumbnailKey": "16.17.1/champion/Lux_072_tile.jpg"
+    },
+    {
+      "skinId": 20000,
+      "skinNum": 0,
+      "championKey": 20,
+      "names": {
+        "pt_BR": "Nunu e Willump",
+        "en_US": "Nunu & Willump"
+      },
+      "isBase": true,
+      "chromaCount": 0,
+      "thumbnailKey": "16.17.1/champion/Nunu_000_tile.jpg"
+    },
+    {
+      "skinId": 20001,
+      "skinNum": 1,
+      "championKey": 20,
+      "names": {
+        "pt_BR": "Nunu e Willump Pé-Grande",
+        "en_US": "Sasquatch Nunu & Willump"
+      },
+      "isBase": false,
+      "chromaCount": 0,
+      "thumbnailKey": "16.17.1/champion/Nunu_001_tile.jpg"
+    },
+    {
+      "skinId": 20002,
+      "skinNum": 2,
+      "championKey": 20,
+      "names": {
+        "pt_BR": "Nunu e Willump Natalinos",
+        "en_US": "Workshop Nunu & Willump"
+      },
+      "isBase": false,
+      "chromaCount": 0,
+      "thumbnailKey": "16.17.1/champion/Nunu_002_tile.jpg"
+    },
+    {
+      "skinId": 20003,
+      "skinNum": 3,
+      "championKey": 20,
+      "names": {
+        "pt_BR": "Nunu e Willump Bicho-Papão",
+        "en_US": "Grungy Nunu & Willump"
+      },
+      "isBase": false,
+      "chromaCount": 0,
+      "thumbnailKey": "16.17.1/champion/Nunu_003_tile.jpg"
+    },
+    {
+      "skinId": 20004,
+      "skinNum": 4,
+      "championKey": 20,
+      "names": {
+        "pt_BR": "Nunu e Willump Robótico",
+        "en_US": "Nunu & Willump Bot"
+      },
+      "isBase": false,
+      "chromaCount": 0,
+      "thumbnailKey": "16.17.1/champion/Nunu_004_tile.jpg"
+    },
+    {
+      "skinId": 20005,
+      "skinNum": 5,
+      "championKey": 20,
+      "names": {
+        "pt_BR": "Nunu e Willump Demolidor",
+        "en_US": "Demolisher Nunu & Willump"
+      },
+      "isBase": false,
+      "chromaCount": 0,
+      "thumbnailKey": "16.17.1/champion/Nunu_005_tile.jpg"
+    },
+    {
+      "skinId": 20006,
+      "skinNum": 6,
+      "championKey": 20,
+      "names": {
+        "pt_BR": "TPA Nunu e Willump",
+        "en_US": "TPA Nunu & Willump"
+      },
+      "isBase": false,
+      "chromaCount": 0,
+      "thumbnailKey": "16.17.1/champion/Nunu_006_tile.jpg"
+    },
+    {
+      "skinId": 20007,
+      "skinNum": 7,
+      "championKey": 20,
+      "names": {
+        "pt_BR": "Nunu e Willump Zumbi",
+        "en_US": "Zombie Nunu & Willump"
+      },
+      "isBase": false,
+      "chromaCount": 0,
+      "thumbnailKey": "16.17.1/champion/Nunu_007_tile.jpg"
+    },
+    {
+      "skinId": 20008,
+      "skinNum": 8,
+      "championKey": 20,
+      "names": {
+        "pt_BR": "Nunu e Willump de Papel",
+        "en_US": "Papercraft Nunu & Willump"
+      },
+      "isBase": false,
+      "chromaCount": 7,
+      "thumbnailKey": "16.17.1/champion/Nunu_008_tile.jpg"
+    },
+    {
+      "skinId": 20016,
+      "skinNum": 16,
+      "championKey": 20,
+      "names": {
+        "pt_BR": "Nunu e Willump Embalos no Espaço",
+        "en_US": "Space Groove Nunu & Willump"
+      },
+      "isBase": false,
+      "chromaCount": 9,
+      "thumbnailKey": "16.17.1/champion/Nunu_016_tile.jpg"
+    },
+    {
+      "skinId": 20026,
+      "skinNum": 26,
+      "championKey": 20,
+      "names": {
+        "pt_BR": "Nunu e Mellump",
+        "en_US": "Nunu & Beelump"
+      },
+      "isBase": false,
+      "chromaCount": 8,
+      "thumbnailKey": "16.17.1/champion/Nunu_026_tile.jpg"
+    },
+    {
+      "skinId": 20035,
+      "skinNum": 35,
+      "championKey": 20,
+      "names": {
+        "pt_BR": "Nunu e Willump Paladinos Cósmicos",
+        "en_US": "Cosmic Paladins Nunu & Willump"
+      },
+      "isBase": false,
+      "chromaCount": 8,
+      "thumbnailKey": "16.17.1/champion/Nunu_035_tile.jpg"
+    },
+    {
+      "skinId": 20044,
+      "skinNum": 44,
+      "championKey": 20,
+      "names": {
+        "pt_BR": "Nunu e Willump Noite Apavorante",
+        "en_US": "Fright Night Nunu & Willump"
+      },
+      "isBase": false,
+      "chromaCount": 9,
+      "thumbnailKey": "16.17.1/champion/Nunu_044_tile.jpg"
+    }
+  ]
+}

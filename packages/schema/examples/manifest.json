@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "1.1.0",
+  "generatedAt": "2026-09-04T00:00:00Z",
+  "assetsBaseUrl": "https://assets.exemplo.invalido/lol",
+  "currentVersion": "16.17.1",
+  "versions": [
+    {
+      "gameVersion": "16.17.1",
+      "indexedAt": "2026-09-04T00:00:00Z",
+      "assetsCopied": true,
+      "catalog": {
+        "url": "catalog.json",
+        "champions": 3,
+        "skins": 54,
+        "bytes": 12556,
+        "sha256": "86e84b915bd81976cf5f737e07d42deb1da3c43ac1d887ef8861902fb8760621"
+      },
+      "totalAssets": 21,
+      "totalBytes": 1570560,
+      "shards": [
+        {
+          "category": "champion",
+          "url": "index-champion.json",
+          "assets": 19,
+          "bytes": 10598,
+          "sha256": "cf88982f1c7a29a78cee74e07fb680b441db24e890dfd8cd10637ee3f8b5bd17"
+        },
+        {
+          "category": "item",
+          "url": "index-item.json",
+          "assets": 1,
+          "bytes": 660,
+          "sha256": "9de00b243f09b45bc7972118c76d0375feeff22082e21c9e7d5757d8ab1c6ddc"
+        },
+        {
+          "category": "rune",
+          "url": "index-rune.json",
+          "assets": 1,
+          "bytes": 686,
+          "sha256": "b82cd4674b87a2fb7f07a505f7c52b21638b5707da9c33866c19772d426c2be9"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "1.1.0",
+  "gameVersion": "16.17.1",
+  "category": "item",
+  "generatedAt": "2026-09-04T00:00:00Z",
+  "assetsBaseUrl": "https://assets.exemplo.invalido/lol",
+  "assets": [
+    {
+      "id": "item_icon:3031",
+      "type": "item_icon",
+      "category": "item",
+      "itemId": 3031,
+      "names": {
+        "pt_BR": "Gume do Infinito",
+        "en_US": "Infinity Edge"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/item/3031.png",
+      "storageKey": "16.17.1/item/Item_3031.png",
+      "fileName": "Item_3031.png",
+      "width": 64,
+      "height": 64,
+      "format": "png",
+      "hasAlpha": false,
+      "bytes": 7104,
+      "sha256": "39382e1bef39a48d14e6d37e52e9d02068df9153ca60c2bcca033dd276fae5df"
+    }
+  ]
+}

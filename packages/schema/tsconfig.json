@@ -1,14 +1,20 @@
 {
   "compilerOptions": {
     "target": "ES2022",
-    "lib": ["esnext"],
+    "lib": [
+      "esnext"
+    ],
     "module": "esnext",
     "moduleResolution": "bundler",
     "strict": true,
     "noEmit": true,
     "isolatedModules": true,
     "skipLibCheck": true,
-    "verbatimModuleSyntax": true
+    "verbatimModuleSyntax": true,
+    "resolveJsonModule": true
   },
-  "include": ["src-ts/**/*.ts"]
+  "include": [
+    "src-ts/**/*.ts",
+    "examples/*.json"
+  ]
 }

@@ -10,6 +10,7 @@ from pathlib import Path
 __all__ = [
     "ALIASES_FILE",
     "CATALOG_SCHEMA",
+    "EXAMPLES_DIR",
     "MANIFEST_SCHEMA",
     "SCHEMA_DIR",
     "SCHEMA_VERSION",
@@ -34,3 +35,7 @@ SHARD_SCHEMA = SCHEMA_DIR / "index-shard.schema.json"
 
 #: Apelidos de busca mantidos à mão. Ampliar = editar o arquivo (ADR 0009).
 ALIASES_FILE = _ROOT / "data" / "champion-aliases.json"
+
+#: Fixture do contrato: um retrato medido do patch 16.17.1. Usada pelos testes
+#: dos dois lados — Python e front — para as duas pontas andarem em paralelo.
+EXAMPLES_DIR = _ROOT / "examples"
