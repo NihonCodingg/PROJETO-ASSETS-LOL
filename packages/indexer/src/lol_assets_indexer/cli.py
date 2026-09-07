@@ -25,15 +25,21 @@ from typing import Annotated, Any
 import typer
 from lol_assets_schema import SCHEMA_VERSION
 from lol_assets_schema.models import Asset, IndexManifest, IndexShard, ManifestVersion
-from lol_assets_schema.validators import validate_catalog, validate_shard
 
 from lol_assets_indexer import __version__, logging_setup
 from lol_assets_indexer.adapters.ddragon import latest_version, tarball_url
 from lol_assets_indexer.adapters.records import build_all, build_champion_snapshots
 from lol_assets_indexer.adapters.tarball import TarballScan, scan_tarball
-from lol_assets_indexer.catalog import project_catalog
+from lol_assets_indexer.catalog import project_catalog, verify_catalog
 from lol_assets_indexer.http import IndexerSettings, SourceClient
-from lol_assets_indexer.publish.storage import LocalObjectStore, Publisher
+from lol_assets_indexer.limits import BudgetReport, check_budget, measure
+from lol_assets_indexer.publish.storage import (
+    LocalObjectStore,
+    Publisher,
+    prepare_catalog,
+    prepare_manifest,
+    prepare_shard,
+)
 
 logger = logging.getLogger("lol_assets_indexer.cli")
 
@@ -97,7 +103,8 @@ def index(
     typer.echo(
         f"{resumo['assets']} assets · {resumo['champions']} campeões · "
         f"{resumo['skins']} skins · {resumo['categories']} categorias · "
-        f"patch {resumo['gameVersion']} · destino {resumo['destination']}"
+        f"patch {resumo['gameVersion']} · índice de {resumo['indexBytes']:,} bytes · "
+        f"destino {resumo['destination']}"
     )
 
 
@@ -166,13 +173,44 @@ async def _run(
         for categoria, assets in por_categoria.items()
     ]
 
-    # Validação ANTES de qualquer escrita.
-    validate_catalog(catalog.model_dump(by_alias=True, exclude_none=True, mode="json"))
-    for shard in shards:
-        validate_shard(shard.model_dump(by_alias=True, exclude_none=True, mode="json"))
-
     total_assets = sum(len(assets) for assets in por_categoria.values())
     total_bytes = sum(asset.bytes for assets in por_categoria.values() for asset in assets)
+
+    # Tudo é serializado, validado e MEDIDO antes de o primeiro arquivo existir.
+    # É isso que faz o estouro de orçamento abortar sem deixar índice pela metade.
+    verify_catalog(catalog)
+    catalog_ref, catalog_payload = prepare_catalog(catalog)
+    fatias = [prepare_shard(shard) for shard in shards]
+    manifest = IndexManifest(
+        schema_version=SCHEMA_VERSION,
+        generated_at=generated_at,
+        current_version=scan.game_version,
+        versions=[
+            ManifestVersion(
+                game_version=scan.game_version,
+                indexed_at=generated_at,
+                # ADR 0012: nada é copiado, então isto nunca é `true`.
+                assets_copied=False,
+                catalog=catalog_ref,
+                total_assets=total_assets,
+                total_bytes=total_bytes,
+                shards=[ref for ref, _ in fatias],
+            )
+        ],
+    )
+    manifest_payload = prepare_manifest(manifest)
+
+    report = check_budget(
+        BudgetReport(
+            catalog=measure("catalog", catalog_payload),
+            shards=tuple(
+                measure(shard.category, payload)
+                for shard, (_, payload) in zip(shards, fatias, strict=True)
+            ),
+            manifest=measure("manifest", manifest_payload),
+        )
+    )
+
     logger.info(
         "documentos validados",
         extra={
@@ -184,6 +222,7 @@ async def _run(
             "descartadas": scan.skipped,
             "ilegiveis": sum(scan.unreadable.values()),
             "caixaDivergente": len(scan.case_mismatches),
+            **report.as_log(),
         },
     )
 
@@ -193,6 +232,7 @@ async def _run(
         "skins": len(catalog.skins),
         "categories": len(shards),
         "gameVersion": scan.game_version,
+        "indexBytes": report.total_raw,
         "destination": "nada escrito (--dry-run)" if dry_run else str(output),
     }
     if dry_run:
@@ -200,27 +240,10 @@ async def _run(
         return resumo
 
     publisher = Publisher(LocalObjectStore(root=output))
-    catalog_ref = publisher.publish_catalog(catalog)
-    shard_refs = [publisher.publish_shard(shard) for shard in shards]
-    publisher.publish_manifest(
-        IndexManifest(
-            schema_version=SCHEMA_VERSION,
-            generated_at=generated_at,
-            current_version=scan.game_version,
-            versions=[
-                ManifestVersion(
-                    game_version=scan.game_version,
-                    indexed_at=generated_at,
-                    # ADR 0012: nada é copiado, então isto nunca é `true`.
-                    assets_copied=False,
-                    catalog=catalog_ref,
-                    total_assets=total_assets,
-                    total_bytes=total_bytes,
-                    shards=shard_refs,
-                )
-            ],
-        )
-    )
+    publisher.publish_catalog(catalog, (catalog_ref, catalog_payload))
+    for shard, preparada in zip(shards, fatias, strict=True):
+        publisher.publish_shard(shard, preparada)
+    publisher.publish_manifest(manifest, manifest_payload)
     logger.info("índice escrito", extra={"destination": str(output)})
     return resumo
 

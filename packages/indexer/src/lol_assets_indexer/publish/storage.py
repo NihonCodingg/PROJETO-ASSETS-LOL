@@ -49,7 +49,7 @@ def content_type_for(key: str) -> str:
     return _CONTENT_TYPES.get(Path(key).suffix.lower(), "application/octet-stream")
 
 
-def _canonical_json(document: Any) -> bytes:
+def canonical_json(document: Any) -> bytes:
     return (json.dumps(document, indent=2, ensure_ascii=False) + "\n").encode("utf-8")
 
 
@@ -104,6 +104,56 @@ class S3ObjectStore:
         return bytes(resposta["Body"].read())
 
 
+#: O par que a guarda de orçamento do T-10 mede e o publicador escreve.
+Prepared = tuple[Any, bytes]
+
+
+def prepare_catalog(catalog: Catalog) -> tuple[CatalogRef, bytes]:
+    """Serializa e valida o catálogo sem escrever nada.
+
+    Existe porque a guarda do T-10 precisa medir **os bytes que iriam para o
+    disco** antes de o primeiro arquivo existir. Medir uma serialização e
+    escrever outra daria um limite que não vale para o arquivo de verdade.
+    """
+    documento = catalog.model_dump(by_alias=True, exclude_none=True, mode="json")
+    validate_catalog(documento)
+    payload = canonical_json(documento)
+    return (
+        CatalogRef(
+            url=hashed_name("catalog", payload),
+            champions=len(catalog.champions),
+            skins=len(catalog.skins),
+            bytes=len(payload),
+            sha256=hashlib.sha256(payload).hexdigest(),
+        ),
+        payload,
+    )
+
+
+def prepare_shard(shard: IndexShard) -> tuple[ShardRef, bytes]:
+    """O mesmo, para uma fatia."""
+    documento = shard.model_dump(by_alias=True, exclude_none=True, mode="json")
+    validate_shard(documento)
+    payload = canonical_json(documento)
+    return (
+        ShardRef(
+            category=shard.category,
+            url=hashed_name(f"index-{shard.category}", payload),
+            assets=len(shard.assets),
+            bytes=len(payload),
+            sha256=hashlib.sha256(payload).hexdigest(),
+        ),
+        payload,
+    )
+
+
+def prepare_manifest(manifest: IndexManifest) -> bytes:
+    """O manifesto não tem hash no nome, então basta o payload."""
+    documento = manifest.model_dump(by_alias=True, exclude_none=True, mode="json")
+    validate_manifest(documento)
+    return canonical_json(documento)
+
+
 class Publisher:
     """Publica na ordem certa e recusa a ordem errada."""
 
@@ -124,22 +174,14 @@ class Publisher:
 
     # --- índice ---------------------------------------------------------------
 
-    def publish_catalog(self, catalog: Catalog) -> CatalogRef:
+    def publish_catalog(self, catalog: Catalog, prepared: Prepared | None = None) -> CatalogRef:
         """A projeção de navegação e busca (ADR 0010)."""
-        documento = catalog.model_dump(by_alias=True, exclude_none=True, mode="json")
-        validate_catalog(documento)
-        payload = _canonical_json(documento)
-        key = hashed_name("catalog", payload)
-        self._put(key, payload, CACHE_IMMUTABLE)
-        return CatalogRef(
-            url=key,
-            champions=len(catalog.champions),
-            skins=len(catalog.skins),
-            bytes=len(payload),
-            sha256=hashlib.sha256(payload).hexdigest(),
-        )
+        ref, payload = prepared or prepare_catalog(catalog)
+        self._put(ref.url, payload, CACHE_IMMUTABLE)
+        assert isinstance(ref, CatalogRef)
+        return ref
 
-    def publish_shard(self, shard: IndexShard) -> ShardRef:
+    def publish_shard(self, shard: IndexShard, prepared: Prepared | None = None) -> ShardRef:
         """Uma fatia de assets. Recusa se algum asset dela ainda não subiu."""
         faltando = sorted(
             asset.storage_key
@@ -152,22 +194,14 @@ class Publisher:
                 f"publicados; o primeiro é {faltando[0]!r}. Publique os assets antes da fatia."
             )
 
-        documento = shard.model_dump(by_alias=True, exclude_none=True, mode="json")
-        validate_shard(documento)
-        payload = _canonical_json(documento)
-        key = hashed_name(f"index-{shard.category}", payload)
-        self._put(key, payload, CACHE_IMMUTABLE)
-        return ShardRef(
-            category=shard.category,
-            url=key,
-            assets=len(shard.assets),
-            bytes=len(payload),
-            sha256=hashlib.sha256(payload).hexdigest(),
-        )
+        ref, payload = prepared or prepare_shard(shard)
+        self._put(ref.url, payload, CACHE_IMMUTABLE)
+        assert isinstance(ref, ShardRef)
+        return ref
 
     # --- manifesto: sempre por último ----------------------------------------
 
-    def publish_manifest(self, manifest: IndexManifest) -> str:
+    def publish_manifest(self, manifest: IndexManifest, payload: bytes | None = None) -> str:
         """Só sobe depois de tudo que a versão atual referencia já estar no bucket."""
         atual = next(
             (v for v in manifest.versions if v.game_version == manifest.current_version),
@@ -188,9 +222,7 @@ class Publisher:
                 f"Faltam {len(faltando)}: {', '.join(faltando[:3])}"
             )
 
-        documento = manifest.model_dump(by_alias=True, exclude_none=True, mode="json")
-        validate_manifest(documento)
-        self._put(MANIFEST_KEY, _canonical_json(documento), CACHE_MANIFEST)
+        self._put(MANIFEST_KEY, payload or prepare_manifest(manifest), CACHE_MANIFEST)
         return MANIFEST_KEY
 
     def read_manifest(self) -> IndexManifest:

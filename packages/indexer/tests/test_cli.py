@@ -313,3 +313,85 @@ def test_help_descreve_as_opcoes_em_portugues() -> None:
         assert trecho in limpo, limpo
     assert "--champion" not in limpo, "o recorte por campeão morreu com o tarball"
     assert "Patch" in limpo
+
+
+# --- guardas de orçamento e de forma (T-10) ---------------------------------------
+
+
+def test_orcamento_estourado_aborta_sem_escrever_nada(
+    tarball_local: Path, destino: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """RNF-03: o build para. Não escreve e depois reclama."""
+    monkeypatch.setattr("lol_assets_indexer.limits.CATALOG_GZIP_LIMIT", 10)
+    resultado = indexar(tarball_local, destino)
+
+    assert resultado.exit_code != 0
+    assert not destino.exists(), "o estouro precisa abortar ANTES da primeira escrita"
+    assert "RNF-03" in resultado.output
+
+
+def test_indice_grande_demais_aborta_antes_de_escrever(
+    tarball_local: Path, destino: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """RNF-05: o índice é versionado no repositório desde o ADR 0012."""
+    monkeypatch.setattr("lol_assets_indexer.limits.INDEX_RAW_LIMIT", 100)
+    resultado = indexar(tarball_local, destino)
+
+    assert resultado.exit_code != 0
+    assert not destino.exists()
+    assert "RNF-05" in resultado.output
+
+
+def test_dry_run_tambem_aplica_a_guarda(
+    tarball_local: Path, destino: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Senão o ensaio passaria e o build de verdade falharia — o pior dos dois."""
+    monkeypatch.setattr("lol_assets_indexer.limits.CATALOG_GZIP_LIMIT", 10)
+    assert indexar(tarball_local, destino, "--dry-run").exit_code != 0
+
+
+def test_catalogo_inconsistente_aborta_sem_escrever_nada(
+    tarball_local: Path, destino: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """ADR 0010: `skinCount` que não bate com skins[] quebra o seletor em silêncio."""
+    from lol_assets_indexer import catalog as modulo
+
+    original = modulo.project_catalog
+
+    def torto(**kwargs: Any) -> Any:
+        projetado = original(**kwargs)
+        projetado.champions[0].skin_count += 1
+        return projetado
+
+    monkeypatch.setattr("lol_assets_indexer.cli.project_catalog", torto)
+    resultado = indexar(tarball_local, destino)
+
+    assert resultado.exit_code != 0
+    assert not destino.exists()
+    assert "ADR 0010" in resultado.output
+
+
+def test_o_resumo_diz_o_tamanho_do_indice(tarball_local: Path, destino: Path) -> None:
+    """É o número que decide se o orçamento ainda cabe; não pode ficar só no log."""
+    resultado = indexar(tarball_local, destino)
+    escrito = sum(c.stat().st_size for c in destino.rglob("*.json"))
+
+    assert f"{escrito:,} bytes" in resultado.output, resultado.output
+
+
+def test_cada_fatia_traz_sha256_e_contagem_corretos(tarball_local: Path, destino: Path) -> None:
+    import hashlib
+
+    indexar(tarball_local, destino)
+    versao = ler(destino, "manifest.json")["versions"][0]
+
+    for fatia in versao["shards"]:
+        bruto = (destino / fatia["url"]).read_bytes()
+        assert fatia["bytes"] == len(bruto)
+        assert fatia["sha256"] == hashlib.sha256(bruto).hexdigest()
+        assert fatia["assets"] == len(json.loads(bruto)["assets"])
+
+    catalogo = versao["catalog"]
+    bruto = (destino / catalogo["url"]).read_bytes()
+    assert catalogo["sha256"] == hashlib.sha256(bruto).hexdigest()
+    assert catalogo["champions"] == len(json.loads(bruto)["champions"])
