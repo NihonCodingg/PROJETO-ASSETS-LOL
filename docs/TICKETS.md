@@ -443,6 +443,12 @@ limite de 500 linhas.
 >
 > Ganhou `--tarball`, que reaproveita um arquivo já baixado — 2,39 GB por execução de
 > teste era caro demais para verificar o resto.
+>
+> **Rodou contra o patch 16.17.1 de verdade** e os totais batem com o S1: 173 squares,
+> 2.118 de cada corte de splash, 868 itens, 726 feitiços. A execução real achou três
+> defeitos que a fixture não tinha — nome em branco no ddragon, `Fiddlesticks` contra
+> `FiddleSticks` e stat mods fora do índice — todos corrigidos aqui. Medição em
+> [`docs/evidencias/t09-indexacao-real.json`](evidencias/t09-indexacao-real.json).
 
 | | |
 |---|---|
@@ -494,7 +500,7 @@ limite de 500 linhas.
 
 **Entra**
 - Escalar a projeção do catálogo de T-07 para o catálogo inteiro: **173 campeões** em
-  `champions[]` (com `skinCount`, `chromaCount`, `baseSkinId` e miniatura) e **2.149 skins**
+  `champions[]` (com `skinCount`, `chromaCount`, `baseSkinId` e miniatura) e **2.118 skins**
   em `skins[]`.
 - Fatiar o índice de assets por categoria, com hash no nome.
 - Calcular o tamanho comprimido e **falhar** se o catálogo passar de **150 KB** ou se a
@@ -697,7 +703,7 @@ limite de 500 linhas.
 - Importar `champion-aliases.json` de `packages/schema` **em tempo de build**.
 - Paleta de busca com **cmdk**, pela lista acessível e pela navegação por teclado, com o
   **filtro embutido desligado** ([ADR 0011](adr/0011-base-de-componentes-do-front.md)).
-- Índice de busca sobre **`catalog.skins[]` (2.149) e `catalog.champions[]` (173)**,
+- Índice de busca sobre **`catalog.skins[]` (2.118) e `catalog.champions[]` (173)**,
   montado uma vez, na carga do catálogo.
 - **Duas classes de resultado.** Campeão casado vira **uma** entrada de campeão, nunca 18
   de skin. Skin casada vira entrada de skin, rotulada com o campeão de origem.
@@ -718,7 +724,7 @@ limite de 500 linhas.
 2c. `kda` e `prestigio` retornam skins de **≥ 3 campeões distintos**, cada uma rotulada com
    o campeão de origem (RF-24).
 3. `/` foca o campo e o valor não muda.
-4. Com 173 campeões e 2.149 skins no índice, a busca responde em < 50 ms (medido).
+4. Com 173 campeões e 2.118 skins no índice, a busca responde em < 50 ms (medido).
 5. Acrescentar uma linha ao JSON de apelidos passa a valer sem tocar em código.
 6. O filtro do cmdk está desligado: uma consulta que não casa nada devolve a lista inteira
    do componente, e quem reduz é o nosso ranqueamento.
@@ -726,7 +732,7 @@ limite de 500 linhas.
 **Testes que provam**
 - Vitest com tabela de ≥ 20 pares consulta→esperado, incluindo os quatro apelidos citados,
   o caso `jax` (uma entrada) e os casos transversais `kda` e `prestigio`.
-- Teste de performance com o catálogo completo sintético (173 + 2.149).
+- Teste de performance com o catálogo completo sintético (173 + 2.118).
 - Teste que adiciona um apelido à fixture e confirma que passa a resolver.
 - Teste que falha se o filtro do cmdk voltar a ser aplicado (a armadilha silenciosa do
   ADR 0011).
@@ -895,7 +901,7 @@ limite de 500 linhas.
 - **Resultado de skin abre o painel do campeão já com aquela skin selecionada** — o
   resultado de busca é atalho para dentro do painel, não destino separado.
 - Carregar a fatia de assets sob demanda, na primeira abertura de painel.
-- **TanStack Virtual nos resultados de busca de skin** (até 2.149). A grade de 173
+- **TanStack Virtual nos resultados de busca de skin** (até 2.118). A grade de 173
   campeões e a lista de skins do painel (até ~90) **não** virtualizam — não pagam o custo
   ([ADR 0011](adr/0011-base-de-componentes-do-front.md)).
 - Altura de item fixa por breakpoint, que é o que a virtualização exige.
@@ -915,14 +921,14 @@ limite de 500 linhas.
 5. Nenhum chroma aparece na grade nem na lista de skins do painel.
 6. Do carregamento ao arquivo salvo: ≤ 3 cliques nos quatro caminhos do ADR 0010,
    contados por teste.
-7. Com 2.149 resultados de skin, o número de nós no DOM fica na casa das dezenas, não dos
+7. Com 2.118 resultados de skin, o número de nós no DOM fica na casa das dezenas, não dos
    milhares, e a rolagem não perde quadro.
 
 **Testes que provam**
 - Vitest com catálogo de fixture completo: contagem da grade, atalho da busca para a skin
   certa, troca de skin, ausência de chroma.
 - Teste que conta cliques dos quatro caminhos e falha em > 3.
-- Teste que conta nós renderizados com 2.149 resultados e falha se a virtualização sumir.
+- Teste que conta nós renderizados com 2.118 resultados e falha se a virtualização sumir.
 
 ---
 

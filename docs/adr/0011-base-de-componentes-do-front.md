@@ -20,7 +20,7 @@ Três coisas mudaram desde então:
    o promoveu a caminho principal da seleção customizada, porque não há servidor para zipar.
 3. **Apareceu um problema de renderização que a §0.3 não previa.** O
    [ADR 0010](0010-navegacao-por-campeao-busca-por-skin.md) deixou a navegação com 173
-   entradas — tranquilo —, mas a busca opera sobre **2.149 skins**, e as categorias do
+   entradas — tranquilo —, mas a busca opera sobre **2.118 skins**, e as categorias do
    RF-08 chegam a **5.021 ícones de perfil** e **2.347 emotes**. Renderizar milhares de nós
    de uma vez trava a rolagem em qualquer máquina.
 
@@ -51,7 +51,7 @@ Virtualização de janela onde a contagem justifica, e **só** onde justifica:
 | Superfície | Itens | Virtualiza? |
 |---|---:|---|
 | Grade de campeões (padrão) | 173 | **Não** — não paga o custo |
-| Resultados de busca de skin | até 2.149 | **Sim** |
+| Resultados de busca de skin | até 2.118 | **Sim** |
 | Skins dentro do painel do campeão | até ~90 | Não |
 | Categorias grandes (perfil, emotes) | 5.021 / 2.347 | **Sim** |
 

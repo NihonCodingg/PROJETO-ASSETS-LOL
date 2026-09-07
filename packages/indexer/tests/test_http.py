@@ -10,6 +10,7 @@ from __future__ import annotations
 import asyncio
 import re
 from collections.abc import Awaitable, Callable
+from pathlib import Path
 
 import httpx
 import pytest
@@ -288,3 +289,72 @@ async def test_get_json_levanta_em_erro() -> None:
     async with cliente() as http:
         with pytest.raises(httpx.HTTPStatusError):
             await http.get_json(URL)
+
+
+# --- download em streaming ------------------------------------------------------
+
+TARBALL = "https://ddragon.leagueoflegends.com/cdn/dragontail-16.17.1.tgz"
+
+
+@respx.mock
+async def test_stream_to_escreve_o_arquivo_e_devolve_o_tamanho(tmp_path: Path) -> None:
+    respx.get(TARBALL).mock(return_value=httpx.Response(200, content=b"x" * 5000))
+    destino = tmp_path / "sub" / "dragontail.tgz"
+
+    async with cliente() as http:
+        total = await http.stream_to(TARBALL, destino)
+
+    assert total == 5000
+    assert destino.read_bytes() == b"x" * 5000
+
+
+@respx.mock
+async def test_stream_to_repete_em_5xx_e_recomeca_do_zero(tmp_path: Path) -> None:
+    """Sem requisição por faixa, meio arquivo não vale nada.
+
+    O perigo específico é o tgz truncado: ele só falharia lá na frente, na
+    descompressão, parecendo outro problema.
+    """
+    respx.get(TARBALL).mock(
+        side_effect=[
+            httpx.Response(503, content=b"meio arquivo"),
+            httpx.Response(200, content=b"inteiro"),
+        ]
+    )
+    relogio = RelogioFalso()
+    destino = tmp_path / "dragontail.tgz"
+
+    async with cliente(sleep=relogio) as http:
+        total = await http.stream_to(TARBALL, destino)
+
+    assert total == len(b"inteiro")
+    assert destino.read_bytes() == b"inteiro", "sobrou byte da tentativa que falhou"
+    assert relogio.esperas, "não esperou antes de tentar de novo"
+
+
+@respx.mock
+async def test_stream_to_nao_repete_em_404(tmp_path: Path) -> None:
+    rota = respx.get(TARBALL).mock(return_value=httpx.Response(404))
+
+    async with cliente() as http:
+        with pytest.raises(httpx.HTTPStatusError):
+            await http.stream_to(TARBALL, tmp_path / "x.tgz")
+
+    assert rota.call_count == 1, "patch inexistente não melhora com insistência"
+
+
+@respx.mock
+async def test_stream_to_desiste_depois_do_limite(tmp_path: Path) -> None:
+    rota = respx.get(TARBALL).mock(return_value=httpx.Response(503))
+
+    async with cliente(config=settings(indexer_max_retries=3)) as http:
+        with pytest.raises(httpx.HTTPStatusError):
+            await http.stream_to(TARBALL, tmp_path / "x.tgz")
+
+    assert rota.call_count == 3
+
+
+async def test_stream_to_nao_toca_a_wiki_sem_consentimento(tmp_path: Path) -> None:
+    async with cliente() as http:
+        with pytest.raises(WikiAccessBlockedError):
+            await http.stream_to("https://wiki.leagueoflegends.com/x.zip", tmp_path / "x")
