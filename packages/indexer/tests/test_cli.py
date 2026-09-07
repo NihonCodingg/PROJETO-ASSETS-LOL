@@ -376,7 +376,8 @@ def test_o_resumo_diz_o_tamanho_do_indice(tarball_local: Path, destino: Path) ->
     resultado = indexar(tarball_local, destino)
     escrito = sum(c.stat().st_size for c in destino.rglob("*.json"))
 
-    assert f"{escrito:,} bytes" in resultado.output, resultado.output
+    esperado = f"{escrito:,}".replace(",", ".")
+    assert f"{esperado} bytes" in resultado.output, resultado.output
 
 
 def test_cada_fatia_traz_sha256_e_contagem_corretos(tarball_local: Path, destino: Path) -> None:

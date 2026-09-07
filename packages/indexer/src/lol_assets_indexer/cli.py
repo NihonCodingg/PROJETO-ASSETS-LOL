@@ -103,7 +103,7 @@ def index(
     typer.echo(
         f"{resumo['assets']} assets · {resumo['champions']} campeões · "
         f"{resumo['skins']} skins · {resumo['categories']} categorias · "
-        f"patch {resumo['gameVersion']} · índice de {resumo['indexBytes']:,} bytes · "
+        f"patch {resumo['gameVersion']} · índice de {_milhar(resumo['indexBytes'])} bytes · "
         f"destino {resumo['destination']}"
     )
 
@@ -246,6 +246,11 @@ async def _run(
     publisher.publish_manifest(manifest, manifest_payload)
     logger.info("índice escrito", extra={"destination": str(output)})
     return resumo
+
+
+def _milhar(valor: int) -> str:
+    """10583827 vira 10.583.827 — separador daqui, não o do C."""
+    return f"{valor:,}".replace(",", ".")
 
 
 def _por_campeao(assets: list[Asset]) -> dict[int, list[Asset]]:
