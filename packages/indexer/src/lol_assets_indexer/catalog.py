@@ -94,3 +94,71 @@ def _schema_version() -> str:
     from lol_assets_schema import SCHEMA_VERSION
 
     return SCHEMA_VERSION
+
+
+class CatalogShapeError(RuntimeError):
+    """O catálogo violou uma invariante do ADR 0010."""
+
+
+def verify_catalog(catalog: Catalog) -> None:
+    """As invariantes do ADR 0010 que nenhum JSON Schema pega.
+
+    O schema garante o formato de cada entrada; o que ele não vê é a relação
+    entre os dois níveis — que `skinCount` bate com o número de skins daquele
+    campeão, que cada skin pertence a um campeão que existe, e que `skinId` é
+    mesmo `championKey * 1000 + skinNum`. É essa aritmética que faz o seletor de
+    skin encontrar o que procura, e ela quebra em silêncio.
+    """
+    problemas: list[str] = []
+
+    chaves = [campeao.champion_key for campeao in catalog.champions]
+    if len(set(chaves)) != len(chaves):
+        problemas.append(f"campeão repetido em champions[]: {_repetidos(chaves)}")
+
+    ids = [skin.skin_id for skin in catalog.skins]
+    if len(set(ids)) != len(ids):
+        problemas.append(f"skin repetida em skins[]: {_repetidos(ids)}")
+
+    por_campeao: dict[int, list[CatalogSkin]] = {}
+    for skin in catalog.skins:
+        por_campeao.setdefault(skin.champion_key, []).append(skin)
+
+    orfas = sorted(set(por_campeao) - set(chaves))
+    if orfas:
+        problemas.append(f"skins de campeão que não está no catálogo: {orfas}")
+
+    for campeao in catalog.champions:
+        skins = por_campeao.get(campeao.champion_key, [])
+        if len(skins) != campeao.skin_count:
+            problemas.append(
+                f"campeão {campeao.champion_id!r} diz {campeao.skin_count} skins "
+                f"mas skins[] traz {len(skins)}"
+            )
+        bases = [skin for skin in skins if skin.is_base]
+        if len(bases) != 1:
+            problemas.append(
+                f"campeão {campeao.champion_id!r} tem {len(bases)} skins marcadas como base"
+            )
+
+    for skin in catalog.skins:
+        esperado = skin_id(skin.champion_key, skin.skin_num)
+        if skin.skin_id != esperado:
+            problemas.append(
+                f"skinId {skin.skin_id} não bate com championKey {skin.champion_key} "
+                f"e skinNum {skin.skin_num} (esperado {esperado})"
+            )
+
+    if problemas:
+        raise CatalogShapeError(
+            "o catálogo violou as invariantes do ADR 0010:\n  - " + "\n  - ".join(problemas)
+        )
+
+
+def _repetidos(valores: list[int]) -> list[int]:
+    vistos: set[int] = set()
+    repetidos: set[int] = set()
+    for valor in valores:
+        if valor in vistos:
+            repetidos.add(valor)
+        vistos.add(valor)
+    return sorted(repetidos)

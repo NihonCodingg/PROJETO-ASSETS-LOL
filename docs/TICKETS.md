@@ -488,7 +488,27 @@ limite de 500 linhas.
 
 ---
 
-### T-10 — Fatiamento do índice e guarda de orçamento
+### ✅ T-10 — Fatiamento do índice e guarda de orçamento
+
+> **Concluído em 07/09/2026.** O fatiamento e a projeção completa já tinham vindo no
+> T-09; o que este ticket entregou foram as **guardas** e um pedaço que o escopo escrito
+> não previa.
+>
+> - **Limites em KiB, não em KB.** 150 KiB, 1,5 MiB e 15 MiB. O texto dizia "KB"; a
+>   diferença é de 2,4 % e nenhuma decisão depende dela, mas o código precisava escolher.
+> - **A guarda mede os bytes que iriam para o disco**, não uma serialização parecida.
+>   Para isso a serialização foi separada da escrita (`prepare_catalog`, `prepare_shard`,
+>   `prepare_manifest`), e o manifesto entra na conta — ele referencia os hashes, então
+>   só existe depois dos outros dois.
+> - **Guarda de forma do catálogo**, além da de tamanho. O critério 1b pedia
+>   `skinCount` batendo com `skins[]`; virou `verify_catalog`, que também confere
+>   `skinId = championKey × 1000 + skinNum`, uma base por campeão e nenhuma skin órfã.
+>   São invariantes do ADR 0010 que o JSON Schema não alcança e que quebram em silêncio.
+> - **O `--dry-run` também aplica a guarda**, senão o ensaio passaria e o build de
+>   verdade falharia.
+>
+> Medido no patch 16.17.1: catálogo 63.293 gzip (42 % do limite), maior fatia 717.050
+> gzip (46 %), índice inteiro 10.583.827 escritos (67 %).
 
 | | |
 |---|---|
