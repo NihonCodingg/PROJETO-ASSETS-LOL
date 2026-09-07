@@ -1,46 +1,46 @@
 """CLI do indexador — o comando que o GitHub Actions vai chamar (T-13).
 
-O `index` faz o caminho inteiro de uma vez: descobre a versão, lê a fonte, mede,
-projeta o catálogo, **valida tudo** e só então publica. A validação vem antes de
-qualquer escrita de propósito: um registro inválido precisa abortar sem ter
-deixado nada meio publicado no bucket.
+O `index` faz o caminho inteiro numa tacada: descobre a versão, baixa o tarball,
+mede tudo numa passada, projeta o catálogo, **valida** e só então escreve.
+
+Desde o [ADR 0012] o indexador **não copia asset nenhum**. Ele baixa o tarball
+para medir e joga os bytes fora; o que é escrito são três documentos — manifesto,
+catálogo e fatias —, servidos como estáticos pelo próprio app. Por isso o
+`--dry-run` mudou de sentido: antes era "escreve local em vez do bucket", agora é
+"mede e valida sem escrever nada", que é o único ensaio que ainda sobra.
+
+A validação vem antes de qualquer escrita de propósito: um registro inválido
+precisa abortar sem ter deixado nada meio escrito.
 """
 
 from __future__ import annotations
 
 import asyncio
 import logging
+import tempfile
 from datetime import UTC, datetime
 from pathlib import Path
 from typing import Annotated, Any
 
 import typer
 from lol_assets_schema import SCHEMA_VERSION
-from lol_assets_schema.models import (
-    Asset,
-    CatalogRef,
-    IndexManifest,
-    IndexShard,
-    ManifestVersion,
-    ShardRef,
-)
+from lol_assets_schema.models import Asset, IndexManifest, IndexShard, ManifestVersion
 from lol_assets_schema.validators import validate_catalog, validate_shard
 
 from lol_assets_indexer import __version__, logging_setup
-from lol_assets_indexer.adapters.ddragon import (
-    FetchedAsset,
-    fetch_champion,
-    fetch_champion_assets,
-    latest_version,
-)
+from lol_assets_indexer.adapters.ddragon import latest_version, tarball_url
+from lol_assets_indexer.adapters.records import build_all, build_champion_snapshots
+from lol_assets_indexer.adapters.tarball import TarballScan, scan_tarball
 from lol_assets_indexer.catalog import project_catalog
 from lol_assets_indexer.http import IndexerSettings, SourceClient
-from lol_assets_indexer.publish.bucket import build_store
-from lol_assets_indexer.publish.storage import LocalObjectStore, ObjectStore, Publisher
+from lol_assets_indexer.publish.storage import LocalObjectStore, Publisher
 
 logger = logging.getLogger("lol_assets_indexer.cli")
 
 app = typer.Typer(help="Indexador de assets de League of Legends.", no_args_is_help=True)
+
+#: O índice é servido pelo próprio Next como estático — ADR 0012.
+DEFAULT_OUTPUT = Path("apps/web/public/indice")
 
 
 @app.callback()
@@ -56,24 +56,24 @@ def version() -> None:
 
 @app.command()
 def index(
-    champion: Annotated[
-        str,
-        typer.Option("--champion", help="Id interno do campeão no ddragon, ex.: Jax."),
-    ],
     game_version: Annotated[
         str | None,
         typer.Option("--game-version", help="Patch a indexar. Sem isto, usa o mais recente."),
     ] = None,
     dry_run: Annotated[
         bool,
-        typer.Option("--dry-run", help="Escreve numa pasta local em vez do bucket."),
+        typer.Option("--dry-run", help="Mede e valida sem escrever nada."),
     ] = False,
     output: Annotated[
         Path,
-        typer.Option("--output", help="Pasta de destino do --dry-run."),
-    ] = Path("dist/bucket"),
+        typer.Option("--output", help="Pasta onde o índice é escrito."),
+    ] = DEFAULT_OUTPUT,
+    tarball: Annotated[
+        Path | None,
+        typer.Option("--tarball", help="Usa um tarball já baixado em vez de buscar de novo."),
+    ] = None,
 ) -> None:
-    """Indexa um campeão e publica catálogo, fatia e manifesto."""
+    """Indexa o patch inteiro: manifesto, catálogo e fatias."""
     logging_setup.configure()
     settings = IndexerSettings()
 
@@ -81,10 +81,10 @@ def index(
         resumo = asyncio.run(
             _run(
                 settings=settings,
-                champion_id=champion,
                 game_version=game_version,
                 dry_run=dry_run,
                 output=output,
+                tarball=tarball,
             )
         )
     except Exception as erro:
@@ -95,120 +95,143 @@ def index(
         raise typer.Exit(code=1) from erro
 
     typer.echo(
-        f"{resumo['assets']} assets · {resumo['champions']} campeão(ões) · "
-        f"{resumo['skins']} skins · patch {resumo['gameVersion']} · "
-        f"destino {resumo['destination']}"
+        f"{resumo['assets']} assets · {resumo['champions']} campeões · "
+        f"{resumo['skins']} skins · {resumo['categories']} categorias · "
+        f"patch {resumo['gameVersion']} · destino {resumo['destination']}"
     )
+
+
+async def _scan_source(
+    settings: IndexerSettings, game_version: str | None, tarball: Path | None
+) -> TarballScan:
+    """Resolve a versão, garante o tarball em disco e faz uma passada nele."""
+    if tarball is not None:
+        resolved = game_version or _version_from_name(tarball)
+        logging_setup.bind(gameVersion=resolved, source="ddragon")
+        logger.info("tarball local", extra={"path": str(tarball)})
+        with tarball.open("rb") as handle:
+            return scan_tarball(handle, resolved)
+
+    async with SourceClient(settings) as client:
+        resolved = game_version or await latest_version(client)
+        logging_setup.bind(gameVersion=resolved, source="ddragon")
+        logger.info("indexação iniciada", extra={"tarball": True})
+
+        # Vai para disco antes de ser lido: um engasgo de rede no meio da
+        # varredura custaria a passada inteira, e ela dura minutos.
+        with tempfile.TemporaryDirectory(prefix="lol-assets-") as temporario:
+            destino = Path(temporario) / f"dragontail-{resolved}.tgz"
+            baixados = await client.stream_to(
+                tarball_url(settings.ddragon_base_url, resolved), destino
+            )
+            logger.info("tarball em disco", extra={"bytes": baixados})
+            with destino.open("rb") as handle:
+                return scan_tarball(handle, resolved)
+
+
+def _version_from_name(tarball: Path) -> str:
+    """`dragontail-16.17.1.tgz` vira `16.17.1`."""
+    miolo = tarball.name.removeprefix("dragontail-").removesuffix(".tgz")
+    if not miolo or miolo == tarball.name:
+        raise ValueError(f"não dá para deduzir a versão de {tarball.name!r}; passe --game-version")
+    return miolo
 
 
 async def _run(
     *,
     settings: IndexerSettings,
-    champion_id: str,
     game_version: str | None,
     dry_run: bool,
     output: Path,
+    tarball: Path | None,
 ) -> dict[str, Any]:
     generated_at = datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%SZ")
+    scan = await _scan_source(settings, game_version, tarball)
 
-    async with SourceClient(settings) as client:
-        resolved_version = game_version or await latest_version(client)
-        logging_setup.bind(gameVersion=resolved_version, source="ddragon")
-        logger.info("indexação iniciada", extra={"champion": champion_id, "dryRun": dry_run})
-
-        snapshot = await fetch_champion(client, champion_id, resolved_version)
-        fetched = await fetch_champion_assets(client, champion_id, version=resolved_version)
-
-    assets = [asset for asset, _ in fetched]
-    shard = IndexShard(
-        schema_version=SCHEMA_VERSION,
-        game_version=resolved_version,
-        category="champion",
-        generated_at=generated_at,
-        assets_base_url=settings.assets_public_base_url or None,
-        assets=assets,
-    )
+    por_categoria = {categoria: assets for categoria, assets in build_all(scan).items() if assets}
     catalog = project_catalog(
-        game_version=resolved_version,
+        game_version=scan.game_version,
         generated_at=generated_at,
-        snapshots=[snapshot],
-        assets_by_champion={snapshot.key: assets},
-        assets_base_url=settings.assets_public_base_url or None,
+        snapshots=build_champion_snapshots(scan),
+        assets_by_champion=_por_campeao(por_categoria.get("champion", [])),
     )
-
-    # Validação ANTES de qualquer escrita: é isso que garante que um registro
-    # inválido não deixe o bucket meio publicado.
-    validate_shard(shard.model_dump(by_alias=True, exclude_none=True, mode="json"))
-    validate_catalog(catalog.model_dump(by_alias=True, exclude_none=True, mode="json"))
-    logger.info("documentos validados", extra={"assets": len(assets), "skins": len(catalog.skins)})
-
-    store = _build_store(settings, dry_run=dry_run, output=output)
-    publisher = Publisher(store)
-
-    _publish_assets(publisher, fetched)
-    catalog_ref = publisher.publish_catalog(catalog)
-    shard_ref = publisher.publish_shard(shard)
-    publisher.publish_manifest(
-        _build_manifest(
-            settings=settings,
-            game_version=resolved_version,
+    shards = [
+        IndexShard(
+            schema_version=SCHEMA_VERSION,
+            game_version=scan.game_version,
+            category=categoria,
             generated_at=generated_at,
-            catalog_ref=catalog_ref,
-            shard_ref=shard_ref,
             assets=assets,
         )
+        for categoria, assets in por_categoria.items()
+    ]
+
+    # Validação ANTES de qualquer escrita.
+    validate_catalog(catalog.model_dump(by_alias=True, exclude_none=True, mode="json"))
+    for shard in shards:
+        validate_shard(shard.model_dump(by_alias=True, exclude_none=True, mode="json"))
+
+    total_assets = sum(len(assets) for assets in por_categoria.values())
+    total_bytes = sum(asset.bytes for assets in por_categoria.values() for asset in assets)
+    logger.info(
+        "documentos validados",
+        extra={
+            "assets": total_assets,
+            "bytes": total_bytes,
+            "categorias": len(shards),
+            "campeoes": len(catalog.champions),
+            "skins": len(catalog.skins),
+            "descartadas": scan.skipped,
+            "ilegiveis": sum(scan.unreadable.values()),
+            "caixaDivergente": len(scan.case_mismatches),
+        },
     )
 
-    destination = str(output) if dry_run else settings.s3_bucket
-    logger.info("publicação concluída", extra={"destination": destination})
-    return {
-        "assets": len(assets),
+    resumo: dict[str, Any] = {
+        "assets": total_assets,
         "champions": len(catalog.champions),
         "skins": len(catalog.skins),
-        "gameVersion": resolved_version,
-        "destination": destination,
+        "categories": len(shards),
+        "gameVersion": scan.game_version,
+        "destination": "nada escrito (--dry-run)" if dry_run else str(output),
     }
-
-
-def _build_store(settings: IndexerSettings, *, dry_run: bool, output: Path) -> ObjectStore:
     if dry_run:
-        return LocalObjectStore(root=output)
-    return build_store(settings)
+        logger.info("dry-run: nada escrito")
+        return resumo
 
-
-def _publish_assets(publisher: Publisher, fetched: list[FetchedAsset]) -> None:
-    for asset, data in fetched:
-        if asset.storage_key is None:
-            raise ValueError(f"asset {asset.id} sem storageKey não pode ser publicado")
-        publisher.publish_asset(asset.storage_key, data)
-
-
-def _build_manifest(
-    *,
-    settings: IndexerSettings,
-    game_version: str,
-    generated_at: str,
-    catalog_ref: CatalogRef,
-    shard_ref: ShardRef,
-    assets: list[Asset],
-) -> IndexManifest:
-    return IndexManifest(
-        schema_version=SCHEMA_VERSION,
-        generated_at=generated_at,
-        assets_base_url=settings.assets_public_base_url or None,
-        current_version=game_version,
-        versions=[
-            ManifestVersion(
-                game_version=game_version,
-                indexed_at=generated_at,
-                assets_copied=True,
-                catalog=catalog_ref,
-                total_assets=len(assets),
-                total_bytes=sum(asset.bytes for asset in assets),
-                shards=[shard_ref],
-            )
-        ],
+    publisher = Publisher(LocalObjectStore(root=output))
+    catalog_ref = publisher.publish_catalog(catalog)
+    shard_refs = [publisher.publish_shard(shard) for shard in shards]
+    publisher.publish_manifest(
+        IndexManifest(
+            schema_version=SCHEMA_VERSION,
+            generated_at=generated_at,
+            current_version=scan.game_version,
+            versions=[
+                ManifestVersion(
+                    game_version=scan.game_version,
+                    indexed_at=generated_at,
+                    # ADR 0012: nada é copiado, então isto nunca é `true`.
+                    assets_copied=False,
+                    catalog=catalog_ref,
+                    total_assets=total_assets,
+                    total_bytes=total_bytes,
+                    shards=shard_refs,
+                )
+            ],
+        )
     )
+    logger.info("índice escrito", extra={"destination": str(output)})
+    return resumo
+
+
+def _por_campeao(assets: list[Asset]) -> dict[int, list[Asset]]:
+    """O catálogo só precisa dos assets do campeão para escolher a miniatura."""
+    agrupado: dict[int, list[Asset]] = {}
+    for asset in assets:
+        if asset.champion_key is not None:
+            agrupado.setdefault(asset.champion_key, []).append(asset)
+    return agrupado
 
 
 if __name__ == "__main__":  # pragma: no cover

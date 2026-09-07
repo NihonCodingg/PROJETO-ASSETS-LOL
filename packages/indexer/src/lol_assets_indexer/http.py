@@ -10,8 +10,10 @@ Este módulo não sabe o que é ddragon nem cdragon. Ele só sabe pedir educadam
 from __future__ import annotations
 
 import asyncio
+import logging
 import random
 from collections.abc import Awaitable, Callable
+from pathlib import Path
 from types import TracebackType
 from typing import Any, Self
 
@@ -20,6 +22,8 @@ from pydantic import Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 from lol_assets_indexer import __version__
+
+logger = logging.getLogger(__name__)
 
 REPO_URL = "https://github.com/NihonCodingg/PROJETO-ASSETS-LOL"
 
@@ -143,6 +147,59 @@ class SourceClient:
         response = await self.request("GET", url)
         response.raise_for_status()
         return response.content
+
+    async def stream_to(self, url: str, destination: Path) -> int:
+        """Baixa um arquivo grande para disco sem carregá-lo na memória.
+
+        O tarball do ddragon tem 2,39 GB. Vai para disco antes de ser lido porque
+        um engasgo de rede no meio da varredura perderia a passada inteira.
+
+        A repetição aqui **recomeça do zero**: sem requisição por faixa, meio
+        arquivo não vale nada — e um tgz truncado só falharia lá na frente, na
+        descompressão, parecendo outro problema.
+        """
+        self._guard(url)
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        delay = _BASE_DELAY_SECONDS
+        ultima_resposta: httpx.Response | None = None
+        ultimo_erro: httpx.TransportError | None = None
+
+        async with self._gate_for(url):
+            for tentativa in range(1, self._settings.indexer_max_retries + 1):
+                try:
+                    total = await self._stream_once(url, destination)
+                except httpx.TransportError as erro:
+                    ultimo_erro, ultima_resposta = erro, None
+                except httpx.HTTPStatusError as erro:
+                    if not _should_retry(erro.response):
+                        raise
+                    ultimo_erro, ultima_resposta = None, erro.response
+                else:
+                    logger.info(
+                        "arquivo baixado",
+                        extra={"url": url, "bytes": total, "tentativas": tentativa},
+                    )
+                    return total
+
+                if tentativa == self._settings.indexer_max_retries:
+                    break
+                await self._sleep(self._delay_for(ultima_resposta, delay))
+                delay = min(delay * 2, _MAX_DELAY_SECONDS)
+
+        if ultima_resposta is not None:
+            ultima_resposta.raise_for_status()
+        assert ultimo_erro is not None
+        raise ultimo_erro
+
+    async def _stream_once(self, url: str, destination: Path) -> int:
+        total = 0
+        async with self._client.stream("GET", url) as response:
+            response.raise_for_status()
+            with destination.open("wb") as handle:
+                async for chunk in response.aiter_bytes(1024 * 1024):
+                    handle.write(chunk)
+                    total += len(chunk)
+        return total
 
     # --- interno -------------------------------------------------------------
 

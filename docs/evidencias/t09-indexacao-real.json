@@ -1,0 +1,95 @@
+{
+  "gameVersion": "16.17.1",
+  "tarball": {
+    "bytes": 2564139878,
+    "arquivos": 34305,
+    "imagensMedidas": 15526,
+    "imagensDescartadas": 18421,
+    "ilegiveis": {}
+  },
+  "assetsPorTipo": {
+    "ability_icon": 692,
+    "item_icon": 868,
+    "loading": 2118,
+    "map_image": 5,
+    "passive_icon": 173,
+    "profile_icon": 5021,
+    "rune_icon": 62,
+    "rune_tree_icon": 5,
+    "splash_centered": 2118,
+    "splash_wide": 2118,
+    "square": 173,
+    "stat_mod_icon": 10,
+    "summoner_spell_icon": 34,
+    "tile": 2118
+  },
+  "assetsPorCategoria": {
+    "champion": 9510,
+    "item": 868,
+    "map": 5,
+    "profile_icon": 5021,
+    "rune": 77,
+    "summoner_spell": 34
+  },
+  "totalAssets": 15515,
+  "totalBytesDosAssets": 1439374815,
+  "catalogo": {
+    "campeoes": 173,
+    "skins": 2118,
+    "bytes": 595297,
+    "bytesGzip": 60634
+  },
+  "fatias": {
+    "champion": {
+      "assets": 9510,
+      "bytes": 5192806,
+      "bytesGzip": 710213
+    },
+    "item": {
+      "assets": 868,
+      "bytes": 387456,
+      "bytesGzip": 71560
+    },
+    "map": {
+      "assets": 5,
+      "bytes": 2036,
+      "bytesGzip": 519
+    },
+    "profile_icon": {
+      "assets": 5021,
+      "bytes": 2164718,
+      "bytesGzip": 333035
+    },
+    "rune": {
+      "assets": 77,
+      "bytes": 36884,
+      "bytesGzip": 7477
+    },
+    "summoner_spell": {
+      "assets": 34,
+      "bytes": 17562,
+      "bytesGzip": 2802
+    }
+  },
+  "descartePorPasta": {
+    "img/challenges-images": 3388,
+    "img/mode": 2492,
+    "img/tft-tactician": 2017,
+    "img/tft-item": 1189,
+    "img/sprite": 575,
+    "img/tft-augment": 460,
+    "img/tft-champion": 323,
+    "img/mission": 292,
+    "img/tft-trait": 194,
+    "img/tft-arena": 138,
+    "img/tft-stage-round-data": 31,
+    "img/tft-regalia": 16,
+    "img/tft-queue": 10,
+    "img/item-modifiers": 9,
+    "img/tft-region-portal": 9,
+    "img/tft-charms": 3,
+    "img/bg": 2,
+    "img/tft-augment-container": 1,
+    "img/global": 1
+  }
+}

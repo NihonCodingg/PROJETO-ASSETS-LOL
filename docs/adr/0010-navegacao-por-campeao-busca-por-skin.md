@@ -10,12 +10,12 @@
 
 O ADR 0008 corrigiu um erro real — o protótipo só mostrava a skin base, e o job to be done
 da §A.2 é *"preciso da splash da skin Jax Deus da Guerra"*. Mas corrigiu longe demais:
-concluiu que **a unidade do catálogo** passava a ser a skin, com ~2.149 entradas no lugar
+concluiu que **a unidade do catálogo** passava a ser a skin, com ~2.118 entradas no lugar
 de 173.
 
 Como modelo de navegação, isso não funciona:
 
-- Uma grade de 2.149 cartões não é navegável. Abrir o site e ver duas mil skins soltas é
+- Uma grade de 2.118 cartões não é navegável. Abrir o site e ver duas mil skins soltas é
   pior do que ver 173 campeões — o editor sabe de que campeão precisa muito antes de saber
   de que skin.
 - Um campeão apareceria repetido 18 vezes na tela sem nenhuma busca digitada, o que
@@ -33,12 +33,12 @@ O modelo é **híbrido**. Navegação e busca operam em níveis diferentes, de p
 | Superfície | Unidade | Entradas | Para quê |
 |---|---|---:|---|
 | **Navegação** | campeão | **173** | Quem sabe o campeão e quer chegar nele |
-| **Busca** | skin (e campeão) | **2.149** | Quem sabe o nome da skin, ou um termo transversal |
+| **Busca** | skin (e campeão) | **2.118** | Quem sabe o nome da skin, ou um termo transversal |
 | **Painel do campeão** | skin | as do campeão | Onde vive o seletor de skin |
 
 1. **Navegação por campeão.** A grade padrão tem 173 entradas, uma por campeão, com a arte
    da skin base e o número de skins. É o que aparece sem nada digitado.
-2. **Índice de busca no nível de skin.** 2.149 entradas. Buscar "K/DA" ou "Prestígio"
+2. **Índice de busca no nível de skin.** 2.118 entradas. Buscar "K/DA" ou "Prestígio"
    retorna skins de **vários campeões**, cada uma rotulada com o campeão de origem.
 3. **Um campeão casado aparece uma vez.** Buscar "jax" devolve **uma** entrada de campeão,
    não 18 de skin. Só skins cujo próprio nome casa a consulta viram entradas de skin.
@@ -70,7 +70,7 @@ Por isso o contrato ganha um documento novo, o **catálogo** (`catalog.schema.js
 
 - `champions[]` — 173 entradas: chave, id, nomes, título, tags, contagem de skins e de
   chromas, `baseSkinId` e a chave da miniatura.
-- `skins[]` — 2.149 entradas: `skinId`, `skinNum`, `championKey`, nomes, `isBase`,
+- `skins[]` — 2.118 entradas: `skinId`, `skinNum`, `championKey`, nomes, `isBase`,
   contagem de chromas e a chave da miniatura.
 
 Sem asset, sem hash, sem URL de origem. É a projeção de navegação e busca, e só.
@@ -106,7 +106,7 @@ muda é que ela deixa de ser bloqueante.
 
 ## Alternativas descartadas
 
-- **Manter tudo no nível de skin** (o ADR 0008 como estava). Grade de 2.149 cartões, com o
+- **Manter tudo no nível de skin** (o ADR 0008 como estava). Grade de 2.118 cartões, com o
   mesmo campeão repetido dezenas de vezes.
 - **Voltar tudo para o nível de campeão.** Mata "K/DA" e "Prestígio", que são exatamente as
   buscas que só existem no nível de skin.

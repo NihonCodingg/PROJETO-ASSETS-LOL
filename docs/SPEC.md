@@ -120,7 +120,7 @@ implementa e pelo teste que o prova.
 
 | # | Requisito | Meta mensurável | Como se mede |
 |---|---|---|---|
-| **RNF-01** | Busca responde rápido | < 50 ms do keystroke ao render, com 173 campeões e 2.149 skins no índice | `performance.measure` no e2e |
+| **RNF-01** | Busca responde rápido | < 50 ms do keystroke ao render, com 173 campeões e 2.118 skins no índice | `performance.measure` no e2e |
 | **RNF-02** | Imagem abre rápido | < 1 s para a prévia da splash em conexão de banda larga | e2e com timing |
 | **RNF-03** | Carga inicial enxuta | **Catálogo ≤ 150 KB comprimido** (é o único documento pesado da abertura); fatia de assets ≤ 1,5 MB comprimida e carregada **sob demanda** | Falha o build se qualquer um passar |
 | **RNF-04** | Custo de operação | **R$ 0,00/mês**: Vercel Hobby + Actions em repo público. **Sem storage e sem conta a manter** ([ADR 0012](adr/0012-onde-guardar-os-assets.md)) | Não há painel de cobrança a revisar |
@@ -156,7 +156,7 @@ flowchart LR
     subgraph vercel["Vercel Hobby · tudo estático, sem storage"]
         WEB[apps/web<br/>Next.js · busca no cliente]
         MAN[manifest.json]
-        CAT["catalog-hash.json<br/>173 campeões · 2.149 skins"]
+        CAT["catalog-hash.json<br/>173 campeões · 2.118 skins"]
         SHARD["index-*-hash.json<br/>assets · sob demanda"]
     end
 
@@ -209,7 +209,7 @@ sequenceDiagram
     Note over A,C: só caminhos declarados no JSON; nunca montados à mão
     A->>P: mede width, height, format, hasAlpha, sha256
     A->>A: fusão por (identidade, tipo) → nomes canônicos
-    A->>A: projeta o catálogo: 173 campeões e 2.149 skins, sem asset
+    A->>A: projeta o catálogo: 173 campeões e 2.118 skins, sem asset
     A->>A: valida contra o JSON Schema; falha aborta tudo
     A->>R: escreve catálogo e fatias do índice em apps/web/public
     A->>R: escreve manifest.json (último passo)
@@ -235,7 +235,7 @@ sequenceDiagram
     U->>W: abre o site
     W->>R: GET manifest.json (TTL curto)
     W->>R: GET catalog-{hash}.json (imutável, ~150 KB)
-    W->>W: desenha 173 campeões e monta o índice de busca de 2.149 skins + apelidos
+    W->>W: desenha 173 campeões e monta o índice de busca de 2.118 skins + apelidos
     U->>W: digita "mf" ou "kda"
     W->>W: busca no cliente (< 50 ms, sem rede)
     U->>W: clica no campeão (ou num resultado de skin)
@@ -279,7 +279,7 @@ Versão do contrato: **1.0.0**. Mudança exige ADR e nova versão.
 | Arquivo | Papel |
 |---|---|
 | `index-manifest.schema.json` | O `manifest.json` — único arquivo de nome fixo do índice |
-| `catalog.schema.json` | **Projeção de navegação (173 campeões) e de busca (2.149 skins)**, sem nenhum asset. É o único documento pesado da abertura ([ADR 0010](adr/0010-navegacao-por-campeao-busca-por-skin.md)) |
+| `catalog.schema.json` | **Projeção de navegação (173 campeões) e de busca (2.118 skins)**, sem nenhum asset. É o único documento pesado da abertura ([ADR 0010](adr/0010-navegacao-por-campeao-busca-por-skin.md)) |
 | `index-shard.schema.json` | Uma fatia de **assets** por categoria e versão, com `$defs.asset`. Carregada sob demanda |
 | `data/champion-aliases.json` | Apelidos de busca, mantidos à mão ([ADR 0009](adr/0009-apelidos-de-busca-mantidos-a-mao.md)) |
 
@@ -356,8 +356,14 @@ Nenhum requisito funcional depende destes endpoints.
 | Nível | Onde vive | Entradas | Serve a |
 |---|---|---:|---|
 | Campeão | `catalog.champions[]` | 173 | Navegação: a grade padrão |
-| Skin | `catalog.skins[]` | 2.149 | Busca, inclusive por termo transversal ("K/DA") |
-| Asset | `index-{categoria}` | ~20 mil | Download; carregado sob demanda |
+| Skin | `catalog.skins[]` | 2.118 | Busca, inclusive por termo transversal ("K/DA") |
+| Asset | `index-{categoria}` | 15.515 | Download; carregado sob demanda |
+
+> **Números corrigidos em 07/09/2026, na execução do T-09.** Eram 2.149 skins e 7.037
+> chromas; esses vinham do **cdragon** (S3). O ddragon, que é a única fonte da v1, lista
+> **2.118 skins** e **6.994 chromas** — 31 skins e 43 chromas a menos. A diferença entra
+> quando o cdragon entrar (T-16); até lá, o índice tem o que o ddragon tem. Medição em
+> [`docs/evidencias/t09-indexacao-real.json`](evidencias/t09-indexacao-real.json).
 
 **Identidade.** `championKey` numérico é a chave de fusão entre fontes;
 `skinId = {championKey}{skinNum:03d}` é a chave natural da skin (Jax Deus da Guerra =
