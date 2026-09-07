@@ -1,9 +1,15 @@
 # ADR 0007 — Só a versão atual tem assets copiados; orçamento de 10 GB
 
-- **Status:** aceito
+- **Status:** ⚠️ **largamente emendado** pelo [ADR 0012](0012-onde-guardar-os-assets.md) (07/09/2026)
 - **Data:** 2026-09-03
 - **Depende de:** [ADR 0005](0005-arquitetura-estatica-custo-zero.md)
-- **Evidência:** [SPIKES](../SPIKES.md) — S1 e S3
+- **Evidência:** [SPIKES](../SPIKES.md) — S1, S3 e S4
+
+> **Leia o [ADR 0012](0012-onde-guardar-os-assets.md) antes deste.**
+> Sem storage, **não há o que copiar nem o que rotacionar**: os itens 1 a 3 e 5 caem por
+> inteiro. O que **sobrevive, e é a parte mais importante deste ADR**, é a §"A pegadinha
+> que isso expõe": splash, loading e tile do ddragon não são versionados, e por isso o
+> histórico desses tipos continua impossível. Isso não mudou e não muda com storage nenhum.
 
 ## Contexto
 
@@ -30,18 +36,20 @@ em cerca de **10 semanas** e depois cresce para sempre.
 
 ## Decisão
 
-1. **Apenas a versão atual tem assets copiados para o R2.** Uma versão, ~1,9 GB, ~19 % do
-   tier gratuito. Sobra espaço para os zips por categoria e para crescimento do catálogo.
-2. **Versões anteriores existem só como índice**, apontando para as URLs versionadas do
-   ddragon (`sourceUrl`). O campo `storageKey` fica ausente e o front usa `sourceUrl`.
-   O índice de uma versão antiga custa alguns MB.
-3. Ao indexar um patch novo, os assets do patch anterior são **removidos do bucket**; o
-   índice dele permanece.
+1. ~~**Apenas a versão atual tem assets copiados para o R2.**~~ → **Corrigido pelo
+   [ADR 0012](0012-onde-guardar-os-assets.md): nenhuma versão tem assets copiados.**
+2. **Toda versão existe só como índice**, apontando para as URLs das fontes (`sourceUrl`).
+   O campo `storageKey` fica **sempre** ausente. *(Era a regra das versões antigas; virou a
+   regra de todas.)*
+3. ~~Ao indexar um patch novo, os assets do patch anterior são **removidos do bucket**.~~ →
+   **Não há bucket, então não há remoção.** O que acumula é índice: ~10 MB por versão
+   corrente e ~3 MB por versão antiga, que fica reduzida aos tipos versionados.
 4. **Idiomas:** `pt_BR` primeiro; `en_US` entra quando couber. Os dois juntos custam
    18,2 MB de JSON de origem por patch, então cabem — mas a ordem de prioridade fica
    registrada para quando o orçamento apertar.
-5. Se o orçamento apertar, a primeira fatia a sair são os **ícones de perfil** (554 MB,
-   32 % do total, e o tipo de asset que menos serve a um editor de vídeo).
+5. ~~Se o orçamento apertar, a primeira fatia a sair são os **ícones de perfil**.~~ →
+   **Não há orçamento de armazenamento a estourar.** O limite que sobra é o do RNF-03
+   (tamanho do catálogo e das fatias na carga), que é sobre latência, não sobre disco.
 
 ## A pegadinha que isso expõe
 

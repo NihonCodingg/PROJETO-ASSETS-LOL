@@ -7,6 +7,11 @@
 >
 > Data: 03/09/2026 · patch de referência: 16.17.1 · contrato do índice: `1.1.0`
 >
+> **Revisão de 07/09/2026:** o projeto passa a operar **sem storage próprio** —
+> [ADR 0012](adr/0012-onde-guardar-os-assets.md), que emenda os ADRs 0005 e 0007. O índice
+> aponta para as URLs das fontes. **RF-16 e a categoria `rank` saem da v1**; RNF-05 e
+> RNF-07 foram reescritos para dizer o que a arquitetura realmente entrega.
+>
 > **Revisão de 03/09/2026:** navegação e busca passam a operar em níveis diferentes —
 > ver [ADR 0010](adr/0010-navegacao-por-campeao-busca-por-skin.md), que emenda o
 > [ADR 0008](adr/0008-catalogo-de-skins-e-seletor.md). Os requisitos são numerados de
@@ -36,6 +41,8 @@ Uso pessoal e de um pequeno grupo de amigos, custo de operação **zero**, sem m
 | Monetização de qualquer forma | [ADR 0005](adr/0005-arquitetura-estatica-custo-zero.md), regra 6 |
 | Assets da wiki | Bloqueado até consentimento ([ADR 0004](adr/0004-consentimento-da-wiki-e-teto-de-resolucao.md)) |
 | Splash, loading e tile de versões antigas | Fisicamente impossível: essas URLs do ddragon não são versionadas ([ADR 0007](adr/0007-politica-de-versoes-e-orcamento.md)) |
+| **Zip por categoria pré-gerado (ex-RF-16)** | Sem storage não há onde pré-gerar ([ADR 0012](adr/0012-onde-guardar-os-assets.md)). O lote existe, mas montado no cliente — ver RF-17 |
+| **Emblemas de elo (categoria `rank`)** | O emblema composto só existe dentro do zip de 61,5 MB da Riot; o cdragon tem as peças, não o emblema montado, e compor violaria o [ADR 0001](adr/0001-formato-de-entrega-dos-assets.md) |
 
 ---
 
@@ -50,8 +57,8 @@ asset. Não vai ler nada.
 | J1 | "Preciso do square do Jax pro canto do vídeo" | Busca ou grade → campeão → baixar |
 | J2 | "Preciso da splash da skin Jax Deus da Guerra em alta" | Busca pelo nome da skin → abre o painel do campeão já naquela skin → baixar |
 | J7 | "Preciso das skins K/DA de vários campeões pra uma thumbnail temática" | Busca por termo transversal → skins de campeões diferentes ([ADR 0010](adr/0010-navegacao-por-campeao-busca-por-skin.md)) |
-| J3 | "Preciso de todos os ícones de item pra uma build animada" | Zip da categoria `item`, pré-gerado |
-| J4 | "Preciso do ícone de Diamante IV" | Categoria `rank` |
+| J3 | "Preciso de todos os ícones de item pra uma build animada" | Seleção da categoria `item` zipada no cliente (~868 arquivos, ~31 s medidos) |
+| ~~J4~~ | ~~"Preciso do ícone de Diamante IV"~~ | **Fora da v1** — ver §1.2 |
 | J5 | "Esse vídeo é de patch antigo, preciso do square antigo do Aatrox" | Seletor de versão — **só tipos versionados** |
 | J6 | "Preciso de tudo do Jax" | Seleção no cliente → zip com JSZip |
 
@@ -93,8 +100,8 @@ implementa e pelo teste que o prova.
 
 | # | Requisito | Critério de aceite |
 |---|---|---|
-| **RF-16** | Zip por categoria é pré-gerado e baixado direto do bucket | O download não executa JavaScript de compressão; o `Content-Length` bate com o manifesto |
-| **RF-17** | Zip de seleção customizada é montado no cliente | Selecionar N assets e baixar produz um zip com N arquivos, sem nenhuma requisição a um servidor próprio |
+| ~~**RF-16**~~ | ~~Zip por categoria é pré-gerado e baixado direto do bucket~~ | **Removido da v1 em 07/09/2026** ([ADR 0012](adr/0012-onde-guardar-os-assets.md)): sem storage não há onde pré-gerar. O número fica reservado, não reaproveitado |
+| **RF-17** | Zip de seleção customizada é montado no cliente — **único caminho de lote** | Selecionar N assets e baixar produz um zip com N arquivos, sem nenhuma requisição a um servidor próprio. Verificado com bytes de terceiros de dois hosts |
 | **RF-18** | "Tudo do Jax" é uma seleção pré-montada | Um clique seleciona todos os assets do campeão; o zip sai pelo caminho do RF-17 |
 | **RF-19** | Seletor de versão, com a atual por padrão | O manifesto lista as versões; trocar recarrega o índice daquela versão |
 | **RF-20** | Em versão anterior, tipos indisponíveis são explicitamente ausentes | Splash, loading e tile não aparecem; a UI diz por quê, em vez de servir a arte atual |
@@ -116,12 +123,13 @@ implementa e pelo teste que o prova.
 | **RNF-01** | Busca responde rápido | < 50 ms do keystroke ao render, com 173 campeões e 2.149 skins no índice | `performance.measure` no e2e |
 | **RNF-02** | Imagem abre rápido | < 1 s para a prévia da splash em conexão de banda larga | e2e com timing |
 | **RNF-03** | Carga inicial enxuta | **Catálogo ≤ 150 KB comprimido** (é o único documento pesado da abertura); fatia de assets ≤ 1,5 MB comprimida e carregada **sob demanda** | Falha o build se qualquer um passar |
-| **RNF-04** | Custo de operação | **R$ 0,00/mês**: Vercel Hobby + R2 free (10 GB) + Actions em repo público | Revisão mensal do painel |
-| **RNF-05** | Armazenamento | ≤ 10 GB; uma versão medida em ~1,9 GB | O indexador falha se o total projetado passar de 8 GB |
+| **RNF-04** | Custo de operação | **R$ 0,00/mês**: Vercel Hobby + Actions em repo público. **Sem storage e sem conta a manter** ([ADR 0012](adr/0012-onde-guardar-os-assets.md)) | Não há painel de cobrança a revisar |
+| **RNF-05** | Armazenamento | **Nenhum asset é armazenado.** O que o repositório carrega é índice: ~10 MB da versão corrente e ~3 MB por versão antiga | O indexador falha se o índice de uma versão passar de 15 MB |
 | **RNF-06** | Atualização | Novo patch refletido em ≤ 24 h, sem intervenção | Workflow agendado + `status.json` |
-| **RNF-07** | Resiliência | Se ddragon/cdragon caírem, o site continua com o último índice publicado | Nenhuma requisição do navegador vai às fontes |
+| **RNF-07** | Resiliência **degradada, e assumida** | Se ddragon/cdragon caírem, **as imagens não carregam** — o catálogo e a busca continuam, porque são estáticos do app. O site diz que a fonte está fora, em vez de mostrar quadrado quebrado | e2e com as fontes bloqueadas: busca funciona, imagem mostra estado de erro |
 | **RNF-08** | Etiqueta de rede | User-Agent identificado, concorrência ≤ 4, backoff em 429/5xx | Teste unitário do cliente HTTP |
 | **RNF-09** | Wiki | Zero requisições enquanto `WIKI_CONSENT_GRANTED` for falso | Trava em código que levanta exceção |
+| **RNF-13** | Integridade **verificável, não garantida** | O `sha256` do índice descreve os bytes medidos na indexação. Como quem serve é a fonte, ele vira **detector**: o front compara e avisa quando diverge, em vez de impedir | Teste: `sha256` divergente produz aviso visível e não bloqueia o download |
 | **RNF-10** | Legal | Aviso da Riot visível; produto registrado no Developer Portal antes do lançamento | Checklist de lançamento |
 | **RNF-11** | Acessibilidade | Navegável por teclado, contraste AA, `alt` em toda imagem; primitivas acessíveis via Radix ([ADR 0011](adr/0011-base-de-componentes-do-front.md)) | axe no e2e |
 | **RNF-12** | Qualidade | ruff, ruff format, mypy strict, pytest, eslint, tsc, vitest verdes em todo PR | CI |
@@ -145,42 +153,40 @@ flowchart LR
         IDX[packages/indexer<br/>adaptadores → fusão → publicação]
     end
 
-    subgraph r2["Cloudflare R2 + CDN · estático"]
+    subgraph vercel["Vercel Hobby · tudo estático, sem storage"]
+        WEB[apps/web<br/>Next.js · busca no cliente]
         MAN[manifest.json]
         CAT["catalog-hash.json<br/>173 campeões · 2.149 skins"]
         SHARD["index-*-hash.json<br/>assets · sob demanda"]
-        ASSET[assets nos bytes de origem]
-        ZIP[zips por categoria]
-    end
-
-    subgraph vercel["Vercel Hobby"]
-        WEB[apps/web<br/>Next.js · busca no cliente]
     end
 
     USER([editor])
 
     DD --> IDX
     CD --> IDX
-    RS --> IDX
+    RS -. fora da v1 .-> IDX
     WK -. bloqueado .-> IDX
-    IDX --> MAN & CAT & SHARD & ASSET & ZIP
+    IDX -->|commit| MAN & CAT & SHARD
     USER --> WEB
     WEB --> MAN & CAT
     WEB -. sob demanda .-> SHARD
-    USER --> ASSET & ZIP
+    USER -->|bytes de origem| DD & CD
 
     API[apps/api · FastAPI<br/>opcional, local]
     API -.->|alternativa, fora do caminho crítico| SHARD
 ```
 
-**A linha que define o projeto:** o tráfego do usuário nunca toca a Riot, e nunca toca um
-servidor nosso.
+**A linha que define o projeto** era "o tráfego do usuário nunca toca a Riot". O
+[ADR 0012](adr/0012-onde-guardar-os-assets.md) trocou isso conscientemente: nesta escala —
+o dono e uns poucos amigos — poupar as fontes não vale um cartão de crédito. O que
+**continua** valendo é a outra metade: **o tráfego do usuário nunca toca um servidor
+nosso**, porque não existe nenhum.
 
 ### 5.2 Componentes
 
 | Componente | Responsabilidade | Não faz |
 |---|---|---|
-| `packages/indexer` | Baixar, medir, fundir, nomear, publicar, gerar zips por categoria | Nunca converte imagem |
+| `packages/indexer` | Baixar, **medir**, fundir, nomear e escrever o índice | Nunca converte imagem e, desde o [ADR 0012](adr/0012-onde-guardar-os-assets.md), **nunca copia**: baixa para medir e descarta os bytes |
 | `packages/schema` | JSON Schema do índice, tipos TS, modelos Pydantic, tabela de apelidos | Nada de runtime |
 | `apps/web` | Busca, navegação, preview, download, conversão PNG, zip de seleção | Nunca chama a Riot nem exige a API |
 | `apps/api` | Alternativa opcional de portfólio | Nada do que o site precisa ([ADR 0006](adr/0006-api-como-componente-opcional.md)) |
@@ -193,11 +199,11 @@ sequenceDiagram
     participant D as ddragon
     participant C as cdragon
     participant P as Pillow
-    participant R as R2
+    participant R as repositório
 
     A->>D: GET /api/versions.json
     A->>A: versão nova? senão encerra
-    A->>D: GET dragontail-{v}.tgz (2,39 GB, 1 requisição)
+    A->>D: GET dragontail-{v}.tgz (2,39 GB, 1 requisição — para MEDIR, não para copiar)
     A->>A: extrai só data/{pt_BR,en_US} e os img/ do escopo
     A->>C: GET v1/champions/{key}.json (concorrência ≤ 4)
     Note over A,C: só caminhos declarados no JSON; nunca montados à mão
@@ -205,15 +211,17 @@ sequenceDiagram
     A->>A: fusão por (identidade, tipo) → nomes canônicos
     A->>A: projeta o catálogo: 173 campeões e 2.149 skins, sem asset
     A->>A: valida contra o JSON Schema; falha aborta tudo
-    A->>R: publica assets, catálogo, fatias do índice e zips
-    A->>R: publica manifest.json (último passo, commit atômico)
-    A->>R: remove os assets do patch anterior
+    A->>R: escreve catálogo e fatias do índice em apps/web/public
+    A->>R: escreve manifest.json (último passo)
     A->>A: escreve status.json e o resumo do job
+    A->>R: commit e push — o deploy da Vercel publica
 ```
 
-**Ordem importa:** o `manifest.json` é sempre o **último** a subir e o **primeiro** a ser
-lido. Enquanto ele não muda, o site continua servindo a versão antiga, íntegra. A remoção
-do patch anterior só acontece **depois** do manifesto novo estar publicado e verificado.
+**Ordem importa, mesmo sem bucket:** o `manifest.json` continua sendo o **último** a ser
+escrito e o **primeiro** a ser lido. Com o índice no repositório a atomicidade passa a ser
+do commit — ou o deploy inteiro entra, ou nenhum entra —, o que é uma garantia mais forte
+do que a ordem dava no bucket. A trava de ordem do T-06 fica valendo mesmo assim: ela
+impede que uma fatia referencie asset que não existe.
 
 ### 5.4 Fluxo de consulta
 
@@ -221,7 +229,8 @@ do patch anterior só acontece **depois** do manifesto novo estar publicado e ve
 sequenceDiagram
     participant U as Editor
     participant W as apps/web (Vercel)
-    participant R as R2 + CDN
+    participant R as índice estático (mesmo deploy)
+    participant F as ddragon / cdragon
 
     U->>W: abre o site
     W->>R: GET manifest.json (TTL curto)
@@ -232,7 +241,7 @@ sequenceDiagram
     U->>W: clica no campeão (ou num resultado de skin)
     W->>R: GET index-champion-{hash}.json (sob demanda, uma vez)
     W->>U: painel do campeão, com o seletor de skin
-    W->>R: GET dos assets da skin (bytes de origem)
+    W->>F: GET dos assets pela sourceUrl (CORS aberto em todos os tipos)
     W->>U: mostra formato, resolução, tamanho, fonte
     U->>W: "Baixar original" → salva o blob
     U->>W: "Baixar PNG" → canvas → toBlob → salva
@@ -242,18 +251,23 @@ sequenceDiagram
 
 ```mermaid
 flowchart TD
-    A[usuário quer vários assets] --> B{categoria inteira?}
-    B -->|sim| C[GET zip pré-gerado no R2]
-    B -->|não| D[seleção no cliente]
-    D --> E[fetch de cada asset já em cache do navegador]
+    A[usuário quer vários assets] --> D[seleção no cliente]
+    D --> E[fetch de cada asset pela sourceUrl · CORS aberto]
     E --> F[JSZip monta em memória]
     F --> G[download do blob]
-    C --> H([arquivo salvo])
-    G --> H
+    G --> H([arquivo salvo])
 ```
 
-**Limite prático:** acima de 300 arquivos ou 500 MB de seleção, a UI recomenda o zip por
-categoria em vez de montar no cliente. É recomendação, não bloqueio.
+O ramo do zip pré-gerado deixou de existir: o
+[ADR 0012](adr/0012-onde-guardar-os-assets.md) tirou o RF-16 da v1. O caminho do cliente foi
+**verificado** com bytes de dois hosts diferentes — 5 arquivos, zip relido, bytes
+preservados.
+
+**Limite prático:** acima de 300 arquivos ou 500 MB de seleção, a UI **avisa** que a
+montagem vai demorar e mostra progresso. Continua sendo aviso, não bloqueio — mas agora não
+há alternativa pronta para oferecer, então o aviso precisa ser honesto sobre o tempo.
+Medido: ~28 arquivos/s, o que põe a categoria `item` (868) em torno de **31 s** e a de
+ícones de perfil (5.021) em torno de **3 minutos e meio**, com meio GB em memória.
 
 ---
 
@@ -264,7 +278,7 @@ Versão do contrato: **1.0.0**. Mudança exige ADR e nova versão.
 
 | Arquivo | Papel |
 |---|---|
-| `index-manifest.schema.json` | O `manifest.json` — único arquivo de nome fixo no bucket |
+| `index-manifest.schema.json` | O `manifest.json` — único arquivo de nome fixo do índice |
 | `catalog.schema.json` | **Projeção de navegação (173 campeões) e de busca (2.149 skins)**, sem nenhum asset. É o único documento pesado da abertura ([ADR 0010](adr/0010-navegacao-por-campeao-busca-por-skin.md)) |
 | `index-shard.schema.json` | Uma fatia de **assets** por categoria e versão, com `$defs.asset`. Carregada sob demanda |
 | `data/champion-aliases.json` | Apelidos de busca, mantidos à mão ([ADR 0009](adr/0009-apelidos-de-busca-mantidos-a-mao.md)) |
@@ -283,6 +297,9 @@ Duas regras estão **no schema**, não só na prosa, e há teste que prova cada 
 
 Três camadas, carregadas nesta ordem:
 
+0. **Onde isso mora:** os três documentos são arquivos estáticos servidos pelo próprio app
+   na Vercel, gerados pelo indexador e versionados no repositório
+   ([ADR 0012](adr/0012-onde-guardar-os-assets.md)). Não há bucket.
 1. **`manifest.json`** — nome fixo, TTL curto. Diz qual é a versão atual e onde está tudo.
 2. **`catalog-{hash}.json`** — as duas projeções do [ADR 0010](adr/0010-navegacao-por-campeao-busca-por-skin.md):
    `champions[]` para navegar e `skins[]` para buscar. Sem asset, sem hash de arquivo, sem
@@ -355,25 +372,36 @@ cdragon entra por cobertura (chromas, loading vintage), não por resolução.
 
 | | Versão atual | Versões anteriores |
 |---|---|---|
-| Assets no R2 | sim (~1,9 GB) | não |
-| `storageKey` no índice | presente | ausente |
-| Origem servida ao usuário | R2 | `sourceUrl` do ddragon |
+| Assets copiados | **não** — [ADR 0012](adr/0012-onde-guardar-os-assets.md) | não |
+| `storageKey` no índice | **sempre ausente** | sempre ausente |
+| Origem servida ao usuário | `sourceUrl` da fonte | `sourceUrl` da fonte |
 | Tipos disponíveis | todos | **só os versionados**: square, item, spell, passive, profile_icon, map |
 | Splash, loading, tile | sim | **não existem** — essas URLs não são versionadas |
+| Índice no repositório | ~10 MB | ~3 MB (só os tipos versionados) |
 
 ---
 
 ## 9. Cache e CDN
 
-| Recurso | Nome | Cache-Control | Por quê |
-|---|---|---|---|
-| `manifest.json` | fixo | `max-age=300, stale-while-revalidate=86400` | Único ponto de invalidação |
-| Catálogo | com hash | `max-age=31536000, immutable` | Conteúdo novo = nome novo |
-| Fatias do índice | com hash | `max-age=31536000, immutable` | Conteúdo novo = nome novo |
-| Assets | `{versão}/{categoria}/{fileName}` | `max-age=31536000, immutable` | Nunca mudam dentro de uma versão |
-| Zips por categoria | com hash | `max-age=31536000, immutable` | Idem |
+**O que controlamos** — servido pela Vercel, com `headers()` no `next.config.ts`:
 
-Publicar um patch novo troca **um** arquivo de nome fixo. Nada precisa ser purgado.
+| Recurso | Nome | Cache-Control |
+|---|---|---|
+| `manifest.json` | fixo | `max-age=300, stale-while-revalidate=86400` |
+| Catálogo | com hash | `max-age=31536000, immutable` |
+| Fatias do índice | com hash | `max-age=31536000, immutable` |
+
+**O que não controlamos** — os assets, que agora vêm das fontes
+([ADR 0012](adr/0012-onde-guardar-os-assets.md)). Medido:
+
+| Fonte | `Cache-Control` |
+|---|---|
+| ddragon | **ausente** — tem `ETag` e `Last-Modified`, então o navegador cai em cache heurístico |
+| cdragon | `max-age=3600` |
+
+É uma perda real e assumida: a grade de 173 miniaturas (~4,6 MB) revalida conforme a
+heurística do navegador em vez de vir do cache para sempre. Medido em 0,71 s para 20
+miniaturas — aceitável, mas em toda visita fria, não só na primeira.
 
 ---
 
@@ -398,8 +426,8 @@ fontes. Rodam agendados e o resultado vira issue.
 Não há processo para instrumentar, mas a indexação pode falhar em silêncio — e é o único
 jeito de o site apodrecer.
 
-1. **`status.json` publicado no bucket** a cada execução: versão indexada, duração, assets
-   por fonte, bytes publicados, falhas por tipo, dimensões inesperadas.
+1. **`status.json` versionado junto com o índice** a cada execução: versão indexada,
+   duração, assets por fonte, bytes medidos, falhas por tipo, dimensões inesperadas.
 2. **Resumo do job no GitHub Actions** com a mesma tabela, legível sem baixar nada.
 3. **Falha abre issue automaticamente** com o log — inclusive quando um teste de contrato
    de fonte quebra. É o alerta que a §0.3 pede.
@@ -417,11 +445,13 @@ jeito de o site apodrecer.
 | cdragon muda caminhos | Assets somem do catálogo | Nunca montar caminho; partir do JSON. Teste de contrato agendado → issue |
 | ddragon troca a resolução de publicação | Fusão escolhe errado | Teste de contrato valida **dimensão**, não só status |
 | Grafia de `championId` muda entre patches | Apelidos e URLs quebram | Teste de contrato dos apelidos; `Fiddlesticks`×`FiddleSticks` já aconteceu |
-| Estourar 10 GB do R2 | Publicação falha | O indexador aborta acima de 8 GB projetados; ícones de perfil (554 MB) são a primeira fatia a sair |
-| Remoção do patch anterior apaga cedo demais | Site sem assets | Remoção só após manifesto novo publicado e verificado; teste cobre a ordem |
+| Fonte muda a arte sob uma URL não versionada | O `sha256` do índice diverge do arquivo servido, até a próxima indexação (≤ 24 h) | RNF-13: o front compara e **avisa**, em vez de impedir. É o preço medido do [ADR 0012](adr/0012-onde-guardar-os-assets.md) |
+| Fonte fora do ar | Imagens não carregam | Catálogo e busca continuam, porque são estáticos do app; a UI diz que a fonte caiu (RNF-07) |
+| Índice cresce no repositório | Repositório grande | ~10 MB por versão corrente e ~3 MB por versão antiga; revisitar se passar de 500 MB |
+| ~~Remoção do patch anterior apaga cedo demais~~ | — | **Não se aplica**: sem storage, não há remoção ([ADR 0012](adr/0012-onde-guardar-os-assets.md)) |
 | Vercel Hobby proíbe uso comercial | Conta suspensa | Não monetizar ([ADR 0005](adr/0005-arquitetura-estatica-custo-zero.md) regra 6) |
 | Política da Riot | Take-down | Aviso legal visível, registro no Developer Portal, sem monetização |
-| Zip no cliente trava o navegador | Frustração | Limite recomendado de 300 arquivos / 500 MB; empurra para o zip por categoria |
+| Zip no cliente trava o navegador | Frustração | Aviso acima de 300 arquivos / 500 MB, com progresso. **Não há mais zip por categoria para onde empurrar** — é o custo do ADR 0012 |
 | Wiki sem consentimento | Sem arte acima de 1280×720 | v1 não depende; a UI é honesta sobre o teto ([ADR 0004](adr/0004-consentimento-da-wiki-e-teto-de-resolucao.md)) |
 | Tabela de apelidos incompleta | Busca falha para alguém | Correção é uma linha; issue por busca sem resultado |
 
@@ -455,4 +485,5 @@ jeito de o site apodrecer.
 | [0008](adr/0008-catalogo-de-skins-e-seletor.md) catálogo de skins | RF-06 — emendado pelo 0010 |
 | [0010](adr/0010-navegacao-por-campeao-busca-por-skin.md) navegação × busca | RF-04, RF-05, RF-24, RF-25, RNF-03, §5.4, §6, §6.1, §8 |
 | [0011](adr/0011-base-de-componentes-do-front.md) base de componentes | RF-01, RF-03, RF-08, RF-24, RNF-01, RNF-11 |
+| [0012](adr/0012-onde-guardar-os-assets.md) sem storage | §1.2, §5, §6.1, §8, §9, RNF-05, RNF-07, RNF-13; remove RF-16 e a categoria `rank` |
 | [0009](adr/0009-apelidos-de-busca-mantidos-a-mao.md) apelidos | RF-03, §6, §10 |

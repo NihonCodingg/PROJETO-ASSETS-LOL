@@ -6,6 +6,10 @@
 >
 > Data: 03/09/2026 · 35 tickets · 7 ondas
 >
+> **Revisão de 07/09/2026:** o projeto passa a operar **sem storage próprio** —
+> [ADR 0012](adr/0012-onde-guardar-os-assets.md). Afeta T-06 (vira componente inativo),
+> T-10, T-11, T-12, T-13, T-22, T-23 (suspenso), T-25 e T-26. Nenhum ticket foi apagado.
+>
 > **Revisão de 03/09/2026:** navegação passa a ser por campeão e busca por skin
 > ([ADR 0010](adr/0010-navegacao-por-campeao-busca-por-skin.md)). Afeta T-04, T-07,
 > T-08, T-10, T-14, T-19 e T-20. Nenhum ticket foi criado ou removido.
@@ -277,9 +281,22 @@ limite de 500 linhas.
 
 ---
 
-### ✅ T-06 — Publicador no R2 com manifesto atômico
+### ✅🔌 T-06 — Publicador no R2 com manifesto atômico
 
 > **Concluído em 04/09/2026** (PR #5).
+>
+> 🔌 **Componente inativo desde 07/09/2026** ([ADR 0012](adr/0012-onde-guardar-os-assets.md)).
+> O código **não foi revertido**: `publish/storage.py` e `publish/bucket.py` continuam no
+> repositório, com os 17 testes passando na CI. O que mudou é que a CLI não os usa mais para
+> publicar assets — o `LocalObjectStore` e a trava de ordem seguem em uso para escrever o
+> índice.
+>
+> **O caminho de volta para a opção A é preencher `storageKey`**: criar o bucket, preencher
+> as cinco variáveis já documentadas no `.env.example` e voltar a chamar `publish_asset` no
+> `_publish_assets` da CLI. Os bytes já viajam junto do registro desde o T-07
+> (`FetchedAsset`), justamente por isso. O front não muda uma linha — `assetUrl()` já
+> prefere `storageKey` quando ele existe. Passo a passo completo na §"Como voltar para A"
+> do [ADR 0012](adr/0012-onde-guardar-os-assets.md).
 
 | | |
 |---|---|
@@ -455,7 +472,7 @@ limite de 500 linhas.
 
 | | |
 |---|---|
-| **Objetivo** | Projetar o catálogo completo, manter a carga inicial enxuta e impedir que uma publicação estoure os 10 GB |
+| **Objetivo** | Projetar o catálogo completo e manter a carga inicial enxuta |
 | **Dependências** | T-09 |
 | **Estimativa** | ~280 linhas |
 | **Effort** | médio |
@@ -468,8 +485,9 @@ limite de 500 linhas.
 - Fatiar o índice de assets por categoria, com hash no nome.
 - Calcular o tamanho comprimido e **falhar** se o catálogo passar de **150 KB** ou se a
   fatia `champion` passar de 1,5 MB (RNF-03).
-- Somar os bytes projetados e **abortar antes de publicar** se passar de 8 GB, com
-  mensagem dizendo qual categoria é a maior.
+- **Guarda de tamanho do índice** — substitui a guarda de orçamento de 10 GB, que morreu
+  com o [ADR 0012](adr/0012-onde-guardar-os-assets.md): abortar se o índice de uma versão
+  passar de **15 MB**, porque agora ele é versionado no repositório.
 - Preencher `shards[]` e os totais do manifesto.
 
 **NÃO entra**
@@ -482,47 +500,53 @@ limite de 500 linhas.
    campeão bate com a contagem em `skins[]`; nenhum chroma aparece em nenhum dos dois.
 2. Catálogo acima de 150 KB ou fatia `champion` acima de 1,5 MB comprimida → build falha
    com mensagem clara.
-3. Total projetado acima de 8 GB → aborta **antes** de qualquer upload.
+3. Índice de uma versão acima de 15 MB → aborta **antes** de escrever qualquer arquivo.
 4. O manifesto lista o catálogo e todas as fatias, e os totais batem com a soma delas.
 
 **Testes que provam**
 - Unitários com índices sintéticos nos dois lados de cada limite.
-- Teste de que o publicador não é chamado quando o orçamento estoura.
+- Teste de que nada é escrito quando o limite estoura.
 
 ---
 
-### T-11 — Rotação de versão: publicar novo, remover anterior
+### T-11 — Histórico de versões no índice
 
 | | |
 |---|---|
-| **Objetivo** | Manter o bucket em uma versão de assets sem nunca deixar o site sem arquivo |
-| **Dependências** | T-06 |
-| **Estimativa** | ~150 linhas |
-| **Effort** | médio |
-| **Cobre** | RF-19, RF-20, RNF-05, [ADR 0007](adr/0007-politica-de-versoes-e-orcamento.md) |
+| **Objetivo** | Acumular versões no índice sem prometer o que não existe |
+| **Dependências** | T-10 |
+| **Estimativa** | ~90 linhas |
+| **Effort** | baixo |
+| **Cobre** | RF-19, RF-20, RNF-05, [ADR 0007](adr/0007-politica-de-versoes-e-orcamento.md), [ADR 0012](adr/0012-onde-guardar-os-assets.md) |
+
+> **Reduzido em 07/09/2026.** Era "publicar novo, remover anterior". Sem storage não há o
+> que remover, então o ticket encolhe para a parte que sempre foi a mais importante: **não
+> oferecer, no modo histórico, os tipos cuja URL não é versionada.**
 
 **Entra**
-- Depois do manifesto novo publicado **e relido com sucesso**, remover os assets da versão
-  anterior, mantendo as fatias de índice dela.
-- Marcar `assetsCopied: false` na versão que perdeu os assets e remover do índice dela os
-  tipos não versionados (`splash_*`, `loading`, `tile`) — eles deixam de existir (RF-20).
-- Modo `--keep-previous` para depuração.
+- Ao indexar uma versão nova, a anterior é **reduzida no índice** aos tipos versionados:
+  `square`, `item_icon`, `summoner_spell_icon`, `passive_icon`, `profile_icon`, `map_image`.
+- `splash_*`, `loading`, `tile` e `chroma` são **removidos do índice da versão antiga** —
+  as URLs deles no ddragon não são versionadas e serviriam a arte de hoje com rótulo de
+  ontem (RF-20).
+- `assetsCopied` permanece `false` em toda versão.
 
 **NÃO entra**
-- Apagar índice antigo. Índice acumula; é barato e é o histórico.
+- Remover assets. Não há assets copiados ([ADR 0012](adr/0012-onde-guardar-os-assets.md)).
 - Recuperar splash histórico. É impossível por esta arquitetura, e a Spec diz isso.
+- Apagar índice antigo. Ele acumula — ~3 MB por versão reduzida.
 
 **Critérios de aceite**
-1. A remoção só roda depois de o manifesto novo ser lido de volta do bucket com sucesso.
-2. Falha na releitura → nada é removido e o comando sai ≠ 0.
-3. A versão anterior fica com `assetsCopied: false` e sem os tipos não versionados.
-4. As fatias de índice da versão anterior continuam acessíveis.
-5. Nunca há um instante em que o manifesto aponte para asset já removido.
+1. Depois de indexar uma versão nova, a anterior não tem nenhum registro de `splash_*`,
+   `loading`, `tile` ou `chroma`.
+2. Os tipos versionados da versão anterior continuam no índice, e as URLs deles respondem.
+3. `assetsCopied` é `false` em todas as versões do manifesto.
+4. O índice de uma versão antiga fica em torno de 3 MB — medido, não estimado.
 
 **Testes que provam**
-- Teste de ordem com S3 falso: releitura falhando prova que nada foi apagado.
-- Teste que percorre o manifesto resultante e confirma que toda URL referenciada existe.
-- Teste do filtro de tipos não versionados.
+- Teste do filtro de tipos não versionados, com um índice de duas versões.
+- Teste que percorre o índice reduzido e confirma que todo `sourceUrl` restante contém a
+  versão no caminho.
 
 ---
 
@@ -537,8 +561,10 @@ limite de 500 linhas.
 | **Cobre** | §11 da Spec, RNF-06 |
 
 **Entra**
-- `status.json` publicado a cada execução: versão, duração, assets por fonte, bytes
-  publicados, falhas por tipo, dimensões inesperadas.
+- `status.json` **versionado junto com o índice** a cada execução: versão, duração, assets
+  por fonte, bytes medidos, falhas por tipo, dimensões inesperadas.
+- Como não há bucket ([ADR 0012](adr/0012-onde-guardar-os-assets.md)), ele vai para o mesmo
+  destino do índice e é servido pelo app.
 - Resumo no `$GITHUB_STEP_SUMMARY` com a mesma tabela.
 - Abertura automática de issue em falha, com o log anexado e rótulo `indexacao`.
 - Log estruturado JSON consolidado.
@@ -548,7 +574,7 @@ limite de 500 linhas.
 - Serviço externo de alerta. Issue no repositório é o canal.
 
 **Critérios de aceite**
-1. `status.json` valida contra um schema próprio e é publicado mesmo quando a indexação falha.
+1. `status.json` valida contra um schema próprio e é escrito mesmo quando a indexação falha.
 2. O resumo do job aparece na aba do Actions sem precisar abrir o log.
 3. Falha simulada abre exatamente uma issue, sem duplicar em reexecução do mesmo commit.
 4. Nenhum segredo aparece no log nem na issue.
@@ -573,7 +599,9 @@ limite de 500 linhas.
 **Entra**
 - `.github/workflows/index.yml`: agendado a cada 6 h e por `workflow_dispatch`.
 - Detectar versão nova comparando com o manifesto publicado; sair cedo se não houver.
-- Segredos do R2 vindos de secrets do repositório.
+- **Publicar por commit**, não por API de bucket ([ADR 0012](adr/0012-onde-guardar-os-assets.md)):
+  o job escreve o índice, commita e dá push; o deploy da Vercel publica. **Nenhum segredo
+  de storage é necessário** — só o `GITHUB_TOKEN` que o Actions já fornece.
 - `concurrency` para nunca ter duas indexações ao mesmo tempo.
 - `timeout-minutes` compatível com o download de 2,39 GB.
 
@@ -584,8 +612,8 @@ limite de 500 linhas.
 **Critérios de aceite**
 1. Sem versão nova, o job sai em menos de 1 minuto e não publica nada.
 2. Duas execuções simultâneas não acontecem (`concurrency` prova).
-3. Os segredos não aparecem em log.
-4. Uma execução manual publica e o site passa a servir a versão nova.
+3. O commit do índice é atômico: ou entra inteiro, ou não entra.
+4. Uma execução manual commita e, depois do deploy, o site serve a versão nova.
 
 **Testes que provam**
 - `act` ou execução real em branch com bucket de teste.
@@ -918,7 +946,7 @@ limite de 500 linhas.
 
 # Onda 4 — categorias e download em lote
 
-**Execução: (T-21 ∥ T-22) → T-23**, com **(T-24 ∥ T-25 ∥ T-26)** em paralelo.
+**Execução: (T-21 ∥ T-22)**, com **(T-24 ∥ T-25 ∥ T-26)** em paralelo. ⏸️ T-23 suspenso.
 
 ### T-21 — Indexar as categorias não-campeão do ddragon
 
@@ -952,7 +980,14 @@ limite de 500 linhas.
 
 ---
 
-### T-22 — Indexar emotes, ward skins e emblemas de elo
+### T-22 — Indexar emotes e ward skins
+
+> **Reduzido em 07/09/2026** ([ADR 0012](adr/0012-onde-guardar-os-assets.md)): os
+> **emblemas de elo saem da v1**. O emblema composto só existe dentro do
+> `ranked-emblems-latest.zip`, de 61,5 MB; verifiquei que o cdragon tem as *peças*
+> (`diamond_base.png`, `diamond_crown_d1.png`, `backlight.png`) com CORS aberto, mas não o
+> emblema montado — e compor violaria o [ADR 0001](adr/0001-formato-de-entrega-dos-assets.md).
+> Sem storage, não há onde guardar o resultado da extração do zip.
 
 | | |
 |---|---|
@@ -964,28 +999,33 @@ limite de 500 linhas.
 
 **Entra**
 - Emotes (2.347) e ward skins (265) pelo cdragon, partindo dos JSONs `v1/`.
-- Emblemas de elo pelo zip oficial da Riot em `static.developer.riotgames.com`
-  (`source: "riot_static"`), com nome `Rank_{tier}_{divisão}.png`.
-- Respeitar o orçamento medido em T-02.
+- Respeitar as dimensões e formatos medidos no T-02.
 
 **NÃO entra**
+- **Emblemas de elo.** Fora da v1 — ver a nota acima.
 - Assets da wiki. Bloqueado pelo [ADR 0004](adr/0004-consentimento-da-wiki-e-teto-de-resolucao.md).
 - Ícones de posição e moedas — v2.
 
 **Critérios de aceite**
-1. As três categorias aparecem no manifesto com contagem conferida.
-2. Emblemas de elo vêm do zip oficial, não do cdragon, e o `source` diz isso.
-3. O total de bytes bate com o projetado em T-02, com margem de 15 %.
-4. Nenhuma requisição à wiki.
+1. As duas categorias aparecem no manifesto com contagem conferida: 2.338 emotes e 530
+   arquivos de ward (265 wards × 2 imagens).
+2. O total de bytes bate com o medido em T-02, com margem de 15 %.
+3. Nenhuma requisição à wiki.
+4. Nenhum registro com `category: "rank"` é produzido.
 
 **Testes que provam**
-- Unitários com fixture dos JSONs e um zip de fixture.
-- Teste do nome de arquivo de elo.
+- Unitários com fixture dos JSONs das duas categorias.
 - Teste de que o total medido não diverge do projetado além da margem.
+- Teste que falha se algum registro sair com `category: "rank"`.
 
 ---
 
-### T-23 — Zips por categoria pré-gerados
+### ⏸️ T-23 — Zips por categoria pré-gerados — **SUSPENSO**
+
+> ⏸️ **Suspenso em 07/09/2026** ([ADR 0012](adr/0012-onde-guardar-os-assets.md)): sem
+> storage não há onde pré-gerar, e o **RF-16 saiu da v1**. O ticket **não foi apagado** —
+> ele volta inteiro se um dia a opção A for retomada, junto com o T-06. Até lá, o download
+> em lote é só o do cliente (T-25).
 
 | | |
 |---|---|
@@ -993,7 +1033,7 @@ limite de 500 linhas.
 | **Dependências** | T-21, T-22 |
 | **Estimativa** | ~180 linhas |
 | **Effort** | médio |
-| **Cobre** | RF-16, [ADR 0005](adr/0005-arquitetura-estatica-custo-zero.md) |
+| **Cobre** | ~~RF-16~~ — fora da v1 ([ADR 0012](adr/0012-onde-guardar-os-assets.md)) |
 
 **Entra**
 - Um zip por categoria, gerado no indexador, com os arquivos nomeados pelo `fileName`.
@@ -1055,7 +1095,7 @@ limite de 500 linhas.
 
 | | |
 |---|---|
-| **Objetivo** | "Tudo do Jax" e seleção livre, sem servidor |
+| **Objetivo** | "Tudo do Jax" e seleção livre, sem servidor — e, desde o [ADR 0012](adr/0012-onde-guardar-os-assets.md), **o único caminho de download em lote** |
 | **Dependências** | T-19 |
 | **Estimativa** | ~200 linhas |
 | **Effort** | médio |
@@ -1064,9 +1104,10 @@ limite de 500 linhas.
 **Entra**
 - Selecionar vários assets e baixar como zip montado com JSZip.
 - Ação "tudo deste campeão" que pré-monta a seleção.
-- Acima de 300 arquivos ou 500 MB, recomendar o zip por categoria — **recomendação, não
-  bloqueio**.
-- Progresso durante a montagem.
+- Acima de 300 arquivos ou 500 MB, **avisar** com estimativa de tempo honesta. Não há mais
+  zip por categoria para onde empurrar (T-23 suspenso), então o aviso precisa informar em
+  vez de redirecionar. Base medida: ~28 arquivos/s.
+- Progresso durante a montagem, obrigatório — a categoria `item` leva ~31 s.
 
 **NÃO entra**
 - Conversão PNG em lote. Fica para v2 se alguém pedir.
@@ -1075,12 +1116,13 @@ limite de 500 linhas.
 **Critérios de aceite**
 1. Selecionar N assets e baixar produz um zip com N arquivos, com os `fileName` corretos.
 2. Nenhuma requisição a servidor próprio durante a montagem.
-3. Acima do limite, aparece a recomendação e ainda assim é possível prosseguir.
+3. Acima do limite, aparece o aviso com a estimativa de tempo e ainda assim é possível
+   prosseguir.
 4. "Tudo do Jax" seleciona todos os assets do campeão, chromas incluídos se revelados.
 
 **Testes que provam**
 - Vitest montando um zip de fixture e lendo de volta a lista de nomes.
-- Teste do limite (aparece a recomendação, o botão continua habilitado).
+- Teste do limite (aparece o aviso com estimativa, o botão continua habilitado).
 - Teste de rede confirmando ausência de chamada a servidor próprio.
 
 ---
@@ -1097,7 +1139,9 @@ limite de 500 linhas.
 
 **Entra**
 - Seletor de versão a partir do manifesto, com `currentVersion` como padrão.
-- Em versão com `assetsCopied: false`, usar `sourceUrl` e mostrar só os tipos versionados.
+- **Toda** versão tem `assetsCopied: false` desde o [ADR 0012](adr/0012-onde-guardar-os-assets.md),
+  então o front sempre usa `sourceUrl`. O que distingue o modo histórico é a **ausência dos
+  tipos não versionados**, garantida pelo T-11.
 - Aviso explícito de que splash, loading e tile de patches antigos **não existem** — e por quê.
 
 **NÃO entra**
@@ -1412,7 +1456,7 @@ Todo requisito da Spec tem pelo menos um ticket.
 | RF-09, RF-12, RF-13, RF-14 | T-08, T-15 |
 | RF-10, RF-11 | T-05, T-08 |
 | RF-15 | T-19, T-29 |
-| RF-16 | T-23 |
+| ~~RF-16~~ | ⏸️ T-23 suspenso — fora da v1 ([ADR 0012](adr/0012-onde-guardar-os-assets.md)) |
 | RF-17, RF-18 | T-25 |
 | RF-19, RF-20 | T-11, T-26 |
 | RF-21, RF-22 | T-27, T-33 |
@@ -1421,7 +1465,8 @@ Todo requisito da Spec tem pelo menos um ticket.
 | RNF-02 | T-29 |
 | RNF-03 | T-10, T-08, T-24 |
 | RNF-04 | T-13 |
-| RNF-05 | T-02, T-10, T-23 |
+| RNF-05 | T-02, T-10 |
+| RNF-13 | T-15 (aviso de divergência), T-09 (medição do sha256) |
 | RNF-06 | T-12, T-13, T-31 |
 | RNF-07 | T-08 |
 | RNF-08, RNF-09 | T-03 |
@@ -1437,7 +1482,7 @@ Todo requisito da Spec tem pelo menos um ticket.
 | 1 | ✅ (T-03 ∥ T-04) → (T-05 ∥ T-06) → T-07; T-08 ∥ | 2 frentes | **Concluída.** Esqueleto andante: 1 campeão, 2 tipos, ponta a ponta — falta só publicar no R2 de verdade |
 | 2 | T-09 → (T-10 ∥ T-11 ∥ T-12) → T-13; (T-14 ∥ T-15) ∥; 🚧 T-34 quando o design chegar | 2 frentes | Catálogo de campeões completo e automático |
 | 3 | (T-16 → T-17) ∥ (T-19 → T-20); T-18 ao final | 2 frentes | Grade de campeões, seletor de skin, chromas e a segunda fonte |
-| 4 | (T-21 ∥ T-22) → T-23; (T-24 ∥ T-25 ∥ T-26) ∥ | 2 frentes | Catálogo inteiro e download em lote |
+| 4 | (T-21 ∥ T-22); (T-24 ∥ T-25 ∥ T-26) ∥ · ⏸️ T-23 suspenso | 2 frentes | Catálogo inteiro e download em lote pelo cliente |
 | 5 | (T-27 ∥ T-28 ∥ T-31) → T-29 → T-30 | 3 frentes | Produto fechado e vestido |
 | 6 | T-32 | — | API opcional |
 | — | T-33 | gatilho manual | Pré-lançamento |
