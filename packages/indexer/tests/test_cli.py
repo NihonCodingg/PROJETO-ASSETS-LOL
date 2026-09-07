@@ -109,20 +109,20 @@ def test_nenhum_registro_do_indice_tem_storage_key(tarball_local: Path, destino:
             assert asset["sourceUrl"].startswith("https://"), asset["id"]
 
 
-def test_o_catalogo_tem_o_campeao_e_as_skins_dele(tarball_local: Path, destino: Path) -> None:
+def test_o_catalogo_tem_os_campeoes_e_as_skins_deles(tarball_local: Path, destino: Path) -> None:
     """ADR 0010: navegação por campeão, busca por skin — e chroma não é skin."""
     indexar(tarball_local, destino)
     manifesto = ler(destino, "manifest.json")
     catalogo = ler(destino, manifesto["versions"][0]["catalog"]["url"])
 
-    assert len(catalogo["champions"]) == 1
-    campeao = catalogo["champions"][0]
-    assert campeao["championKey"] == 24
+    assert len(catalogo["champions"]) == 2
+    campeao = next(c for c in catalogo["champions"] if c["championKey"] == 24)
+    assert campeao["championId"] == "Jax"
     assert campeao["skinCount"] == 2, "duas skins de verdade; o chroma não conta"
     assert campeao["chromaCount"] == 1
-    assert len(catalogo["skins"]) == campeao["skinCount"]
-    assert {s["skinId"] for s in catalogo["skins"]} == {24000, 24004}
-    assert sum(1 for s in catalogo["skins"] if s["isBase"]) == 1
+    assert len(catalogo["skins"]) == sum(c["skinCount"] for c in catalogo["champions"])
+    assert {24000, 24004} <= {s["skinId"] for s in catalogo["skins"]}
+    assert sum(1 for s in catalogo["skins"] if s["isBase"]) == 2
     assert manifesto["versions"][0]["catalog"]["skins"] == len(catalogo["skins"])
 
 
@@ -130,7 +130,8 @@ def test_a_miniatura_aponta_para_a_fonte(tarball_local: Path, destino: Path) -> 
     """Sem storage, o cartão da grade carrega direto do ddragon (ADR 0012)."""
     indexar(tarball_local, destino)
     manifesto = ler(destino, "manifest.json")
-    campeao = ler(destino, manifesto["versions"][0]["catalog"]["url"])["champions"][0]
+    campeoes = ler(destino, manifesto["versions"][0]["catalog"]["url"])["champions"]
+    campeao = next(c for c in campeoes if c["championKey"] == 24)
 
     assert campeao.get("thumbnailKey") is None
     assert campeao["thumbnailUrl"].endswith("/img/champion/Jax.png")
@@ -145,6 +146,8 @@ def test_a_miniatura_da_skin_e_o_tile(tarball_local: Path, destino: Path) -> Non
     por_id = {s["skinId"]: s for s in skins}
     assert por_id[24004]["thumbnailUrl"].endswith("/img/champion/tiles/Jax_4.jpg")
     assert por_id[24004].get("thumbnailKey") is None
+    # e a do campeão de caixa divergente aponta para o arquivo que existe
+    assert por_id[9004]["thumbnailUrl"].endswith("/img/champion/tiles/FiddleSticks_4.jpg")
 
 
 def test_a_versao_sai_do_nome_do_arquivo(tarball_local: Path, destino: Path) -> None:

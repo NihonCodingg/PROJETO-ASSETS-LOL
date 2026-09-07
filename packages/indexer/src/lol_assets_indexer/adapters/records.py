@@ -23,6 +23,9 @@ from lol_assets_indexer.naming import asset_id, champion_file_name, file_extensi
 
 DDRAGON = "https://ddragon.leagueoflegends.com"
 
+#: Os ícones de stat mod, que nenhum JSON do ddragon lista.
+STAT_MODS_DIR = "img/perk-images/StatMods/"
+
 
 def _texto(valor: Any) -> str | None:
     """Nome em branco no ddragon é ausência, não nome."""
@@ -99,15 +102,16 @@ def build_champion_assets(scan: TarballScan) -> list[Asset]:
         nome = _names(pt.get("name"), en.get("name"), fallback=champion_id)
         comum = {"champion_key": champion_key, "champion_id": champion_id}
 
-        square = scan.image(f"img/champion/{champion_id}.png")
-        if square is not None:
+        achado = scan.resolve(f"img/champion/{champion_id}.png")
+        if achado is not None:
+            relativo, square = achado
             assets.append(
                 _asset(
                     asset_type="square",
                     category="champion",
                     natural_key=champion_key,
                     names=nome,
-                    source_url=_versioned_url(scan.game_version, f"img/champion/{champion_id}.png"),
+                    source_url=_versioned_url(scan.game_version, relativo),
                     file_name=champion_file_name(champion_id, "square", square.format),
                     measured=square,
                     **comum,
@@ -190,10 +194,10 @@ def _skin_assets(
             fallback=champion_id,
         )
         for pasta, tipo in SOURCE_FOLDER_TO_TYPE.items():
-            relativo = f"img/champion/{pasta}/{champion_id}_{num}.jpg"
-            medida = scan.image(relativo)
-            if medida is None:
+            achado = scan.resolve(f"img/champion/{pasta}/{champion_id}_{num}.jpg")
+            if achado is None:
                 continue
+            relativo, medida = achado
             yield _asset(
                 asset_type=tipo,
                 category="champion",
@@ -357,6 +361,13 @@ def build_rune_assets(scan: TarballScan) -> list[Asset]:
                     (runas_en.get(runa.get("id")) or {}).get("name"),
                     fallback=chave,
                 )
+
+    # Os stat mods não aparecem em runesReforged.json — nenhum JSON do ddragon os
+    # lista. São arquivos soltos, e a §A.4 do KICKOFF os cita junto com as runas
+    # justamente porque também têm alfa e nunca podem virar JPEG (ADR 0001).
+    for relativo, _ in scan.images_under(STAT_MODS_DIR):
+        chave = relativo.rsplit("/", 1)[-1].rsplit(".", 1)[0]
+        caminhos[relativo] = (chave, "stat_mod_icon", "StatMod")
 
     assets: list[Asset] = []
     for relativo, (chave, tipo, prefixo) in caminhos.items():

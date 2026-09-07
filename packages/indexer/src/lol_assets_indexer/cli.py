@@ -183,6 +183,7 @@ async def _run(
             "skins": len(catalog.skins),
             "descartadas": scan.skipped,
             "ilegiveis": sum(scan.unreadable.values()),
+            "caixaDivergente": len(scan.case_mismatches),
         },
     )
 

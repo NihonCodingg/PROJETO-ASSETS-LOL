@@ -79,9 +79,35 @@ class TarballScan:
     images: dict[str, MeasuredImage] = field(default_factory=dict)
     skipped: int = 0
     unreadable: dict[str, int] = field(default_factory=dict)
+    #: Caminho pedido → caminho real, quando só a caixa diverge. Ver `resolve`.
+    case_mismatches: dict[str, str] = field(default_factory=dict)
+
+    #: Índice em minúsculas, montado sob demanda pelo `resolve`.
+    _por_minusculas: dict[str, str] = field(default_factory=dict, repr=False)
 
     def image(self, relative_path: str) -> MeasuredImage | None:
         return self.images.get(relative_path)
+
+    def resolve(self, relative_path: str) -> tuple[str, MeasuredImage] | None:
+        """Acha a imagem tolerando divergência de caixa, e devolve o caminho real.
+
+        O ddragon chama o campeão de `Fiddlesticks` em `data/` e de `FiddleSticks`
+        em `img/champion/*/`. São 13 skins que sumiriam do índice se a busca fosse
+        só exata — e a URL precisa ser a do arquivo que existe, não a deduzida do
+        `championId`, senão aponta para um 404.
+        """
+        exata = self.images.get(relative_path)
+        if exata is not None:
+            return relative_path, exata
+        if not self._por_minusculas:
+            self._por_minusculas = {caminho.lower(): caminho for caminho in self.images}
+        real = self._por_minusculas.get(relative_path.lower())
+        if real is None:
+            return None
+        # Anotado, não logado: são 52 arquivos por patch, e um resumo no fim vale
+        # mais do que 52 linhas iguais no meio da varredura.
+        self.case_mismatches[relative_path] = real
+        return real, self.images[real]
 
     def images_under(self, prefix: str) -> Iterator[tuple[str, MeasuredImage]]:
         for path, measured in self.images.items():

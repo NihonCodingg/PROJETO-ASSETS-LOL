@@ -62,6 +62,10 @@ def montar_membros() -> dict[str, bytes]:
         membros[f"{VERSAO}/data/{idioma}/champion/Jax.json"] = json_de(
             ficha_de_campeao("Jax", "24", "Jax")
         )
+        # O ddragon escreve `Fiddlesticks` em data/ e `FiddleSticks` em img/.
+        membros[f"{VERSAO}/data/{idioma}/champion/Fiddlesticks.json"] = json_de(
+            ficha_de_campeao("Fiddlesticks", "9", "Fiddlesticks")
+        )
         membros[f"{VERSAO}/data/{idioma}/item.json"] = json_de(
             {"data": {"3031": {"name": "Gume do Infinito"}}}
         )
@@ -102,6 +106,10 @@ def montar_membros() -> dict[str, bytes]:
     membros["img/perk-images/Styles/Precision/PressTheAttack.png"] = imagem(
         256, 256, "PNG", alfa=True
     )
+    # stat mod: existe como arquivo e não aparece em JSON nenhum do ddragon
+    membros["img/perk-images/StatMods/StatModsHealthScalingIcon.png"] = imagem(
+        32, 32, "PNG", alfa=True
+    )
     for num in (0, 4):
         membros[f"img/champion/centered/Jax_{num}.jpg"] = imagem(1280, 720, "JPEG")
         membros[f"img/champion/splash/Jax_{num}.jpg"] = imagem(1215, 717, "JPEG")
@@ -109,6 +117,17 @@ def montar_membros() -> dict[str, bytes]:
         membros[f"img/champion/tiles/Jax_{num}.jpg"] = imagem(380, 380, "JPEG")
     # o chroma tem arquivo de splash no tarball, mas NÃO pode virar registro
     membros["img/champion/centered/Jax_18.jpg"] = imagem(1280, 720, "JPEG")
+
+    # o campeão de caixa divergente: os arquivos são `FiddleSticks`, com S maiúsculo
+    membros[f"{VERSAO}/img/champion/FiddleSticks.png"] = imagem(128, 128, "PNG")
+    membros[f"{VERSAO}/img/passive/Fiddlesticks_P.png"] = imagem(64, 64, "PNG")
+    membros[f"{VERSAO}/img/spell/FiddlesticksQ.png"] = imagem(64, 64, "PNG")
+    membros[f"{VERSAO}/img/spell/FiddlesticksW.png"] = imagem(64, 64, "PNG")
+    for num in (0, 4):
+        membros[f"img/champion/centered/FiddleSticks_{num}.jpg"] = imagem(1280, 720, "JPEG")
+        membros[f"img/champion/splash/FiddleSticks_{num}.jpg"] = imagem(1215, 717, "JPEG")
+        membros[f"img/champion/loading/FiddleSticks_{num}.jpg"] = imagem(308, 560, "JPEG")
+        membros[f"img/champion/tiles/FiddleSticks_{num}.jpg"] = imagem(380, 380, "JPEG")
 
     # --- fora do escopo: 44 % do peso do tarball real (S1) ---
     membros[f"{VERSAO}/img/tft-champion/x.png"] = imagem(256, 128, "PNG")

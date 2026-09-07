@@ -98,14 +98,15 @@ def test_chroma_nao_vira_skin(scan: TarballScan) -> None:
     assert nums == [0, 4], "o chroma 18 entrou como skin"
 
     assets = build_champion_assets(scan)
-    splashes = [a for a in assets if a.type == "splash_centered"]
+    splashes = [a for a in assets if a.type == "splash_centered" and a.champion_key == 24]
     assert {a.skin_num for a in splashes} == {0, 4}
     assert not any(a.skin_num == 18 for a in assets), "o chroma virou registro"
 
 
 def test_os_quatro_cortes_saem_com_os_nomes_canonicos(scan: TarballScan) -> None:
     """ADR 0002: `centered` é splash_centered; `splash` é splash_wide."""
-    por_tipo = {a.type: a for a in build_champion_assets(scan) if a.skin_num == 0}
+    jax = [a for a in build_champion_assets(scan) if a.champion_id == "Jax"]
+    por_tipo = {a.type: a for a in jax if a.skin_num == 0}
     assert (por_tipo["splash_centered"].width, por_tipo["splash_centered"].height) == (1280, 720)
     assert (por_tipo["splash_wide"].width, por_tipo["splash_wide"].height) == (1215, 717)
     assert (por_tipo["loading"].width, por_tipo["loading"].height) == (308, 560)
@@ -176,7 +177,7 @@ def test_feitico_de_invocador_nao_vira_habilidade(scan: TarballScan) -> None:
     feiticos = {a.id for a in tudo["summoner_spell"]}
     assert habilidades and feiticos
     assert not (habilidades & feiticos)
-    assert all(a.champion_key == 24 for a in tudo["champion"] if a.type == "ability_icon")
+    assert {a.champion_key for a in tudo["champion"] if a.type == "ability_icon"} == {9, 24}
 
 
 def test_nomes_saem_dos_dois_idiomas(scan: TarballScan) -> None:
@@ -186,7 +187,8 @@ def test_nomes_saem_dos_dois_idiomas(scan: TarballScan) -> None:
 
 
 def test_identidade_e_nome_de_arquivo(scan: TarballScan) -> None:
-    por_tipo = {a.type: a for a in build_champion_assets(scan) if a.skin_num in (None, 0)}
+    jax = [a for a in build_champion_assets(scan) if a.champion_id == "Jax"]
+    por_tipo = {a.type: a for a in jax if a.skin_num in (None, 0)}
     assert por_tipo["square"].id == "square:24"
     assert por_tipo["square"].file_name == "Jax_square.png"
     assert por_tipo["splash_centered"].id == "splash_centered:24000"
@@ -216,20 +218,20 @@ def test_a_medicao_bate_byte_a_byte_com_o_arquivo(
 #: A fixture tem um caso de cada coisa: um campeão, duas skins de verdade, um
 #: chroma, dois idiomas e um arquivo de cada categoria. Se um construtor parar de
 #: produzir um tipo — ou passar a produzir a mais —, é aqui que aparece.
-CONTAGENS_ESPERADAS = {
+CONTAGENS_ESPERADAS: dict[str, dict[str, int]] = {
     "champion": {
-        "square": 1,
-        "passive_icon": 1,
-        "ability_icon": 2,
-        "splash_centered": 2,
-        "splash_wide": 2,
-        "loading": 2,
-        "tile": 2,
+        "square": 2,
+        "passive_icon": 2,
+        "ability_icon": 4,
+        "splash_centered": 4,
+        "splash_wide": 4,
+        "loading": 4,
+        "tile": 4,
     },
     "item": {"item_icon": 1},
     "summoner_spell": {"summoner_spell_icon": 1},
     "profile_icon": {"profile_icon": 1},
-    "rune": {"rune_tree_icon": 1, "rune_icon": 1},
+    "rune": {"rune_tree_icon": 1, "rune_icon": 1, "stat_mod_icon": 1},
     "map": {"map_image": 1},
 }
 
@@ -242,7 +244,7 @@ def test_as_contagens_batem_com_o_manifesto_esperado(scan: TarballScan) -> None:
     construtor continue produzindo exatamente os tipos que promete.
     """
     obtidas = {
-        categoria: dict(collections.Counter(a.type for a in assets))
+        str(categoria): dict(collections.Counter(a.type for a in assets))
         for categoria, assets in build_all(scan).items()
     }
     for categoria, esperado in CONTAGENS_ESPERADAS.items():
@@ -263,3 +265,36 @@ def test_nome_em_branco_no_ddragon_cai_para_o_id(scan: TarballScan) -> None:
     item = build_all(vazio)["item"][0]
     assert item.names.pt_BR == "3031"
     assert item.names.en_US is None
+
+
+def test_stat_mod_entra_mesmo_sem_json_que_o_liste(scan: TarballScan) -> None:
+    """Nenhum JSON do ddragon lista stat mod; eles vêm da varredura da pasta.
+
+    A §A.4 do KICKOFF os cita junto com as runas porque têm alfa e nunca podem
+    virar JPEG — mas quem constrói pelo `runesReforged.json` simplesmente não os vê.
+    """
+    stat_mods = [a for a in build_all(scan)["rune"] if a.type == "stat_mod_icon"]
+    assert stat_mods, "os stat mods sumiram do índice"
+    for asset in stat_mods:
+        assert asset.has_alpha is True
+        assert asset.format == "png"
+        assert "/perk-images/StatMods/" in asset.source_url
+        assert asset.names.pt_BR == "StatModsHealthScalingIcon"
+
+
+def test_caixa_divergente_no_nome_do_arquivo_nao_perde_a_skin(scan: TarballScan) -> None:
+    """O ddragon escreve `Fiddlesticks` em `data/` e `FiddleSticks` em `img/`.
+
+    São 13 skins reais no patch 16.17.1. Buscar só pelo caminho exato as apagaria
+    do índice sem erro nenhum — some silenciosamente, que é o pior jeito.
+    """
+    fiddle = [a for a in build_champion_assets(scan) if a.champion_id == "Fiddlesticks"]
+    splashes = [a for a in fiddle if a.type == "splash_centered"]
+    assert {a.skin_num for a in splashes} == {0, 4}
+
+    # A URL tem que ser a do arquivo que existe, não a deduzida do championId.
+    for asset in splashes:
+        assert "/FiddleSticks_" in asset.source_url, asset.source_url
+    # E o nome do arquivo que oferecemos segue a nossa convenção, com o id do dado.
+    assert splashes[0].file_name.startswith("Fiddlesticks_")
+    assert scan.case_mismatches, "a divergência precisa ficar registrada"
