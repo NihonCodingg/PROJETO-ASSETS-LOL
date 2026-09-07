@@ -31,6 +31,11 @@ def project_catalog(
     skins: list[CatalogSkin] = []
 
     for snapshot in snapshots:
+        do_campeao = assets_by_champion.get(snapshot.key, [])
+        # A miniatura do cartão é o `square`; a do resultado de busca é o `tile`.
+        square_key, square_url = _thumbnail(a for a in do_campeao if a.type == "square")
+        tiles = {a.skin_num: a for a in do_campeao if a.type == "tile"}
+
         champions.append(
             CatalogChampion(
                 champion_key=snapshot.key,
@@ -41,22 +46,25 @@ def project_catalog(
                 skin_count=len(snapshot.skins),
                 chroma_count=snapshot.chroma_count,
                 base_skin_id=skin_id(snapshot.key, 0),
-                thumbnail_key=_square_key(assets_by_champion.get(snapshot.key, [])),
+                thumbnail_key=square_key,
+                thumbnail_url=square_url,
             )
         )
-        skins.extend(
-            CatalogSkin(
-                skin_id=skin_id(snapshot.key, skin.num),
-                skin_num=skin.num,
-                champion_key=snapshot.key,
-                names=skin.names,
-                is_base=skin.num == 0,
-                chroma_count=skin.chroma_count,
-                # A miniatura da skin é o `tile`, que só existe a partir do T-09.
-                thumbnail_key=None,
+        for skin in snapshot.skins:
+            tile = tiles.get(skin.num)
+            tile_key, tile_url = _thumbnail([tile] if tile is not None else [])
+            skins.append(
+                CatalogSkin(
+                    skin_id=skin_id(snapshot.key, skin.num),
+                    skin_num=skin.num,
+                    champion_key=snapshot.key,
+                    names=skin.names,
+                    is_base=skin.num == 0,
+                    chroma_count=skin.chroma_count,
+                    thumbnail_key=tile_key,
+                    thumbnail_url=tile_url,
+                )
             )
-            for skin in snapshot.skins
-        )
 
     return Catalog(
         schema_version=_schema_version(),
@@ -68,12 +76,18 @@ def project_catalog(
     )
 
 
-def _square_key(assets: list[Asset]) -> str | None:
-    """A miniatura do cartão é o square, que já é publicado desde o T-05."""
+def _thumbnail(assets: Iterable[Asset]) -> tuple[str | None, str | None]:
+    """`(thumbnailKey, thumbnailUrl)` do primeiro asset da sequência.
+
+    Com storage, a miniatura é a chave no bucket. Sem storage (ADR 0012), é a URL
+    da fonte. O schema aceita os dois desde o começo e o front lê os dois — é isso
+    que faz a volta para a opção A ser barata.
+    """
     for asset in assets:
-        if asset.type == "square":
-            return asset.storage_key
-    return None
+        if asset.storage_key:
+            return asset.storage_key, None
+        return None, asset.source_url
+    return None, None
 
 
 def _schema_version() -> str:

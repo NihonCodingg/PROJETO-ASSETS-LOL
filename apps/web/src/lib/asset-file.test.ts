@@ -11,6 +11,7 @@ import {
   formatBytes,
   pngFileName,
   sha256Hex,
+  thumbnailSrc,
   type Bitmap,
   type CanvasLike,
   type PngDeps,
@@ -113,5 +114,26 @@ describe("integridade e ficha", () => {
     expect(formatBytes(512)).toBe("512 B");
     expect(formatBytes(27107)).toBe("26 KB");
     expect(formatBytes(5 * 1024 * 1024)).toBe("5.0 MB");
+  });
+});
+
+describe("miniatura do catálogo", () => {
+  // ADR 0012: sem storage, o catálogo traz a URL da fonte.
+  it("usa a thumbnailUrl quando não há chave no bucket", () => {
+    expect(thumbnailSrc({ thumbnailUrl: square.sourceUrl }, "")).toBe(square.sourceUrl);
+  });
+
+  it("prefere o bucket quando há chave e base pública", () => {
+    const entrada = { thumbnailKey: "16.17.1/champion/Jax_square.png" };
+    expect(thumbnailSrc(entrada, BASE)).toBe(`${BASE}/${entrada.thumbnailKey}`);
+  });
+
+  it("ignora a chave sem base pública e cai para a fonte", () => {
+    const entrada = { thumbnailKey: "16.17.1/champion/Jax_square.png", thumbnailUrl: "https://x/y.png" };
+    expect(thumbnailSrc(entrada, "")).toBe("https://x/y.png");
+  });
+
+  it("devolve undefined quando o campeão não tem miniatura", () => {
+    expect(thumbnailSrc({}, BASE)).toBeUndefined();
   });
 });

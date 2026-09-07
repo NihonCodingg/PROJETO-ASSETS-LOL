@@ -428,7 +428,21 @@ limite de 500 linhas.
 
 **Execução: T-09 → (T-10 ∥ T-11 ∥ T-12) → T-13**, com **(T-14 ∥ T-15)** em paralelo a tudo.
 
-### T-09 — Adaptador ddragon completo pelo tarball
+### ✅ T-09 — Adaptador ddragon completo pelo tarball
+
+> **Concluído em 07/09/2026.** Três desvios do escopo escrito, todos por causa do
+> [ADR 0012](adr/0012-onde-guardar-os-assets.md):
+>
+> 1. **`--champion` morreu.** O tarball traz o patch inteiro; indexar um campeão só
+>    deixou de fazer sentido. O que sobrou de recorte é `--game-version`.
+> 2. **`--dry-run` mudou de sentido.** Era "escreve local em vez do bucket"; sem
+>    bucket, virou "mede e valida sem escrever nada".
+> 3. **O adaptador mínimo do T-05 foi removido**, não deixado ao lado. Ele montava
+>    `storageKey`, o que contradiz o ADR 0012 na primeira vez que alguém o chamasse.
+>    Sobraram dele a descoberta de versão, a URL do tarball e as formas normalizadas.
+>
+> Ganhou `--tarball`, que reaproveita um arquivo já baixado — 2,39 GB por execução de
+> teste era caro demais para verificar o resto.
 
 | | |
 |---|---|

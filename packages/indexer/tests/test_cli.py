@@ -1,13 +1,12 @@
-"""T-07 — a CLI amarra as pontas e falha alto.
+"""A CLI amarra as pontas e falha alto.
 
-O que estes testes protegem é a ordem: validar antes de publicar. Um registro
-inválido tem que abortar sem ter deixado nada meio publicado no bucket — e isso
-só é verificável olhando o que NÃO foi escrito.
+Duas coisas são verificadas aqui olhando o que **não** foi escrito: a ordem
+(validar antes de escrever — um registro inválido aborta sem deixar índice pela
+metade) e o ADR 0012 (nenhuma imagem sai para o disco, nunca).
 """
 
 from __future__ import annotations
 
-import io
 import json
 import logging
 import re
@@ -21,53 +20,31 @@ from lol_assets_indexer import logging_setup
 from lol_assets_indexer.cli import app
 from lol_assets_schema.models import Asset
 from lol_assets_schema.validators import validate_catalog, validate_manifest, validate_shard
-from PIL import Image
 from typer.testing import CliRunner
 
 DDRAGON = "https://ddragon.leagueoflegends.com"
 VERSAO = "16.17.1"
+CATEGORIAS = {"champion", "item", "summoner_spell", "profile_icon", "rune", "map"}
 runner = CliRunner()
 
 
-def imagem(largura: int, altura: int, formato: str) -> bytes:
-    buffer = io.BytesIO()
-    Image.new("RGB", (largura, altura), (12, 34, 56)).save(buffer, format=formato)
-    return buffer.getvalue()
+@pytest.fixture
+def tarball_local(tmp_path: Path, tarball_bytes: bytes) -> Path:
+    """O tarball de mentira em disco — é assim que a CLI o recebe."""
+    caminho = tmp_path / f"dragontail-{VERSAO}.tgz"
+    caminho.write_bytes(tarball_bytes)
+    return caminho
 
 
-def ficha() -> dict[str, Any]:
-    return {
-        "data": {
-            "Jax": {
-                "id": "Jax",
-                "key": "24",
-                "name": "Jax",
-                "title": "o Grão-Mestre das Armas",
-                "tags": ["Fighter"],
-                "skins": [
-                    {"id": "24000", "num": 0, "name": "default", "chromas": False},
-                    {"id": "24004", "num": 4, "name": "Jax Deus da Guerra", "chromas": True},
-                    # chroma: tem `parentSkin`, então não é skin de verdade (§B.1.4)
-                    {"id": "24018", "num": 18, "name": "Chroma", "parentSkin": 4},
-                ],
-            }
-        }
-    }
+@pytest.fixture
+def destino(tmp_path: Path) -> Path:
+    return tmp_path / "indice"
 
 
-def montar_rotas() -> None:
-    respx.get(f"{DDRAGON}/api/versions.json").mock(
-        return_value=httpx.Response(200, json=[VERSAO, "16.16.1"])
-    )
-    for idioma in ("pt_BR", "en_US"):
-        respx.get(f"{DDRAGON}/cdn/{VERSAO}/data/{idioma}/champion/Jax.json").mock(
-            return_value=httpx.Response(200, json=ficha())
-        )
-    respx.get(f"{DDRAGON}/cdn/{VERSAO}/img/champion/Jax.png").mock(
-        return_value=httpx.Response(200, content=imagem(128, 128, "PNG"))
-    )
-    respx.get(f"{DDRAGON}/cdn/img/champion/centered/Jax_0.jpg").mock(
-        return_value=httpx.Response(200, content=imagem(1280, 720, "JPEG"))
+def indexar(tarball: Path, destino: Path, *extra: str) -> Any:
+    return runner.invoke(
+        app,
+        ["index", "--tarball", str(tarball), "--output", str(destino), *extra],
     )
 
 
@@ -85,34 +62,58 @@ def _limpar_contexto() -> Any:
 # --- caminho feliz --------------------------------------------------------------
 
 
-@respx.mock
-def test_dry_run_produz_a_arvore_completa_e_sai_zero(tmp_path: Path) -> None:
-    montar_rotas()
-    resultado = runner.invoke(
-        app, ["index", "--champion", "Jax", "--dry-run", "--output", str(tmp_path)]
-    )
+def test_escreve_a_arvore_completa_e_sai_zero(tarball_local: Path, destino: Path) -> None:
+    resultado = indexar(tarball_local, destino)
 
     assert resultado.exit_code == 0, resultado.output
-    manifesto = ler(tmp_path, "manifest.json")
+    manifesto = ler(destino, "manifest.json")
     validate_manifest(manifesto)
 
     versao = manifesto["versions"][0]
-    validate_catalog(ler(tmp_path, versao["catalog"]["url"]))
-    validate_shard(ler(tmp_path, versao["shards"][0]["url"]))
-
-    # os assets também foram para a árvore, com os bytes de origem
-    assert (tmp_path / VERSAO / "champion" / "Jax_square.png").exists()
-    assert (tmp_path / VERSAO / "champion" / "Jax_000_splash_centered.jpg").exists()
+    validate_catalog(ler(destino, versao["catalog"]["url"]))
+    for fatia in versao["shards"]:
+        validate_shard(ler(destino, fatia["url"]))
 
 
-@respx.mock
-def test_o_catalogo_tem_um_campeao_e_as_skins_dele(tmp_path: Path) -> None:
+def test_uma_fatia_por_categoria(tarball_local: Path, destino: Path) -> None:
+    indexar(tarball_local, destino)
+    versao = ler(destino, "manifest.json")["versions"][0]
+
+    assert {fatia["category"] for fatia in versao["shards"]} == CATEGORIAS
+    assert versao["totalAssets"] == sum(fatia["assets"] for fatia in versao["shards"])
+
+
+def test_nao_escreve_imagem_nenhuma(tarball_local: Path, destino: Path) -> None:
+    """ADR 0012: o indexador mede e descarta. Só saem JSONs."""
+    indexar(tarball_local, destino)
+
+    escritos = sorted(caminho.suffix for caminho in destino.rglob("*") if caminho.is_file())
+    assert escritos, "nada foi escrito"
+    assert set(escritos) == {".json"}, escritos
+
+
+def test_o_manifesto_declara_que_nada_foi_copiado(tarball_local: Path, destino: Path) -> None:
+    manifesto = (indexar(tarball_local, destino), ler(destino, "manifest.json"))[1]
+
+    assert manifesto["versions"][0]["assetsCopied"] is False
+    assert "assetsBaseUrl" not in manifesto, "sem storage não há base pública"
+
+
+def test_nenhum_registro_do_indice_tem_storage_key(tarball_local: Path, destino: Path) -> None:
+    indexar(tarball_local, destino)
+    versao = ler(destino, "manifest.json")["versions"][0]
+
+    for fatia in versao["shards"]:
+        for asset in ler(destino, fatia["url"])["assets"]:
+            assert "storageKey" not in asset, asset["id"]
+            assert asset["sourceUrl"].startswith("https://"), asset["id"]
+
+
+def test_o_catalogo_tem_o_campeao_e_as_skins_dele(tarball_local: Path, destino: Path) -> None:
     """ADR 0010: navegação por campeão, busca por skin — e chroma não é skin."""
-    montar_rotas()
-    runner.invoke(app, ["index", "--champion", "Jax", "--dry-run", "--output", str(tmp_path)])
-
-    manifesto = ler(tmp_path, "manifest.json")
-    catalogo = ler(tmp_path, manifesto["versions"][0]["catalog"]["url"])
+    indexar(tarball_local, destino)
+    manifesto = ler(destino, "manifest.json")
+    catalogo = ler(destino, manifesto["versions"][0]["catalog"]["url"])
 
     assert len(catalogo["champions"]) == 1
     campeao = catalogo["champions"][0]
@@ -125,54 +126,80 @@ def test_o_catalogo_tem_um_campeao_e_as_skins_dele(tmp_path: Path) -> None:
     assert manifesto["versions"][0]["catalog"]["skins"] == len(catalogo["skins"])
 
 
+def test_a_miniatura_aponta_para_a_fonte(tarball_local: Path, destino: Path) -> None:
+    """Sem storage, o cartão da grade carrega direto do ddragon (ADR 0012)."""
+    indexar(tarball_local, destino)
+    manifesto = ler(destino, "manifest.json")
+    campeao = ler(destino, manifesto["versions"][0]["catalog"]["url"])["champions"][0]
+
+    assert campeao.get("thumbnailKey") is None
+    assert campeao["thumbnailUrl"].endswith("/img/champion/Jax.png")
+
+
+def test_a_miniatura_da_skin_e_o_tile(tarball_local: Path, destino: Path) -> None:
+    """O resultado de busca é por skin (ADR 0010), então a miniatura dele é o tile."""
+    indexar(tarball_local, destino)
+    manifesto = ler(destino, "manifest.json")
+    skins = ler(destino, manifesto["versions"][0]["catalog"]["url"])["skins"]
+
+    por_id = {s["skinId"]: s for s in skins}
+    assert por_id[24004]["thumbnailUrl"].endswith("/img/champion/tiles/Jax_4.jpg")
+    assert por_id[24004].get("thumbnailKey") is None
+
+
+def test_a_versao_sai_do_nome_do_arquivo(tarball_local: Path, destino: Path) -> None:
+    indexar(tarball_local, destino)
+    assert ler(destino, "manifest.json")["currentVersion"] == VERSAO
+
+
+def test_versao_fixada_nao_consulta_a_lista_de_versoes(tarball_local: Path, destino: Path) -> None:
+    with respx.mock:
+        rota = respx.get(f"{DDRAGON}/api/versions.json")
+        resultado = indexar(tarball_local, destino, "--game-version", VERSAO)
+
+    assert resultado.exit_code == 0, resultado.output
+    assert not rota.called
+
+
 @respx.mock
-def test_a_miniatura_do_campeao_aponta_para_asset_publicado(tmp_path: Path) -> None:
-    montar_rotas()
-    runner.invoke(app, ["index", "--champion", "Jax", "--dry-run", "--output", str(tmp_path)])
-
-    manifesto = ler(tmp_path, "manifest.json")
-    catalogo = ler(tmp_path, manifesto["versions"][0]["catalog"]["url"])
-    miniatura = catalogo["champions"][0]["thumbnailKey"]
-
-    assert miniatura is not None
-    assert (tmp_path / miniatura).exists(), "o cartão da grade apontaria para o vazio"
-
-
-@respx.mock
-def test_versao_pode_ser_fixada(tmp_path: Path) -> None:
-    montar_rotas()
-    rota = respx.get(f"{DDRAGON}/api/versions.json")
-    resultado = runner.invoke(
-        app,
-        [
-            "index",
-            "--champion",
-            "Jax",
-            "--game-version",
-            VERSAO,
-            "--dry-run",
-            "--output",
-            str(tmp_path),
-        ],
+def test_sem_tarball_local_ele_e_baixado(destino: Path, tarball_bytes: bytes) -> None:
+    """O caminho de produção: uma requisição para 2,39 GB, medidos no S1."""
+    respx.get(f"{DDRAGON}/api/versions.json").mock(
+        return_value=httpx.Response(200, json=[VERSAO, "16.16.1"])
+    )
+    rota = respx.get(f"{DDRAGON}/cdn/dragontail-{VERSAO}.tgz").mock(
+        return_value=httpx.Response(200, content=tarball_bytes)
     )
 
-    assert resultado.exit_code == 0
-    assert not rota.called
+    resultado = runner.invoke(app, ["index", "--output", str(destino)])
+
+    assert resultado.exit_code == 0, resultado.output
+    assert rota.called
+    assert ler(destino, "manifest.json")["currentVersion"] == VERSAO
+
+
+# --- dry-run --------------------------------------------------------------------
+
+
+def test_dry_run_valida_e_nao_escreve_nada(tarball_local: Path, destino: Path) -> None:
+    resultado = indexar(tarball_local, destino, "--dry-run")
+
+    assert resultado.exit_code == 0, resultado.output
+    assert not destino.exists(), "o --dry-run não pode criar nem a pasta"
+    assert "dry-run" in resultado.output
 
 
 # --- falha alto -----------------------------------------------------------------
 
 
-@respx.mock
-def test_registro_invalido_aborta_sem_publicar_nada(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+def test_registro_invalido_aborta_sem_escrever_nada(
+    tarball_local: Path, destino: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
-    """A validação vem antes da escrita. Nada de bucket meio publicado."""
-    montar_rotas()
+    """A validação vem antes da escrita. Nada de índice pela metade."""
 
-    async def adaptador_quebrado(*args: Any, **kwargs: Any) -> list[tuple[Asset, bytes]]:
+    def construtor_quebrado(*args: Any, **kwargs: Any) -> dict[str, list[Asset]]:
         # `model_construct` pula a validação do Pydantic de propósito: o que se
-        # testa aqui é a trava do JSON Schema, na fronteira da publicação.
+        # testa aqui é a trava do JSON Schema, na fronteira da escrita.
         invalido = Asset.model_construct(
             id="rune_icon:8010",
             type="rune_icon",
@@ -180,7 +207,6 @@ def test_registro_invalido_aborta_sem_publicar_nada(
             names={"pt_BR": "x"},
             source="ddragon",
             source_url="https://exemplo.invalido/x.jpg",
-            storage_key=f"{VERSAO}/rune/Rune_8010.jpg",
             file_name="Rune_8010.jpg",
             width=256,
             height=256,
@@ -189,42 +215,31 @@ def test_registro_invalido_aborta_sem_publicar_nada(
             bytes=10,
             sha256="0" * 64,
         )
-        return [(invalido, b"bytes")]
+        return {"rune": [invalido]}
 
-    monkeypatch.setattr("lol_assets_indexer.cli.fetch_champion_assets", adaptador_quebrado)
-    resultado = runner.invoke(
-        app, ["index", "--champion", "Jax", "--dry-run", "--output", str(tmp_path)]
-    )
+    monkeypatch.setattr("lol_assets_indexer.cli.build_all", construtor_quebrado)
+    resultado = indexar(tarball_local, destino)
 
     assert resultado.exit_code != 0
-    assert not list(tmp_path.rglob("*.json")), "nada podia ter sido publicado"
-    assert not (tmp_path / "manifest.json").exists()
+    assert not destino.exists(), "nada podia ter sido escrito"
 
 
 @respx.mock
-def test_fonte_indisponivel_sai_diferente_de_zero(tmp_path: Path) -> None:
-    respx.get(f"{DDRAGON}/api/versions.json").mock(return_value=httpx.Response(200, json=[VERSAO]))
-    respx.get(f"{DDRAGON}/cdn/{VERSAO}/data/pt_BR/champion/NaoExiste.json").mock(
-        return_value=httpx.Response(404)
-    )
-    resultado = runner.invoke(
-        app, ["index", "--champion", "NaoExiste", "--dry-run", "--output", str(tmp_path)]
-    )
+def test_fonte_indisponivel_sai_diferente_de_zero(destino: Path) -> None:
+    respx.get(f"{DDRAGON}/api/versions.json").mock(return_value=httpx.Response(500))
+    resultado = runner.invoke(app, ["index", "--output", str(destino)])
 
     assert resultado.exit_code != 0
-    assert not (tmp_path / "manifest.json").exists()
+    assert not (destino / "manifest.json").exists()
 
 
-def test_sem_credencial_e_sem_dry_run_falha_dizendo_o_que_fazer(
-    monkeypatch: pytest.MonkeyPatch,
-) -> None:
-    for variavel in ("S3_ENDPOINT_URL", "S3_ACCESS_KEY_ID", "S3_SECRET_ACCESS_KEY"):
-        monkeypatch.delenv(variavel, raising=False)
-    with respx.mock:
-        montar_rotas()
-        resultado = runner.invoke(app, ["index", "--champion", "Jax"])
+def test_nome_de_tarball_sem_versao_pede_a_versao(tmp_path: Path, destino: Path) -> None:
+    estranho = tmp_path / "arquivo.tgz"
+    estranho.write_bytes(b"")
+    resultado = indexar(estranho, destino)
 
     assert resultado.exit_code != 0
+    assert not destino.exists()
 
 
 # --- log ------------------------------------------------------------------------
@@ -239,30 +254,30 @@ def eventos_de(resultado: Any) -> list[dict[str, Any]]:
     return [json.loads(linha) for linha in saida.splitlines() if linha.startswith("{")]
 
 
-@respx.mock
-def test_o_log_e_uma_linha_json_por_evento_com_a_versao(tmp_path: Path) -> None:
-    montar_rotas()
-    resultado = runner.invoke(
-        app, ["index", "--champion", "Jax", "--dry-run", "--output", str(tmp_path)]
-    )
-    eventos = eventos_de(resultado)
+def test_o_log_e_uma_linha_json_por_evento_com_a_versao(tarball_local: Path, destino: Path) -> None:
+    eventos = eventos_de(indexar(tarball_local, destino))
 
     assert eventos, "a indexação precisa deixar rastro"
     assert all("event" in evento and "level" in evento for evento in eventos)
 
-    # `gameVersion` entra no contexto assim que a versão é resolvida
     com_versao = [evento for evento in eventos if evento.get("gameVersion") == VERSAO]
     assert com_versao, "nenhum evento carregou o patch"
     assert any(evento.get("source") == "ddragon" for evento in com_versao)
 
 
+def test_o_log_conta_o_que_foi_descartado(tarball_local: Path, destino: Path) -> None:
+    """O filtro de escopo joga fora 44 % do tarball; isso precisa ser auditável."""
+    eventos = eventos_de(indexar(tarball_local, destino))
+    varredura = next(e for e in eventos if e["event"] == "tarball varrido")
+
+    assert varredura["descartadas"] > 0
+    assert varredura["imagens"] > 0
+
+
 @respx.mock
-def test_o_log_de_falha_diz_o_tipo_do_erro(tmp_path: Path) -> None:
+def test_o_log_de_falha_diz_o_tipo_do_erro(destino: Path) -> None:
     respx.get(f"{DDRAGON}/api/versions.json").mock(return_value=httpx.Response(500))
-    resultado = runner.invoke(
-        app, ["index", "--champion", "Jax", "--dry-run", "--output", str(tmp_path)]
-    )
-    eventos = eventos_de(resultado)
+    eventos = eventos_de(runner.invoke(app, ["index", "--output", str(destino)]))
 
     falhas = [evento for evento in eventos if evento["level"] == "error"]
     assert falhas
@@ -291,6 +306,7 @@ def test_help_descreve_as_opcoes_em_portugues() -> None:
     assert resultado.exit_code == 0
 
     limpo = re.sub("\x1b\\[[0-9;]*m", "", resultado.output)
-    for trecho in ("--champion", "--game-version", "--dry-run", "--output"):
+    for trecho in ("--game-version", "--dry-run", "--output", "--tarball"):
         assert trecho in limpo, limpo
-    assert "campeão" in limpo
+    assert "--champion" not in limpo, "o recorte por campeão morreu com o tarball"
+    assert "Patch" in limpo

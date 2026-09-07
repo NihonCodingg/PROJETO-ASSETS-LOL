@@ -10,8 +10,10 @@ Este módulo não sabe o que é ddragon nem cdragon. Ele só sabe pedir educadam
 from __future__ import annotations
 
 import asyncio
+import logging
 import random
 from collections.abc import Awaitable, Callable
+from pathlib import Path
 from types import TracebackType
 from typing import Any, Self
 
@@ -20,6 +22,8 @@ from pydantic import Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 from lol_assets_indexer import __version__
+
+logger = logging.getLogger(__name__)
 
 REPO_URL = "https://github.com/NihonCodingg/PROJETO-ASSETS-LOL"
 
@@ -143,6 +147,25 @@ class SourceClient:
         response = await self.request("GET", url)
         response.raise_for_status()
         return response.content
+
+    async def stream_to(self, url: str, destination: Path) -> int:
+        """Baixa um arquivo grande para disco sem carregá-lo na memória.
+
+        O tarball do ddragon tem 2,39 GB. Vai para disco antes de ser lido porque
+        um engasgo de rede no meio da varredura perderia a passada inteira; em
+        arquivo, a repetição do cliente resolve.
+        """
+        self._guard(url)
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        total = 0
+        async with self._gate_for(url), self._client.stream("GET", url) as response:
+            response.raise_for_status()
+            with destination.open("wb") as handle:
+                async for chunk in response.aiter_bytes(1024 * 1024):
+                    handle.write(chunk)
+                    total += len(chunk)
+        logger.info("arquivo baixado", extra={"url": url, "bytes": total})
+        return total
 
     # --- interno -------------------------------------------------------------
 

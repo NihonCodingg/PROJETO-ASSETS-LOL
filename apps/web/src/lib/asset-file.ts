@@ -40,6 +40,23 @@ export function assetUrl(asset: Asset, assetsBaseUrl?: string): string {
   return asset.sourceUrl;
 }
 
+/**
+ * A miniatura de um cartão do catálogo, pela mesma regra do `assetUrl`.
+ *
+ * Sem storage (ADR 0012) o catálogo traz `thumbnailUrl` apontando para a fonte;
+ * com storage traria `thumbnailKey`. O front lê os dois, e é isso que faz a
+ * volta para a opção A não exigir mexer no front.
+ */
+export function thumbnailSrc(
+  entry: { thumbnailKey?: string; thumbnailUrl?: string },
+  assetsBaseUrl?: string,
+): string | undefined {
+  if (entry.thumbnailKey && assetsBaseUrl) {
+    return `${assetsBaseUrl.replace(/\/+$/, "")}/${entry.thumbnailKey}`;
+  }
+  return entry.thumbnailUrl;
+}
+
 /** Só faz sentido converter o que ainda não é PNG (ADR 0001 regra 4). */
 export function canConvertToPng(asset: Asset): boolean {
   return asset.format !== "png";

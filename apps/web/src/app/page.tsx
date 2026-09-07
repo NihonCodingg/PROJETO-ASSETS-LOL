@@ -23,10 +23,19 @@ import {
   convertToPng,
   pngFileName,
   saveBlob,
+  thumbnailSrc,
 } from "@/lib/asset-file";
 import { AssetsClient } from "@/lib/assets-client";
 import { siteConfig } from "@/lib/site-config";
 
+/** O índice é servido pelo próprio app, de `public/indice` (ADR 0012). */
+const BASE_INDICE = process.env.NEXT_PUBLIC_INDEX_BASE_URL ?? "/indice";
+
+/**
+ * Onde os assets COPIADOS moram. Vazio na opção B do ADR 0012 — nada é
+ * copiado, então cada asset vale pela `sourceUrl`. A variável continua lida
+ * para o dia em que houver bucket de novo.
+ */
 const BASE_ASSETS = process.env.NEXT_PUBLIC_ASSETS_BASE_URL ?? "";
 
 type Estado =
@@ -35,7 +44,7 @@ type Estado =
   | { fase: "pronto"; manifest: IndexManifest; catalog: Catalog };
 
 export default function HomePage() {
-  const cliente = useMemo(() => new AssetsClient(BASE_ASSETS), []);
+  const cliente = useMemo(() => new AssetsClient(BASE_INDICE), []);
   const [estado, setEstado] = useState<Estado>({ fase: "carregando" });
   const [aberto, setAberto] = useState<CatalogChampion | null>(null);
   const [assets, setAssets] = useState<Asset[] | null>(null);
@@ -84,7 +93,8 @@ export default function HomePage() {
       <Moldura>
         <p role="alert">Falhou ao carregar o catálogo: {estado.motivo}</p>
         <p>
-          Configure <code>NEXT_PUBLIC_ASSETS_BASE_URL</code> apontando para o bucket.
+          Gere o índice com <code>lol-assets-indexer index</code>; ele é servido de{" "}
+          <code>{BASE_INDICE}</code>.
         </p>
       </Moldura>
     );
@@ -99,17 +109,14 @@ export default function HomePage() {
       </p>
 
       <ul aria-label="Campeões">
-        {catalog.champions.map((campeao) => (
+        {catalog.champions.map((campeao) => {
+          const miniatura = thumbnailSrc(campeao, BASE_ASSETS);
+          return (
           <li key={campeao.championKey}>
             <button type="button" onClick={() => abrir(campeao)}>
-              {campeao.thumbnailKey && (
+              {miniatura && (
                 /* eslint-disable-next-line @next/next/no-img-element */
-                <img
-                  src={`${BASE_ASSETS}/${campeao.thumbnailKey}`}
-                  alt={campeao.names.pt_BR}
-                  width={64}
-                  height={64}
-                />
+                <img src={miniatura} alt={campeao.names.pt_BR} width={64} height={64} />
               )}
               <span>{campeao.names.pt_BR}</span>
               <span>
@@ -117,7 +124,8 @@ export default function HomePage() {
               </span>
             </button>
           </li>
-        ))}
+          );
+        })}
       </ul>
 
       {aberto && (
