@@ -1,9 +1,14 @@
 # ADR 0005 — Arquitetura estática por padrão, custo de operação zero
 
-- **Status:** aceito
+- **Status:** ⚠️ **parcialmente emendado** pelo [ADR 0012](0012-onde-guardar-os-assets.md) (07/09/2026)
 - **Data:** 2026-09-03
 - **Decidido por:** dono do projeto (mudança de escopo)
 - **Afeta:** §A.5, §A.6, §A.7 e §0.3 do [KICKOFF](../KICKOFF.md)
+
+> **Leia o [ADR 0012](0012-onde-guardar-os-assets.md) antes deste.**
+> A arquitetura estática e o custo zero continuam valendo inteiros — é a **escolha de
+> storage** que mudou. Não há mais bucket: o índice aponta para as URLs das fontes. Os
+> itens 2 e 5 abaixo estão corrigidos lá.
 
 ## Contexto
 
@@ -23,16 +28,21 @@ acesso do dia em vários segundos de espera — exatamente o oposto da §A.4 ite
 
 1. **Front:** Next.js na **Vercel, plano Hobby**, que exige uso **não comercial** — o que
    este projeto satisfaz por decisão explícita (ver regra 6 abaixo).
-2. **Assets e índice:** **Cloudflare R2**, tier gratuito — 10 GB de armazenamento e
-   **egress zero**. O orçamento de 10 GB é tratado no [ADR 0007](0007-politica-de-versoes-e-orcamento.md).
+2. ~~**Assets e índice:** **Cloudflare R2**, tier gratuito — 10 GB de armazenamento e
+   **egress zero**.~~ → **Corrigido pelo [ADR 0012](0012-onde-guardar-os-assets.md):** o R2
+   exige meio de pagamento, e a restrição do dono do projeto o descartou. **Não há storage.**
+   Índice, catálogo e manifesto são arquivos estáticos do próprio app; os assets são
+   servidos pelas URLs das fontes, que têm CORS aberto em todos os tipos.
 3. **Indexação:** **GitHub Actions** em repositório público, onde os minutos são gratuitos.
    Roda por patch, publica no R2 e abre/atualiza o índice.
 4. **A API FastAPI sai do caminho crítico.** O site precisa funcionar inteiro sem ela —
    busca, preview, download individual, download por categoria e download de seleção.
    Ver [ADR 0006](0006-api-como-componente-opcional.md).
-5. **Zips:** por categoria são **pré-gerados pelo indexador** e ficam no R2 como qualquer
-   outro arquivo estático. Seleção customizada é zipada **no cliente com JSZip**, usando os
-   mesmos bytes que o navegador já baixou.
+5. ~~**Zips:** por categoria são **pré-gerados pelo indexador** e ficam no R2 como qualquer
+   outro arquivo estático.~~ → **Corrigido pelo [ADR 0012](0012-onde-guardar-os-assets.md):**
+   sem storage não há onde pré-gerar, e o **RF-16 sai da v1**. Seleção customizada continua
+   sendo zipada **no cliente com JSZip** — testado com bytes de terceiros, funciona — e passa
+   a ser o **único** caminho de download em lote.
 6. **O produto não será monetizado.** Sem anúncios, sem assinatura, sem doação vinculada
    aos assets. Isso mantém a conformidade com o plano Hobby da Vercel e simplifica a
    política da Riot, que exige registro e aprovação para qualquer monetização.
@@ -47,8 +57,8 @@ acesso do dia em vários segundos de espera — exatamente o oposto da §A.4 ite
   customizada — menos código, não mais.
 - Sem servidor no meio, o rate limit da §A.5 e o "cache por hash da seleção" deixam de
   existir como problema: não há o que abusar.
-- O egress zero do R2 remove o último item de custo variável. Splash em alta deixa de ser
-  risco financeiro.
+- ~~O egress zero do R2 remove o último item de custo variável.~~ → Sem storage, não há
+  sequer conta a manter: o custo variável some por não existir (ADR 0012).
 
 **Ruins / custos aceitos**
 

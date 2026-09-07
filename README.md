@@ -14,8 +14,10 @@ navegar por wiki.
 > O [`docs/KICKOFF.md`](docs/KICKOFF.md) guarda a ideia e a pesquisa originais.
 
 Uso pessoal e de um pequeno grupo, sem monetização, **custo de operação zero**:
-Vercel Hobby + Cloudflare R2 (tier gratuito) + GitHub Actions. Nada no caminho do
-usuário depende de um servidor nosso.
+Vercel Hobby + GitHub Actions, e **nenhum serviço de armazenamento**. O índice é
+estático e aponta para as URLs das fontes; o navegador busca de lá
+([ADR 0012](docs/adr/0012-onde-guardar-os-assets.md)). Nada no caminho do usuário
+depende de um servidor nosso.
 
 ## Estrutura
 

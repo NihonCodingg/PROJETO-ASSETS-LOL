@@ -1,10 +1,41 @@
 # ADR 0012 — Onde guardar os assets
 
-- **Status:** 🟡 **proposto** — aguardando decisão do dono do projeto
-- **Data:** 2026-09-05
-- **Reabre:** a parte de storage do [ADR 0005](0005-arquitetura-estatica-custo-zero.md) e o
+- **Status:** ✅ **aceito em 07/09/2026** — venceu a **opção B (sem storage)**
+- **Data:** 2026-09-05 · aceito em 2026-09-07
+- **Emenda:** a parte de storage do [ADR 0005](0005-arquitetura-estatica-custo-zero.md) e o
   [ADR 0007](0007-politica-de-versoes-e-orcamento.md) inteiro
 - **Restrição declarada:** não cadastrar cartão na Cloudflare
+
+## Decisão
+
+**Venceu a opção B: sem storage.** O índice aponta para as URLs das fontes e o navegador
+busca de lá. Não há bucket.
+
+**Por quê, na ordem em que os fatos pesaram:**
+
+1. **A premissa foi confirmada.** A dúvida sobre o cartão foi checada no painel: o R2
+   **exige** meio de pagamento. A opção A saiu por restrição declarada do dono do projeto,
+   não por mérito técnico — e a análise abaixo registra que, sem essa restrição, A seria a
+   escolha.
+2. **A opção C caiu por medição, não por preferência.** Assets de release do GitHub não
+   mandam `Access-Control-Allow-Origin`; sem isso o navegador não lê os bytes e caem
+   conversão para PNG, zip no cliente, verificação de `sha256` e o próprio "baixar
+   original". As variantes que funcionam (raw, jsDelivr) trocam o cartão por um repositório
+   que cresce ~2 GB por patch e por uma zona cinzenta de ToS.
+3. **O que B custa não quebra o projeto nesta escala.** As quatro perdas estão medidas e
+   aceitas: resiliência, integridade garantida, zips por categoria e a categoria de elos.
+4. **B é reversível de graça**, e a §"Como voltar para A" abaixo existe para que essa
+   reversibilidade não dependa da memória de ninguém.
+
+### O que fica valendo
+
+- Todo asset entra no índice **sem `storageKey`**, só com `sourceUrl`.
+- Índice, catálogo e manifesto (~10 MB por versão) são **arquivos estáticos do próprio
+  app**, publicados junto com o deploy. Não há serviço de armazenamento no projeto.
+- O indexador continua **baixando e medindo** tudo — dimensão, formato, canal alfa, bytes e
+  `sha256` são o que a ficha do RF-09 e a regra do ADR 0001 precisam. O que ele deixa de
+  fazer é **copiar**.
+- `RF-16` (zip por categoria pré-gerado) e a categoria `rank` **saem da v1**.
 
 ## Contexto
 
@@ -380,8 +411,40 @@ superfície de risco, isso é uma preferência legítima que número nenhum derr
 segundo lugar honesto, e a lista do que se perde está acima para você decidir com ela à
 vista — em especial o item que ninguém tinha notado: **os emblemas de elo saem da v1**.
 
+## Como voltar para A depois
+
+Registrado aqui para a reversibilidade não depender da memória de ninguém. Se um dia o
+cartão deixar de ser um problema, a volta é **preencher um campo**, não reescrever o
+projeto. Em ordem:
+
+1. **Criar o bucket e o token** no R2, e preencher as cinco variáveis que já estão no
+   `.env.example`: `S3_ENDPOINT_URL`, `S3_BUCKET`, `S3_ACCESS_KEY_ID`,
+   `S3_SECRET_ACCESS_KEY` e `ASSETS_PUBLIC_BASE_URL`.
+2. **Reativar o T-06.** O `publish/storage.py` e o `publish/bucket.py` continuam no
+   repositório, com os 17 testes passando — ver o cabeçalho de componente inativo no
+   ticket. Nada precisa ser reescrito.
+3. **Fazer o indexador copiar de novo.** É o passo do `_publish_assets` da CLI, que hoje
+   não roda: publicar os bytes e preencher `storage_key` no registro. Os bytes já viajam
+   junto do registro desde o T-07 (`FetchedAsset`), justamente por isso.
+4. **Ligar `assetsCopied: true`** no manifesto e a base pública no catálogo.
+5. **Nada muda no front.** `assetUrl()` já prefere `storageKey` quando ele existe e cai para
+   `sourceUrl` quando não — código testado desde o T-08:
+
+   ```ts
+   if (asset.storageKey && assetsBaseUrl) return `${assetsBaseUrl}/${asset.storageKey}`;
+   return asset.sourceUrl;
+   ```
+
+6. **Voltam sozinhos:** a resiliência (RNF-07), o `sha256` como garantia, e a possibilidade
+   de RF-16 e da categoria `rank`. Estes dois últimos exigem reabrir os tickets T-23 e T-22,
+   que ficam registrados como suspensos, não apagados.
+
+O que **não** volta sozinho é o histórico: enquanto B estiver valendo, nenhum byte é
+copiado, então não existe arquivo antigo para recuperar. A migração indexa a versão
+corrente do zero — o que leva os mesmos minutos da indexação normal, porque tudo é dado
+derivado das fontes.
+
 ## Próximo passo
 
-Nenhum código foi tocado. Spec e tickets estão intactos. Este ADR fica em **proposto** até
-sua decisão; aceito ele, faço as emendas nos ADRs 0005 e 0007 e ajusto os tickets nomeados
-acima, na ordem, antes de seguir para a Onda 2.
+Aceito. As emendas nos ADRs 0005 e 0007, os ajustes na Spec e nos tickets saem no mesmo PR
+desta promoção, antes da Onda 2.
