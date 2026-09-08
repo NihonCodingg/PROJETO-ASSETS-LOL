@@ -1615,7 +1615,7 @@ limite de 500 linhas.
 
 | | |
 |---|---|
-| **Objetivo** | Impedir que o repositório cresça ~275 MB/ano depois que o T-13 começar a commitar sozinho |
+| **Objetivo** | Decidir onde o índice gerado vive, com o crescimento medido em vez de estimado |
 | **Dependências** | T-13 |
 | **Estimativa** | a definir — depende da decisão |
 | **Effort** | médio |
@@ -1631,7 +1631,13 @@ limite de 500 linhas.
 > 6 h e um patch a cada duas semanas, são **~26 reescritas por ano de 10,6 MB — ~275 MB/ano**
 > que todo `git clone` baixa.
 >
-> É a metade maior do problema que o ADR 0013 resolveu pela metade menor.
+> ~~É a metade maior do problema que o ADR 0013 resolveu pela metade menor.~~
+>
+> ⚠️ **Medido em 08/09/2026: o número acima está errado por um fator de ~25.** O custo
+> real é **~12 MiB/ano**, não ~275 MB/ano — eu esqueci que o Git comprime (8,8×) e faz
+> delta entre índices consecutivos (mais ~3×). A análise das cinco saídas, com a
+> medição de três anos, está no [ADR 0014](adr/0014-onde-vive-o-indice-gerado.md)
+> (proposto).
 
 **Entra**
 - Medir o crescimento real com dois ou três commits de índice, em vez de estimar.
@@ -1649,7 +1655,7 @@ limite de 500 linhas.
 - Reescrever histórico existente. Se for preciso, é operação manual e avisada.
 
 **Critérios de aceite**
-1. O crescimento por indexação está medido, não estimado.
+1. O crescimento por indexação está medido, não estimado. ✅ [ADR 0014](adr/0014-onde-vive-o-indice-gerado.md)
 2. A escolha está registrada em ADR, com o custo das alternativas.
 3. Depois de N indexações, o tamanho de um `git clone` é previsível e conhecido.
 

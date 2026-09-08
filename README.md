@@ -55,6 +55,45 @@ pnpm -r --if-present lint typecheck test
 uv run ruff check . && uv run ruff format --check . && uv run mypy && uv run pytest
 ```
 
+### Abrir o site local
+
+**O front não funciona sem índice.** Ele é um site estático que lê
+`apps/web/public/indice/`, e esse diretório **não está no repositório** — é gerado. Sem
+ele, a página abre no estado de erro dizendo exatamente isso.
+
+Três passos, na ordem:
+
+```bash
+uv run lol-assets-indexer index
+pnpm -C apps/web dev
+```
+
+E abrir <http://localhost:3000>.
+
+O primeiro comando **baixa o `dragontail` do patch atual: 2,39 GB, ~15 minutos** na
+primeira vez. Ele mede 15.526 imagens e escreve ~10,6 MB de JSON em
+`apps/web/public/indice/`. Não copia imagem nenhuma ([ADR 0012](docs/adr/0012-onde-guardar-os-assets.md)).
+
+**`--dry-run` não serve para isto.** Ele mede e valida **sem escrever nada** — é ensaio,
+não geração. Depois de um `--dry-run` o diretório continua vazio e o site continua no
+estado de erro.
+
+Se você já tem o tarball em disco, pule o download:
+
+```bash
+uv run lol-assets-indexer index --tarball caminho/para/dragontail-16.17.1.tgz
+```
+
+Para conferir se já há índice sem gerar nada:
+
+```bash
+uv run lol-assets-indexer check
+```
+
+> **O índice gerado aparece como não rastreado no `git status`.** É esperado: enquanto o
+> **T-37** ([ADR 0014](docs/adr/0014-onde-vive-o-indice-gerado.md), proposto) não for
+> decidido, ele não é commitado à mão. Quem vai commitá-lo é o workflow do T-13.
+
 ## Fontes dos assets
 
 Data Dragon e Community Dragon. A League of Legends Wiki **não** é acessada de

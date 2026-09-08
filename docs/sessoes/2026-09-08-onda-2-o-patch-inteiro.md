@@ -76,11 +76,17 @@ isso é exatamente a pergunta do **T-37**, que registrei em vez de responder soz
 
 > O teto de uma versão mantém o **diretório** em 10,6 MB. Ele não encosta no **histórico do
 > Git**: cada indexação reescreve o índice inteiro com nomes novos, e todo blob commitado
-> fica lá para sempre. Com o T-13 rodando a cada 6 h, são **~275 MB/ano** que todo clone
+> fica lá para sempre. Com o T-13 rodando a cada 6 h, são ~~**~275 MB/ano**~~ que todo clone
 > baixa.
 
-É a metade maior do problema que o ADR 0013 resolveu pela metade menor. Disparar o workflow
-sozinho seria decidi-la em silêncio.
+> ⚠️ **Corrigido em 08/09/2026:** o número acima está errado por um fator de ~25. Medido,
+> são **~12 MiB/ano** — eu esqueci que o Git comprime (8,8×) e faz delta entre índices
+> consecutivos (mais ~3×). Três anos custam 28 MiB, num repositório que hoje tem 0,65 MiB.
+> A análise das cinco saídas está no
+> [ADR 0014](../adr/0014-onde-vive-o-indice-gerado.md), proposto.
+
+Disparar o workflow sozinho ainda seria decidir em silêncio, então continua com você — mas
+a decisão é bem menos pesada do que eu a apresentei.
 
 **Quando você quiser:** Actions → Indexação → Run workflow. Os campos `force` e
 `game_version` estão lá para reindexar sem esperar patch novo.
