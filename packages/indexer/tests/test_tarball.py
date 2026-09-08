@@ -70,6 +70,7 @@ def test_data_target_so_aceita_os_idiomas_da_v1() -> None:
 
 def test_uma_passada_mede_so_o_que_esta_no_escopo(scan: TarballScan) -> None:
     assert scan.images, "nada foi medido"
+    assert scan.files > len(scan.images) + scan.skipped, "os JSONs de data/ também contam"
     for caminho in scan.images:
         assert is_in_scope_image(caminho), f"{caminho} não deveria ter sido aberto"
     assert scan.skipped > 0, "o filtro de escopo não descartou nada"

@@ -604,7 +604,29 @@ limite de 500 linhas.
 
 ---
 
-### T-12 — Observabilidade: `status.json`, resumo do job e issue automática
+### ✅ T-12 — Observabilidade: `status.json`, resumo do job e issue automática
+
+> **Concluído em 08/09/2026.** Três decisões que o escopo escrito não tomava:
+>
+> - **A issue é aberta em Python, não em YAML.** O critério pedia teste de
+>   idempotência, e passo de workflow não se testa sem `act`. Com a chamada em
+>   Python, a idempotência, a redação e o comportamento quando a API está fora do ar
+>   viram teste com `respx`. O T-13 só precisa passar `GITHUB_TOKEN`.
+> - **A idempotência é por `GITHUB_RUN_ID` carimbado no corpo**, num comentário HTML
+>   invisível no Markdown — não por título parecido. Título muda quando o texto do
+>   erro muda; o `run_id` não.
+> - **`--dry-run` não escreve nem o `status.json`.** "Mede e valida sem escrever
+>   nada" é uma regra só, e uma regra só é mais fácil de lembrar do que uma com
+>   exceção.
+>
+> **Fora do escopo escrito, mas dentro do objetivo:** o detector de **dimensão
+> inesperada**. O ticket pedia "dimensões inesperadas" no `status.json` sem dizer o
+> que era esperado; virou uma tabela com as medidas do S1 e um agrupamento por
+> (tipo, tamanho encontrado) — uma linha por desvio, não uma por asset, senão 2.118
+> splashes com tamanho novo produziriam 2.118 linhas.
+>
+> A promessa do T-10 de "aborta sem escrever nada" passou a significar **nenhum
+> documento de índice**: o relatório da falha é escrito de propósito.
 
 | | |
 |---|---|

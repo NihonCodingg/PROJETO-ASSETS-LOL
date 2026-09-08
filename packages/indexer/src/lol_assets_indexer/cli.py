@@ -16,8 +16,12 @@ precisa abortar sem ter deixado nada meio escrito.
 from __future__ import annotations
 
 import asyncio
+import json
 import logging
+import os
 import tempfile
+import time
+from dataclasses import dataclass, field
 from datetime import UTC, datetime
 from pathlib import Path
 from typing import Annotated, Any
@@ -28,14 +32,17 @@ from lol_assets_schema.models import (
     Asset,
     IndexManifest,
     IndexShard,
+    IndexStatus,
     ManifestVersion,
 )
+from lol_assets_schema.validators import validate_status
 
 from lol_assets_indexer import __version__, logging_setup
 from lol_assets_indexer.adapters.ddragon import latest_version, tarball_url
 from lol_assets_indexer.adapters.records import build_all, build_champion_snapshots
 from lol_assets_indexer.adapters.tarball import TarballScan, scan_tarball
 from lol_assets_indexer.catalog import project_catalog, verify_catalog
+from lol_assets_indexer.github import reporter_from_env
 from lol_assets_indexer.http import IndexerSettings, SourceClient
 from lol_assets_indexer.limits import BudgetReport, check_budget, measure
 from lol_assets_indexer.publish.storage import (
@@ -46,6 +53,7 @@ from lol_assets_indexer.publish.storage import (
     prepare_manifest,
     prepare_shard,
 )
+from lol_assets_indexer.status import build_status, render_summary
 
 logger = logging.getLogger("lol_assets_indexer.cli")
 
@@ -53,6 +61,27 @@ app = typer.Typer(help="Indexador de assets de League of Legends.", no_args_is_h
 
 #: O índice é servido pelo próprio Next como estático — ADR 0012.
 DEFAULT_OUTPUT = Path("apps/web/public/indice")
+
+
+#: Nome fixo, ao lado do índice. É o que responde "a indexação de hoje rodou?".
+STATUS_KEY = "status.json"
+
+
+@dataclass
+class _Execucao:
+    """O que a execução foi descobrindo pelo caminho.
+
+    Existe para o `status.json` poder ser escrito **mesmo quando a indexação
+    falha**: o que já se sabia até o ponto da falha vai para o relatório.
+    """
+
+    started_at: str
+    game_version: str | None = None
+    scan: TarballScan | None = None
+    por_categoria: dict[str, list[Asset]] = field(default_factory=dict)
+    champions: int | None = None
+    skins: int | None = None
+    budget: BudgetReport | None = None
 
 
 @app.callback()
@@ -84,10 +113,19 @@ def index(
         Path | None,
         typer.Option("--tarball", help="Usa um tarball já baixado em vez de buscar de novo."),
     ] = None,
+    summary: Annotated[
+        Path | None,
+        typer.Option("--summary", help="Onde escrever o resumo em Markdown do job."),
+    ] = None,
 ) -> None:
     """Indexa o patch inteiro: manifesto, catálogo e fatias."""
     logging_setup.configure()
     settings = IndexerSettings()
+
+    relogio = time.monotonic()
+    execucao = _Execucao(started_at=_agora())
+    falha: Exception | None = None
+    resumo: dict[str, Any] = {}
 
     try:
         resumo = asyncio.run(
@@ -97,14 +135,36 @@ def index(
                 dry_run=dry_run,
                 output=output,
                 tarball=tarball,
+                execucao=execucao,
             )
         )
     except Exception as erro:
+        falha = erro
         logger.error(
             "indexação falhou",
             extra={"failure": str(erro), "kind": type(erro).__name__},
         )
-        raise typer.Exit(code=1) from erro
+
+    # O relatório vem antes da saída: uma falha aqui não pode esconder o motivo
+    # dela mesma. Em `--dry-run` nada é escrito, nem isto — é o combinado.
+    status = build_status(
+        started_at=execucao.started_at,
+        finished_at=_agora(),
+        duration_seconds=time.monotonic() - relogio,
+        game_version=execucao.game_version,
+        run_id=os.environ.get("GITHUB_RUN_ID") or None,
+        failure=falha,
+        scan=execucao.scan,
+        assets_by_category=execucao.por_categoria or None,
+        catalog_champions=execucao.champions,
+        catalog_skins=execucao.skins,
+        budget=execucao.budget,
+    )
+    if not dry_run:
+        _entregar_status(status, output=output, summary=summary)
+
+    if falha is not None:
+        raise typer.Exit(code=1) from falha
 
     typer.echo(
         f"{resumo['assets']} assets · {resumo['champions']} campeões · "
@@ -157,11 +217,15 @@ async def _run(
     dry_run: bool,
     output: Path,
     tarball: Path | None,
+    execucao: _Execucao,
 ) -> dict[str, Any]:
-    generated_at = datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%SZ")
+    generated_at = _agora()
     scan = await _scan_source(settings, game_version, tarball)
+    execucao.scan = scan
+    execucao.game_version = scan.game_version
 
     por_categoria = {categoria: assets for categoria, assets in build_all(scan).items() if assets}
+    execucao.por_categoria = {str(c): a for c, a in por_categoria.items()}
     catalog = project_catalog(
         game_version=scan.game_version,
         generated_at=generated_at,
@@ -179,6 +243,8 @@ async def _run(
         for categoria, assets in por_categoria.items()
     ]
 
+    execucao.champions = len(catalog.champions)
+    execucao.skins = len(catalog.skins)
     total_assets = sum(len(assets) for assets in por_categoria.values())
     total_bytes = sum(asset.bytes for assets in por_categoria.values() for asset in assets)
 
@@ -218,6 +284,7 @@ async def _run(
             manifest=measure("manifest", manifest_payload),
         )
     )
+    execucao.budget = report
 
     logger.info(
         "documentos validados",
@@ -262,6 +329,51 @@ async def _run(
     )
     resumo["sweptDocuments"] = removidos
     return resumo
+
+
+def _agora() -> str:
+    return datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%SZ")
+
+
+def _entregar_status(status: IndexStatus, *, output: Path, summary: Path | None) -> None:
+    """Escreve `status.json`, o resumo do job, e abre a issue se falhou.
+
+    Nesta ordem de propósito: o arquivo é o registro durável, o resumo é
+    conveniência, e a issue depende de rede. Se a rede falhar, os dois primeiros
+    já aconteceram.
+    """
+    documento = status.model_dump(by_alias=True, exclude_none=True, mode="json")
+    validate_status(documento)
+    output.mkdir(parents=True, exist_ok=True)
+    (output / STATUS_KEY).write_text(
+        json.dumps(documento, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
+    )
+    logger.info("status escrito", extra={"ok": status.ok, "arquivo": STATUS_KEY})
+
+    destino = summary or (
+        Path(os.environ["GITHUB_STEP_SUMMARY"]) if os.environ.get("GITHUB_STEP_SUMMARY") else None
+    )
+    if destino is not None:
+        destino.parent.mkdir(parents=True, exist_ok=True)
+        with destino.open("a", encoding="utf-8") as arquivo:
+            arquivo.write(render_summary(status))
+
+    if status.ok:
+        return
+    reporter = reporter_from_env()
+    if reporter is None:
+        logger.info("sem GITHUB_TOKEN: nenhuma issue aberta")
+        return
+    reporter.report(status, run_url=_run_url())
+
+
+def _run_url() -> str | None:
+    servidor = os.environ.get("GITHUB_SERVER_URL")
+    repositorio = os.environ.get("GITHUB_REPOSITORY")
+    execucao = os.environ.get("GITHUB_RUN_ID")
+    if not (servidor and repositorio and execucao):
+        return None
+    return f"{servidor}/{repositorio}/actions/runs/{execucao}"
 
 
 def _varrer_orfaos(output: Path, referenciados: frozenset[str]) -> int:

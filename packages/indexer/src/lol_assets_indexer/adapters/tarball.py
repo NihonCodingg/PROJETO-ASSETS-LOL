@@ -77,6 +77,8 @@ class TarballScan:
     champions: dict[str, dict[str, Any]] = field(default_factory=dict)
     #: Caminho relativo (sem a versão) → medição. Ex.: `img/champion/Jax.png`.
     images: dict[str, MeasuredImage] = field(default_factory=dict)
+    #: Arquivos vistos no tarball, incluindo os JSONs de `data/`.
+    files: int = 0
     skipped: int = 0
     unreadable: dict[str, int] = field(default_factory=dict)
     #: Caminho pedido → caminho real, quando só a caixa diverge. Ver `resolve`.
@@ -197,6 +199,7 @@ def scan_tarball(stream: IO[bytes], game_version: str) -> TarballScan:
                 scan.unreadable[chave] = scan.unreadable.get(chave, 0) + 1
             del data  # os bytes morrem aqui — ADR 0012
 
+    scan.files = processed
     logger.info(
         "tarball varrido",
         extra={
