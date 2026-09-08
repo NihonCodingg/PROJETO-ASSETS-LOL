@@ -25,6 +25,7 @@ import {
   saveBlob,
   thumbnailSrc,
 } from "@/lib/asset-file";
+import { PaletaDeBusca } from "@/components/paleta-de-busca";
 import { AssetsClient } from "@/lib/assets-client";
 import { siteConfig } from "@/lib/site-config";
 
@@ -107,6 +108,12 @@ export default function HomePage() {
         patch {manifest.currentVersion} · {catalog.champions.length} campeões ·{" "}
         {catalog.skins.length} skins
       </p>
+
+      <PaletaDeBusca
+        catalog={catalog}
+        onChampion={abrir}
+        onSkin={(_skin, campeao) => campeao && abrir(campeao)}
+      />
 
       <ul aria-label="Campeões">
         {catalog.champions.map((campeao) => {

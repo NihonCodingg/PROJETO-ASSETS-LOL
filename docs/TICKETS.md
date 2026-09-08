@@ -765,7 +765,29 @@ limite de 500 linhas.
 
 ---
 
-### T-14 — Front: busca com normalização e apelidos
+### ✅ T-14 — Front: busca com normalização e apelidos
+
+> **Concluído em 08/09/2026.** Duas decisões que o escopo escrito deixava em aberto:
+>
+> - **A supressão é por campeão, não por contagem.** O critério dizia "`jax` retorna
+>   uma entrada de campeão, não 18 de skin", sem dizer como. A regra que ficou: se o
+>   campeão casou, as skins **dele** saem do resultado — elas moram no painel dele
+>   ([ADR 0010](adr/0010-navegacao-por-campeao-busca-por-skin.md)). Isso é o que faz
+>   `jax` devolver uma entrada mesmo com "O Super Jax" e "Jax Deus da Guerra"
+>   casando por substring, e ao mesmo tempo deixa `kda` devolver skins de campeões
+>   diferentes: nenhum campeão se chama "K/DA".
+> - **Apelido ganha de tudo, inclusive de prefixo.** `eve` é prefixo de "Evelynn" e
+>   também apelido dela; se um dia um campeão novo começar com "eve", o apelido
+>   continua mandando. Apelido é intenção declarada à mão.
+>
+> **Verificado no navegador, contra o catálogo real** (173 campeões, 2.118 skins):
+> `kaisa`, `mf`, `j4`, `asol` em primeiro lugar; `jax` com **uma** entrada; `kda` com
+> 21 skins de vários campeões; `prestigio` com o teto de 50. A busca responde em
+> **5 ms** para seis consultas sobre 2.291 entradas — o RNF-01 pede menos de 50 ms
+> por consulta.
+>
+> O `cmdk` entrou como dependência aqui, e não no T-34: ele é headless, e instalar
+> não é decisão visual. O tema continua bloqueado com o resto do design.
 
 | | |
 |---|---|
