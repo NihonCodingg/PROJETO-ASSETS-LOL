@@ -53,6 +53,7 @@ from lol_assets_indexer.publish.storage import (
     prepare_manifest,
     prepare_shard,
 )
+from lol_assets_indexer.scheduling import decide, indexed_version, write_github_output
 from lol_assets_indexer.status import build_status, render_summary
 
 logger = logging.getLogger("lol_assets_indexer.cli")
@@ -93,6 +94,49 @@ def main() -> None:
 def version() -> None:
     """Imprime a versão do indexador."""
     typer.echo(__version__)
+
+
+@app.command()
+def check(
+    output: Annotated[
+        Path,
+        typer.Option("--output", help="Pasta do índice publicado."),
+    ] = DEFAULT_OUTPUT,
+) -> None:
+    """Diz se há patch novo, sem baixar nada.
+
+    É o primeiro passo do workflow do T-13: na maioria das execuções não há nada
+    a fazer, e "nada a fazer" tem que custar segundos, não os ~15 minutos de
+    baixar 2,39 GB.
+    """
+    logging_setup.configure()
+    settings = IndexerSettings()
+
+    try:
+        latest = asyncio.run(_latest(settings))
+    except Exception as erro:
+        logger.error(
+            "não consegui consultar a versão mais recente",
+            extra={"failure": str(erro), "kind": type(erro).__name__},
+        )
+        raise typer.Exit(code=1) from erro
+
+    decisao = decide(latest, indexed_version(output))
+    write_github_output(decisao)
+    logger.info(
+        "decisão de indexação",
+        extra={
+            "needsIndex": decisao.needs_index,
+            "latest": decisao.latest,
+            "indexed": decisao.indexed,
+        },
+    )
+    typer.echo(f"{'indexar' if decisao.needs_index else 'nada a fazer'}: {decisao.reason}")
+
+
+async def _latest(settings: IndexerSettings) -> str:
+    async with SourceClient(settings) as client:
+        return await latest_version(client)
 
 
 @app.command()

@@ -1,0 +1,102 @@
+name: Indexação
+
+# A Riot publica um patch a cada duas semanas; este workflow roda a cada 6 h.
+# Na esmagadora maioria das execuções não há nada a fazer, e é por isso que o
+# primeiro passo pergunta antes de baixar 2,39 GB.
+#
+# Publicação é por COMMIT, não por API de bucket (ADR 0012): o job escreve o
+# índice, commita e dá push; o deploy da Vercel publica. Nenhum segredo de
+# storage é necessário — só o GITHUB_TOKEN que o Actions já fornece.
+
+on:
+  schedule:
+    # 03:00, 09:00, 15:00 e 21:00 UTC. Minuto 17 para não cair no pico da hora
+    # cheia, quando o Actions atrasa os agendamentos de todo mundo.
+    - cron: "17 3,9,15,21 * * *"
+  workflow_dispatch:
+    inputs:
+      game_version:
+        description: "Patch a indexar. Vazio = o mais recente."
+        required: false
+        type: string
+      force:
+        description: "Indexar mesmo que a versão já esteja publicada."
+        required: false
+        type: boolean
+        default: false
+
+# Duas indexações ao mesmo tempo escreveriam no mesmo diretório e brigariam pelo
+# push. `cancel-in-progress: false` porque cancelar no meio deixaria a árvore
+# suja no runner — melhor a segunda esperar a primeira terminar.
+concurrency:
+  group: indexacao
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  indexar:
+    name: Indexar o patch atual
+    runs-on: ubuntu-latest
+    # O download são 2,39 GB e a varredura mede 15.526 imagens. Localmente dá
+    # ~15 min; o teto é folgado de propósito, para timeout significar "algo
+    # travou", não "o dia estava lento".
+    timeout-minutes: 60
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Instalar uv
+        uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+
+      - name: Instalar dependências
+        run: uv sync --all-packages --frozen
+
+      - name: Há patch novo?
+        id: decidir
+        run: uv run lol-assets-indexer check
+
+      - name: Indexar
+        id: indexar
+        if: >-
+          steps.decidir.outputs.needs_index == 'true' ||
+          inputs.force == true ||
+          inputs.game_version != ''
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          uv run lol-assets-indexer index \
+            ${{ inputs.game_version && format('--game-version {0}', inputs.game_version) || '' }}
+
+      - name: Commitar o índice
+        if: steps.indexar.outcome == 'success'
+        run: |
+          set -euo pipefail
+          # `status --porcelain`, não `diff`: na primeira execução os arquivos
+          # ainda não são rastreados, e `diff` não vê arquivo novo.
+          if [ -z "$(git status --porcelain -- apps/web/public/indice)" ]; then
+            echo "índice idêntico ao publicado; nada a commitar"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          # Um commit só, do diretório inteiro: ou entra tudo, ou não entra nada.
+          git add -- apps/web/public/indice
+          git commit -m "chore(indice): patch ${{ steps.decidir.outputs.game_version }}" \
+            -m "Gerado por .github/workflows/index.yml, execução ${{ github.run_id }}."
+          git push
+
+      - name: Publicar o status como artefato
+        # Vale também quando a indexação falha: é o relatório do T-12, e é o
+        # único jeito de ver o que aconteceu sem abrir o log inteiro.
+        if: always() && steps.indexar.outcome != 'skipped'
+        uses: actions/upload-artifact@v4
+        with:
+          name: status-${{ github.run_id }}
+          path: apps/web/public/indice/status.json
+          if-no-files-found: warn
+          retention-days: 30

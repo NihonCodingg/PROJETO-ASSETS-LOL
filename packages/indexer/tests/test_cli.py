@@ -614,3 +614,42 @@ def test_nenhum_segredo_do_ambiente_aparece_no_status(
     bruto = (destino / "status.json").read_text(encoding="utf-8")
     assert segredo not in bruto
     assert "outra_credencial_bem_longa" not in bruto
+
+
+# --- o comando `check` do workflow (T-13) --------------------------------------------
+
+
+@respx.mock
+def test_check_diz_para_indexar_quando_nao_ha_indice(destino: Path, tmp_path: Path) -> None:
+    respx.get(f"{DDRAGON}/api/versions.json").mock(
+        return_value=httpx.Response(200, json=[VERSAO, ANTIGA])
+    )
+    saida = tmp_path / "github_output"
+
+    with pytest.MonkeyPatch.context() as ambiente:
+        ambiente.setenv("GITHUB_OUTPUT", str(saida))
+        resultado = runner.invoke(app, ["check", "--output", str(destino)])
+
+    assert resultado.exit_code == 0
+    assert "indexar" in resultado.output
+    assert "needs_index=true" in saida.read_text(encoding="utf-8")
+
+
+@respx.mock
+def test_check_nao_baixa_nada(tarball_local: Path, destino: Path) -> None:
+    """O ponto do ticket: "nada a fazer" custa segundos, não 2,39 GB."""
+    indexar(tarball_local, destino)
+    respx.get(f"{DDRAGON}/api/versions.json").mock(return_value=httpx.Response(200, json=[VERSAO]))
+    tarball = respx.get(f"{DDRAGON}/cdn/dragontail-{VERSAO}.tgz")
+
+    resultado = runner.invoke(app, ["check", "--output", str(destino)])
+
+    assert resultado.exit_code == 0
+    assert "nada a fazer" in resultado.output
+    assert not tarball.called
+
+
+@respx.mock
+def test_check_falha_alto_se_a_fonte_estiver_fora(destino: Path) -> None:
+    respx.get(f"{DDRAGON}/api/versions.json").mock(return_value=httpx.Response(500))
+    assert runner.invoke(app, ["check", "--output", str(destino)]).exit_code != 0
