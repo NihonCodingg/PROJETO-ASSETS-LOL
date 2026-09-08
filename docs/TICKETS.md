@@ -662,7 +662,28 @@ limite de 500 linhas.
 
 ---
 
-### T-13 — Workflow agendado de indexação
+### ✅ T-13 — Workflow agendado de indexação
+
+> **Concluído em 08/09/2026, com um critério que não depende de mim.**
+>
+> - **O comparador de versão virou um subcomando, `check`.** Ele consulta só o
+>   `versions.json` (alguns KB) e compara com o manifesto publicado; o passo de
+>   indexação só roda se ele disser que sim. Em ~27 de cada 28 execuções o job
+>   termina em segundos, sem tocar nos 2,39 GB.
+> - **A regra é "diferente", não "mais novo".** Se o ddragon voltar atrás num patch,
+>   o índice volta junto: ele descreve o que a fonte serve **hoje**. Comparar por
+>   ordem deixaria o site apontando para arquivos que a fonte não tem mais.
+> - **Manifesto ilegível conta como ausente.** Melhor reindexar por causa de um
+>   arquivo corrompido do que ficar parado achando que está tudo certo.
+> - **`git status --porcelain`, não `git diff`**, para decidir se há o que commitar:
+>   na primeira execução os arquivos ainda não são rastreados, e `diff` não vê
+>   arquivo novo. Seria uma falha silenciosa exatamente na estreia.
+>
+> **O critério 4 fica em aberto, e não por falta de código.** "Uma execução manual
+> commita e, depois do deploy, o site serve a versão nova" precisa de duas coisas que
+> não estão nas minhas mãos: alguém disparar o `workflow_dispatch` e o projeto estar
+> ligado à Vercel. A primeira execução também põe **10,6 MB no repositório**, que é
+> exatamente a pergunta do **T-37** — disparar sozinho seria decidi-la em silêncio.
 
 | | |
 |---|---|
