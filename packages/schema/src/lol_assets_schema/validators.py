@@ -14,7 +14,7 @@ from typing import Any
 
 from jsonschema import Draft202012Validator
 
-from lol_assets_schema import CATALOG_SCHEMA, MANIFEST_SCHEMA, SHARD_SCHEMA
+from lol_assets_schema import CATALOG_SCHEMA, MANIFEST_SCHEMA, SHARD_SCHEMA, STATUS_SCHEMA
 
 
 @lru_cache(maxsize=8)
@@ -37,3 +37,8 @@ def validate_catalog(document: Any) -> None:
 def validate_manifest(document: Any) -> None:
     """Levanta `jsonschema.ValidationError` se o manifesto não estiver conforme."""
     _validator(MANIFEST_SCHEMA).validate(document)
+
+
+def validate_status(document: Any) -> None:
+    """Levanta `jsonschema.ValidationError` se o status não estiver conforme."""
+    _validator(STATUS_SCHEMA).validate(document)

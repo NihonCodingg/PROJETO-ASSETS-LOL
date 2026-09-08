@@ -227,3 +227,67 @@ class IndexManifest(_Base):
     assets_base_url: str | None = None
     current_version: Version
     versions: list[ManifestVersion] = Field(min_length=1)
+
+
+# --- status da execução (T-12) -------------------------------------------------
+#
+# Não faz parte do contrato que o front precisa para funcionar: é o relatório da
+# última indexação, escrito com sucesso ou com falha. Como não há processo
+# monitorando nada (§11 da Spec), ele e a issue automática são o canal inteiro.
+
+
+class StatusFailure(_Base):
+    #: Nome da classe da exceção — agrupa falhas repetidas sem depender do texto.
+    kind: str = Field(min_length=1)
+    message: str
+
+
+class StatusCounts(_Base):
+    assets: int | None = Field(default=None, ge=0)
+    champions: int | None = Field(default=None, ge=0)
+    skins: int | None = Field(default=None, ge=0)
+    categories: int | None = Field(default=None, ge=0)
+    assets_by_category: dict[str, int] | None = None
+    assets_by_source: dict[str, int] | None = None
+
+
+class StatusBytes(_Base):
+    index: int | None = Field(default=None, ge=0)
+    catalog_gzip: int | None = Field(default=None, ge=0)
+    largest_shard_gzip: int | None = Field(default=None, ge=0)
+    #: Soma dos bytes que o índice descreve. Nada disso é copiado (ADR 0012).
+    described_assets: int | None = Field(default=None, ge=0)
+
+
+class StatusSource(_Base):
+    files: int | None = Field(default=None, ge=0)
+    images_measured: int | None = Field(default=None, ge=0)
+    images_skipped: int | None = Field(default=None, ge=0)
+    unreadable: dict[str, int] | None = None
+    case_mismatches: int | None = Field(default=None, ge=0)
+
+
+class DimensionDeviation(_Base):
+    """Um tipo cujo tamanho fugiu do que os spikes mediram."""
+
+    type: AssetType
+    expected: tuple[int, int]
+    found: tuple[int, int]
+    assets: int = Field(ge=1)
+    example: str | None = None
+
+
+class IndexStatus(_Base):
+    schema_version: Version
+    started_at: str
+    finished_at: str
+    duration_seconds: float = Field(ge=0)
+    ok: bool
+    game_version: Version | None = None
+    #: `GITHUB_RUN_ID` — chave de idempotência da issue automática.
+    run_id: str | None = None
+    failure: StatusFailure | None = None
+    counts: StatusCounts | None = None
+    bytes: StatusBytes | None = None
+    source: StatusSource | None = None
+    unexpected_dimensions: list[DimensionDeviation] | None = None

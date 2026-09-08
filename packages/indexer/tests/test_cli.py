@@ -52,6 +52,17 @@ def ler(destino: Path, nome: str) -> Any:
     return json.loads((destino / nome).read_text(encoding="utf-8"))
 
 
+def documentos_de_indice(destino: Path) -> set[str]:
+    """O que o índice escreveu. `status.json` não conta — é relatório, não índice.
+
+    A promessa de "aborta sem escrever nada" é sobre o índice: o relatório da
+    falha é escrito **de propósito** mesmo quando a indexação aborta (T-12).
+    """
+    if not destino.exists():
+        return set()
+    return {caminho.name for caminho in destino.glob("*.json") if caminho.name != "status.json"}
+
+
 @pytest.fixture(autouse=True)
 def _limpar_contexto() -> Any:
     logging_setup.clear_context()
@@ -224,7 +235,7 @@ def test_registro_invalido_aborta_sem_escrever_nada(
     resultado = indexar(tarball_local, destino)
 
     assert resultado.exit_code != 0
-    assert not destino.exists(), "nada podia ter sido escrito"
+    assert documentos_de_indice(destino) == set(), "nada de índice podia ter sido escrito"
 
 
 @respx.mock
@@ -242,7 +253,7 @@ def test_nome_de_tarball_sem_versao_pede_a_versao(tmp_path: Path, destino: Path)
     resultado = indexar(estranho, destino)
 
     assert resultado.exit_code != 0
-    assert not destino.exists()
+    assert documentos_de_indice(destino) == set()
 
 
 # --- log ------------------------------------------------------------------------
@@ -326,7 +337,7 @@ def test_orcamento_estourado_aborta_sem_escrever_nada(
     resultado = indexar(tarball_local, destino)
 
     assert resultado.exit_code != 0
-    assert not destino.exists(), "o estouro precisa abortar ANTES da primeira escrita"
+    assert documentos_de_indice(destino) == set(), "o estouro tem que abortar ANTES da escrita"
     assert "RNF-03" in resultado.output
 
 
@@ -338,7 +349,7 @@ def test_indice_grande_demais_aborta_antes_de_escrever(
     resultado = indexar(tarball_local, destino)
 
     assert resultado.exit_code != 0
-    assert not destino.exists()
+    assert documentos_de_indice(destino) == set()
     assert "RNF-05" in resultado.output
 
 
@@ -367,14 +378,14 @@ def test_catalogo_inconsistente_aborta_sem_escrever_nada(
     resultado = indexar(tarball_local, destino)
 
     assert resultado.exit_code != 0
-    assert not destino.exists()
+    assert documentos_de_indice(destino) == set()
     assert "ADR 0010" in resultado.output
 
 
 def test_o_resumo_diz_o_tamanho_do_indice(tarball_local: Path, destino: Path) -> None:
     """É o número que decide se o orçamento ainda cabe; não pode ficar só no log."""
     resultado = indexar(tarball_local, destino)
-    escrito = sum(c.stat().st_size for c in destino.rglob("*.json"))
+    escrito = sum((destino / nome).stat().st_size for nome in documentos_de_indice(destino))
 
     esperado = f"{escrito:,}".replace(",", ".")
     assert f"{esperado} bytes" in resultado.output, resultado.output
@@ -426,7 +437,7 @@ def test_a_versao_anterior_some_do_destino(depois_de_dois_patches: Path) -> None
     referenciados = {"manifest.json", versao["catalog"]["url"]}
     referenciados.update(fatia["url"] for fatia in versao["shards"])
 
-    no_disco = {caminho.name for caminho in depois_de_dois_patches.glob("*.json")}
+    no_disco = documentos_de_indice(depois_de_dois_patches)
     assert no_disco == referenciados, no_disco - referenciados
 
 
@@ -434,7 +445,7 @@ def test_o_indice_nao_cresce_com_o_numero_de_patches(tarball_local: Path, destin
     """A conta que derrubou o histórico: 4,4 MB por patch, ~115 MB/ano."""
 
     def tamanho() -> int:
-        return sum(caminho.stat().st_size for caminho in destino.glob("*.json"))
+        return sum((destino / nome).stat().st_size for nome in documentos_de_indice(destino))
 
     indexar(tarball_local, destino, "--game-version", "16.15.1")
     primeiro = tamanho()
@@ -454,7 +465,7 @@ def test_a_varredura_so_roda_depois_do_manifesto(
     versão anterior inteira — não pode ter sido varrido antes.
     """
     indexar(tarball_local, destino, "--game-version", ANTIGA)
-    antes = {caminho.name for caminho in destino.glob("*.json")}
+    antes = documentos_de_indice(destino)
 
     def explode(*args: Any, **kwargs: Any) -> None:
         raise RuntimeError("falha ao escrever o manifesto")
@@ -462,18 +473,17 @@ def test_a_varredura_so_roda_depois_do_manifesto(
     monkeypatch.setattr("lol_assets_indexer.publish.storage.Publisher.publish_manifest", explode)
     assert indexar(tarball_local, destino, "--game-version", VERSAO).exit_code != 0
 
-    depois = {caminho.name for caminho in destino.glob("*.json")}
-    assert antes <= depois, "a versão anterior foi apagada antes da hora"
+    assert antes <= documentos_de_indice(destino), "a versão anterior foi apagada antes da hora"
 
 
 def test_reindexar_o_mesmo_patch_nao_duplica_nem_deixa_lixo(
     tarball_local: Path, destino: Path
 ) -> None:
     indexar(tarball_local, destino)
-    primeiro = {caminho.name for caminho in destino.glob("*.json")}
+    primeiro = documentos_de_indice(destino)
     indexar(tarball_local, destino)
 
-    assert {caminho.name for caminho in destino.glob("*.json")} == primeiro
+    assert documentos_de_indice(destino) == primeiro
     assert len(ler(destino, "manifest.json")["versions"]) == 1
 
 
@@ -494,3 +504,113 @@ def test_a_varredura_ignora_arquivo_que_nao_e_do_indice(tarball_local: Path, des
 
     indexar(tarball_local, destino, "--game-version", VERSAO)
     assert intruso.exists(), "a varredura apagou arquivo que não é dela"
+
+
+# --- observabilidade (T-12) ---------------------------------------------------------
+
+
+def test_status_e_escrito_no_sucesso(tarball_local: Path, destino: Path) -> None:
+    from lol_assets_schema.validators import validate_status
+
+    indexar(tarball_local, destino)
+    status = ler(destino, "status.json")
+
+    validate_status(status)
+    assert status["ok"] is True
+    assert status["gameVersion"] == VERSAO
+    assert status["counts"]["champions"] == 2
+    assert status["bytes"]["index"] > 0
+    assert status["source"]["caseMismatches"] > 0, "a fixture tem o campeão de caixa divergente"
+
+
+def test_status_e_escrito_tambem_quando_falha(
+    tarball_local: Path, destino: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """É o critério 1 do T-12: o relatório existe justamente quando dá errado."""
+    from lol_assets_schema.validators import validate_status
+
+    monkeypatch.setattr("lol_assets_indexer.limits.CATALOG_GZIP_LIMIT", 10)
+    assert indexar(tarball_local, destino).exit_code != 0
+
+    status = ler(destino, "status.json")
+    validate_status(status)
+    assert status["ok"] is False
+    assert status["failure"]["kind"] == "BudgetExceededError"
+    assert "RNF-03" in status["failure"]["message"]
+
+
+def test_status_existe_mesmo_quando_a_falha_e_no_comeco(destino: Path, tmp_path: Path) -> None:
+    """Pior caso: nem a versão foi resolvida."""
+    vazio = tmp_path / "arquivo.tgz"
+    vazio.write_bytes(b"")
+    assert indexar(vazio, destino).exit_code != 0
+
+    status = ler(destino, "status.json")
+    assert status["ok"] is False
+    assert "gameVersion" not in status
+
+
+def test_o_status_nao_e_varrido_como_orfao(depois_de_dois_patches: Path) -> None:
+    assert (depois_de_dois_patches / "status.json").exists()
+
+
+def test_dry_run_nao_escreve_nem_status(tarball_local: Path, destino: Path) -> None:
+    assert indexar(tarball_local, destino, "--dry-run").exit_code == 0
+    assert not destino.exists(), "o --dry-run não escreve nada, nem relatório"
+
+
+def test_o_resumo_do_job_e_escrito_onde_pedirem(
+    tarball_local: Path, destino: Path, tmp_path: Path
+) -> None:
+    resumo = tmp_path / "summary.md"
+    indexar(tarball_local, destino, "--summary", str(resumo))
+
+    texto = resumo.read_text(encoding="utf-8")
+    assert texto.startswith("## ✅ Indexação")
+    assert "| `champion` |" in texto
+
+
+def test_o_resumo_do_job_sai_pela_variavel_do_actions(
+    tarball_local: Path, destino: Path, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """É assim que o T-13 vai ligar isto, sem passar opção nenhuma."""
+    resumo = tmp_path / "step-summary.md"
+    monkeypatch.setenv("GITHUB_STEP_SUMMARY", str(resumo))
+    indexar(tarball_local, destino)
+
+    assert "## ✅ Indexação" in resumo.read_text(encoding="utf-8")
+
+
+def test_o_resumo_de_falha_tambem_sai(
+    tarball_local: Path, destino: Path, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    resumo = tmp_path / "summary.md"
+    monkeypatch.setattr("lol_assets_indexer.limits.INDEX_RAW_LIMIT", 100)
+    indexar(tarball_local, destino, "--summary", str(resumo))
+
+    texto = resumo.read_text(encoding="utf-8")
+    assert texto.startswith("## ❌ Indexação")
+    assert "RNF-05" in texto
+
+
+def test_o_run_id_do_actions_entra_no_status(
+    tarball_local: Path, destino: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    monkeypatch.setenv("GITHUB_RUN_ID", "987654")
+    indexar(tarball_local, destino)
+
+    assert ler(destino, "status.json")["runId"] == "987654"
+
+
+def test_nenhum_segredo_do_ambiente_aparece_no_status(
+    tarball_local: Path, destino: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Critério 4 do T-12. O status é publicado junto com o índice."""
+    segredo = "ghp_UmTokenBemLongoQueNaoPodeVazar"
+    monkeypatch.setenv("GITHUB_TOKEN", segredo)
+    monkeypatch.setenv("S3_SECRET_ACCESS_KEY", "outra_credencial_bem_longa")
+    indexar(tarball_local, destino)
+
+    bruto = (destino / "status.json").read_text(encoding="utf-8")
+    assert segredo not in bruto
+    assert "outra_credencial_bem_longa" not in bruto

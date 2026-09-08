@@ -1,0 +1,161 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/NihonCodingg/PROJETO-ASSETS-LOL/schemas/index-status.schema.json",
+  "title": "Status da última indexação",
+  "description": "Escrito a cada execução do indexador, com sucesso ou com falha, ao lado do índice (status.json). Não faz parte do contrato que o front precisa para funcionar: é o que responde 'a indexação de hoje rodou, e o que ela viu' sem abrir o log do Actions. Como não há processo monitorando nada (§11 da Spec), este arquivo e a issue automática são o canal inteiro.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "startedAt",
+    "finishedAt",
+    "durationSeconds",
+    "ok"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "startedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "finishedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "durationSeconds": {
+      "description": "Quanto a execução inteira levou. É o número que diz se o timeout do Actions ainda cabe.",
+      "type": "number",
+      "minimum": 0
+    },
+    "ok": {
+      "description": "false quando a indexação abortou. O arquivo é escrito nos dois casos.",
+      "type": "boolean"
+    },
+    "gameVersion": {
+      "description": "Patch indexado. Ausente quando a falha aconteceu antes de a versão ser resolvida — é o pior caso, e o status precisa existir nele.",
+      "type": ["string", "null"],
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "runId": {
+      "description": "Identificador da execução do Actions (GITHUB_RUN_ID). É a chave de idempotência da issue automática.",
+      "type": ["string", "null"]
+    },
+    "failure": {
+      "$ref": "#/$defs/failure"
+    },
+    "counts": {
+      "$ref": "#/$defs/counts"
+    },
+    "bytes": {
+      "$ref": "#/$defs/bytes"
+    },
+    "source": {
+      "$ref": "#/$defs/source"
+    },
+    "unexpectedDimensions": {
+      "description": "Assets cujas dimensões fogem do que os spikes mediram. Não é erro: é o detector de mudança silenciosa na fonte.",
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/dimensionDeviation"
+      }
+    }
+  },
+  "$defs": {
+    "failure": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "required": ["kind", "message"],
+      "properties": {
+        "kind": {
+          "description": "Nome da classe da exceção. Agrupa falhas repetidas sem depender do texto.",
+          "type": "string",
+          "minLength": 1
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "counts": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "assets": { "type": "integer", "minimum": 0 },
+        "champions": { "type": "integer", "minimum": 0 },
+        "skins": { "type": "integer", "minimum": 0 },
+        "categories": { "type": "integer", "minimum": 0 },
+        "assetsByCategory": {
+          "type": "object",
+          "additionalProperties": { "type": "integer", "minimum": 0 }
+        },
+        "assetsBySource": {
+          "description": "Por fonte (ddragon, cdragon, riot_static, wiki). Hoje só ddragon; o T-16 acrescenta.",
+          "type": "object",
+          "additionalProperties": { "type": "integer", "minimum": 0 }
+        }
+      }
+    },
+    "bytes": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "index": {
+          "description": "O que foi escrito no destino. É o número do RNF-05.",
+          "type": "integer",
+          "minimum": 0
+        },
+        "catalogGzip": { "type": "integer", "minimum": 0 },
+        "largestShardGzip": { "type": "integer", "minimum": 0 },
+        "describedAssets": {
+          "description": "Soma dos bytes dos assets que o índice descreve. Nada disso é copiado (ADR 0012).",
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "files": { "type": "integer", "minimum": 0 },
+        "imagesMeasured": { "type": "integer", "minimum": 0 },
+        "imagesSkipped": { "type": "integer", "minimum": 0 },
+        "unreadable": {
+          "description": "Por pasta e tipo de erro. Vazio é o esperado.",
+          "type": "object",
+          "additionalProperties": { "type": "integer", "minimum": 0 }
+        },
+        "caseMismatches": {
+          "description": "Arquivos achados só por busca insensível a caixa. 52 no patch 16.17.1, todos do Fiddlesticks.",
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "dimensionDeviation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "expected", "found", "assets"],
+      "properties": {
+        "type": { "type": "string" },
+        "expected": {
+          "type": "array",
+          "items": { "type": "integer", "minimum": 1 },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "found": {
+          "type": "array",
+          "items": { "type": "integer", "minimum": 1 },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "assets": { "type": "integer", "minimum": 1 },
+        "example": { "type": "string" }
+      }
+    }
+  }
+}

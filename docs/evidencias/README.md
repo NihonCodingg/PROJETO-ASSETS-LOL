@@ -52,3 +52,20 @@ Indexação de `16.16.1` e depois `16.17.1` no mesmo destino, com o mesmo tarbal
 Foi este número que derrubou o histórico: **4,4 MB por patch**, não os ~3 MB estimados —
 e sem a categoria `rune`, porque `perk-images` não é versionado no ddragon. A ~26 patches
 por ano, seriam ~115 MB/ano num repositório que todo clone paga inteiro.
+
+## O `status.json` do patch 16.17.1
+
+Primeira execução com o relatório do T-12 ligado. O que confirma mais que o resto:
+**`unexpectedDimensions` saiu vazio** — todas as 2.118 splashes, 2.118 tiles, 2.118
+loadings e 173 squares batem, pixel a pixel, com o que o S1 mediu.
+
+```json
+"counts":  { "assets": 15515, "champions": 173, "skins": 2118, "categories": 6 },
+"bytes":   { "index": 10583827, "catalogGzip": 63293, "largestShardGzip": 717050,
+             "describedAssets": 1439374815 },
+"source":  { "files": 34305, "imagesMeasured": 15526, "imagesSkipped": 18421,
+             "caseMismatches": 52 }
+```
+
+Os 52 `caseMismatches` são as 13 skins do Fiddlesticks vezes os 4 cortes — a divergência
+de caixa que o T-09 encontrou, agora contada a cada execução em vez de descoberta de novo.

@@ -15,6 +15,7 @@ __all__ = [
     "SCHEMA_DIR",
     "SCHEMA_VERSION",
     "SHARD_SCHEMA",
+    "STATUS_SCHEMA",
     "__version__",
 ]
 
@@ -32,6 +33,8 @@ MANIFEST_SCHEMA = SCHEMA_DIR / "index-manifest.schema.json"
 #: Projeção de navegação (campeões) e busca (skins). Ver ADR 0010.
 CATALOG_SCHEMA = SCHEMA_DIR / "catalog.schema.json"
 SHARD_SCHEMA = SCHEMA_DIR / "index-shard.schema.json"
+#: Relatório da última execução do indexador. Não é contrato do front (T-12).
+STATUS_SCHEMA = SCHEMA_DIR / "index-status.schema.json"
 
 #: Apelidos de busca mantidos à mão. Ampliar = editar o arquivo (ADR 0009).
 ALIASES_FILE = _ROOT / "data" / "champion-aliases.json"
