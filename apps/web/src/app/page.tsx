@@ -16,15 +16,8 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 
 import type { Asset, Catalog, CatalogChampion, IndexManifest } from "@lol-assets/schema";
 
-import {
-  assetSummary,
-  assetUrl,
-  canConvertToPng,
-  convertToPng,
-  pngFileName,
-  saveBlob,
-  thumbnailSrc,
-} from "@/lib/asset-file";
+import { thumbnailSrc } from "@/lib/asset-file";
+import { PainelDeAsset } from "@/components/painel-de-asset";
 import { PaletaDeBusca } from "@/components/paleta-de-busca";
 import { AssetsClient } from "@/lib/assets-client";
 import { siteConfig } from "@/lib/site-config";
@@ -136,59 +129,16 @@ export default function HomePage() {
       </ul>
 
       {aberto && (
-        <section aria-label={aberto.names.pt_BR}>
-          <h2>{aberto.names.pt_BR}</h2>
-          <button type="button" onClick={() => setAberto(null)}>
-            fechar
-          </button>
-          {erroDoPainel && <p role="alert">{erroDoPainel}</p>}
-          {!assets && !erroDoPainel && <p>carregando os assets…</p>}
-          {assets?.map((asset) => (
-            <CartaoDeAsset key={asset.id} asset={asset} />
-          ))}
-        </section>
+        <PainelDeAsset
+          titulo={aberto.names.pt_BR}
+          assets={assets ?? []}
+          assetsBaseUrl={BASE_ASSETS}
+          onClose={() => setAberto(null)}
+        />
       )}
+      {aberto && erroDoPainel && <p role="alert">{erroDoPainel}</p>}
+      {aberto && !assets && !erroDoPainel && <p>carregando os assets…</p>}
     </Moldura>
-  );
-}
-
-function CartaoDeAsset({ asset }: { asset: Asset }) {
-  const [baixando, setBaixando] = useState<"original" | "png" | null>(null);
-  const url = assetUrl(asset, BASE_ASSETS);
-
-  const baixar = useCallback(
-    async (comoPng: boolean) => {
-      setBaixando(comoPng ? "png" : "original");
-      try {
-        const blob = await (await fetch(url)).blob();
-        if (comoPng) saveBlob(await convertToPng(blob), pngFileName(asset.fileName));
-        else saveBlob(blob, asset.fileName);
-      } finally {
-        setBaixando(null);
-      }
-    },
-    [asset.fileName, url],
-  );
-
-  return (
-    <article>
-      <h3>{asset.type}</h3>
-      {/* RF-09: a ficha aparece antes de qualquer clique de download. */}
-      <p>{assetSummary(asset)}</p>
-      <button type="button" disabled={baixando !== null} onClick={() => baixar(false)}>
-        Baixar original
-      </button>
-      <button
-        type="button"
-        disabled={baixando !== null || !canConvertToPng(asset)}
-        onClick={() => baixar(true)}
-      >
-        {canConvertToPng(asset) ? "Baixar PNG" : "já é PNG"}
-      </button>
-      <button type="button" onClick={() => navigator.clipboard.writeText(url)}>
-        Copiar URL
-      </button>
-    </article>
   );
 }
 

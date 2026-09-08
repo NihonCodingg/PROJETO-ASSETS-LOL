@@ -838,7 +838,35 @@ limite de 500 linhas.
 
 ---
 
-### T-15 — Front: painel de asset completo
+### ✅ T-15 — Front: painel de asset completo
+
+> **Concluído em 08/09/2026.**
+>
+> - **Estado por cartão, não por painel.** São 58 cartões no Fiddlesticks; um erro de
+>   rede num deles não pode apagar os outros 57 da tela. Cada cartão tem o seu
+>   `pronto | baixando | erro`.
+> - **A ordem é por tipo, e a tabela vive num lugar só.** `splash_centered` primeiro
+>   ([ADR 0002](adr/0002-nomes-canonicos-de-corte-de-splash.md)), depois do maior para
+>   o menor, terminando nos ícones. Tipo desconhecido vai para o fim em vez de sumir.
+> - **Baixar e copiar entram por injeção**, com o comportamento real como padrão —
+>   mesmo desenho do `PngDeps` do `asset-file.ts`. É o que torna o caminho de erro
+>   testável sem mock de módulo.
+>
+> **Infraestrutura de teste que faltava:** `jsdom` e `@testing-library/react`. Sem DOM
+> não dava para provar "o erro fica no cartão" nem "`Esc` fecha" — só varredura de
+> fonte, que é fraca para comportamento. O `vitest.config.ts` também passou a resolver
+> o alias `@/` e a transformar JSX, que o Next fazia sozinho. Isso destrava os testes
+> de componente do T-19, T-20, T-24 e T-25.
+>
+> **Verificado no navegador, com o índice real:** painel do Fiddlesticks com 58
+> cartões, ordem `splash_centered → splash_wide → loading → tile → square →
+> passive_icon → ability_icon`, ficha `1280x720 · jpeg · 90 KB · ddragon` **antes** de
+> qualquer clique, `Esc` fechando, e a URL copiada respondendo 200 com o `sha256`
+> batendo com o do índice.
+>
+> **Fica uma consequência de o T-19 ainda não existir:** sem seletor de skin, o painel
+> de um campeão mostra os assets de **todas** as skins dele — 13 splashes seguidas, no
+> caso do Fiddlesticks. Agrupar por tipo é o que mantém isso legível até lá.
 
 | | |
 |---|---|
