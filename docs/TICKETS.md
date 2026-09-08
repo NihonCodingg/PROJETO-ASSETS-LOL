@@ -4,7 +4,7 @@
 > Cada ticket cabe em **≤ 500 linhas de lógica** (exclui lockfiles, fixtures e snapshots).
 > Se não couber, divide-se o ticket — nunca se infla o PR (regra 5 do [CLAUDE.md](../CLAUDE.md)).
 >
-> Data: 03/09/2026 · 35 tickets · 7 ondas
+> Data: 03/09/2026 · 37 tickets · 7 ondas
 >
 > **Revisão de 07/09/2026:** o projeto passa a operar **sem storage próprio** —
 > [ADR 0012](adr/0012-onde-guardar-os-assets.md). Afeta T-06 (vira componente inativo),
@@ -549,44 +549,58 @@ limite de 500 linhas.
 
 ---
 
-### T-11 — Histórico de versões no índice
+### ✅ T-11 — Rotação: uma versão por vez no índice
+
+> **Reescrito e concluído em 08/09/2026.** O ticket mudou de nome porque mudou de objetivo,
+> duas vezes:
+>
+> 1. Nasceu como "publicar novo, remover anterior" — remoção de **assets** do bucket.
+> 2. Virou "reduzir a versão anterior aos tipos versionados" quando o
+>    [ADR 0012](adr/0012-onde-guardar-os-assets.md) tirou o bucket.
+> 3. Virou **rotação simples** quando a execução mediu o custo do histórico: **4,4 MB por
+>    patch, ~115 MB/ano**, num repositório que todo `git clone` paga inteiro — e o que se
+>    comprava com isso eram ícones repetidos, porque splash, loading, tile e a categoria
+>    `rune` inteira não são versionados. Decidido no
+>    [ADR 0013](adr/0013-uma-versao-por-vez-no-indice.md).
+>
+> A redução ao histórico chegou a ser escrita e testada; foi descartada **antes de
+> entrar**, e a regra inteira está escrita no ADR 0013 — mais durável que um ponteiro para
+> um commit.
 
 | | |
 |---|---|
-| **Objetivo** | Acumular versões no índice sem prometer o que não existe |
+| **Objetivo** | O índice guarda a versão corrente e só ela, sem deixar rastro da anterior |
 | **Dependências** | T-10 |
-| **Estimativa** | ~90 linhas |
+| **Estimativa** | ~60 linhas |
 | **Effort** | baixo |
-| **Cobre** | RF-19, RF-20, RNF-05, [ADR 0007](adr/0007-politica-de-versoes-e-orcamento.md), [ADR 0012](adr/0012-onde-guardar-os-assets.md) |
-
-> **Reduzido em 07/09/2026.** Era "publicar novo, remover anterior". Sem storage não há o
-> que remover, então o ticket encolhe para a parte que sempre foi a mais importante: **não
-> oferecer, no modo histórico, os tipos cuja URL não é versionada.**
+| **Cobre** | RNF-05, [ADR 0013](adr/0013-uma-versao-por-vez-no-indice.md), [ADR 0007](adr/0007-politica-de-versoes-e-orcamento.md) |
 
 **Entra**
-- Ao indexar uma versão nova, a anterior é **reduzida no índice** aos tipos versionados:
-  `square`, `item_icon`, `summoner_spell_icon`, `passive_icon`, `profile_icon`, `map_image`.
-- `splash_*`, `loading`, `tile` e `chroma` são **removidos do índice da versão antiga** —
-  as URLs deles no ddragon não são versionadas e serviriam a arte de hoje com rótulo de
-  ontem (RF-20).
-- `assetsCopied` permanece `false` em toda versão.
+- `versions[]` do manifesto tem **exatamente um item**, sempre igual a `currentVersion`.
+- **Varredura de órfãos**: depois de o manifesto novo estar escrito, todo documento de
+  índice que ele não referencia mais é apagado do destino. É o que faz a versão anterior
+  desaparecer, e o que impede uma reindexação do mesmo patch de deixar lixo.
+- `assetsCopied` permanece `false`.
 
 **NÃO entra**
-- Remover assets. Não há assets copiados ([ADR 0012](adr/0012-onde-guardar-os-assets.md)).
-- Recuperar splash histórico. É impossível por esta arquitetura, e a Spec diz isso.
-- Apagar índice antigo. Ele acumula — ~3 MB por versão reduzida.
+- Guardar versão anterior, reduzida ou não ([ADR 0013](adr/0013-uma-versao-por-vez-no-indice.md)).
+- Apagar qualquer coisa **antes** do manifesto novo. É a trava do
+  [ADR 0007](adr/0007-politica-de-versoes-e-orcamento.md) para passo destrutivo.
+- Encolher o histórico do **Git**. Cada indexação continua deixando ~10,6 MB de blobs para
+  sempre — problema separado, no **T-37**.
 
 **Critérios de aceite**
-1. Depois de indexar uma versão nova, a anterior não tem nenhum registro de `splash_*`,
-   `loading`, `tile` ou `chroma`.
-2. Os tipos versionados da versão anterior continuam no índice, e as URLs deles respondem.
-3. `assetsCopied` é `false` em todas as versões do manifesto.
-4. O índice de uma versão antiga fica em torno de 3 MB — medido, não estimado.
+1. Depois de indexar dois patches em sequência, o manifesto traz uma versão só.
+2. Nenhum documento da versão anterior sobra no destino.
+3. Indexar N patches no mesmo destino deixa o diretório do mesmo tamanho que indexar um.
+4. Se a escrita do manifesto falhar, nada foi apagado — a versão anterior continua inteira.
+5. A varredura não toca em `manifest.json` nem em arquivo fora do padrão de nome do índice.
 
 **Testes que provam**
-- Teste do filtro de tipos não versionados, com um índice de duas versões.
-- Teste que percorre o índice reduzido e confirma que todo `sourceUrl` restante contém a
-  versão no caminho.
+- Dois patches em sequência, conferindo o manifesto e o conteúdo do diretório.
+- Três patches, comparando o tamanho do diretório com o do primeiro.
+- Falha injetada na publicação do manifesto, conferindo que nada sumiu.
+- Arquivo intruso no destino, conferindo que sobrevive.
 
 ---
 
@@ -672,7 +686,7 @@ limite de 500 linhas.
 | **Cobre** | RNF-11, [ADR 0011](adr/0011-base-de-componentes-do-front.md) |
 
 > 🚧 **Bloqueado.** Precisa de `docs/design/TOKENS.md`, que só existe depois da ingestão do
-> design. Enquanto isso, T-14, T-15, T-19, T-20, T-24, T-25 e T-26 rodam sem ele — ficam
+> design. Enquanto isso, T-14, T-15, T-19, T-20, T-24 e T-25 rodam sem ele — ficam
 > com a tela crua, que é o combinado da nota no topo.
 
 **Entra**
@@ -986,7 +1000,7 @@ limite de 500 linhas.
 
 # Onda 4 — categorias e download em lote
 
-**Execução: (T-21 ∥ T-22)**, com **(T-24 ∥ T-25 ∥ T-26)** em paralelo. ⏸️ T-23 suspenso.
+**Execução: (T-21 ∥ T-22)**, com **(T-24 ∥ T-25)** em paralelo. ⏸️ T-23 e T-26 suspensos.
 
 ### T-21 — Indexar as categorias não-campeão do ddragon
 
@@ -1167,7 +1181,12 @@ limite de 500 linhas.
 
 ---
 
-### T-26 — Front: seletor de versão e modo histórico honesto
+### ⏸️ T-26 — Front: seletor de versão e modo histórico honesto
+
+> ⏸️ **Suspenso em 08/09/2026** pelo [ADR 0013](adr/0013-uma-versao-por-vez-no-indice.md).
+> O índice guarda uma versão só, então não há o que selecionar nem modo histórico a
+> tornar honesto. RF-19 e RF-20 saíram da v1 junto. O ticket fica escrito: se o teto
+> de uma versão for revisto, ele volta como está — o que ele descreve continua certo.
 
 | | |
 |---|---|
@@ -1482,6 +1501,70 @@ limite de 500 linhas.
 
 ---
 
+### ✅ T-36 — Teto de versões guardadas no índice
+
+> **Fechado em 08/09/2026 pela decisão, não pelo código.** Levantado durante o T-11, quando
+> a execução mediu **4,4 MB por versão antiga** — 47 % acima dos ~3 MB que o ticket e o
+> [ADR 0007](adr/0007-politica-de-versoes-e-orcamento.md) estimavam.
+>
+> A pergunta era "guardar as N últimas, só as do ano, ou todas?". A resposta foi
+> **N = 1**, registrada no [ADR 0013](adr/0013-uma-versao-por-vez-no-indice.md): 26 patches
+> por ano a 4,4 MB são ~115 MB/ano que todo `git clone` paga para sempre, e o que se compra
+> é histórico incompleto por construção — sem splash, sem loading, sem tile e sem runa
+> nenhuma, porque essas URLs não são versionadas no ddragon.
+>
+> A implementação virou o **T-11**, que ficou mais simples do que se tivesse teto > 1: não
+> há rotação a fazer, só a versão nova e a varredura do que sobrou.
+
+---
+
+### T-37 — O índice no histórico do Git
+
+| | |
+|---|---|
+| **Objetivo** | Impedir que o repositório cresça ~275 MB/ano depois que o T-13 começar a commitar sozinho |
+| **Dependências** | T-13 |
+| **Estimativa** | a definir — depende da decisão |
+| **Effort** | médio |
+| **Cobre** | RNF-05, [ADR 0013](adr/0013-uma-versao-por-vez-no-indice.md) |
+
+> Levantado no **T-11**, junto com a decisão do
+> [ADR 0013](adr/0013-uma-versao-por-vez-no-indice.md), e **deliberadamente deixado de
+> fora dele**.
+>
+> O teto de uma versão mantém o **diretório de trabalho** em 10,6 MB. Ele não encosta no
+> **histórico do Git**: cada indexação reescreve o índice inteiro com nomes novos (hash no
+> nome), e todo blob commitado fica no repositório para sempre. Com o T-13 rodando a cada
+> 6 h e um patch a cada duas semanas, são **~26 reescritas por ano de 10,6 MB — ~275 MB/ano**
+> que todo `git clone` baixa.
+>
+> É a metade maior do problema que o ADR 0013 resolveu pela metade menor.
+
+**Entra**
+- Medir o crescimento real com dois ou três commits de índice, em vez de estimar.
+- Comparar as saídas, com o custo de cada uma:
+  - **Gerar no build da Vercel**, sem commitar. Elimina o problema inteiro, mas exige
+    baixar 2,39 GB a cada deploy dentro dos limites do plano Hobby — e desfaz a escolha do
+    [ADR 0012](adr/0012-onde-guardar-os-assets.md) de publicar por commit sem segredo nenhum.
+  - **Branch órfão** só para o índice, com squash periódico ou `git clone --depth`.
+  - **Release do GitHub** como destino do índice (não dos assets — as releases não têm CORS,
+    mas o índice é buscado pelo próprio app, não pelo navegador de outra origem).
+  - **Aceitar o crescimento** e podar o histórico manualmente quando incomodar.
+- Registrar a escolha em ADR.
+
+**NÃO entra**
+- Reescrever histórico existente. Se for preciso, é operação manual e avisada.
+
+**Critérios de aceite**
+1. O crescimento por indexação está medido, não estimado.
+2. A escolha está registrada em ADR, com o custo das alternativas.
+3. Depois de N indexações, o tamanho de um `git clone` é previsível e conhecido.
+
+**Testes que provam**
+- Depende da saída escolhida. Se for build na Vercel, o próprio deploy é o teste.
+
+---
+
 ## Mapa de cobertura
 
 Todo requisito da Spec tem pelo menos um ticket.
@@ -1498,14 +1581,14 @@ Todo requisito da Spec tem pelo menos um ticket.
 | RF-15 | T-19, T-29 |
 | ~~RF-16~~ | ⏸️ T-23 suspenso — fora da v1 ([ADR 0012](adr/0012-onde-guardar-os-assets.md)) |
 | RF-17, RF-18 | T-25 |
-| RF-19, RF-20 | T-11, T-26 |
+| ~~RF-19, RF-20~~ | fora da v1 ([ADR 0013](adr/0013-uma-versao-por-vez-no-indice.md)); ⏸️ T-26 suspenso |
 | RF-21, RF-22 | T-27, T-33 |
 | RF-23 | T-27, T-33 |
 | RNF-01 | T-14, T-19, T-29 |
 | RNF-02 | T-29 |
 | RNF-03 | T-10, T-08, T-24 |
 | RNF-04 | T-13 |
-| RNF-05 | T-02, T-10 |
+| RNF-05 | T-02, T-10, T-11, ✅ T-36, T-37 |
 | RNF-13 | T-15 (aviso de divergência), T-09 (medição do sha256) |
 | RNF-06 | T-12, T-13, T-31 |
 | RNF-07 | T-08 |
@@ -1522,7 +1605,7 @@ Todo requisito da Spec tem pelo menos um ticket.
 | 1 | ✅ (T-03 ∥ T-04) → (T-05 ∥ T-06) → T-07; T-08 ∥ | 2 frentes | **Concluída.** Esqueleto andante: 1 campeão, 2 tipos, ponta a ponta — falta só publicar no R2 de verdade |
 | 2 | T-09 → (T-10 ∥ T-11 ∥ T-12) → T-13; (T-14 ∥ T-15) ∥; 🚧 T-34 quando o design chegar | 2 frentes | Catálogo de campeões completo e automático |
 | 3 | (T-16 → T-17) ∥ (T-19 → T-20); T-18 ao final | 2 frentes | Grade de campeões, seletor de skin, chromas e a segunda fonte |
-| 4 | (T-21 ∥ T-22); (T-24 ∥ T-25 ∥ T-26) ∥ · ⏸️ T-23 suspenso | 2 frentes | Catálogo inteiro e download em lote pelo cliente |
+| 4 | (T-21 ∥ T-22); (T-24 ∥ T-25) ∥ · ⏸️ T-23 e T-26 suspensos | 2 frentes | Catálogo inteiro e download em lote pelo cliente |
 | 5 | (T-27 ∥ T-28 ∥ T-31) → T-29 → T-30 | 3 frentes | Produto fechado e vestido |
 | 6 | T-32 | — | API opcional |
 | — | T-33 | gatilho manual | Pré-lançamento |

@@ -396,3 +396,101 @@ def test_cada_fatia_traz_sha256_e_contagem_corretos(tarball_local: Path, destino
     bruto = (destino / catalogo["url"]).read_bytes()
     assert catalogo["sha256"] == hashlib.sha256(bruto).hexdigest()
     assert catalogo["champions"] == len(json.loads(bruto)["champions"])
+
+
+# --- uma versão por vez (T-11 / ADR 0013) -------------------------------------------
+
+ANTIGA = "16.16.1"
+
+
+@pytest.fixture
+def depois_de_dois_patches(tarball_local: Path, destino: Path) -> Path:
+    """Indexa 16.16.1 e depois 16.17.1 no mesmo destino."""
+    assert indexar(tarball_local, destino, "--game-version", ANTIGA).exit_code == 0
+    assert indexar(tarball_local, destino, "--game-version", VERSAO).exit_code == 0
+    return destino
+
+
+def test_o_manifesto_tem_uma_versao_so(depois_de_dois_patches: Path) -> None:
+    """ADR 0013: guardar histórico custa 4,4 MB por patch e entrega ícone repetido."""
+    manifesto = ler(depois_de_dois_patches, "manifest.json")
+
+    assert [v["gameVersion"] for v in manifesto["versions"]] == [VERSAO]
+    assert manifesto["currentVersion"] == VERSAO
+
+
+def test_a_versao_anterior_some_do_destino(depois_de_dois_patches: Path) -> None:
+    """Não basta sair do manifesto: o arquivo tem que sair do diretório."""
+    manifesto = ler(depois_de_dois_patches, "manifest.json")
+    versao = manifesto["versions"][0]
+    referenciados = {"manifest.json", versao["catalog"]["url"]}
+    referenciados.update(fatia["url"] for fatia in versao["shards"])
+
+    no_disco = {caminho.name for caminho in depois_de_dois_patches.glob("*.json")}
+    assert no_disco == referenciados, no_disco - referenciados
+
+
+def test_o_indice_nao_cresce_com_o_numero_de_patches(tarball_local: Path, destino: Path) -> None:
+    """A conta que derrubou o histórico: 4,4 MB por patch, ~115 MB/ano."""
+
+    def tamanho() -> int:
+        return sum(caminho.stat().st_size for caminho in destino.glob("*.json"))
+
+    indexar(tarball_local, destino, "--game-version", "16.15.1")
+    primeiro = tamanho()
+    indexar(tarball_local, destino, "--game-version", ANTIGA)
+    indexar(tarball_local, destino, "--game-version", VERSAO)
+
+    # Os três patches têm o mesmo conteúdo, então o tamanho tem que ser o mesmo.
+    assert tamanho() == primeiro
+
+
+def test_a_varredura_so_roda_depois_do_manifesto(
+    tarball_local: Path, destino: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """ADR 0007: passo destrutivo nunca antes do índice novo estar escrito.
+
+    Se a publicação do manifesto falhar, o destino tem que continuar servindo a
+    versão anterior inteira — não pode ter sido varrido antes.
+    """
+    indexar(tarball_local, destino, "--game-version", ANTIGA)
+    antes = {caminho.name for caminho in destino.glob("*.json")}
+
+    def explode(*args: Any, **kwargs: Any) -> None:
+        raise RuntimeError("falha ao escrever o manifesto")
+
+    monkeypatch.setattr("lol_assets_indexer.publish.storage.Publisher.publish_manifest", explode)
+    assert indexar(tarball_local, destino, "--game-version", VERSAO).exit_code != 0
+
+    depois = {caminho.name for caminho in destino.glob("*.json")}
+    assert antes <= depois, "a versão anterior foi apagada antes da hora"
+
+
+def test_reindexar_o_mesmo_patch_nao_duplica_nem_deixa_lixo(
+    tarball_local: Path, destino: Path
+) -> None:
+    indexar(tarball_local, destino)
+    primeiro = {caminho.name for caminho in destino.glob("*.json")}
+    indexar(tarball_local, destino)
+
+    assert {caminho.name for caminho in destino.glob("*.json")} == primeiro
+    assert len(ler(destino, "manifest.json")["versions"]) == 1
+
+
+def test_assets_copied_continua_falso(depois_de_dois_patches: Path) -> None:
+    manifesto = ler(depois_de_dois_patches, "manifest.json")
+    assert all(v["assetsCopied"] is False for v in manifesto["versions"])
+
+
+def test_a_varredura_nunca_toca_no_manifesto(depois_de_dois_patches: Path) -> None:
+    assert (depois_de_dois_patches / "manifest.json").exists()
+
+
+def test_a_varredura_ignora_arquivo_que_nao_e_do_indice(tarball_local: Path, destino: Path) -> None:
+    """Só apaga o que casa com o padrão de nome do índice."""
+    indexar(tarball_local, destino, "--game-version", ANTIGA)
+    intruso = destino / "anotacoes.json"
+    intruso.write_text("{}", encoding="utf-8")
+
+    indexar(tarball_local, destino, "--game-version", VERSAO)
+    assert intruso.exists(), "a varredura apagou arquivo que não é dela"

@@ -7,6 +7,13 @@
 >
 > Data: 03/09/2026 · patch de referência: 16.17.1 · contrato do índice: `1.1.0`
 >
+> **Revisão de 08/09/2026:** o índice guarda **uma versão só, a corrente** —
+> [ADR 0013](adr/0013-uma-versao-por-vez-no-indice.md), que emenda o
+> [ADR 0007](adr/0007-politica-de-versoes-e-orcamento.md). **RF-19 e RF-20 saem da v1**:
+> guardar histórico custa 4,4 MB por patch, ~115 MB/ano num repositório que todo clone
+> paga, e entrega ícones repetidos — splash, loading, tile e runas não existem em versão
+> antiga. Consequência direta da opção B do ADR 0012: com bucket, a decisão seria outra.
+>
 > **Revisão de 07/09/2026:** o projeto passa a operar **sem storage próprio** —
 > [ADR 0012](adr/0012-onde-guardar-os-assets.md), que emenda os ADRs 0005 e 0007. O índice
 > aponta para as URLs das fontes. **RF-16 e a categoria `rank` saem da v1**; RNF-05 e
@@ -59,7 +66,7 @@ asset. Não vai ler nada.
 | J7 | "Preciso das skins K/DA de vários campeões pra uma thumbnail temática" | Busca por termo transversal → skins de campeões diferentes ([ADR 0010](adr/0010-navegacao-por-campeao-busca-por-skin.md)) |
 | J3 | "Preciso de todos os ícones de item pra uma build animada" | Seleção da categoria `item` zipada no cliente (~868 arquivos, ~31 s medidos) |
 | ~~J4~~ | ~~"Preciso do ícone de Diamante IV"~~ | **Fora da v1** — ver §1.2 |
-| J5 | "Esse vídeo é de patch antigo, preciso do square antigo do Aatrox" | Seletor de versão — **só tipos versionados** |
+| ~~J5~~ | ~~"Esse vídeo é de patch antigo, preciso do square antigo do Aatrox"~~ | **Fora da v1 em 08/09/2026** ([ADR 0013](adr/0013-uma-versao-por-vez-no-indice.md)): o índice guarda uma versão só. A jornada continua real, e o custo de atendê-la está medido no ADR |
 | J6 | "Preciso de tudo do Jax" | Seleção no cliente → zip com JSZip |
 
 ---
@@ -103,8 +110,8 @@ implementa e pelo teste que o prova.
 | ~~**RF-16**~~ | ~~Zip por categoria é pré-gerado e baixado direto do bucket~~ | **Removido da v1 em 07/09/2026** ([ADR 0012](adr/0012-onde-guardar-os-assets.md)): sem storage não há onde pré-gerar. O número fica reservado, não reaproveitado |
 | **RF-17** | Zip de seleção customizada é montado no cliente — **único caminho de lote** | Selecionar N assets e baixar produz um zip com N arquivos, sem nenhuma requisição a um servidor próprio. Verificado com bytes de terceiros de dois hosts |
 | **RF-18** | "Tudo do Jax" é uma seleção pré-montada | Um clique seleciona todos os assets do campeão; o zip sai pelo caminho do RF-17 |
-| **RF-19** | Seletor de versão, com a atual por padrão | O manifesto lista as versões; trocar recarrega o índice daquela versão |
-| **RF-20** | Em versão anterior, tipos indisponíveis são explicitamente ausentes | Splash, loading e tile não aparecem; a UI diz por quê, em vez de servir a arte atual |
+| ~~**RF-19**~~ | ~~Seletor de versão, com a atual por padrão~~ | **Removido da v1 em 08/09/2026** ([ADR 0013](adr/0013-uma-versao-por-vez-no-indice.md)): o índice guarda uma versão só, então não há o que selecionar. O número fica reservado |
+| ~~**RF-20**~~ | ~~Em versão anterior, tipos indisponíveis são explicitamente ausentes~~ | **Removido da v1 em 08/09/2026** pelo mesmo ADR: sem versão anterior, não há tipo ausente a explicar. A regra que o motivava — splash, loading e tile não são versionados — continua verdadeira e registrada no [ADR 0007](adr/0007-politica-de-versoes-e-orcamento.md) |
 
 ### Institucional
 
@@ -124,7 +131,7 @@ implementa e pelo teste que o prova.
 | **RNF-02** | Imagem abre rápido | < 1 s para a prévia da splash em conexão de banda larga | e2e com timing |
 | **RNF-03** | Carga inicial enxuta | **Catálogo ≤ 150 KB comprimido** (é o único documento pesado da abertura); fatia de assets ≤ 1,5 MB comprimida e carregada **sob demanda** | Falha o build se qualquer um passar |
 | **RNF-04** | Custo de operação | **R$ 0,00/mês**: Vercel Hobby + Actions em repo público. **Sem storage e sem conta a manter** ([ADR 0012](adr/0012-onde-guardar-os-assets.md)) | Não há painel de cobrança a revisar |
-| **RNF-05** | Armazenamento | **Nenhum asset é armazenado.** O que o repositório carrega é índice: ~10 MB da versão corrente e ~3 MB por versão antiga | O indexador falha se o índice de uma versão passar de 15 MB |
+| **RNF-05** | Armazenamento | **Nenhum asset é armazenado.** O repositório carrega o índice de **uma versão só**: **10,6 MB medidos** no patch 16.17.1 ([ADR 0013](adr/0013-uma-versao-por-vez-no-indice.md)) | O indexador falha se o índice passar de 15 MiB; o manifesto tem exatamente uma versão |
 | **RNF-06** | Atualização | Novo patch refletido em ≤ 24 h, sem intervenção | Workflow agendado + `status.json` |
 | **RNF-07** | Resiliência **degradada, e assumida** | Se ddragon/cdragon caírem, **as imagens não carregam** — o catálogo e a busca continuam, porque são estáticos do app. O site diz que a fonte está fora, em vez de mostrar quadrado quebrado | e2e com as fontes bloqueadas: busca funciona, imagem mostra estado de erro |
 | **RNF-08** | Etiqueta de rede | User-Agent identificado, concorrência ≤ 4, backoff em 429/5xx | Teste unitário do cliente HTTP |
@@ -374,16 +381,25 @@ não são entradas de primeiro nível em nenhum dos dois.
 favorece o ddragon. Os spikes mostraram que **para assets de campeão é sempre empate** — o
 cdragon entra por cobertura (chromas, loading vintage), não por resolução.
 
-**Versões** ([ADR 0007](adr/0007-politica-de-versoes-e-orcamento.md)):
+**Versões** ([ADR 0013](adr/0013-uma-versao-por-vez-no-indice.md)):
 
-| | Versão atual | Versões anteriores |
-|---|---|---|
-| Assets copiados | **não** — [ADR 0012](adr/0012-onde-guardar-os-assets.md) | não |
-| `storageKey` no índice | **sempre ausente** | sempre ausente |
-| Origem servida ao usuário | `sourceUrl` da fonte | `sourceUrl` da fonte |
-| Tipos disponíveis | todos | **só os versionados**: square, item, spell, passive, profile_icon, map |
-| Splash, loading, tile | sim | **não existem** — essas URLs não são versionadas |
-| Índice no repositório | ~10 MB | ~3 MB (só os tipos versionados) |
+**Existe uma versão só: a corrente.** `versions[]` do manifesto tem exatamente um item, e
+ele é sempre igual a `currentVersion`. Ao indexar um patch novo, a versão anterior sai do
+manifesto e os documentos dela são apagados do destino — nessa ordem.
+
+| | Versão atual |
+|---|---|
+| Assets copiados | **não** — [ADR 0012](adr/0012-onde-guardar-os-assets.md) |
+| `storageKey` no índice | **sempre ausente** |
+| Origem servida ao usuário | `sourceUrl` da fonte |
+| Tipos disponíveis | todos |
+| Índice no repositório | **10,6 MB** (medido, 16.17.1) |
+
+Por que não guardar as anteriores: custam **4,4 MB por patch medidos** e entregam só os
+tipos versionados — square, item, feitiço, passiva, habilidade, ícone de perfil e mapa.
+Splash, loading, tile e **a categoria `rune` inteira** não são versionados no ddragon e
+teriam que sumir de qualquer versão antiga. A conta e as alternativas estão no
+[ADR 0013](adr/0013-uma-versao-por-vez-no-indice.md).
 
 ---
 
@@ -487,9 +503,10 @@ jeito de o site apodrecer.
 | [0004](adr/0004-consentimento-da-wiki-e-teto-de-resolucao.md) wiki | RNF-09, D2 |
 | [0005](adr/0005-arquitetura-estatica-custo-zero.md) estático, custo zero | §1.2, §5, RNF-04 |
 | [0006](adr/0006-api-como-componente-opcional.md) API opcional | §5.2, §7 |
-| [0007](adr/0007-politica-de-versoes-e-orcamento.md) versões e orçamento | RF-19, RF-20, RNF-05, §8 |
+| [0007](adr/0007-politica-de-versoes-e-orcamento.md) versões e orçamento | ~~RF-19, RF-20~~, RNF-05, §8 — emendado pelo 0013 |
 | [0008](adr/0008-catalogo-de-skins-e-seletor.md) catálogo de skins | RF-06 — emendado pelo 0010 |
 | [0010](adr/0010-navegacao-por-campeao-busca-por-skin.md) navegação × busca | RF-04, RF-05, RF-24, RF-25, RNF-03, §5.4, §6, §6.1, §8 |
 | [0011](adr/0011-base-de-componentes-do-front.md) base de componentes | RF-01, RF-03, RF-08, RF-24, RNF-01, RNF-11 |
 | [0012](adr/0012-onde-guardar-os-assets.md) sem storage | §1.2, §5, §6.1, §8, §9, RNF-05, RNF-07, RNF-13; remove RF-16 e a categoria `rank` |
+| [0013](adr/0013-uma-versao-por-vez-no-indice.md) uma versão por vez | RNF-05, §8; remove RF-19 e RF-20 |
 | [0009](adr/0009-apelidos-de-busca-mantidos-a-mao.md) apelidos | RF-03, §6, §10 |

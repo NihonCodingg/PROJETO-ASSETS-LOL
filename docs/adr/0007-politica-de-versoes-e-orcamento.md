@@ -1,6 +1,7 @@
 # ADR 0007 — Só a versão atual tem assets copiados; orçamento de 10 GB
 
 - **Status:** ⚠️ **largamente emendado** pelo [ADR 0012](0012-onde-guardar-os-assets.md) (07/09/2026)
+  e pelo [ADR 0013](0013-uma-versao-por-vez-no-indice.md) (08/09/2026)
 - **Data:** 2026-09-03
 - **Depende de:** [ADR 0005](0005-arquitetura-estatica-custo-zero.md)
 - **Evidência:** [SPIKES](../SPIKES.md) — S1, S3 e S4
@@ -42,8 +43,11 @@ em cerca de **10 semanas** e depois cresce para sempre.
    O campo `storageKey` fica **sempre** ausente. *(Era a regra das versões antigas; virou a
    regra de todas.)*
 3. ~~Ao indexar um patch novo, os assets do patch anterior são **removidos do bucket**.~~ →
-   **Não há bucket, então não há remoção.** O que acumula é índice: ~10 MB por versão
-   corrente e ~3 MB por versão antiga, que fica reduzida aos tipos versionados.
+   ~~**Não há bucket, então não há remoção.** O que acumula é índice: ~10 MB por versão
+   corrente e ~3 MB por versão antiga, que fica reduzida aos tipos versionados.~~ →
+   **Corrigido pelo [ADR 0013](0013-uma-versao-por-vez-no-indice.md):** a versão antiga
+   custa **4,4 MB medidos**, não ~3 MB estimados, e o índice **não acumula** — guarda uma
+   versão só. Removida do manifesto, ela é apagada do destino.
 4. **Idiomas:** `pt_BR` primeiro; `en_US` entra quando couber. Os dois juntos custam
    18,2 MB de JSON de origem por patch, então cabem — mas a ordem de prioridade fica
    registrada para quando o orçamento apertar.
@@ -58,8 +62,9 @@ em cerca de **10 semanas** e depois cresce para sempre.
 URL**: eles sempre entregam a arte *atual*. Só `square`, `item`, `spell`, `passive`,
 `profileicon` e `map` ficam sob `/cdn/{versão}/` e são realmente históricos.
 
-Consequência direta: para versões anteriores, o índice só pode oferecer os tipos
-versionados. Splash, loading e tile de patches antigos **não são recuperáveis** por esta
+Consequência direta: para versões anteriores, o índice só poderia oferecer os tipos
+versionados — e foi essa incompletude que ajudou a derrubar o histórico inteiro no
+[ADR 0013](0013-uma-versao-por-vez-no-indice.md). Splash, loading e tile de patches antigos **não são recuperáveis** por esta
 arquitetura — e a interface precisa dizer isso, em vez de servir a arte de hoje com um
 rótulo de ontem. A §A.3 previa "squares/splashes de versões antigas": os squares sim, os
 splashes não. A única fonte conhecida para o histórico de splash é a wiki, que depende do
@@ -69,7 +74,10 @@ consentimento do [ADR 0004](0004-consentimento-da-wiki-e-teto-de-resolucao.md).
 
 - O custo de armazenamento fica constante em ~1,9 GB, independente de quantos patches
   passem. O orçamento nunca é atingido por acúmulo.
-- O índice acumula, mas é barato: alguns MB por versão.
+- ~~O índice acumula, mas é barato: alguns MB por versão.~~ → **Errado, e é o que o
+  [ADR 0013](0013-uma-versao-por-vez-no-indice.md) corrige.** Esta frase foi escrita quando
+  o índice ia para um bucket. Com o índice no repositório, "acumular" custa 115 MB/ano que
+  todo `git clone` paga, para sempre.
 - O front precisa lidar com asset **sem** `storageKey` e com tipos ausentes em versões
   antigas. Isso é contrato, não caso de erro — está no JSON Schema.
 - Uma versão antiga depende do ddragon estar no ar. É o mesmo risco que a §A.5 já

@@ -182,7 +182,7 @@ Funcionalidades:
 
 - **Performance:** busca responde em < 50 ms (índice no cliente); imagem abre em < 1 s.
 - **Custo: zero.** Vercel Hobby (uso não comercial) + Cloudflare R2 no tier gratuito (10 GB, egress zero) + GitHub Actions em repositório público ([ADR 0005](adr/0005-arquitetura-estatica-custo-zero.md)). O produto **não será monetizado**. Assets são servidos como estáticos nos bytes de origem, sem conversão no servidor ([ADR 0001](adr/0001-formato-de-entrega-dos-assets.md)).
-- **Orçamento de armazenamento:** cabe em 10 GB. Assets completos só da versão atual (~1,9 GB medidos); versões anteriores só no índice. Idiomas: `pt_BR` primeiro, `en_US` se couber ([ADR 0007](adr/0007-politica-de-versoes-e-orcamento.md)).
+- **Orçamento de armazenamento:** ~~cabe em 10 GB. Assets completos só da versão atual (~1,9 GB medidos); versões anteriores só no índice.~~ → **Não há armazenamento** ([ADR 0012](adr/0012-onde-guardar-os-assets.md)) e o índice guarda **uma versão só**, 10,6 MB medidos ([ADR 0013](adr/0013-uma-versao-por-vez-no-indice.md)). Idiomas: `pt_BR` primeiro, `en_US` se couber ([ADR 0007](adr/0007-politica-de-versoes-e-orcamento.md)).
 - **Resiliência:** se ddragon/cdragon caírem, o site continua funcionando com o último índice publicado.
 - **Atualização:** novo patch refletido em até 24 h, sem intervenção manual.
 - **Abuso:** não se aplica — não há servidor a abusar. Zips de categoria são estáticos e pré-gerados; o zip de seleção roda no navegador do próprio usuário.
