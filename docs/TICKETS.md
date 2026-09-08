@@ -1696,7 +1696,7 @@ Todo requisito da Spec tem pelo menos um ticket.
 |---|---|---|---|
 | 0 | ✅ T-02 → T-01 | sequencial | **Concluída.** Orçamento fechado em 2,0 GB (20,1 % de 10 GB); protótipo removido |
 | 1 | ✅ (T-03 ∥ T-04) → (T-05 ∥ T-06) → T-07; T-08 ∥ | 2 frentes | **Concluída.** Esqueleto andante: 1 campeão, 2 tipos, ponta a ponta — falta só publicar no R2 de verdade |
-| 2 | T-09 → (T-10 ∥ T-11 ∥ T-12) → T-13; (T-14 ∥ T-15) ∥; 🚧 T-34 quando o design chegar | 2 frentes | Catálogo de campeões completo e automático |
+| 2 | ✅ T-09 → T-10 → T-11 → T-12 → T-13; ✅ T-14, T-15; 🚧 T-34 quando o design chegar | sequencial | **Concluída.** Patch inteiro indexado, com guarda, rotação, relatório, workflow, busca e painel |
 | 3 | (T-16 → T-17) ∥ (T-19 → T-20); T-18 ao final | 2 frentes | Grade de campeões, seletor de skin, chromas e a segunda fonte |
 | 4 | (T-21 ∥ T-22); (T-24 ∥ T-25) ∥ · ⏸️ T-23 e T-26 suspensos | 2 frentes | Catálogo inteiro e download em lote pelo cliente |
 | 5 | (T-27 ∥ T-28 ∥ T-31) → T-29 → T-30 | 3 frentes | Produto fechado e vestido |
