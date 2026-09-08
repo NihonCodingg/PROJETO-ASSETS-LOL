@@ -1,0 +1,1461 @@
+{
+  "schemaVersion": "1.1.0",
+  "gameVersion": "16.17.1",
+  "category": "rune",
+  "generatedAt": "2026-09-08T23:24:48Z",
+  "assets": [
+    {
+      "id": "rune_tree_icon:8100",
+      "type": "rune_tree_icon",
+      "category": "rune",
+      "refId": "8100",
+      "names": {
+        "pt_BR": "Dominação",
+        "en_US": "Domination"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/7200_Domination.png",
+      "fileName": "RuneTree_8100.png",
+      "width": 32,
+      "height": 32,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 1424,
+      "sha256": "5982e902c9049bd357e18fa4914290906468a554645735aa2c10b8f36c87868c"
+    },
+    {
+      "id": "rune_icon:8112",
+      "type": "rune_icon",
+      "category": "rune",
+      "refId": "8112",
+      "names": {
+        "pt_BR": "Eletrocutar",
+        "en_US": "Electrocute"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Domination/Electrocute/Electrocute.png",
+      "fileName": "Rune_8112.png",
+      "width": 256,
+      "height": 256,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 58055,
+      "sha256": "6e900ec70646a691dd71806938cfcef5d55c2a59fe1acca68475ca35c73636d3"
+    },
+    {
+      "id": "rune_icon:8128",
+      "type": "rune_icon",
+      "category": "rune",
+      "refId": "8128",
+      "names": {
+        "pt_BR": "Colheita Sombria",
+        "en_US": "Dark Harvest"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Domination/DarkHarvest/DarkHarvest.png",
+      "fileName": "Rune_8128.png",
+      "width": 256,
+      "height": 256,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 51567,
+      "sha256": "bf3a0943bf6af128ce579463862cebca81e97d948b5b92afb9d1427a2fabc1fa"
+    },
+    {
+      "id": "rune_icon:9923",
+      "type": "rune_icon",
+      "category": "rune",
+      "refId": "9923",
+      "names": {
+        "pt_BR": "Chuva de Lâminas",
+        "en_US": "Hail of Blades"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Domination/HailOfBlades/HailOfBlades.png",
+      "fileName": "Rune_9923.png",
+      "width": 256,
+      "height": 256,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 60768,
+      "sha256": "279c2ad940f3b5a33cd6f08b1718cdfe73e2c3ea3117f3361fd02df6f26fdd13"
+    },
+    {
+      "id": "rune_icon:8126",
+      "type": "rune_icon",
+      "category": "rune",
+      "refId": "8126",
+      "names": {
+        "pt_BR": "Golpe Desleal",
+        "en_US": "Cheap Shot"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Domination/CheapShot/CheapShot.png",
+      "fileName": "Rune_8126.png",
+      "width": 64,
+      "height": 64,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 5943,
+      "sha256": "f39d286e4256d3c13259600a044f1ee242b4febb05675e786a5145fa14c38974"
+    },
+    {
+      "id": "rune_icon:8139",
+      "type": "rune_icon",
+      "category": "rune",
+      "refId": "8139",
+      "names": {
+        "pt_BR": "Gosto de Sangue",
+        "en_US": "Taste of Blood"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Domination/TasteOfBlood/GreenTerror_TasteOfBlood.png",
+      "fileName": "Rune_8139.png",
+      "width": 64,
+      "height": 64,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 5000,
+      "sha256": "0a8ee6585ba4c5ef6200d77189e98bd123c195de49f615a6d10ae5436b545b8e"
+    },
+    {
+      "id": "rune_icon:8143",
+      "type": "rune_icon",
+      "category": "rune",
+      "refId": "8143",
+      "names": {
+        "pt_BR": "Impacto Repentino",
+        "en_US": "Sudden Impact"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Domination/SuddenImpact/SuddenImpact.png",
+      "fileName": "Rune_8143.png",
+      "width": 64,
+      "height": 64,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 4800,
+      "sha256": "2fc29e67ce07d5bbf17824714c01b0cc8cf058d597cb79bfa03c4c08ce039afe"
+    },
+    {
+      "id": "rune_icon:8137",
+      "type": "rune_icon",
+      "category": "rune",
+      "refId": "8137",
+      "names": {
+        "pt_BR": "Sexto Sentido",
+        "en_US": "Sixth Sense"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Domination/SixthSense/SixthSense.png",
+      "fileName": "Rune_8137.png",
+      "width": 64,
+      "height": 64,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 5091,
+      "sha256": "26ed90469d05e8b69ba91568e6d9242db3777f94f2bde5ad160811f09217ac1d"
+    },
+    {
+      "id": "rune_icon:8140",
+      "type": "rune_icon",
+      "category": "rune",
+      "refId": "8140",
+      "names": {
+        "pt_BR": "Lembranças Aterrorizantes",
+        "en_US": "Grisly Mementos"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Domination/GrislyMementos/GrislyMementos.png",
+      "fileName": "Rune_8140.png",
+      "width": 64,
+      "height": 64,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 5337,
+      "sha256": "86b3e368755f32dbec2f0208d1c6325d88085e1f5f50c4342cba89461d64ed20"
+    },
+    {
+      "id": "rune_icon:8141",
+      "type": "rune_icon",
+      "category": "rune",
+      "refId": "8141",
+      "names": {
+        "pt_BR": "Sentinela Profunda",
+        "en_US": "Deep Ward"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Domination/DeepWard/DeepWard.png",
+      "fileName": "Rune_8141.png",
+      "width": 64,
+      "height": 64,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 5288,
+      "sha256": "8de75a8b5ce0417ddba0ef1fd4143cf6bff912199811b3eeced1f70f03fe06f4"
+    },
+    {
+      "id": "rune_icon:8135",
+      "type": "rune_icon",
+      "category": "rune",
+      "refId": "8135",
+      "names": {
+        "pt_BR": "Caçador de Tesouros",
+        "en_US": "Treasure Hunter"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Domination/TreasureHunter/TreasureHunter.png",
+      "fileName": "Rune_8135.png",
+      "width": 64,
+      "height": 64,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 5206,
+      "sha256": "8def01263d23ea7f7601eaa0bfa0f56a83247c9dd94d1b57b3805299b076a482"
+    },
+    {
+      "id": "rune_icon:8105",
+      "type": "rune_icon",
+      "category": "rune",
+      "refId": "8105",
+      "names": {
+        "pt_BR": "Caça Incansável",
+        "en_US": "Relentless Hunter"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Domination/RelentlessHunter/RelentlessHunter.png",
+      "fileName": "Rune_8105.png",
+      "width": 64,
+      "height": 64,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 5208,
+      "sha256": "22dc1799cc07e5c62b221614963eb0aa6bd80f4521026279e6514e181d3899b9"
+    },
+    {
+      "id": "rune_icon:8106",
+      "type": "rune_icon",
+      "category": "rune",
+      "refId": "8106",
+      "names": {
+        "pt_BR": "Caça Suprema",
+        "en_US": "Ultimate Hunter"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Domination/UltimateHunter/UltimateHunter.png",
+      "fileName": "Rune_8106.png",
+      "width": 128,
+      "height": 128,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 14739,
+      "sha256": "208f95819b2aa65d1f2a8aa38498b13d495464f1ed622e7ce39c3709d7ac63be"
+    },
+    {
+      "id": "rune_tree_icon:8300",
+      "type": "rune_tree_icon",
+      "category": "rune",
+      "refId": "8300",
+      "names": {
+        "pt_BR": "Inspiração",
+        "en_US": "Inspiration"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/7203_Whimsy.png",
+      "fileName": "RuneTree_8300.png",
+      "width": 32,
+      "height": 32,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 2022,
+      "sha256": "0fe0ea987bdad4aa595bded9d04716c5b77c00b0002177975158253146aed733"
+    },
+    {
+      "id": "rune_icon:8351",
+      "type": "rune_icon",
+      "category": "rune",
+      "refId": "8351",
+      "names": {
+        "pt_BR": "Aprimoramento Glacial",
+        "en_US": "Glacial Augment"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Inspiration/GlacialAugment/GlacialAugment.png",
+      "fileName": "Rune_8351.png",
+      "width": 256,
+      "height": 256,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 73350,
+      "sha256": "5e82f4855c198ccdfa58ebc56d0aaec0d654423d8289521632580cf24597a98e"
+    },
+    {
+      "id": "rune_icon:8360",
+      "type": "rune_icon",
+      "category": "rune",
+      "refId": "8360",
+      "names": {
+        "pt_BR": "Livro de Feitiços Deslacrado",
+        "en_US": "Unsealed Spellbook"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Inspiration/UnsealedSpellbook/UnsealedSpellbook.png",
+      "fileName": "Rune_8360.png",
+      "width": 256,
+      "height": 256,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 72267,
+      "sha256": "db2edc2719a68639c40955593975fc8fcc36ada206d9348ccb9db0b566a6f226"
+    },
+    {
+      "id": "rune_icon:8369",
+      "type": "rune_icon",
+      "category": "rune",
+      "refId": "8369",
+      "names": {
+        "pt_BR": "Primeiro Ataque",
+        "en_US": "First Strike"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Inspiration/FirstStrike/FirstStrike.png",
+      "fileName": "Rune_8369.png",
+      "width": 256,
+      "height": 256,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 51271,
+      "sha256": "1f901df7b83c4ad0c3456d605d83e5ecaa0072a0640bf9ea2749323169f9580d"
+    },
+    {
+      "id": "rune_icon:8306",
+      "type": "rune_icon",
+      "category": "rune",
+      "refId": "8306",
+      "names": {
+        "pt_BR": "Flashtração Hextec",
+        "en_US": "Hextech Flashtraption"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Inspiration/HextechFlashtraption/HextechFlashtraption.png",
+      "fileName": "Rune_8306.png",
+      "width": 64,
+      "height": 64,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 5183,
+      "sha256": "67ffb6f6ea4ab64526c7ba4e5410a52e4b662a47ccff566d4a1b78b69abba51f"
+    },
+    {
+      "id": "rune_icon:8304",
+      "type": "rune_icon",
+      "category": "rune",
+      "refId": "8304",
+      "names": {
+        "pt_BR": "Calçados Mágicos",
+        "en_US": "Magical Footwear"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Inspiration/MagicalFootwear/MagicalFootwear.png",
+      "fileName": "Rune_8304.png",
+      "width": 64,
+      "height": 64,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 5073,
+      "sha256": "b80bf9bab38d6cb2a8d04fa7d409f402b3ea6a2313394e0f846f8dc464b1a218"
+    },
+    {
+      "id": "rune_icon:8321",
+      "type": "rune_icon",
+      "category": "rune",
+      "refId": "8321",
+      "names": {
+        "pt_BR": "Reembolso",
+        "en_US": "Cash Back"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Inspiration/CashBack/CashBack2.png",
+      "fileName": "Rune_8321.png",
+      "width": 64,
+      "height": 64,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 7796,
+      "sha256": "f2451db21e9a1b8acfb7c7f58eeb17edb7286be451f26766e5fdbdfc898ad1d9"
+    },
+    {
+      "id": "rune_icon:8313",
+      "type": "rune_icon",
+      "category": "rune",
+      "refId": "8313",
+      "names": {
+        "pt_BR": "Tônico Triplo",
+        "en_US": "Triple Tonic"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Inspiration/PerfectTiming/AlchemistCabinet.png",
+      "fileName": "Rune_8313.png",
+      "width": 64,
+      "height": 64,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 5953,
+      "sha256": "6314fb6a869a78622e9082267ca3f7731a2d13c020748f89bebca9ec1d19a7ac"
+    },
+    {
+      "id": "rune_icon:8352",
+      "type": "rune_icon",
+      "category": "rune",
+      "refId": "8352",
+      "names": {
+        "pt_BR": "Tônico de Distorção no Tempo",
+        "en_US": "Time Warp Tonic"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Inspiration/TimeWarpTonic/TimeWarpTonic.png",
+      "fileName": "Rune_8352.png",
+      "width": 128,
+      "height": 128,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 14341,
+      "sha256": "e2266a1337c494d7270005b248be116ae61e5ee018234cce51485dfa9e205386"
+    },
+    {
+      "id": "rune_icon:8345",
+      "type": "rune_icon",
+      "category": "rune",
+      "refId": "8345",
+      "names": {
+        "pt_BR": "Entrega de Biscoitos",
+        "en_US": "Biscuit Delivery"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Inspiration/BiscuitDelivery/BiscuitDelivery.png",
+      "fileName": "Rune_8345.png",
+      "width": 64,
+      "height": 64,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 4921,
+      "sha256": "4f4c70536a85455ac082b4d9b89643c670c0a083c52f8c68072b20332992ab19"
+    },
+    {
+      "id": "rune_icon:8347",
+      "type": "rune_icon",
+      "category": "rune",
+      "refId": "8347",
+      "names": {
+        "pt_BR": "Perspicácia Cósmica",
+        "en_US": "Cosmic Insight"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Inspiration/CosmicInsight/CosmicInsight.png",
+      "fileName": "Rune_8347.png",
+      "width": 64,
+      "height": 64,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 4771,
+      "sha256": "c95f312f1c4d1293b9d60db0ac8d1a31895d9a9c8add7fd9a9de6c7825eee0ef"
+    },
+    {
+      "id": "rune_icon:8410",
+      "type": "rune_icon",
+      "category": "rune",
+      "refId": "8410",
+      "names": {
+        "pt_BR": "Velocidade de Aproximação",
+        "en_US": "Approach Velocity"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Resolve/ApproachVelocity/ApproachVelocity.png",
+      "fileName": "Rune_8410.png",
+      "width": 64,
+      "height": 64,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 5054,
+      "sha256": "838bcdb70b0543e072001df66639af3da0d9194eee1678a88ddf18be411f489c"
+    },
+    {
+      "id": "rune_icon:8316",
+      "type": "rune_icon",
+      "category": "rune",
+      "refId": "8316",
+      "names": {
+        "pt_BR": "Quebra-galho",
+        "en_US": "Jack Of All Trades"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Inspiration/JackOfAllTrades/JackofAllTrades2.png",
+      "fileName": "Rune_8316.png",
+      "width": 64,
+      "height": 64,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 7010,
+      "sha256": "0c23f4ed12284097be7e40272dee1fb82d59eead8defc21ba16578fb1d6dbafb"
+    },
+    {
+      "id": "rune_tree_icon:8000",
+      "type": "rune_tree_icon",
+      "category": "rune",
+      "refId": "8000",
+      "names": {
+        "pt_BR": "Precisão",
+        "en_US": "Precision"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/7201_Precision.png",
+      "fileName": "RuneTree_8000.png",
+      "width": 32,
+      "height": 32,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 1398,
+      "sha256": "3ee3abe2826ba9f0f1b9fb7d8358818443880ccb3ebea965348837aa5c898e57"
+    },
+    {
+      "id": "rune_icon:8005",
+      "type": "rune_icon",
+      "category": "rune",
+      "refId": "8005",
+      "names": {
+        "pt_BR": "Pressione o Ataque",
+        "en_US": "Press the Attack"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Precision/PressTheAttack/PressTheAttack.png",
+      "fileName": "Rune_8005.png",
+      "width": 256,
+      "height": 256,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 101210,
+      "sha256": "f9322ca20bfa3aa60d0d1b33ace65905127e81a81ed90cd2e96366c7237dacaf"
+    },
+    {
+      "id": "rune_icon:8008",
+      "type": "rune_icon",
+      "category": "rune",
+      "refId": "8008",
+      "names": {
+        "pt_BR": "Ritmo Fatal",
+        "en_US": "Lethal Tempo"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Precision/LethalTempo/LethalTempoTemp.png",
+      "fileName": "Rune_8008.png",
+      "width": 256,
+      "height": 256,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 55298,
+      "sha256": "e698b64c52b039fa65393eb91effccf316577415fe0f6a4f8befae05fb12fc90"
+    },
+    {
+      "id": "rune_icon:8021",
+      "type": "rune_icon",
+      "category": "rune",
+      "refId": "8021",
+      "names": {
+        "pt_BR": "Agilidade nos Pés",
+        "en_US": "Fleet Footwork"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Precision/FleetFootwork/FleetFootwork.png",
+      "fileName": "Rune_8021.png",
+      "width": 256,
+      "height": 256,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 88296,
+      "sha256": "bf5d0434dc61ed443b42d46d6152d5fd60b4abec3179fdb1e42309b9096cea07"
+    },
+    {
+      "id": "rune_icon:8010",
+      "type": "rune_icon",
+      "category": "rune",
+      "refId": "8010",
+      "names": {
+        "pt_BR": "Conquistador",
+        "en_US": "Conqueror"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Precision/Conqueror/Conqueror.png",
+      "fileName": "Rune_8010.png",
+      "width": 256,
+      "height": 256,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 51100,
+      "sha256": "2b6c32a35a7df8cf9f0fe1f7c5d931ddb37307c1bafd66bac7e8979ad6fa0b86"
+    },
+    {
+      "id": "rune_icon:9101",
+      "type": "rune_icon",
+      "category": "rune",
+      "refId": "9101",
+      "names": {
+        "pt_BR": "Absorção Vital",
+        "en_US": "Absorb Life"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Precision/AbsorbLife/AbsorbLife.png",
+      "fileName": "Rune_9101.png",
+      "width": 64,
+      "height": 64,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 7132,
+      "sha256": "2e172ffa8bfb07551dfd61ab076087623d11b0d47791f4babd783dc586e257a7"
+    },
+    {
+      "id": "rune_icon:9111",
+      "type": "rune_icon",
+      "category": "rune",
+      "refId": "9111",
+      "names": {
+        "pt_BR": "Triunfo",
+        "en_US": "Triumph"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Precision/Triumph.png",
+      "fileName": "Rune_9111.png",
+      "width": 64,
+      "height": 64,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 4200,
+      "sha256": "75d54c361b70cebcc62b1a5447d729fa12879e449d52b5bf2fe83be291cbbfa2"
+    },
+    {
+      "id": "rune_icon:8009",
+      "type": "rune_icon",
+      "category": "rune",
+      "refId": "8009",
+      "names": {
+        "pt_BR": "Presença de Espírito",
+        "en_US": "Presence of Mind"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Precision/PresenceOfMind/PresenceOfMind.png",
+      "fileName": "Rune_8009.png",
+      "width": 64,
+      "height": 64,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 4806,
+      "sha256": "7fddaa3fb9f5261613779957a08b3dc1f957ebddc28d47c85c1d4a38be150b98"
+    },
+    {
+      "id": "rune_icon:9104",
+      "type": "rune_icon",
+      "category": "rune",
+      "refId": "9104",
+      "names": {
+        "pt_BR": "Lenda: Espontaneidade",
+        "en_US": "Legend: Alacrity"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Precision/LegendAlacrity/LegendAlacrity.png",
+      "fileName": "Rune_9104.png",
+      "width": 64,
+      "height": 64,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 5128,
+      "sha256": "a987e2c2ef3d38c306b9c7d59bb94c1bc7ef2a3408b9c0bfcec5cc156e26ab62"
+    },
+    {
+      "id": "rune_icon:9105",
+      "type": "rune_icon",
+      "category": "rune",
+      "refId": "9105",
+      "names": {
+        "pt_BR": "Lenda: Aceleração",
+        "en_US": "Legend: Haste"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Precision/LegendHaste/LegendHaste.png",
+      "fileName": "Rune_9105.png",
+      "width": 64,
+      "height": 64,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 6696,
+      "sha256": "ef9f01c039daed279015d67a02f2954c99d5077a7aadad5cbfa66d95d5b91088"
+    },
+    {
+      "id": "rune_icon:9103",
+      "type": "rune_icon",
+      "category": "rune",
+      "refId": "9103",
+      "names": {
+        "pt_BR": "Lenda: Linhagem",
+        "en_US": "Legend: Bloodline"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Precision/LegendBloodline/LegendBloodline.png",
+      "fileName": "Rune_9103.png",
+      "width": 64,
+      "height": 64,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 4587,
+      "sha256": "cb34a410310c5e71b2cac2d41f4b1e0bf3e3e363e0d4be1ef0d9f91d971fb099"
+    },
+    {
+      "id": "rune_icon:8014",
+      "type": "rune_icon",
+      "category": "rune",
+      "refId": "8014",
+      "names": {
+        "pt_BR": "Golpe de Misericórdia",
+        "en_US": "Coup de Grace"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Precision/CoupDeGrace/CoupDeGrace.png",
+      "fileName": "Rune_8014.png",
+      "width": 64,
+      "height": 64,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 4762,
+      "sha256": "941db8d8b5e93b81c6f5ec8da2e23baee933cb6a61ecbe5847b1fa26ed05f436"
+    },
+    {
+      "id": "rune_icon:8017",
+      "type": "rune_icon",
+      "category": "rune",
+      "refId": "8017",
+      "names": {
+        "pt_BR": "Dilacerar",
+        "en_US": "Cut Down"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Precision/CutDown/CutDown.png",
+      "fileName": "Rune_8017.png",
+      "width": 64,
+      "height": 64,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 4940,
+      "sha256": "8539600426b04cb518cdfadaf4db207f37223e27b943d916a08789851539dd8b"
+    },
+    {
+      "id": "rune_icon:8299",
+      "type": "rune_icon",
+      "category": "rune",
+      "refId": "8299",
+      "names": {
+        "pt_BR": "Até a Morte",
+        "en_US": "Last Stand"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Sorcery/LastStand/LastStand.png",
+      "fileName": "Rune_8299.png",
+      "width": 64,
+      "height": 64,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 4902,
+      "sha256": "c80a20a544645f99aa95c488a939221ce658e3d9486632b1f5aceb10d7ef4711"
+    },
+    {
+      "id": "rune_tree_icon:8400",
+      "type": "rune_tree_icon",
+      "category": "rune",
+      "refId": "8400",
+      "names": {
+        "pt_BR": "Determinação",
+        "en_US": "Resolve"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/7204_Resolve.png",
+      "fileName": "RuneTree_8400.png",
+      "width": 32,
+      "height": 32,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 1069,
+      "sha256": "7251816d3438504452594b6a38f54440bc92092312dc9c036ad2b0c7ee73d375"
+    },
+    {
+      "id": "rune_icon:8437",
+      "type": "rune_icon",
+      "category": "rune",
+      "refId": "8437",
+      "names": {
+        "pt_BR": "Aperto dos Mortos-Vivos",
+        "en_US": "Grasp of the Undying"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Resolve/GraspOfTheUndying/GraspOfTheUndying.png",
+      "fileName": "Rune_8437.png",
+      "width": 256,
+      "height": 256,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 78682,
+      "sha256": "d419555c07c18276a319e9fe580e10290db3c9bcd112148d579ddc039cdc6315"
+    },
+    {
+      "id": "rune_icon:8439",
+      "type": "rune_icon",
+      "category": "rune",
+      "refId": "8439",
+      "names": {
+        "pt_BR": "Pós-choque",
+        "en_US": "Aftershock"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Resolve/VeteranAftershock/VeteranAftershock.png",
+      "fileName": "Rune_8439.png",
+      "width": 256,
+      "height": 256,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 63340,
+      "sha256": "c48202b105b8bd083d382290f763a4654ab7e10a95cd815491f24a301cf8864c"
+    },
+    {
+      "id": "rune_icon:8465",
+      "type": "rune_icon",
+      "category": "rune",
+      "refId": "8465",
+      "names": {
+        "pt_BR": "Guardião",
+        "en_US": "Guardian"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Resolve/Guardian/Guardian.png",
+      "fileName": "Rune_8465.png",
+      "width": 256,
+      "height": 256,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 73504,
+      "sha256": "19316a3ff79b6aa67a5c9eb4a00dab2656be0ebe4fa7ba7010e2b00f6b439561"
+    },
+    {
+      "id": "rune_icon:8446",
+      "type": "rune_icon",
+      "category": "rune",
+      "refId": "8446",
+      "names": {
+        "pt_BR": "Demolir",
+        "en_US": "Demolish"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Resolve/Demolish/Demolish.png",
+      "fileName": "Rune_8446.png",
+      "width": 64,
+      "height": 64,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 5106,
+      "sha256": "90602a87ef14442b3bddae24872709634e2e1f109bc82844b31a892682cf95fd"
+    },
+    {
+      "id": "rune_icon:8463",
+      "type": "rune_icon",
+      "category": "rune",
+      "refId": "8463",
+      "names": {
+        "pt_BR": "Fonte da Vida",
+        "en_US": "Font of Life"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Resolve/FontOfLife/FontOfLife.png",
+      "fileName": "Rune_8463.png",
+      "width": 64,
+      "height": 64,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 4429,
+      "sha256": "66715a5cf3dc00c60ca81bec6defe5b201beefa2b9d2394f8bae46a1c5b59f80"
+    },
+    {
+      "id": "rune_icon:8401",
+      "type": "rune_icon",
+      "category": "rune",
+      "refId": "8401",
+      "names": {
+        "pt_BR": "Golpe de Escudo",
+        "en_US": "Shield Bash"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Resolve/MirrorShell/MirrorShell.png",
+      "fileName": "Rune_8401.png",
+      "width": 64,
+      "height": 64,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 5568,
+      "sha256": "1100a37f9f068262949181539af8ec552a4b16cfa6548118636e55fd7fbbbd2a"
+    },
+    {
+      "id": "rune_icon:8429",
+      "type": "rune_icon",
+      "category": "rune",
+      "refId": "8429",
+      "names": {
+        "pt_BR": "Condicionamento",
+        "en_US": "Conditioning"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Resolve/Conditioning/Conditioning.png",
+      "fileName": "Rune_8429.png",
+      "width": 64,
+      "height": 64,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 5300,
+      "sha256": "0fd7b4847b03f627c50300b71d951406af0421b5991ddf2cbdf3d322ed8ad7d6"
+    },
+    {
+      "id": "rune_icon:8444",
+      "type": "rune_icon",
+      "category": "rune",
+      "refId": "8444",
+      "names": {
+        "pt_BR": "Ventos Revigorantes",
+        "en_US": "Second Wind"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Resolve/SecondWind/SecondWind.png",
+      "fileName": "Rune_8444.png",
+      "width": 64,
+      "height": 64,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 4077,
+      "sha256": "5395ee0d28a2a5a40895db8904447e16558e49c2c687a2d87fb3aaf8ebb09590"
+    },
+    {
+      "id": "rune_icon:8473",
+      "type": "rune_icon",
+      "category": "rune",
+      "refId": "8473",
+      "names": {
+        "pt_BR": "Osso Revestido",
+        "en_US": "Bone Plating"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Resolve/BonePlating/BonePlating.png",
+      "fileName": "Rune_8473.png",
+      "width": 128,
+      "height": 128,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 14860,
+      "sha256": "90e9d37bf2d67d78f8ebe1d295f37d365b053480d4cabff69c024ba18649093e"
+    },
+    {
+      "id": "rune_icon:8451",
+      "type": "rune_icon",
+      "category": "rune",
+      "refId": "8451",
+      "names": {
+        "pt_BR": "Crescimento Excessivo",
+        "en_US": "Overgrowth"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Resolve/Overgrowth/Overgrowth.png",
+      "fileName": "Rune_8451.png",
+      "width": 64,
+      "height": 64,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 5741,
+      "sha256": "9d31e45e21bd99d6fdb62ea6b13581f27641a1bfe761f9bfea7d5582529585dd"
+    },
+    {
+      "id": "rune_icon:8453",
+      "type": "rune_icon",
+      "category": "rune",
+      "refId": "8453",
+      "names": {
+        "pt_BR": "Revitalizar",
+        "en_US": "Revitalize"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Resolve/Revitalize/Revitalize.png",
+      "fileName": "Rune_8453.png",
+      "width": 64,
+      "height": 64,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 4880,
+      "sha256": "eeb104e95034ae3ba2e8d0b9f89bbe80e2a7a40bfbb6650bcdc9b3f9f083f2f6"
+    },
+    {
+      "id": "rune_icon:8242",
+      "type": "rune_icon",
+      "category": "rune",
+      "refId": "8242",
+      "names": {
+        "pt_BR": "Inabalável",
+        "en_US": "Unflinching"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Sorcery/Unflinching/Unflinching.png",
+      "fileName": "Rune_8242.png",
+      "width": 64,
+      "height": 64,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 4609,
+      "sha256": "40bf08364e770a28376cab28ee35be062d767ddab85e51af0b5ee656f592940a"
+    },
+    {
+      "id": "rune_tree_icon:8200",
+      "type": "rune_tree_icon",
+      "category": "rune",
+      "refId": "8200",
+      "names": {
+        "pt_BR": "Feitiçaria",
+        "en_US": "Sorcery"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/7202_Sorcery.png",
+      "fileName": "RuneTree_8200.png",
+      "width": 32,
+      "height": 32,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 1159,
+      "sha256": "ab4f310160bd7e435ead08fa44025d857ce4a884cc9533664f056ab5e148103e"
+    },
+    {
+      "id": "rune_icon:8214",
+      "type": "rune_icon",
+      "category": "rune",
+      "refId": "8214",
+      "names": {
+        "pt_BR": "Invocar Aery",
+        "en_US": "Summon Aery"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Sorcery/SummonAery/SummonAery.png",
+      "fileName": "Rune_8214.png",
+      "width": 256,
+      "height": 256,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 49583,
+      "sha256": "89fd9b48da8848cea8524976af25e46d7c76fed6323b1a43f486368ba9fda2a9"
+    },
+    {
+      "id": "rune_icon:8229",
+      "type": "rune_icon",
+      "category": "rune",
+      "refId": "8229",
+      "names": {
+        "pt_BR": "Cometa Arcano",
+        "en_US": "Arcane Comet"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Sorcery/ArcaneComet/ArcaneComet.png",
+      "fileName": "Rune_8229.png",
+      "width": 256,
+      "height": 256,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 45377,
+      "sha256": "24443adb6051ff8c548a7fd530bdedf1e7e64d6e8f2f7f0d1356f1b3d3235097"
+    },
+    {
+      "id": "rune_icon:8230",
+      "type": "rune_icon",
+      "category": "rune",
+      "refId": "8230",
+      "names": {
+        "pt_BR": "Avanço da Tempestade",
+        "en_US": "Stormraider's Surge"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Sorcery/PhaseRush/StormraidersSurgeRuneIcon2.png",
+      "fileName": "Rune_8230.png",
+      "width": 512,
+      "height": 512,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 363282,
+      "sha256": "42af8143c90fd7d5568a762829a6e406b33ec84e8a9de681124cf8d4b1acf68b"
+    },
+    {
+      "id": "rune_icon:8992",
+      "type": "rune_icon",
+      "category": "rune",
+      "refId": "8992",
+      "names": {
+        "pt_BR": "Toque Ígneo",
+        "en_US": "Deathfire Touch"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Sorcery/DeathfireTouch/DEATHFIRE_TOUCH_KEYSTONE.png",
+      "fileName": "Rune_8992.png",
+      "width": 512,
+      "height": 512,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 365963,
+      "sha256": "7b59da6fd79c622546bca0e341433f1a0b5b5c63adb899299be5c0f21afde729"
+    },
+    {
+      "id": "rune_icon:8224",
+      "type": "rune_icon",
+      "category": "rune",
+      "refId": "8224",
+      "names": {
+        "pt_BR": "Arcanista do Axioma",
+        "en_US": "Axiom Arcanist"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Sorcery/NullifyingOrb/Axiom_Arcanist.png",
+      "fileName": "Rune_8224.png",
+      "width": 64,
+      "height": 64,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 6109,
+      "sha256": "356b584530c9046da23fc0b6e212522b61182d5561b868c5732ef88e90f4cf7c"
+    },
+    {
+      "id": "rune_icon:8226",
+      "type": "rune_icon",
+      "category": "rune",
+      "refId": "8226",
+      "names": {
+        "pt_BR": "Faixa de Fluxo de Mana",
+        "en_US": "Manaflow Band"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Sorcery/ManaflowBand/ManaflowBand.png",
+      "fileName": "Rune_8226.png",
+      "width": 64,
+      "height": 64,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 5767,
+      "sha256": "de2144f32ec12ef688405eabffb7d9b59ac6b0b8e14e46bb57cdd1d6b6af638d"
+    },
+    {
+      "id": "rune_icon:8275",
+      "type": "rune_icon",
+      "category": "rune",
+      "refId": "8275",
+      "names": {
+        "pt_BR": "Manto de Nimbus",
+        "en_US": "Nimbus Cloak"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Sorcery/NimbusCloak/6361.png",
+      "fileName": "Rune_8275.png",
+      "width": 128,
+      "height": 128,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 14057,
+      "sha256": "5cd5b64e4e75a865bedf6260eb9a64be84cde34b570c0cb075f4241a2a565727"
+    },
+    {
+      "id": "rune_icon:8210",
+      "type": "rune_icon",
+      "category": "rune",
+      "refId": "8210",
+      "names": {
+        "pt_BR": "Transcendência",
+        "en_US": "Transcendence"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Sorcery/Transcendence/Transcendence.png",
+      "fileName": "Rune_8210.png",
+      "width": 64,
+      "height": 64,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 5942,
+      "sha256": "ffbb3543992f1be83edde9b2a560c069fdeaa64cc7ac4c8f5e136d70ad540293"
+    },
+    {
+      "id": "rune_icon:8234",
+      "type": "rune_icon",
+      "category": "rune",
+      "refId": "8234",
+      "names": {
+        "pt_BR": "Celeridade",
+        "en_US": "Celerity"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Sorcery/Celerity/CelerityTemp.png",
+      "fileName": "Rune_8234.png",
+      "width": 64,
+      "height": 64,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 6068,
+      "sha256": "3f2315b7b004b95aab34c34412ea38ffd3bd251c0c18bb3d3687fa38566989e9"
+    },
+    {
+      "id": "rune_icon:8233",
+      "type": "rune_icon",
+      "category": "rune",
+      "refId": "8233",
+      "names": {
+        "pt_BR": "Foco Absoluto",
+        "en_US": "Absolute Focus"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Sorcery/AbsoluteFocus/AbsoluteFocus.png",
+      "fileName": "Rune_8233.png",
+      "width": 64,
+      "height": 64,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 4688,
+      "sha256": "9a5d5939216069427bcc33dcfe3879be8563c9a2ae6c40b248717520dd06f324"
+    },
+    {
+      "id": "rune_icon:8237",
+      "type": "rune_icon",
+      "category": "rune",
+      "refId": "8237",
+      "names": {
+        "pt_BR": "Chamuscar",
+        "en_US": "Scorch"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Sorcery/Scorch/Scorch.png",
+      "fileName": "Rune_8237.png",
+      "width": 64,
+      "height": 64,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 5029,
+      "sha256": "dde12ae30ce293999142d8ee205f3611d2726741f7b05563257e0030eea37dc4"
+    },
+    {
+      "id": "rune_icon:8232",
+      "type": "rune_icon",
+      "category": "rune",
+      "refId": "8232",
+      "names": {
+        "pt_BR": "Caminhar Sobre as Águas",
+        "en_US": "Waterwalking"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Sorcery/Waterwalking/Waterwalking.png",
+      "fileName": "Rune_8232.png",
+      "width": 64,
+      "height": 64,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 4590,
+      "sha256": "c3d4d56136a22fc51b42c906f90fe3cffd44468fd12013d26dfc72124426b6a8"
+    },
+    {
+      "id": "rune_icon:8236",
+      "type": "rune_icon",
+      "category": "rune",
+      "refId": "8236",
+      "names": {
+        "pt_BR": "Tempestade Crescente",
+        "en_US": "Gathering Storm"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Sorcery/GatheringStorm/GatheringStorm.png",
+      "fileName": "Rune_8236.png",
+      "width": 64,
+      "height": 64,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 4910,
+      "sha256": "71c085cb595b6d1f0dc86852cfcbc0d0f75df8f4ea497d502044fb1346a0b939"
+    },
+    {
+      "id": "stat_mod_icon:StatModsAdaptiveForceIcon",
+      "type": "stat_mod_icon",
+      "category": "rune",
+      "refId": "StatModsAdaptiveForceIcon",
+      "names": {
+        "pt_BR": "StatModsAdaptiveForceIcon"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/StatMods/StatModsAdaptiveForceIcon.png",
+      "fileName": "StatMod_StatModsAdaptiveForceIcon.png",
+      "width": 32,
+      "height": 32,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 707,
+      "sha256": "08e3079f1c8cbae3b57b9a692a32078711bc96f93991a2847b8da04d03fa80bc"
+    },
+    {
+      "id": "stat_mod_icon:StatModsAdaptiveForceScalingIcon",
+      "type": "stat_mod_icon",
+      "category": "rune",
+      "refId": "StatModsAdaptiveForceScalingIcon",
+      "names": {
+        "pt_BR": "StatModsAdaptiveForceScalingIcon"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/StatMods/StatModsAdaptiveForceScalingIcon.png",
+      "fileName": "StatMod_StatModsAdaptiveForceScalingIcon.png",
+      "width": 32,
+      "height": 32,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 912,
+      "sha256": "ed93f0b0728b089190fdbcb78fb14c95e720a95a5a19485144bafd7a05daa5fe"
+    },
+    {
+      "id": "stat_mod_icon:StatModsArmorIcon",
+      "type": "stat_mod_icon",
+      "category": "rune",
+      "refId": "StatModsArmorIcon",
+      "names": {
+        "pt_BR": "StatModsArmorIcon"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/StatMods/StatModsArmorIcon.png",
+      "fileName": "StatMod_StatModsArmorIcon.png",
+      "width": 32,
+      "height": 32,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 712,
+      "sha256": "e2f4eb688acfe363408b51974987a4e0e64cae8904daa7ae4baaf39577ce8e2f"
+    },
+    {
+      "id": "stat_mod_icon:StatModsAttackSpeedIcon",
+      "type": "stat_mod_icon",
+      "category": "rune",
+      "refId": "StatModsAttackSpeedIcon",
+      "names": {
+        "pt_BR": "StatModsAttackSpeedIcon"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/StatMods/StatModsAttackSpeedIcon.png",
+      "fileName": "StatMod_StatModsAttackSpeedIcon.png",
+      "width": 32,
+      "height": 32,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 485,
+      "sha256": "83f2463bda6a33f53039c6384a26ea14eb9db9c93c84ac0af298ed7b41934c97"
+    },
+    {
+      "id": "stat_mod_icon:StatModsCDRScalingIcon",
+      "type": "stat_mod_icon",
+      "category": "rune",
+      "refId": "StatModsCDRScalingIcon",
+      "names": {
+        "pt_BR": "StatModsCDRScalingIcon"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/StatMods/StatModsCDRScalingIcon.png",
+      "fileName": "StatMod_StatModsCDRScalingIcon.png",
+      "width": 32,
+      "height": 32,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 852,
+      "sha256": "4a758393d1672041993edcd8c4a33eb3f1dce1609598b3ac4fdda99301b80538"
+    },
+    {
+      "id": "stat_mod_icon:StatModsHealthPlusIcon",
+      "type": "stat_mod_icon",
+      "category": "rune",
+      "refId": "StatModsHealthPlusIcon",
+      "names": {
+        "pt_BR": "StatModsHealthPlusIcon"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/StatMods/StatModsHealthPlusIcon.png",
+      "fileName": "StatMod_StatModsHealthPlusIcon.png",
+      "width": 32,
+      "height": 32,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 295,
+      "sha256": "3b7c1ff871f096d275f6d7e1faeba16496e96ab7fe8e642a477f47d4ef8ab4dd"
+    },
+    {
+      "id": "stat_mod_icon:StatModsHealthScalingIcon",
+      "type": "stat_mod_icon",
+      "category": "rune",
+      "refId": "StatModsHealthScalingIcon",
+      "names": {
+        "pt_BR": "StatModsHealthScalingIcon"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/StatMods/StatModsHealthScalingIcon.png",
+      "fileName": "StatMod_StatModsHealthScalingIcon.png",
+      "width": 32,
+      "height": 32,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 632,
+      "sha256": "77bc6f44d75f8d70566bc753bc4f23b391c64ffdec3ca082f45c4c75ff162c8f"
+    },
+    {
+      "id": "stat_mod_icon:StatModsMagicResIcon",
+      "type": "stat_mod_icon",
+      "category": "rune",
+      "refId": "StatModsMagicResIcon",
+      "names": {
+        "pt_BR": "StatModsMagicResIcon"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/StatMods/StatModsMagicResIcon.png",
+      "fileName": "StatMod_StatModsMagicResIcon.png",
+      "width": 32,
+      "height": 32,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 1000,
+      "sha256": "10e2a3803d5ae79b3da58c39b1056a5a15380147dce42fdbed9a2b33d274c6e9"
+    },
+    {
+      "id": "stat_mod_icon:StatModsMovementSpeedIcon",
+      "type": "stat_mod_icon",
+      "category": "rune",
+      "refId": "StatModsMovementSpeedIcon",
+      "names": {
+        "pt_BR": "StatModsMovementSpeedIcon"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/StatMods/StatModsMovementSpeedIcon.png",
+      "fileName": "StatMod_StatModsMovementSpeedIcon.png",
+      "width": 32,
+      "height": 32,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 802,
+      "sha256": "f80e8066c7f25a7905458ccaa8f1237209fd1bbd3bfd13847fc32ef03e315bbf"
+    },
+    {
+      "id": "stat_mod_icon:StatModsTenacityIcon",
+      "type": "stat_mod_icon",
+      "category": "rune",
+      "refId": "StatModsTenacityIcon",
+      "names": {
+        "pt_BR": "StatModsTenacityIcon"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/StatMods/StatModsTenacityIcon.png",
+      "fileName": "StatMod_StatModsTenacityIcon.png",
+      "width": 32,
+      "height": 32,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 331,
+      "sha256": "8039c4bd7c1287ea123773f24e21bf763784da466338f4cda22562e5d26e2b75"
+    }
+  ]
+}

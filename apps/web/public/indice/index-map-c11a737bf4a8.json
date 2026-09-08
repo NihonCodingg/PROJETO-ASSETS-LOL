@@ -1,0 +1,98 @@
+{
+  "schemaVersion": "1.1.0",
+  "gameVersion": "16.17.1",
+  "category": "map",
+  "generatedAt": "2026-09-08T23:24:48Z",
+  "assets": [
+    {
+      "id": "map_image:map11",
+      "type": "map_image",
+      "category": "map",
+      "refId": "map11",
+      "names": {
+        "pt_BR": "map11"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/map/map11.png",
+      "fileName": "Map_map11.png",
+      "width": 512,
+      "height": 512,
+      "format": "png",
+      "hasAlpha": false,
+      "bytes": 70985,
+      "sha256": "5b446777c3e8491c1ab1860bc8fd448ad58f46cf3630d909f74dd3dc3dda8cd1"
+    },
+    {
+      "id": "map_image:map12",
+      "type": "map_image",
+      "category": "map",
+      "refId": "map12",
+      "names": {
+        "pt_BR": "map12"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/map/map12.png",
+      "fileName": "Map_map12.png",
+      "width": 512,
+      "height": 512,
+      "format": "png",
+      "hasAlpha": false,
+      "bytes": 134736,
+      "sha256": "829b0d75dd765cfed406b5c591b546436f32e95c4445e3f378e89a235f6782fc"
+    },
+    {
+      "id": "map_image:map22",
+      "type": "map_image",
+      "category": "map",
+      "refId": "map22",
+      "names": {
+        "pt_BR": "map22"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/map/map22.png",
+      "fileName": "Map_map22.png",
+      "width": 1024,
+      "height": 1024,
+      "format": "png",
+      "hasAlpha": false,
+      "bytes": 89987,
+      "sha256": "92645770fab90e6490beded056dfde6d9f663648bf8e3938f28e57458334965f"
+    },
+    {
+      "id": "map_image:map30",
+      "type": "map_image",
+      "category": "map",
+      "refId": "map30",
+      "names": {
+        "pt_BR": "map30"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/map/map30.png",
+      "fileName": "Map_map30.png",
+      "width": 1024,
+      "height": 1024,
+      "format": "png",
+      "hasAlpha": false,
+      "bytes": 89987,
+      "sha256": "92645770fab90e6490beded056dfde6d9f663648bf8e3938f28e57458334965f"
+    },
+    {
+      "id": "map_image:map453",
+      "type": "map_image",
+      "category": "map",
+      "refId": "map453",
+      "names": {
+        "pt_BR": "map453"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/map/map453.png",
+      "fileName": "Map_map453.png",
+      "width": 512,
+      "height": 512,
+      "format": "png",
+      "hasAlpha": false,
+      "bytes": 206052,
+      "sha256": "04b3b8dda6e782ecc65d32a9c7aff6a4bbba537f2eace03a414e89c87db45ffd"
+    }
+  ]
+}

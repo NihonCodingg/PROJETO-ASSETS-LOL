@@ -1,0 +1,654 @@
+{
+  "schemaVersion": "1.1.0",
+  "gameVersion": "16.17.1",
+  "category": "summoner_spell",
+  "generatedAt": "2026-09-08T23:24:48Z",
+  "assets": [
+    {
+      "id": "summoner_spell_icon:SummonerBarrier",
+      "type": "summoner_spell_icon",
+      "category": "summoner_spell",
+      "refId": "SummonerBarrier",
+      "names": {
+        "pt_BR": "Barreira",
+        "en_US": "Barrier"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/spell/SummonerBarrier.png",
+      "fileName": "Summoner_SummonerBarrier.png",
+      "width": 64,
+      "height": 64,
+      "format": "png",
+      "hasAlpha": false,
+      "bytes": 6401,
+      "sha256": "a0cf7b08cdd6d852d325bc9124e05f0e2c55aac340e50665c385755dfa86fbc0"
+    },
+    {
+      "id": "summoner_spell_icon:SummonerBarrier_Jade",
+      "type": "summoner_spell_icon",
+      "category": "summoner_spell",
+      "refId": "SummonerBarrier_Jade",
+      "names": {
+        "pt_BR": "Barreira",
+        "en_US": "Barrier"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/spell/SummonerBarrier_Jade.png",
+      "fileName": "Summoner_SummonerBarrier_Jade.png",
+      "width": 64,
+      "height": 64,
+      "format": "png",
+      "hasAlpha": false,
+      "bytes": 6228,
+      "sha256": "101a139c02ef315810d02cd7a65fe821b64c9286ffc49722017504c359191340"
+    },
+    {
+      "id": "summoner_spell_icon:SummonerBattleCry_Jade",
+      "type": "summoner_spell_icon",
+      "category": "summoner_spell",
+      "refId": "SummonerBattleCry_Jade",
+      "names": {
+        "pt_BR": "Surto",
+        "en_US": "Surge"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/spell/SummonerBattleCry_Jade.png",
+      "fileName": "Summoner_SummonerBattleCry_Jade.png",
+      "width": 64,
+      "height": 64,
+      "format": "png",
+      "hasAlpha": false,
+      "bytes": 5221,
+      "sha256": "8512df69cdb8235c34ab2b005b71fece9da33980343436408def4b22ebe26aec"
+    },
+    {
+      "id": "summoner_spell_icon:SummonerBoost",
+      "type": "summoner_spell_icon",
+      "category": "summoner_spell",
+      "refId": "SummonerBoost",
+      "names": {
+        "pt_BR": "Purificar",
+        "en_US": "Cleanse"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/spell/SummonerBoost.png",
+      "fileName": "Summoner_SummonerBoost.png",
+      "width": 64,
+      "height": 64,
+      "format": "png",
+      "hasAlpha": false,
+      "bytes": 6498,
+      "sha256": "9498d4983effb29f0c11a0fa605f39f6381f9708150a111cb2156b0287c80702"
+    },
+    {
+      "id": "summoner_spell_icon:SummonerBoost_Jade",
+      "type": "summoner_spell_icon",
+      "category": "summoner_spell",
+      "refId": "SummonerBoost_Jade",
+      "names": {
+        "pt_BR": "Purificar",
+        "en_US": "Cleanse"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/spell/SummonerBoost_Jade.png",
+      "fileName": "Summoner_SummonerBoost_Jade.png",
+      "width": 64,
+      "height": 64,
+      "format": "png",
+      "hasAlpha": false,
+      "bytes": 6935,
+      "sha256": "5fc08d5c7fc2de0663930874b871ed799a4a05f53c90e0becc4422113b5915aa"
+    },
+    {
+      "id": "summoner_spell_icon:SummonerCherryFlash",
+      "type": "summoner_spell_icon",
+      "category": "summoner_spell",
+      "refId": "SummonerCherryFlash",
+      "names": {
+        "pt_BR": "Flash",
+        "en_US": "Flash"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/spell/SummonerCherryFlash.png",
+      "fileName": "Summoner_SummonerCherryFlash.png",
+      "width": 64,
+      "height": 64,
+      "format": "png",
+      "hasAlpha": false,
+      "bytes": 6403,
+      "sha256": "1272fe7b3275c0afc872a6aaa6b65e27d41572d57f9ce19b9ed81b79aa5eb2aa"
+    },
+    {
+      "id": "summoner_spell_icon:SummonerCherryHold",
+      "type": "summoner_spell_icon",
+      "category": "summoner_spell",
+      "refId": "SummonerCherryHold",
+      "names": {
+        "pt_BR": "Fuga",
+        "en_US": "Flee"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/spell/SummonerCherryHold.png",
+      "fileName": "Summoner_SummonerCherryHold.png",
+      "width": 64,
+      "height": 64,
+      "format": "png",
+      "hasAlpha": false,
+      "bytes": 5596,
+      "sha256": "db6c0a7e10e4a93036c5ca826a56b1f807794a7fc95cbbd2bd48860b0647777c"
+    },
+    {
+      "id": "summoner_spell_icon:SummonerClairvoyance_Jade",
+      "type": "summoner_spell_icon",
+      "category": "summoner_spell",
+      "refId": "SummonerClairvoyance_Jade",
+      "names": {
+        "pt_BR": "Clarividência",
+        "en_US": "Clairvoyance"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/spell/SummonerClairvoyance_Jade.png",
+      "fileName": "Summoner_SummonerClairvoyance_Jade.png",
+      "width": 64,
+      "height": 64,
+      "format": "png",
+      "hasAlpha": false,
+      "bytes": 6514,
+      "sha256": "b2ebafba22cda61af37869865cb8beee7a494cecaeb7abce13a23de8fc305a86"
+    },
+    {
+      "id": "summoner_spell_icon:SummonerDot",
+      "type": "summoner_spell_icon",
+      "category": "summoner_spell",
+      "refId": "SummonerDot",
+      "names": {
+        "pt_BR": "Incendiar",
+        "en_US": "Ignite"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/spell/SummonerDot.png",
+      "fileName": "Summoner_SummonerDot.png",
+      "width": 64,
+      "height": 64,
+      "format": "png",
+      "hasAlpha": false,
+      "bytes": 5799,
+      "sha256": "958db3407c83a9499a5e464c2e37df59c6544590dcd3d822965a83740303b9af"
+    },
+    {
+      "id": "summoner_spell_icon:SummonerDot_Jade",
+      "type": "summoner_spell_icon",
+      "category": "summoner_spell",
+      "refId": "SummonerDot_Jade",
+      "names": {
+        "pt_BR": "Incendiar",
+        "en_US": "Ignite"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/spell/SummonerDot_Jade.png",
+      "fileName": "Summoner_SummonerDot_Jade.png",
+      "width": 64,
+      "height": 64,
+      "format": "png",
+      "hasAlpha": false,
+      "bytes": 6060,
+      "sha256": "a5d4baeb9f89b63cbddcc84a5c047e1b62b1fe585c0681e3b162e4a59fd105ea"
+    },
+    {
+      "id": "summoner_spell_icon:SummonerExhaust",
+      "type": "summoner_spell_icon",
+      "category": "summoner_spell",
+      "refId": "SummonerExhaust",
+      "names": {
+        "pt_BR": "Exaustão",
+        "en_US": "Exhaust"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/spell/SummonerExhaust.png",
+      "fileName": "Summoner_SummonerExhaust.png",
+      "width": 64,
+      "height": 64,
+      "format": "png",
+      "hasAlpha": false,
+      "bytes": 6078,
+      "sha256": "ad513e510391d7c8fc604d16e239f430f1a10dde563ae7cf237eb87b1f0de722"
+    },
+    {
+      "id": "summoner_spell_icon:SummonerExhaust_Jade",
+      "type": "summoner_spell_icon",
+      "category": "summoner_spell",
+      "refId": "SummonerExhaust_Jade",
+      "names": {
+        "pt_BR": "Exaustão",
+        "en_US": "Exhaust"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/spell/SummonerExhaust_Jade.png",
+      "fileName": "Summoner_SummonerExhaust_Jade.png",
+      "width": 64,
+      "height": 64,
+      "format": "png",
+      "hasAlpha": false,
+      "bytes": 6500,
+      "sha256": "494e5e2112f642eb7e956697ad84a2c1c57c37d96afd84b698b1a36a2629ff24"
+    },
+    {
+      "id": "summoner_spell_icon:SummonerFlash",
+      "type": "summoner_spell_icon",
+      "category": "summoner_spell",
+      "refId": "SummonerFlash",
+      "names": {
+        "pt_BR": "Flash",
+        "en_US": "Flash"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/spell/SummonerFlash.png",
+      "fileName": "Summoner_SummonerFlash.png",
+      "width": 64,
+      "height": 64,
+      "format": "png",
+      "hasAlpha": false,
+      "bytes": 6403,
+      "sha256": "1272fe7b3275c0afc872a6aaa6b65e27d41572d57f9ce19b9ed81b79aa5eb2aa"
+    },
+    {
+      "id": "summoner_spell_icon:SummonerFlash_Jade",
+      "type": "summoner_spell_icon",
+      "category": "summoner_spell",
+      "refId": "SummonerFlash_Jade",
+      "names": {
+        "pt_BR": "Flash",
+        "en_US": "Flash"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/spell/SummonerFlash_Jade.png",
+      "fileName": "Summoner_SummonerFlash_Jade.png",
+      "width": 64,
+      "height": 64,
+      "format": "png",
+      "hasAlpha": false,
+      "bytes": 5518,
+      "sha256": "b2a7fdffb318a84fedd29105ac8f78c42caaf32b2261f88b245125c1c2b8e196"
+    },
+    {
+      "id": "summoner_spell_icon:SummonerFortify_Jade",
+      "type": "summoner_spell_icon",
+      "category": "summoner_spell",
+      "refId": "SummonerFortify_Jade",
+      "names": {
+        "pt_BR": "Fortificar",
+        "en_US": "Fortify"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/spell/SummonerFortify_Jade.png",
+      "fileName": "Summoner_SummonerFortify_Jade.png",
+      "width": 64,
+      "height": 64,
+      "format": "png",
+      "hasAlpha": false,
+      "bytes": 6425,
+      "sha256": "2724dd46de676a2ca70cf33fe5969997f9e88c85814bd6902b8131a8563d9895"
+    },
+    {
+      "id": "summoner_spell_icon:SummonerHaste",
+      "type": "summoner_spell_icon",
+      "category": "summoner_spell",
+      "refId": "SummonerHaste",
+      "names": {
+        "pt_BR": "Fantasma",
+        "en_US": "Ghost"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/spell/SummonerHaste.png",
+      "fileName": "Summoner_SummonerHaste.png",
+      "width": 64,
+      "height": 64,
+      "format": "png",
+      "hasAlpha": false,
+      "bytes": 5066,
+      "sha256": "9ce3605a1480f16453ff8230fa61e87cedca91e8a5c6217445c82eaf53884484"
+    },
+    {
+      "id": "summoner_spell_icon:SummonerHaste_Jade",
+      "type": "summoner_spell_icon",
+      "category": "summoner_spell",
+      "refId": "SummonerHaste_Jade",
+      "names": {
+        "pt_BR": "Fantasma",
+        "en_US": "Ghost"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/spell/SummonerHaste_Jade.png",
+      "fileName": "Summoner_SummonerHaste_Jade.png",
+      "width": 64,
+      "height": 64,
+      "format": "png",
+      "hasAlpha": false,
+      "bytes": 4904,
+      "sha256": "9b1ddd3722834c7a3aa1f22512990e072070f372972907da5b13f6aa26d2101f"
+    },
+    {
+      "id": "summoner_spell_icon:SummonerHeal",
+      "type": "summoner_spell_icon",
+      "category": "summoner_spell",
+      "refId": "SummonerHeal",
+      "names": {
+        "pt_BR": "Curar",
+        "en_US": "Heal"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/spell/SummonerHeal.png",
+      "fileName": "Summoner_SummonerHeal.png",
+      "width": 64,
+      "height": 64,
+      "format": "png",
+      "hasAlpha": false,
+      "bytes": 5673,
+      "sha256": "ccebc4b0554572a041b2b5014f25a84d7265c371e97448a516765aaad651dc55"
+    },
+    {
+      "id": "summoner_spell_icon:SummonerHeal_Jade",
+      "type": "summoner_spell_icon",
+      "category": "summoner_spell",
+      "refId": "SummonerHeal_Jade",
+      "names": {
+        "pt_BR": "Curar",
+        "en_US": "Heal"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/spell/SummonerHeal_Jade.png",
+      "fileName": "Summoner_SummonerHeal_Jade.png",
+      "width": 64,
+      "height": 64,
+      "format": "png",
+      "hasAlpha": false,
+      "bytes": 6472,
+      "sha256": "9d8fbcd354640d5413ec8efd52b4f55896209c612cea95c78438d6e3a845ac48"
+    },
+    {
+      "id": "summoner_spell_icon:SummonerMana",
+      "type": "summoner_spell_icon",
+      "category": "summoner_spell",
+      "refId": "SummonerMana",
+      "names": {
+        "pt_BR": "Clareza",
+        "en_US": "Clarity"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/spell/SummonerMana.png",
+      "fileName": "Summoner_SummonerMana.png",
+      "width": 64,
+      "height": 64,
+      "format": "png",
+      "hasAlpha": false,
+      "bytes": 5860,
+      "sha256": "b312643034bb3855d1211884b31f254f00281b71afa39df94dae3c20e51b0d1e"
+    },
+    {
+      "id": "summoner_spell_icon:SummonerMana_Jade",
+      "type": "summoner_spell_icon",
+      "category": "summoner_spell",
+      "refId": "SummonerMana_Jade",
+      "names": {
+        "pt_BR": "Clareza",
+        "en_US": "Clarity"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/spell/SummonerMana_Jade.png",
+      "fileName": "Summoner_SummonerMana_Jade.png",
+      "width": 64,
+      "height": 64,
+      "format": "png",
+      "hasAlpha": false,
+      "bytes": 6498,
+      "sha256": "593cf6dc469b99c3792d124a8775256d1dea4eea1753799c2c22dbff8663d6ac"
+    },
+    {
+      "id": "summoner_spell_icon:SummonerPoroRecall",
+      "type": "summoner_spell_icon",
+      "category": "summoner_spell",
+      "refId": "SummonerPoroRecall",
+      "names": {
+        "pt_BR": "Ao Rei!",
+        "en_US": "To the King!"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/spell/SummonerPoroRecall.png",
+      "fileName": "Summoner_SummonerPoroRecall.png",
+      "width": 64,
+      "height": 64,
+      "format": "png",
+      "hasAlpha": false,
+      "bytes": 6105,
+      "sha256": "db0dfc7b1185f3d8bd6682a7a2dec0f513f4e967a3caba0f55f1f030d3d25bee"
+    },
+    {
+      "id": "summoner_spell_icon:SummonerPoroThrow",
+      "type": "summoner_spell_icon",
+      "category": "summoner_spell",
+      "refId": "SummonerPoroThrow",
+      "names": {
+        "pt_BR": "Arremesso de Poro",
+        "en_US": "Poro Toss"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/spell/SummonerPoroThrow.png",
+      "fileName": "Summoner_SummonerPoroThrow.png",
+      "width": 64,
+      "height": 64,
+      "format": "png",
+      "hasAlpha": false,
+      "bytes": 6340,
+      "sha256": "a33b27b45357eb6be921d53ea336b593f98e09af89aa7410d620032df990c253"
+    },
+    {
+      "id": "summoner_spell_icon:SummonerRally_Jade",
+      "type": "summoner_spell_icon",
+      "category": "summoner_spell",
+      "refId": "SummonerRally_Jade",
+      "names": {
+        "pt_BR": "Revigorar",
+        "en_US": "Rally"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/spell/SummonerRally_Jade.png",
+      "fileName": "Summoner_SummonerRally_Jade.png",
+      "width": 64,
+      "height": 64,
+      "format": "png",
+      "hasAlpha": false,
+      "bytes": 6643,
+      "sha256": "9cb152c9dc0a3dd17c670f2026bef5f45c18a0ffd2ca10fdd1f72b62a163c0ab"
+    },
+    {
+      "id": "summoner_spell_icon:SummonerRevive_Jade",
+      "type": "summoner_spell_icon",
+      "category": "summoner_spell",
+      "refId": "SummonerRevive_Jade",
+      "names": {
+        "pt_BR": "Reviver",
+        "en_US": "Revive"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/spell/SummonerRevive_Jade.png",
+      "fileName": "Summoner_SummonerRevive_Jade.png",
+      "width": 64,
+      "height": 64,
+      "format": "png",
+      "hasAlpha": false,
+      "bytes": 6886,
+      "sha256": "5f0cddbea542f688181fdb4824bb7d63af42ada39c527aa8caa0b0ead96a9678"
+    },
+    {
+      "id": "summoner_spell_icon:SummonerSmite",
+      "type": "summoner_spell_icon",
+      "category": "summoner_spell",
+      "refId": "SummonerSmite",
+      "names": {
+        "pt_BR": "Golpear",
+        "en_US": "Smite"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/spell/SummonerSmite.png",
+      "fileName": "Summoner_SummonerSmite.png",
+      "width": 64,
+      "height": 64,
+      "format": "png",
+      "hasAlpha": false,
+      "bytes": 6221,
+      "sha256": "f07e92e0ded6fae182b1d66191a62dcaf5fcf207a0d9622105e00c39c27a0a28"
+    },
+    {
+      "id": "summoner_spell_icon:SummonerSmite_Jade",
+      "type": "summoner_spell_icon",
+      "category": "summoner_spell",
+      "refId": "SummonerSmite_Jade",
+      "names": {
+        "pt_BR": "Golpear",
+        "en_US": "Smite"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/spell/SummonerSmite_Jade.png",
+      "fileName": "Summoner_SummonerSmite_Jade.png",
+      "width": 64,
+      "height": 64,
+      "format": "png",
+      "hasAlpha": false,
+      "bytes": 6286,
+      "sha256": "237db3702c9134c8ffbf5aa6340203191072b240f90f9d49d4d48dad0b994043"
+    },
+    {
+      "id": "summoner_spell_icon:SummonerSnowURFSnowball_Mark",
+      "type": "summoner_spell_icon",
+      "category": "summoner_spell",
+      "refId": "SummonerSnowURFSnowball_Mark",
+      "names": {
+        "pt_BR": "Marca",
+        "en_US": "Mark"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/spell/SummonerSnowURFSnowball_Mark.png",
+      "fileName": "Summoner_SummonerSnowURFSnowball_Mark.png",
+      "width": 64,
+      "height": 64,
+      "format": "png",
+      "hasAlpha": false,
+      "bytes": 4799,
+      "sha256": "0e2deaacd7cba5e9aee37e35aa91ac6ea69731d60689ed83c8e87fefb0115dbb"
+    },
+    {
+      "id": "summoner_spell_icon:SummonerSnowball",
+      "type": "summoner_spell_icon",
+      "category": "summoner_spell",
+      "refId": "SummonerSnowball",
+      "names": {
+        "pt_BR": "Marca",
+        "en_US": "Mark"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/spell/SummonerSnowball.png",
+      "fileName": "Summoner_SummonerSnowball.png",
+      "width": 64,
+      "height": 64,
+      "format": "png",
+      "hasAlpha": false,
+      "bytes": 4799,
+      "sha256": "0e2deaacd7cba5e9aee37e35aa91ac6ea69731d60689ed83c8e87fefb0115dbb"
+    },
+    {
+      "id": "summoner_spell_icon:SummonerSpell_Promote_Jade",
+      "type": "summoner_spell_icon",
+      "category": "summoner_spell",
+      "refId": "SummonerSpell_Promote_Jade",
+      "names": {
+        "pt_BR": "Promover",
+        "en_US": "Promote"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/spell/SummonerSpell_Promote_Jade.png",
+      "fileName": "Summoner_SummonerSpell_Promote_Jade.png",
+      "width": 64,
+      "height": 64,
+      "format": "png",
+      "hasAlpha": false,
+      "bytes": 5461,
+      "sha256": "f1151941cfa3ad952561ace1de3aa0e92048112d4064f3a63b1df29f9ac5f10f"
+    },
+    {
+      "id": "summoner_spell_icon:SummonerTeleport",
+      "type": "summoner_spell_icon",
+      "category": "summoner_spell",
+      "refId": "SummonerTeleport",
+      "names": {
+        "pt_BR": "Teleporte",
+        "en_US": "Teleport"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/spell/SummonerTeleport.png",
+      "fileName": "Summoner_SummonerTeleport.png",
+      "width": 64,
+      "height": 64,
+      "format": "png",
+      "hasAlpha": false,
+      "bytes": 6131,
+      "sha256": "9b86d0c879504d7ad22815084efb0c59521a40edf5bc6bf85031db9f5e2e976f"
+    },
+    {
+      "id": "summoner_spell_icon:SummonerTeleport_Jade",
+      "type": "summoner_spell_icon",
+      "category": "summoner_spell",
+      "refId": "SummonerTeleport_Jade",
+      "names": {
+        "pt_BR": "Teleporte",
+        "en_US": "Teleport"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/spell/SummonerTeleport_Jade.png",
+      "fileName": "Summoner_SummonerTeleport_Jade.png",
+      "width": 64,
+      "height": 64,
+      "format": "png",
+      "hasAlpha": false,
+      "bytes": 6377,
+      "sha256": "8aee1fbbc99905318028d01d9fd6b3458450ad7ff035958dea3376b0e255530b"
+    },
+    {
+      "id": "summoner_spell_icon:Summoner_UltBookPlaceholder",
+      "type": "summoner_spell_icon",
+      "category": "summoner_spell",
+      "refId": "Summoner_UltBookPlaceholder",
+      "names": {
+        "pt_BR": "A definir",
+        "en_US": "Placeholder"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/spell/Summoner_UltBookPlaceholder.png",
+      "fileName": "Summoner_Summoner_UltBookPlaceholder.png",
+      "width": 64,
+      "height": 64,
+      "format": "png",
+      "hasAlpha": false,
+      "bytes": 3194,
+      "sha256": "320fba7ef6d9d036375c520cf6069e77e47ba385da98c48825063547cb06626d"
+    },
+    {
+      "id": "summoner_spell_icon:Summoner_UltBookSmitePlaceholder",
+      "type": "summoner_spell_icon",
+      "category": "summoner_spell",
+      "refId": "Summoner_UltBookSmitePlaceholder",
+      "names": {
+        "pt_BR": "Placeholder e Atacar-Golpear",
+        "en_US": "Placeholder and Attack-Smite"
+      },
+      "source": "ddragon",
+      "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/spell/Summoner_UltBookSmitePlaceholder.png",
+      "fileName": "Summoner_Summoner_UltBookSmitePlaceholder.png",
+      "width": 64,
+      "height": 64,
+      "format": "png",
+      "hasAlpha": false,
+      "bytes": 4124,
+      "sha256": "e74630d5c3acf7d75616837ebef7d338728f00227433a2da5d4822228e5b86f4"
+    }
+  ]
+}

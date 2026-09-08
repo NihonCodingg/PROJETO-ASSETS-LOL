@@ -1,0 +1,65 @@
+{
+  "schemaVersion": "1.1.0",
+  "generatedAt": "2026-09-08T23:24:48Z",
+  "currentVersion": "16.17.1",
+  "versions": [
+    {
+      "gameVersion": "16.17.1",
+      "indexedAt": "2026-09-08T23:24:48Z",
+      "assetsCopied": false,
+      "catalog": {
+        "url": "catalog-ff8660bb513d.json",
+        "champions": 173,
+        "skins": 2118,
+        "bytes": 779470,
+        "sha256": "ff8660bb513dca00749c405594e3cf681f6b7ba18ef87731800e21f3422f3c2f"
+      },
+      "totalAssets": 15515,
+      "totalBytes": 1439374815,
+      "shards": [
+        {
+          "category": "champion",
+          "url": "index-champion-74ced607509c.json",
+          "assets": 9510,
+          "bytes": 6524686,
+          "sha256": "74ced607509c07af63098b0bf73c50bfbead78e6ca26c2ec9bed7771c78a780b"
+        },
+        {
+          "category": "item",
+          "url": "index-item-f41aa7f96f76.json",
+          "assets": 868,
+          "bytes": 489988,
+          "sha256": "f41aa7f96f76fa7ac3cd8c9831d5330c273818cdd0b573d9fad8f04c57d0548f"
+        },
+        {
+          "category": "summoner_spell",
+          "url": "index-summoner_spell-83fb133d90e9.json",
+          "assets": 34,
+          "bytes": 21724,
+          "sha256": "83fb133d90e9af32feeed43d48eaadb9d2f398b83165a99fea37091882a1441c"
+        },
+        {
+          "category": "profile_icon",
+          "url": "index-profile_icon-d28d9b270b16.json",
+          "assets": 5021,
+          "bytes": 2717176,
+          "sha256": "d28d9b270b16cecf4e5aa74a981e6bd6109a84da3ad7b174d9c498813f759f79"
+        },
+        {
+          "category": "rune",
+          "url": "index-rune-48b94dd24d3c.json",
+          "assets": 77,
+          "bytes": 46030,
+          "sha256": "48b94dd24d3cf07a10be98bdd6b55890ec666fcf4fd01c1af7f73704341d8895"
+        },
+        {
+          "category": "map",
+          "url": "index-map-c11a737bf4a8.json",
+          "assets": 5,
+          "bytes": 2725,
+          "sha256": "c11a737bf4a8f1d926d38ccd4a6df9206972e71798e7c06292e14e24276e9faf"
+        }
+      ]
+    }
+  ]
+}

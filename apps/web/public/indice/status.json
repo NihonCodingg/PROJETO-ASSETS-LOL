@@ -1,0 +1,38 @@
+{
+  "schemaVersion": "1.1.0",
+  "startedAt": "2026-09-08T23:24:48Z",
+  "finishedAt": "2026-09-08T23:25:47Z",
+  "durationSeconds": 59.066,
+  "ok": true,
+  "gameVersion": "16.17.1",
+  "runId": "34290512626",
+  "counts": {
+    "assets": 15515,
+    "champions": 173,
+    "skins": 2118,
+    "categories": 6,
+    "assetsByCategory": {
+      "champion": 9510,
+      "item": 868,
+      "map": 5,
+      "profile_icon": 5021,
+      "rune": 77,
+      "summoner_spell": 34
+    },
+    "assetsBySource": {
+      "ddragon": 15515
+    }
+  },
+  "bytes": {
+    "index": 10583827,
+    "catalogGzip": 62647,
+    "largestShardGzip": 667772,
+    "describedAssets": 1439374815
+  },
+  "source": {
+    "files": 34305,
+    "imagesMeasured": 15526,
+    "imagesSkipped": 18421,
+    "caseMismatches": 52
+  }
+}
