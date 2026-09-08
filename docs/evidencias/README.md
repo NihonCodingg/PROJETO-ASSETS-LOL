@@ -38,3 +38,17 @@ crescer ~3 MB por versão antiga guardada.
 
 O `descartePorPasta` no JSON mostra o que o filtro de escopo joga fora e por onde:
 challenges (3.388), modo Classic (2.492) e as onze pastas de TFT.
+
+## Duas versões, medidas na execução do T-11
+
+Indexação de `16.16.1` e depois `16.17.1` no mesmo destino, com o mesmo tarball, antes do
+[ADR 0013](../adr/0013-uma-versao-por-vez-no-indice.md):
+
+| | Bytes | Assets | Categorias |
+|---|---:|---:|---|
+| Corrente (16.17.1) | 10.581.799 | 15.515 | champion, item, map, profile_icon, **rune**, summoner_spell |
+| Anterior reduzida (16.16.1) | **4.429.668** | 6.966 | champion, item, map, profile_icon, summoner_spell |
+
+Foi este número que derrubou o histórico: **4,4 MB por patch**, não os ~3 MB estimados —
+e sem a categoria `rune`, porque `perk-images` não é versionado no ddragon. A ~26 patches
+por ano, seriam ~115 MB/ano num repositório que todo clone paga inteiro.

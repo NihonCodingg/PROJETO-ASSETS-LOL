@@ -24,7 +24,12 @@ from typing import Annotated, Any
 
 import typer
 from lol_assets_schema import SCHEMA_VERSION
-from lol_assets_schema.models import Asset, IndexManifest, IndexShard, ManifestVersion
+from lol_assets_schema.models import (
+    Asset,
+    IndexManifest,
+    IndexShard,
+    ManifestVersion,
+)
 
 from lol_assets_indexer import __version__, logging_setup
 from lol_assets_indexer.adapters.ddragon import latest_version, tarball_url
@@ -34,6 +39,7 @@ from lol_assets_indexer.catalog import project_catalog, verify_catalog
 from lol_assets_indexer.http import IndexerSettings, SourceClient
 from lol_assets_indexer.limits import BudgetReport, check_budget, measure
 from lol_assets_indexer.publish.storage import (
+    MANIFEST_KEY,
     LocalObjectStore,
     Publisher,
     prepare_catalog,
@@ -181,6 +187,8 @@ async def _run(
     verify_catalog(catalog)
     catalog_ref, catalog_payload = prepare_catalog(catalog)
     fatias = [prepare_shard(shard) for shard in shards]
+    # Uma versão só, sempre (ADR 0013). A anterior sai do manifesto aqui e some do
+    # destino na varredura, depois — nunca antes.
     manifest = IndexManifest(
         schema_version=SCHEMA_VERSION,
         generated_at=generated_at,
@@ -244,8 +252,42 @@ async def _run(
     for shard, preparada in zip(shards, fatias, strict=True):
         publisher.publish_shard(shard, preparada)
     publisher.publish_manifest(manifest, manifest_payload)
-    logger.info("índice escrito", extra={"destination": str(output)})
+
+    # Só depois do manifesto novo estar escrito — a trava que o ADR 0007 pede para
+    # passo destrutivo, e o que apaga a versão anterior (ADR 0013).
+    removidos = _varrer_orfaos(output, publisher.published_keys)
+    logger.info(
+        "índice escrito",
+        extra={"destination": str(output), "orfaosRemovidos": removidos},
+    )
+    resumo["sweptDocuments"] = removidos
     return resumo
+
+
+def _varrer_orfaos(output: Path, referenciados: frozenset[str]) -> int:
+    """Apaga documento de índice que o manifesto novo não aponta mais.
+
+    É por aqui que a versão anterior desaparece (ADR 0013), e é por aqui que os
+    documentos de uma reindexação do mesmo patch somem. Num CDN, arquivo com hash
+    no nome poderia ficar para sempre — é imutável e ninguém paga por ele. Aqui o
+    destino é um repositório Git, e cada patch deixaria um catálogo e seis fatias
+    mortos no diretório de trabalho.
+
+    A trava do ADR 0007 para passo destrutivo: isto roda **depois** de o manifesto
+    novo estar escrito. Só apaga o que casa com o padrão de nome do índice e o que
+    o manifesto atual não referencia — nunca o `manifest.json`, nunca subpasta.
+    """
+    removidos = 0
+    for caminho in output.glob("*.json"):
+        nome = caminho.name
+        if nome == MANIFEST_KEY or nome in referenciados:
+            continue
+        if not (nome.startswith("catalog-") or nome.startswith("index-")):
+            continue
+        caminho.unlink()
+        removidos += 1
+        logger.info("documento órfão removido", extra={"arquivo": nome})
+    return removidos
 
 
 def _milhar(valor: int) -> str:

@@ -17,3 +17,4 @@ com contexto, decisão e consequências. A Spec referencia; não repete.
 | [0010](0010-navegacao-por-campeao-busca-por-skin.md) | Navegação por campeão, busca por skin; catálogo vira documento próprio | aceito — emenda o 0008 |
 | [0011](0011-base-de-componentes-do-front.md) | shadcn/ui sobre Radix, TanStack Virtual, cmdk; Fuse.js fora | aceito |
 | [0012](0012-onde-guardar-os-assets.md) | **Sem storage**: o índice aponta para as URLs das fontes | ✅ aceito — emenda 0005 e 0007 |
+| [0013](0013-uma-versao-por-vez-no-indice.md) | **Uma versão por vez** no índice; histórico sai da v1 | ✅ aceito — emenda 0007 |
