@@ -1611,56 +1611,23 @@ limite de 500 linhas.
 
 ---
 
-### T-37 — O índice no histórico do Git
+### ✅ T-37 — O índice no histórico do Git
 
-| | |
-|---|---|
-| **Objetivo** | Decidir onde o índice gerado vive, com o crescimento medido em vez de estimado |
-| **Dependências** | T-13 |
-| **Estimativa** | a definir — depende da decisão |
-| **Effort** | médio |
-| **Cobre** | RNF-05, [ADR 0013](adr/0013-uma-versao-por-vez-no-indice.md) |
-
-> Levantado no **T-11**, junto com a decisão do
-> [ADR 0013](adr/0013-uma-versao-por-vez-no-indice.md), e **deliberadamente deixado de
-> fora dele**.
+> **Fechado em 09/09/2026 pela medição, não pelo código.** Levantado no T-11 com um número
+> meu que estava **errado por um fator de ~25**: eu disse ~275 MB/ano de histórico; medido
+> em 78 patches simulados, são **~12 MiB/ano** e **28 MiB em três anos**. Eu tinha esquecido
+> que o Git comprime o JSON (8,8×) e faz delta entre índices consecutivos (mais ~3×).
 >
-> O teto de uma versão mantém o **diretório de trabalho** em 10,6 MB. Ele não encosta no
-> **histórico do Git**: cada indexação reescreve o índice inteiro com nomes novos (hash no
-> nome), e todo blob commitado fica no repositório para sempre. Com o T-13 rodando a cada
-> 6 h e um patch a cada duas semanas, são **~26 reescritas por ano de 10,6 MB — ~275 MB/ano**
-> que todo `git clone` baixa.
+> O [ADR 0014](adr/0014-onde-vive-o-indice-gerado.md) compara cinco saídas com o custo de
+> clone em 1, 3 e 10 anos. **Venceu a A: o índice fica no `main`.** Nenhuma alternativa
+> compra o suficiente para pagar o que cobra — 28 MiB em três anos num repositório que hoje
+> tem 0,65 MiB.
 >
-> ~~É a metade maior do problema que o ADR 0013 resolveu pela metade menor.~~
+> O **branch órfão com force-push** fica registrado como plano B, com gatilho explícito:
+> `.git` acima de 200 MiB, ou o `git clone` incomodando na prática. No ritmo medido, ~17
+> anos.
 >
-> ⚠️ **Medido em 08/09/2026: o número acima está errado por um fator de ~25.** O custo
-> real é **~12 MiB/ano**, não ~275 MB/ano — eu esqueci que o Git comprime (8,8×) e faz
-> delta entre índices consecutivos (mais ~3×). A análise das cinco saídas, com a
-> medição de três anos, está no [ADR 0014](adr/0014-onde-vive-o-indice-gerado.md)
-> (proposto).
-
-**Entra**
-- Medir o crescimento real com dois ou três commits de índice, em vez de estimar.
-- Comparar as saídas, com o custo de cada uma:
-  - **Gerar no build da Vercel**, sem commitar. Elimina o problema inteiro, mas exige
-    baixar 2,39 GB a cada deploy dentro dos limites do plano Hobby — e desfaz a escolha do
-    [ADR 0012](adr/0012-onde-guardar-os-assets.md) de publicar por commit sem segredo nenhum.
-  - **Branch órfão** só para o índice, com squash periódico ou `git clone --depth`.
-  - **Release do GitHub** como destino do índice (não dos assets — as releases não têm CORS,
-    mas o índice é buscado pelo próprio app, não pelo navegador de outra origem).
-  - **Aceitar o crescimento** e podar o histórico manualmente quando incomodar.
-- Registrar a escolha em ADR.
-
-**NÃO entra**
-- Reescrever histórico existente. Se for preciso, é operação manual e avisada.
-
-**Critérios de aceite**
-1. O crescimento por indexação está medido, não estimado. ✅ [ADR 0014](adr/0014-onde-vive-o-indice-gerado.md)
-2. A escolha está registrada em ADR, com o custo das alternativas.
-3. Depois de N indexações, o tamanho de um `git clone` é previsível e conhecido.
-
-**Testes que provam**
-- Depende da saída escolhida. Se for build na Vercel, o próprio deploy é o teste.
+> Nenhum código foi necessário: o T-13 já fazia o certo.
 
 ---
 
@@ -1687,7 +1654,7 @@ Todo requisito da Spec tem pelo menos um ticket.
 | RNF-02 | T-29 |
 | RNF-03 | T-10, T-08, T-24 |
 | RNF-04 | T-13 |
-| RNF-05 | T-02, T-10, T-11, ✅ T-36, T-37 |
+| RNF-05 | T-02, T-10, T-11, ✅ T-36, ✅ T-37 |
 | RNF-13 | T-15 (aviso de divergência), T-09 (medição do sha256) |
 | RNF-06 | T-12, T-13, T-31 |
 | RNF-07 | T-08 |

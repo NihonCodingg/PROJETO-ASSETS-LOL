@@ -1,6 +1,6 @@
 # ADR 0014 — Onde vive o índice gerado
 
-- **Status:** 📝 **proposto** (08/09/2026) — aguardando decisão
+- **Status:** ✅ **aceito** (09/09/2026) — **opção A**: o índice fica no `main`
 - **Data:** 2026-09-08
 - **Depende de:** [ADR 0012](0012-onde-guardar-os-assets.md), [ADR 0013](0013-uma-versao-por-vez-no-indice.md)
 - **Ticket:** T-37
@@ -141,7 +141,7 @@ cima dela.
 - **Exige:** cartão de crédito na Cloudflare — a restrição forte que decidiu o ADR 0012.
 - **Quebra:** o ADR 0012 inteiro, e traz de volta quatro variáveis de ambiente.
 
-## Recomendação: **A**, com a **C** anotada como plano B
+## Decisão: **A**, com a **C** anotada como plano B
 
 **Deixe no `main`.** São 12 MiB no primeiro ano e 28 MiB em três, num repositório que hoje
 tem 0,65 MiB. Nenhuma das alternativas compra o suficiente para pagar o que cobra:
@@ -173,12 +173,12 @@ O que **poderia** reabrir o 0012 é outra coisa: se o tráfego do site começar 
 fontes a ponto de virar má vizinhança, ou se o ddragon passar a bloquear hotlink. Nenhum
 dos dois é o caso, e nenhum dos dois tem a ver com tamanho de repositório.
 
-## Consequências, se A for aceita
+## Consequências
 
 - O T-37 fecha sem escrever código. O T-13 já faz o certo.
 - O `git log` do `main` passa a ter um commit `chore(indice)` por patch. Se incomodar, é
   sintoma de que a hora da C chegou.
 - O número errado do relatório da Onda 2 e do T-37 precisa ser corrigido, com a medição no
   lugar dele.
-- Sobra decidir só **quando disparar a primeira indexação** — que era o que estava travado
-  por esta pergunta.
+- A primeira indexação foi disparada em 09/09/2026, logo depois desta decisão. Era o que
+  estava travado por esta pergunta.
