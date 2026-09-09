@@ -67,7 +67,28 @@ def montar_membros() -> dict[str, bytes]:
             ficha_de_campeao("Fiddlesticks", "9", "Fiddlesticks")
         )
         membros[f"{VERSAO}/data/{idioma}/item.json"] = json_de(
-            {"data": {"3031": {"name": "Gume do Infinito"}}}
+            {
+                "data": {
+                    # Comprável, no SR e no ARAM, mas não na Arena — os três
+                    # filtros da §B.1.6 num item só.
+                    "3031": {
+                        "name": "Gume do Infinito",
+                        "gold": {"purchasable": True},
+                        "maps": {"11": True, "12": True, "30": False},
+                        "tags": ["CriticalStrike", "Damage"],
+                    },
+                    # Item de missão: continua no JSON e não pode aparecer na
+                    # listagem padrão.
+                    "3901": {
+                        "name": "Fragmento de Missão",
+                        "gold": {"purchasable": False},
+                        "maps": {"11": True},
+                    },
+                }
+            }
+        )
+        membros[f"{VERSAO}/data/{idioma}/map.json"] = json_de(
+            {"data": {"11": {"MapName": "Summoner's Rift", "image": {"full": "map11.png"}}}}
         )
         membros[f"{VERSAO}/data/{idioma}/summoner.json"] = json_de(
             {"data": {"SummonerFlash": {"name": "Flash", "image": {"full": "SummonerFlash.png"}}}}
@@ -100,6 +121,7 @@ def montar_membros() -> dict[str, bytes]:
     membros[f"{VERSAO}/img/spell/JaxW.png"] = imagem(64, 64, "PNG")
     membros[f"{VERSAO}/img/spell/SummonerFlash.png"] = imagem(64, 64, "PNG")
     membros[f"{VERSAO}/img/item/3031.png"] = imagem(64, 64, "PNG")
+    membros[f"{VERSAO}/img/item/3901.png"] = imagem(64, 64, "PNG")
     membros[f"{VERSAO}/img/profileicon/1.png"] = imagem(300, 300, "PNG")
     membros[f"{VERSAO}/img/map/map11.png"] = imagem(512, 512, "PNG")
     membros["img/perk-images/Styles/7201_Precision.png"] = imagem(32, 32, "PNG", alfa=True)
