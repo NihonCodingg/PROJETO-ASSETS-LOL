@@ -17,16 +17,17 @@ formato do cliente aparece no `status.json` em vez de virar asset faltando.
 
 from __future__ import annotations
 
+import asyncio
 import logging
 from collections.abc import Collection
 from dataclasses import dataclass, field
 from typing import Any
 
-from lol_assets_schema.models import Asset, AssetType, LocalizedName
+from lol_assets_schema.models import Asset, AssetCategory, AssetType, LocalizedName
 
 from lol_assets_indexer.http import SourceClient
 from lol_assets_indexer.imaging import UnsupportedImageFormatError, measure
-from lol_assets_indexer.naming import asset_id, champion_file_name
+from lol_assets_indexer.naming import asset_id, champion_file_name, file_extension
 
 logger = logging.getLogger(__name__)
 
@@ -64,6 +65,8 @@ class DeclaredAsset:
     skin: int | None = None
     parent_skin_num: int | None = None
     label: str | None = None
+    #: Chave natural fora do mundo dos campeões — id de emote ou de ward.
+    ref: str | None = None
 
 
 @dataclass
@@ -243,15 +246,13 @@ async def fetch_champion_assets(
     """
     paths = await fetch_champion_paths(client, champion_key)
     base = client.settings.cdragon_base_url
-    assets: list[Asset] = []
+    desejados = [declarado for declarado in paths.assets if only is None or declarado.type in only]
 
-    for declarado in paths.assets:
-        if only is not None and declarado.type not in only:
-            continue
+    async def um(declarado: DeclaredAsset) -> Asset | None:
         url = asset_url(base, declarado.declared)
         if url is None:  # pragma: no cover - `declared_assets` já filtrou
             paths.unmappable[declarado.json_path] = declarado.declared
-            continue
+            return None
         try:
             medida = measure(await client.get_bytes(url))
         except (UnsupportedImageFormatError, OSError, ValueError) as erro:
@@ -259,35 +260,39 @@ async def fetch_champion_assets(
                 "asset do cdragon ilegível",
                 extra={"url": url, "kind": type(erro).__name__},
             )
-            continue
+            return None
 
         num = None if declarado.skin is None else _skin_num(declarado.skin, paths.champion_key)
         natural = declarado.skin if declarado.skin is not None else paths.champion_key
-        assets.append(
-            Asset(
-                id=asset_id(declarado.type, natural),
-                type=declarado.type,
-                category="champion",
-                champion_key=paths.champion_key,
-                champion_id=paths.champion_id,
-                skin_id=declarado.skin,
-                skin_num=num,
-                parent_skin_num=declarado.parent_skin_num,
-                is_base_skin=(num == 0) if num is not None else None,
-                names=LocalizedName(pt_BR=declarado.label or paths.names.pt_BR),
-                source="cdragon",
-                source_url=url,
-                file_name=champion_file_name(
-                    paths.champion_id, declarado.type, medida.format, skin_num=num
-                ),
-                width=medida.width,
-                height=medida.height,
-                format=medida.format,
-                has_alpha=medida.has_alpha,
-                bytes=medida.bytes,
-                sha256=medida.sha256,
-            )
+        return Asset(
+            id=asset_id(declarado.type, natural),
+            type=declarado.type,
+            category="champion",
+            champion_key=paths.champion_key,
+            champion_id=paths.champion_id,
+            skin_id=declarado.skin,
+            skin_num=num,
+            parent_skin_num=declarado.parent_skin_num,
+            is_base_skin=(num == 0) if num is not None else None,
+            names=LocalizedName(pt_BR=declarado.label or paths.names.pt_BR),
+            source="cdragon",
+            source_url=url,
+            file_name=champion_file_name(
+                paths.champion_id, declarado.type, medida.format, skin_num=num
+            ),
+            width=medida.width,
+            height=medida.height,
+            format=medida.format,
+            has_alpha=medida.has_alpha,
+            bytes=medida.bytes,
+            sha256=medida.sha256,
         )
+
+    # Em paralelo, mas com o semáforo do `SourceClient` mandando: a regra 4 do
+    # CLAUDE.md permite 4 por host, e um `await` por asset usava **um**. Medido:
+    # 2,8 assets/s em série contra 10,8 em paralelo, sem mudar a etiqueta.
+    resultados = await asyncio.gather(*(um(declarado) for declarado in desejados))
+    assets = [asset for asset in resultados if asset is not None]
 
     if paths.unmappable:
         logger.info(
@@ -308,3 +313,145 @@ __all__ = [
     "fetch_champion_assets",
     "fetch_champion_paths",
 ]
+
+
+# --- emotes e ward skins (T-22) ---------------------------------------------------------
+#
+# Não vêm do tarball do ddragon: só existem no cdragon. E não são por campeão, então
+# têm caminho próprio — uma lista só para cada.
+
+EMOTES_JSON = "v1/summoner-emotes.json"
+WARDS_JSON = "v1/ward-skins.json"
+
+
+def catalog_url(base: str, documento: str) -> str:
+    return f"{base.rstrip('/')}/latest/{GAME_DATA_ROOT}/{documento}"
+
+
+def _tem_arquivo(declarado: str) -> bool:
+    """`/lol-game-data/assets/` sozinho não é caminho de arquivo.
+
+    Nove das 2.347 entradas de emote trazem exatamente isso: o prefixo e nada
+    depois. Elas casam a regra de mapeamento e mesmo assim não apontam para nada
+    — é o que separa as 2.347 declaradas dos 2.338 emotes que o S4 mediu.
+    """
+    resto = declarado[len(ASSET_PREFIX) :]
+    return bool(resto) and "." in resto.rsplit("/", 1)[-1]
+
+
+@dataclass
+class SimpleCatalog:
+    """Uma categoria que é uma lista só, sem campeão no meio."""
+
+    category: AssetCategory
+    assets: list[DeclaredAsset] = field(default_factory=list)
+    unmappable: dict[str, str] = field(default_factory=dict)
+
+
+def declared_emotes(documento: list[dict[str, Any]]) -> SimpleCatalog:
+    catalogo = SimpleCatalog(category="emote")
+    for i, emote in enumerate(documento):
+        caminho = emote.get("inventoryIcon")
+        chave = f"[{i}].inventoryIcon"
+        if not isinstance(caminho, str) or not caminho:
+            continue
+        if not caminho.startswith(ASSET_PREFIX) or not _tem_arquivo(caminho):
+            catalogo.unmappable[chave] = caminho
+            continue
+        catalogo.assets.append(
+            DeclaredAsset(
+                json_path=chave,
+                declared=caminho,
+                type="emote_icon",
+                label=str(emote.get("name") or "").strip() or None,
+                ref=str(emote.get("id")),
+            )
+        )
+    return catalogo
+
+
+def declared_wards(documento: list[dict[str, Any]]) -> SimpleCatalog:
+    """Cada ward tem **duas** imagens: a sentinela e a sombra dela.
+
+    São 265 wards e 530 arquivos — o número que o S4 mediu. A sombra não é
+    variação nem duplicata: é outro arquivo, com outra arte.
+    """
+    catalogo = SimpleCatalog(category="ward")
+    for i, ward in enumerate(documento):
+        for campo, sufixo in (("wardImagePath", ""), ("wardShadowImagePath", "-shadow")):
+            caminho = ward.get(campo)
+            chave = f"[{i}].{campo}"
+            if not isinstance(caminho, str) or not caminho:
+                continue
+            if not caminho.startswith(ASSET_PREFIX) or not _tem_arquivo(caminho):
+                catalogo.unmappable[chave] = caminho
+                continue
+            catalogo.assets.append(
+                DeclaredAsset(
+                    json_path=chave,
+                    declared=caminho,
+                    type="ward_icon",
+                    label=str(ward.get("name") or "").strip() or None,
+                    ref=f"{ward.get('id')}{sufixo}",
+                )
+            )
+    return catalogo
+
+
+async def fetch_simple_catalog(
+    client: SourceClient, documento: str, classificar: Any, prefixo_do_nome: str
+) -> tuple[list[Asset], dict[str, str]]:
+    """Baixa a lista, mede o que ela declara e monta os registros."""
+    base = client.settings.cdragon_base_url
+    catalogo = classificar(await client.get_json(catalog_url(base, documento)))
+
+    async def um(declarado: DeclaredAsset) -> Asset | None:
+        url = asset_url(base, declarado.declared)
+        if url is None:  # pragma: no cover
+            return None
+        try:
+            medida = measure(await client.get_bytes(url))
+        except (UnsupportedImageFormatError, OSError, ValueError) as erro:
+            logger.info(
+                "asset do cdragon ilegível",
+                extra={"url": url, "kind": type(erro).__name__},
+            )
+            return None
+        referencia = declarado.ref or ""
+        return Asset(
+            id=asset_id(declarado.type, referencia),
+            type=declarado.type,
+            category=catalogo.category,
+            ref_id=referencia,
+            names=LocalizedName(pt_BR=declarado.label or f"{prefixo_do_nome} {referencia}"),
+            source="cdragon",
+            source_url=url,
+            file_name=f"{prefixo_do_nome}_{referencia}.{file_extension(medida.format)}",
+            width=medida.width,
+            height=medida.height,
+            format=medida.format,
+            has_alpha=medida.has_alpha,
+            bytes=medida.bytes,
+            sha256=medida.sha256,
+        )
+
+    resultados = await asyncio.gather(*(um(declarado) for declarado in catalogo.assets))
+    assets = [asset for asset in resultados if asset is not None]
+    logger.info(
+        "categoria do cdragon indexada",
+        extra={
+            "categoria": catalogo.category,
+            "declarados": len(catalogo.assets),
+            "medidos": len(assets),
+            "naoMapeaveis": len(catalogo.unmappable),
+        },
+    )
+    return assets, catalogo.unmappable
+
+
+async def fetch_emotes(client: SourceClient) -> tuple[list[Asset], dict[str, str]]:
+    return await fetch_simple_catalog(client, EMOTES_JSON, declared_emotes, "Emote")
+
+
+async def fetch_wards(client: SourceClient) -> tuple[list[Asset], dict[str, str]]:
+    return await fetch_simple_catalog(client, WARDS_JSON, declared_wards, "Ward")

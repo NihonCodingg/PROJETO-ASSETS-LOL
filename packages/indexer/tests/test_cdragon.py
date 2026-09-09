@@ -298,3 +298,141 @@ async def test_ficha_inexistente_falha_alto() -> None:
     async with cliente() as http:
         with pytest.raises(httpx.HTTPStatusError):
             await fetch_champion_assets(http, 9999)
+
+
+# --- emotes e ward skins (T-22) ------------------------------------------------------
+
+
+EMOTES = [
+    {"id": 1, "name": "", "inventoryIcon": "/lol-game-data/assets/"},
+    {
+        "id": 2,
+        "name": "Mestre das Armas",
+        "inventoryIcon": "/lol-game-data/assets/ASSETS/Loadouts/SummonerEmotes/Emote2.png",
+    },
+    {"id": 3, "name": "Sem ícone"},
+    {"id": 4, "name": "Relativo", "inventoryIcon": "loadouts/emote4.png"},
+]
+
+WARDS = [
+    {
+        "id": 0,
+        "name": "Sentinela Padrão",
+        "wardImagePath": f"{ASSET_PREFIX}content/src/LeagueClient/WardSkinImages/wardHero_0.png",
+        "wardShadowImagePath": (
+            f"{ASSET_PREFIX}content/src/LeagueClient/WardSkinImages/wardHeroShadow_0.png"
+        ),
+    },
+    {"id": 7, "name": "Só a sentinela", "wardImagePath": "/lol-game-data/assets/x/ward_7.png"},
+]
+
+
+def test_o_prefixo_sozinho_nao_e_caminho_de_arquivo() -> None:
+    """9 das 2.347 entradas de emote trazem `/lol-game-data/assets/` e nada depois.
+
+    É o que separa as 2.347 declaradas dos **2.338** que o S4 mediu.
+    """
+    from lol_assets_indexer.adapters.cdragon import declared_emotes
+
+    catalogo = declared_emotes(EMOTES)
+    assert [d.ref for d in catalogo.assets] == ["2"]
+    assert "[0].inventoryIcon" in catalogo.unmappable
+
+
+def test_emote_sem_icone_nao_vira_nao_mapeavel() -> None:
+    """Campo ausente é ausência, não erro de mapeamento."""
+    from lol_assets_indexer.adapters.cdragon import declared_emotes
+
+    catalogo = declared_emotes(EMOTES)
+    assert not any("[2]" in chave for chave in catalogo.unmappable)
+
+
+def test_emote_com_caminho_relativo_e_registrado() -> None:
+    from lol_assets_indexer.adapters.cdragon import declared_emotes
+
+    catalogo = declared_emotes(EMOTES)
+    assert catalogo.unmappable["[3].inventoryIcon"] == "loadouts/emote4.png"
+
+
+def test_cada_ward_tem_duas_imagens() -> None:
+    """265 wards, 530 arquivos — a sombra é outra arte, não duplicata."""
+    from lol_assets_indexer.adapters.cdragon import declared_wards
+
+    catalogo = declared_wards(WARDS)
+    assert [d.ref for d in catalogo.assets] == ["0", "0-shadow", "7"]
+
+
+def test_a_categoria_dos_dois_catalogos_e_a_certa() -> None:
+    from lol_assets_indexer.adapters.cdragon import declared_emotes, declared_wards
+
+    assert declared_emotes(EMOTES).category == "emote"
+    assert declared_wards(WARDS).category == "ward"
+
+
+@respx.mock
+async def test_emotes_viram_registros_validos() -> None:
+    from lol_assets_indexer.adapters.cdragon import EMOTES_JSON, catalog_url, fetch_emotes
+
+    respx.get(catalog_url(CDRAGON, EMOTES_JSON)).mock(
+        return_value=httpx.Response(200, json=EMOTES)
+    )
+    respx.get(re.compile(rf"{re.escape(CDRAGON)}/latest/.*emote2\.png")).mock(
+        return_value=httpx.Response(200, content=imagem(256, 256, "PNG", alfa=True))
+    )
+
+    async with cliente() as http:
+        assets, nao_mapeaveis = await fetch_emotes(http)
+
+    assert len(assets) == 1
+    emote = assets[0]
+    assert emote.category == "emote"
+    assert emote.type == "emote_icon"
+    assert emote.file_name == "Emote_2.png"
+    assert emote.names.pt_BR == "Mestre das Armas"
+    assert (emote.width, emote.height) == (256, 256), "o S4 mediu 256x256"
+    assert len(nao_mapeaveis) == 2
+
+
+@respx.mock
+async def test_wards_viram_registros_validos() -> None:
+    from lol_assets_indexer.adapters.cdragon import WARDS_JSON, catalog_url, fetch_wards
+
+    respx.get(catalog_url(CDRAGON, WARDS_JSON)).mock(return_value=httpx.Response(200, json=WARDS))
+    respx.get(re.compile(rf"{re.escape(CDRAGON)}/latest/.*ward.*\.png")).mock(
+        return_value=httpx.Response(200, content=imagem(460, 550, "PNG", alfa=True))
+    )
+
+    async with cliente() as http:
+        assets, _ = await fetch_wards(http)
+
+    assert {a.file_name for a in assets} == {"Ward_0.png", "Ward_0-shadow.png", "Ward_7.png"}
+    assert all(a.category == "ward" for a in assets)
+    assert all((a.width, a.height) == (460, 550) for a in assets), "o S4 mediu 460x550"
+
+    validate_shard(
+        {
+            "schemaVersion": "1.1.0",
+            "gameVersion": "16.18.1",
+            "category": "ward",
+            "generatedAt": "2026-09-09T00:00:00Z",
+            "assets": [a.model_dump(by_alias=True, exclude_none=True, mode="json") for a in assets],
+        }
+    )
+
+
+@respx.mock
+async def test_nenhuma_das_duas_categorias_produz_rank() -> None:
+    """Critério 4 do T-22: emblema de elo saiu da v1 pelo ADR 0012."""
+    from lol_assets_indexer.adapters.cdragon import EMOTES_JSON, catalog_url, fetch_emotes
+
+    respx.get(catalog_url(CDRAGON, EMOTES_JSON)).mock(
+        return_value=httpx.Response(200, json=EMOTES)
+    )
+    respx.get(re.compile(rf"{re.escape(CDRAGON)}/latest/.*\.png")).mock(
+        return_value=httpx.Response(200, content=imagem(256, 256, "PNG", alfa=True))
+    )
+
+    async with cliente() as http:
+        assets, _ = await fetch_emotes(http)
+
+    assert all(a.category != "rank" for a in assets)

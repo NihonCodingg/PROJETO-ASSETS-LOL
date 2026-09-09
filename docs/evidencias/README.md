@@ -8,6 +8,7 @@ arquivo daqui.
 |---|---|---|
 | [`spikes/`](spikes/) | As quatro sondagens que sustentam a Spec e os ADRs | 02–03/09/2026 |
 | [`t09-indexacao-real.json`](t09-indexacao-real.json) | A primeira indexação do patch inteiro pelo tarball (T-09) | 07/09/2026 |
+| [`t22-emotes-e-wards.json`](t22-emotes-e-wards.json) | Emotes e ward skins medidos por inteiro, contra a extrapolação do S4 (T-22) | 09/09/2026 |
 
 ## `t09-indexacao-real.json`
 
@@ -69,3 +70,24 @@ loadings e 173 squares batem, pixel a pixel, com o que o S1 mediu.
 
 Os 52 `caseMismatches` são as 13 skins do Fiddlesticks vezes os 4 cortes — a divergência
 de caixa que o T-09 encontrou, agora contada a cada execução em vez de descoberta de novo.
+
+## `t22-emotes-e-wards.json` — uma medição corrigindo outra
+
+O S4 extrapolou emotes e wards de uma amostra de 40 arquivos por categoria. A medição
+completa mostra que **uma das duas extrapolações não valia**:
+
+| | Arquivos | Medido | S4 projetou | Desvio |
+|---|---:|---:|---:|---:|
+| Emotes | 2.338 | 148,3 MB | 156,5 MB | **−5,2 %** |
+| Ward skins | 530 | 25,3 MB | 7,7 MB | **+229 %** |
+
+A mediana de 15,3 KB da amostra de wards não representava a média real, de ~48 KB. As
+contagens, essas, batem exatamente: 2.338 e 530.
+
+**Não muda o produto.** Desde o [ADR 0012](../adr/0012-onde-guardar-os-assets.md) nada é
+armazenado; esses bytes existem só como número no índice, e o limite que vale é o do
+tamanho do índice (RNF-05), não o dos assets.
+
+Também vale registrar o que **não** se confirmou: uma execução anterior reportou 33,1 MB
+para wards e não foi reproduzida. As duas medições seguintes concordam em 25,3 MB, com
+`sha256` idêntico arquivo a arquivo — a fonte é estável dentro de uma execução.

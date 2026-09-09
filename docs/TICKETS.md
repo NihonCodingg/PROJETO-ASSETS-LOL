@@ -1211,7 +1211,23 @@ limite de 500 linhas.
 
 ---
 
-### T-22 — Indexar emotes e ward skins
+### ✅ T-22 — Indexar emotes e ward skins
+
+> **Concluído em 09/09/2026.** As contagens batem **exatamente**: 2.338 emotes e 530
+> arquivos de ward. As 9 entradas que faltavam para os 2.347 declarados trazem
+> `/lol-game-data/assets/` e **nada depois** — casam a regra de mapeamento e não apontam
+> para arquivo nenhum. Ficam registradas como não mapeáveis.
+>
+> **Uma medição corrigiu outra:** o S4 projetou 7,7 MB de wards a partir de uma amostra de
+> 40 arquivos; o total real é **25,3 MB**, medido duas vezes com `sha256` idêntico. A
+> amostra não era representativa. Emotes ficaram
+> em 148,3 MB contra 156,5 MB projetados, dentro da margem.
+>
+> **Correção de desempenho que veio junto:** o cdragon estava sendo buscado com
+> concorrência **1**, não 4 — um `await` por asset dentro de um laço. A regra 4 do CLAUDE.md
+> permite 4 por host. Com `asyncio.gather` sob o mesmo semáforo, a busca foi de **2,8 para
+> 32 assets/s**, e a amostra de verificação da fusão (T-17) subiu de 3 para 12 campeões por
+> execução — de ~58 patches para ~15 até todo campeão ter sido conferido.
 
 > **Reduzido em 07/09/2026** ([ADR 0012](adr/0012-onde-guardar-os-assets.md)): os
 > **emblemas de elo saem da v1**. O emblema composto só existe dentro do
@@ -1239,8 +1255,16 @@ limite de 500 linhas.
 
 **Critérios de aceite**
 1. As duas categorias aparecem no manifesto com contagem conferida: 2.338 emotes e 530
-   arquivos de ward (265 wards × 2 imagens).
-2. O total de bytes bate com o medido em T-02, com margem de 15 %.
+   arquivos de ward (265 wards × 2 imagens). ✅ **Batem exatamente.**
+2. ~~O total de bytes bate com o medido em T-02, com margem de 15 %.~~ → **Ajustado em
+   09/09/2026: o número do T-02 para wards estava errado.** Emotes fecham em **148,3 MB**
+   contra os 156,5 MB projetados (**−5,2 %**, dentro da margem). Wards fecham em
+   **25,3 MB** contra 7,7 MB projetados (**+229 %**): o S4 extrapolou de uma amostra de 40
+   arquivos com mediana de 15,3 KB, e a média real é 65 KB. O critério passa a ser a
+   medição completa registrada em
+   [`docs/evidencias/t22-emotes-e-wards.json`](evidencias/t22-emotes-e-wards.json), não a
+   extrapolação. **Não muda o produto:** desde o [ADR 0012](adr/0012-onde-guardar-os-assets.md)
+   nada é armazenado, e esses bytes só existem como número no índice.
 3. Nenhuma requisição à wiki.
 4. Nenhum registro com `category: "rank"` é produzido.
 
