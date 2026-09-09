@@ -12,12 +12,18 @@
  * que este ticket entrega é comportamento.
  */
 
+import { useVirtualizer } from "@tanstack/react-virtual";
 import { Command } from "cmdk";
 import { useEffect, useMemo, useRef, useState } from "react";
 
 import type { Catalog, CatalogChampion, CatalogSkin } from "@lol-assets/schema";
 
 import { buildSearchIndex, hitId, search, type SearchHit } from "@/lib/search";
+
+/** Altura fixa por item — é o que a virtualização exige para medir. */
+export const ALTURA_DO_ITEM = 44;
+/** Acima disto a lista vira virtual. Abaixo, o custo não se paga (ADR 0011). */
+export const LIMIAR_DE_VIRTUALIZACAO = 60;
 
 export interface PaletaDeBuscaProps {
   readonly catalog: Catalog;
@@ -31,7 +37,22 @@ export function PaletaDeBusca({ catalog, onChampion, onSkin }: PaletaDeBuscaProp
   const [consulta, setConsulta] = useState("");
   const campo = useRef<HTMLInputElement>(null);
 
-  const resultados = useMemo(() => search(indice, consulta), [indice, consulta]);
+  // Sem teto: quem segura a lista é a virtualização, não um corte arbitrário.
+  const resultados = useMemo(
+    () => search(indice, consulta, Number.POSITIVE_INFINITY),
+    [indice, consulta],
+  );
+  const scroller = useRef<HTMLDivElement>(null);
+  const virtual = resultados.length > LIMIAR_DE_VIRTUALIZACAO;
+  const virtualizador = useVirtualizer({
+    count: resultados.length,
+    getScrollElement: () => scroller.current,
+    estimateSize: () => ALTURA_DO_ITEM,
+    overscan: 8,
+  });
+  const janela = virtual
+    ? virtualizador.getVirtualItems().map((v) => ({ indice: v.index, inicio: v.start }))
+    : resultados.map((_, indice) => ({ indice, inicio: indice * ALTURA_DO_ITEM }));
 
   useEffect(() => {
     function atalho(evento: KeyboardEvent) {
@@ -63,29 +84,61 @@ export function PaletaDeBusca({ catalog, onChampion, onSkin }: PaletaDeBuscaProp
         onValueChange={setConsulta}
         placeholder="Campeão ou skin — tente mf, j4, K/DA"
       />
-      <Command.List>
-        {consulta && resultados.length === 0 && (
-          <Command.Empty>Nada para “{consulta}”.</Command.Empty>
-        )}
-        {resultados.map((hit) => (
-          <Command.Item key={hitId(hit)} value={hitId(hit)} onSelect={() => escolher(hit)}>
-            {hit.kind === "champion" ? (
-              <>
-                <span>{hit.champion.names.pt_BR}</span>
-                <span>
-                  {hit.champion.skinCount} {hit.champion.skinCount === 1 ? "skin" : "skins"}
-                </span>
-              </>
-            ) : (
-              <>
-                <span>{hit.skin.names.pt_BR}</span>
-                {/* RF-24: sem o rótulo, "Prestígio" não diz de quem é. */}
-                <span>{hit.championName}</span>
-              </>
-            )}
-          </Command.Item>
-        ))}
-      </Command.List>
+      <div
+        ref={scroller}
+        data-virtual={virtual}
+        data-resultados={resultados.length}
+        style={{ maxHeight: ALTURA_DO_ITEM * 10, overflowY: "auto" }}
+      >
+        <Command.List
+          style={
+            virtual
+              ? { height: virtualizador.getTotalSize(), position: "relative" }
+              : undefined
+          }
+        >
+          {consulta && resultados.length === 0 && (
+            <Command.Empty>Nada para “{consulta}”.</Command.Empty>
+          )}
+          {janela.map(({ indice: posicao, inicio }) => {
+            const hit = resultados[posicao];
+            return (
+              <Command.Item
+                key={hitId(hit)}
+                value={hitId(hit)}
+                onSelect={() => escolher(hit)}
+                style={
+                  virtual
+                    ? {
+                        position: "absolute",
+                        top: 0,
+                        left: 0,
+                        width: "100%",
+                        height: ALTURA_DO_ITEM,
+                        transform: `translateY(${inicio}px)`,
+                      }
+                    : undefined
+                }
+              >
+                {hit.kind === "champion" ? (
+                  <>
+                    <span>{hit.champion.names.pt_BR}</span>
+                    <span>
+                      {hit.champion.skinCount} {hit.champion.skinCount === 1 ? "skin" : "skins"}
+                    </span>
+                  </>
+                ) : (
+                  <>
+                    <span>{hit.skin.names.pt_BR}</span>
+                    {/* RF-24: sem o rótulo, "Prestígio" não diz de quem é. */}
+                    <span>{hit.championName}</span>
+                  </>
+                )}
+              </Command.Item>
+            );
+          })}
+        </Command.List>
+      </div>
     </Command>
   );
 }

@@ -1041,7 +1041,22 @@ limite de 500 linhas.
 
 ---
 
-### T-19 — Front: grade de campeões e painel com seletor de skin
+### ✅ T-19 — Front: grade de campeões e painel com seletor de skin
+
+> **Concluído em 09/09/2026.**
+>
+> - **A virtualização entra por contagem, não por tipo de lista.** Acima de 60 resultados
+>   a lista vira virtual; abaixo, não paga o custo. Isso deixa a regra do
+>   [ADR 0011](adr/0011-base-de-componentes-do-front.md) num número em vez de numa
+>   convenção, e o `data-virtual` do scroller a torna testável.
+> - **A busca perdeu o teto de 50 resultados.** Quem segura a lista passou a ser a
+>   virtualização; cortar em 50 escondia resultado sem dizer.
+> - **`vitest.setup.ts` novo**: o jsdom não traz `ResizeObserver` nem `scrollIntoView`, e o
+>   cmdk usa os dois. Sem o stub, todo teste de componente que renderize a paleta morre com
+>   um erro que não tem nada a ver com o que ele queria provar.
+>
+> O orçamento de 3 cliques está contado em teste, nos quatro caminhos do ADR 0010 — com um
+> contador de verdade, não por inspeção.
 
 | | |
 |---|---|
@@ -1090,7 +1105,14 @@ limite de 500 linhas.
 
 ---
 
-### T-20 — Front: chromas atrás de toggle
+### ✅ T-20 — Front: chromas atrás de toggle
+
+> **Concluído em 09/09/2026, junto com o T-19** — o toggle vive dentro do painel do
+> campeão, e separar os dois em PRs diferentes deixaria um deles sem o que mostrar.
+>
+> **Decisão que o ticket não tomava:** trocar de skin **fecha** os chromas abertos. Sem
+> isso, o toggle continuaria aberto mostrando os chromas da skin anterior — que é
+> exatamente o tipo de coisa que passa despercebida e mostra a arte errada.
 
 | | |
 |---|---|
