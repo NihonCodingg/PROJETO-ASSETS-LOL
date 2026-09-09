@@ -1,0 +1,79 @@
+name: Contrato das fontes
+
+# Descobrir que o ddragon ou o cdragon mudou **antes** que o catálogo quebre em
+# silêncio. Roda sozinho, uma vez por dia; falha aqui é **alerta**, não bloqueio
+# — uma queda da fonte não pode travar merge de ninguém.
+#
+# É por isso que estes testes não rodam em PR: são lentos, tocam a rede e ficam
+# vermelhos por motivo que não é culpa do commit.
+
+on:
+  schedule:
+    # 06:23 UTC. Longe da hora cheia e do horário de patch da Riot.
+    - cron: "23 6 * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: contrato
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  contrato:
+    name: Conferir dimensões, CORS e apelidos
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Instalar uv
+        uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+
+      - name: Instalar dependências
+        run: uv sync --all-packages --frozen
+
+      - name: Testes de contrato
+        id: contrato
+        # `-m network` liga justamente o que a suíte padrão exclui.
+        run: uv run pytest -m network -p no:randomly --tb=short | tee contrato.log
+
+      - name: Abrir issue se a fonte mudou
+        if: failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require("fs");
+            const log = fs.existsSync("contrato.log")
+              ? fs.readFileSync("contrato.log", "utf8").slice(-8000)
+              : "(sem log)";
+            const marcador = `<!-- lol-assets-indexer:contrato:${context.runId} -->`;
+            const abertas = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: "open",
+              labels: "contrato",
+            });
+            if (abertas.data.some((i) => (i.body || "").includes(marcador))) return;
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: "Uma fonte mudou: o teste de contrato falhou",
+              labels: ["contrato"],
+              body: [
+                "O contrato das fontes (T-18) falhou. O que mudou está abaixo.",
+                "",
+                "```",
+                log,
+                "```",
+                "",
+                `[Execução no Actions](${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId})`,
+                "",
+                marcador,
+              ].join("\n"),
+            });

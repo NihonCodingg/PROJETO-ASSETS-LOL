@@ -46,5 +46,11 @@ warn_unreachable = true
 
 [tool.pytest.ini_options]
 testpaths = ["apps", "packages"]
-addopts = "-q"
+# `not network` no padrão: os testes de contrato das fontes (T-18) tocam a rede,
+# são lentos e ficam vermelhos quando o ddragon espirra. Eles têm workflow
+# próprio, agendado, onde falha vira alerta em vez de bloquear PR.
+addopts = "-q -m 'not network'"
 asyncio_mode = "auto"
+markers = [
+    "network: toca ddragon ou cdragon de verdade. Excluído da suíte padrão.",
+]

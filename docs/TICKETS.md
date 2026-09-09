@@ -1006,7 +1006,20 @@ limite de 500 linhas.
 
 ---
 
-### T-18 — Testes de contrato das fontes (agendados)
+### ✅ T-18 — Testes de contrato das fontes (agendados)
+
+> **Concluído em 09/09/2026.** 13 testes que **tocam a rede de verdade**, marcados
+> `network` e excluídos da suíte padrão por `addopts` — a CI de PR nem os coleta.
+>
+> **Rodados contra as fontes vivas no dia da entrega, todos verdes:** CORS ainda `*` nas
+> duas, as dimensões do S1 e do S2 intactas, os 55 apelidos apontando para campeões que
+> existem no patch 16.18.1.
+>
+> **Decisão que o ticket não tomava:** o meta-teste da marca virou **três** asserções, não
+> uma. A exclusão depende do `addopts` do `pyproject.toml` e do `pytestmark` do módulo
+> concordarem, e os dois ficam longe um do outro — o terceiro teste falha se alguém
+> escrever um teste de contrato **sem** a marca, que é o jeito de a suíte de PR ganhar um
+> teste de rede sem ninguém notar.
 
 | | |
 |---|---|
