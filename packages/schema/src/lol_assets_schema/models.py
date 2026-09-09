@@ -267,6 +267,17 @@ class StatusSource(_Base):
     case_mismatches: int | None = Field(default=None, ge=0)
 
 
+class StatusMerge(_Base):
+    """O que a fusão de fontes fez (T-17)."""
+
+    winners_by_source: dict[str, int] | None = None
+    losers_by_source: dict[str, int] | None = None
+    exclusive_by_source: dict[str, int] | None = None
+    ties: int | None = Field(default=None, ge=0)
+    #: O S2 mediu empate em tudo. Passar de zero significa que a premissa mudou.
+    resolution_wins: int | None = Field(default=None, ge=0)
+
+
 class DimensionDeviation(_Base):
     """Um tipo cujo tamanho fugiu do que os spikes mediram."""
 
@@ -290,4 +301,5 @@ class IndexStatus(_Base):
     counts: StatusCounts | None = None
     bytes: StatusBytes | None = None
     source: StatusSource | None = None
+    merge: StatusMerge | None = None
     unexpected_dimensions: list[DimensionDeviation] | None = None

@@ -904,7 +904,22 @@ limite de 500 linhas.
 
 **Execução: (T-16 → T-17) ∥ (T-19 → T-20)**, com **T-18** ao final.
 
-### T-16 — Adaptador cdragon
+### ✅ T-16 — Adaptador cdragon
+
+> **Concluído em 09/09/2026.** A regra "todo caminho vem do JSON" virou três travas: o
+> `asset_url` devolve `None` para prefixo que não casa, uma varredura de fonte falha se
+> alguém escrever f-string com extensão de imagem, e um teste confere que **todo** caminho
+> registrado existe literalmente no documento.
+>
+> **Decisão que o ticket não tomava:** `skins[].chromaPath` — a amostra "cor original" que
+> o cliente mostra ao lado das chromas — entra como `chroma` com `parentSkinNum` igual ao
+> **próprio** `skinNum`. É imagem distinta (24007.png ≠ 24009.png) e é o que a torna
+> reconhecível. Já `chromas[].tilePath` **não** entra: medido em 26 de 26 chromas do Jax,
+> é o mesmo arquivo do `chromaPath`, e registrar os dois duplicaria o índice.
+>
+> **Não mapeável virou varredura do documento inteiro**, não só dos campos que o adaptador
+> usa. O objetivo do critério 4 é que uma mudança de formato do cliente **apareça**, e ela
+> apareceria justamente num campo que ninguém está lendo ainda.
 
 | | |
 |---|---|
@@ -941,7 +956,23 @@ limite de 500 linhas.
 
 ---
 
-### T-17 — Fusão de fontes
+### ✅ T-17 — Fusão de fontes
+
+> **Concluído em 09/09/2026.**
+>
+> **A medição que definiu a integração:** o cdragon responde a **2,8 assets/s** com a
+> concorrência de 4 da regra 4 do CLAUDE.md. Os 173 campeões inteiros custariam **~2 horas
+> por patch** — não cabe na janela do workflow, e o S2 já mediu que square, splash, loading
+> e tile **empatam** entre as duas fontes. Pagar duas horas para confirmar empate seria caro
+> e inútil.
+>
+> Então a CLI busca no cdragon **só os tipos que o ddragon não trouxe** — `chroma` e
+> `loading_vintage` —, e a premissa de empate continua **verificada em vez de assumida**:
+> um punhado de campeões por execução vem completo, girando com o patch, e o
+> `resolutionWins` do `status.json` denuncia se o cdragon vencer alguma disputa por
+> resolução. Em ~58 patches todo campeão terá sido conferido.
+>
+> **`--sem-cdragon`** existe para o caminho do tarball ser testável e executável sozinho.
 
 | | |
 |---|---|
