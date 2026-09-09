@@ -1161,7 +1161,25 @@ limite de 500 linhas.
 
 **Execução: (T-21 ∥ T-22)**, com **(T-24 ∥ T-25)** em paralelo. ⏸️ T-23 e T-26 suspensos.
 
-### T-21 — Indexar as categorias não-campeão do ddragon
+### ✅ T-21 — Indexar as categorias não-campeão do ddragon
+
+> **Concluído em 09/09/2026.** As cinco categorias já vinham do **T-09** — o que faltava
+> eram as **etiquetas de filtro**, e é isso que este ticket entregou.
+>
+> **Nada é inventado:** cada etiqueta sai de um campo que a própria fonte declara.
+> `compravel` vem de `gold.purchasable`, `mapa:sr|aram|arena` de `maps`, `classe:*` das
+> `tags` que a Riot já dá, `arvore:*` do `runesReforged.json`.
+>
+> **Decisão que o ticket não tomava:** stat mod leva `arvore:nenhuma` em vez de ficar sem
+> etiqueta. Ele não pertence a árvore alguma, e isso é **informação** — sem ela, o filtro
+> por árvore teria que fingir que stat mod é runa ou deixá-lo fora sem explicar.
+>
+> Medido no patch real: **865 dos 868 itens** com etiqueta, 696 compráveis (os outros 172
+> são missão, modo antigo ou upgrade do Ornn, que é exatamente o que a §B.1.6 queria
+> separar), 77 runas com árvore, 5 mapas. O índice cresceu 140 KB.
+>
+> Categoria sem etiqueta fica com o campo **ausente**, não com `[]`: lista vazia no índice
+> seria ruído com aparência de dado.
 
 | | |
 |---|---|

@@ -223,9 +223,11 @@ def _simple_category(
     prefixo_do_nome: str,
     versionado: bool,
     rotulos: dict[str, LocalizedName],
+    etiquetas: dict[str, list[str]] | None = None,
 ) -> list[Asset]:
     """Categorias cujo registro é `um arquivo → um asset`, sem skin nem campeão."""
     assets: list[Asset] = []
+    por_chave = etiquetas or {}
     for relativo, medida in scan.images_under(prefixo):
         arquivo = relativo.rsplit("/", 1)[-1]
         chave = arquivo.rsplit(".", 1)[0]
@@ -244,6 +246,7 @@ def _simple_category(
                 file_name=f"{prefixo_do_nome}_{chave}.{file_extension(medida.format)}",
                 measured=medida,
                 ref_id=chave,
+                tags=por_chave.get(chave) or None,
             )
         )
     return assets
@@ -262,6 +265,37 @@ def _rotulos_de(scan: TarballScan, arquivo: str) -> dict[str, LocalizedName]:
     }
 
 
+#: Mapas cujos itens a v1 filtra. §B.1.6 do KICKOFF.
+MAPAS = {"11": "mapa:sr", "12": "mapa:aram", "30": "mapa:arena"}
+
+
+def item_tags(scan: TarballScan) -> dict[str, list[str]]:
+    """Etiquetas de filtro de item, do que o próprio `item.json` declara.
+
+    Três coisas, e nada inventado: se é comprável (`gold.purchasable`), em que
+    mapas aparece (`maps`), e a classificação que a Riot já dá (`tags`).
+
+    O `purchasable: false` é o que separa item de verdade de item de missão, de
+    modo antigo ou de upgrade do Ornn — todos continuam no JSON e todos poluiriam
+    a listagem padrão (§B.1.6).
+    """
+    dados = (scan.data.get("pt_BR", {}).get("item.json") or {}).get("data", {})
+    etiquetas: dict[str, list[str]] = {}
+    for chave, item in dados.items():
+        if not isinstance(item, dict):
+            continue
+        marcas: list[str] = []
+        if (item.get("gold") or {}).get("purchasable"):
+            marcas.append("compravel")
+        for mapa, etiqueta in MAPAS.items():
+            if (item.get("maps") or {}).get(mapa):
+                marcas.append(etiqueta)
+        marcas.extend(f"classe:{t.lower()}" for t in item.get("tags") or [] if isinstance(t, str))
+        if marcas:
+            etiquetas[str(chave)] = marcas
+    return etiquetas
+
+
 def build_item_assets(scan: TarballScan) -> list[Asset]:
     return _simple_category(
         scan,
@@ -270,6 +304,7 @@ def build_item_assets(scan: TarballScan) -> list[Asset]:
         categoria="item",
         prefixo_do_nome="Item",
         versionado=True,
+        etiquetas=item_tags(scan),
         rotulos=_rotulos_de(scan, "item.json"),
     )
 
@@ -286,6 +321,19 @@ def build_profile_icon_assets(scan: TarballScan) -> list[Asset]:
     )
 
 
+def map_tags(scan: TarballScan) -> dict[str, list[str]]:
+    """`map11` vira `mapa:11`, e o nome do mapa vira etiqueta legível."""
+    dados = (scan.data.get("pt_BR", {}).get("map.json") or {}).get("data", {})
+    etiquetas: dict[str, list[str]] = {}
+    for chave, mapa in dados.items():
+        if not isinstance(mapa, dict):
+            continue
+        arquivo = ((mapa.get("image") or {}).get("full") or "").rsplit(".", 1)[0]
+        if arquivo:
+            etiquetas[arquivo] = [f"mapa:{chave}"]
+    return etiquetas
+
+
 def build_map_assets(scan: TarballScan) -> list[Asset]:
     return _simple_category(
         scan,
@@ -294,6 +342,7 @@ def build_map_assets(scan: TarballScan) -> list[Asset]:
         categoria="map",
         prefixo_do_nome="Map",
         versionado=True,
+        etiquetas=map_tags(scan),
         rotulos={},
     )
 
@@ -338,12 +387,16 @@ def build_rune_assets(scan: TarballScan) -> list[Asset]:
     }
     caminhos: dict[str, tuple[str, AssetType, str]] = {}
 
+    arvores: dict[str, list[str]] = {}
     for arvore in arvores_pt:
         arvore_en = arvores_en.get(arvore.get("id"), {})
         icone = arvore.get("icon")
         if icone:
             chave = str(arvore["id"])
             caminhos[f"img/{icone}"] = (chave, "rune_tree_icon", "RuneTree")
+            # A própria árvore leva a etiqueta dela: é o que faz "Precisão"
+            # filtrar a árvore e as runas dela de uma vez (RF-08).
+            arvores[chave] = [f"arvore:{chave}"]
             rotulos[chave] = _names(arvore.get("name"), arvore_en.get("name"), fallback=chave)
         slots_en = arvore_en.get("slots", [])
         for i, slot in enumerate(arvore.get("slots", [])):
@@ -356,6 +409,7 @@ def build_rune_assets(scan: TarballScan) -> list[Asset]:
                     continue
                 chave = str(runa["id"])
                 caminhos[f"img/{icone}"] = (chave, "rune_icon", "Rune")
+                arvores[chave] = [f"arvore:{arvore['id']}", f"slot:{i}"]
                 rotulos[chave] = _names(
                     runa.get("name"),
                     (runas_en.get(runa.get("id")) or {}).get("name"),
@@ -368,6 +422,9 @@ def build_rune_assets(scan: TarballScan) -> list[Asset]:
     for relativo, _ in scan.images_under(STAT_MODS_DIR):
         chave = relativo.rsplit("/", 1)[-1].rsplit(".", 1)[0]
         caminhos[relativo] = (chave, "stat_mod_icon", "StatMod")
+        # Stat mod não pertence a árvore nenhuma, e isso é informação: o filtro
+        # por árvore precisa poder deixá-los de fora sem fingir que são runas.
+        arvores[chave] = ["arvore:nenhuma"]
 
     assets: list[Asset] = []
     for relativo, (chave, tipo, prefixo) in caminhos.items():
@@ -384,6 +441,7 @@ def build_rune_assets(scan: TarballScan) -> list[Asset]:
                 file_name=f"{prefixo}_{chave}.{file_extension(medida.format)}",
                 measured=medida,
                 ref_id=chave,
+                tags=arvores.get(chave) or None,
             )
         )
     return assets

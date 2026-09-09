@@ -229,7 +229,7 @@ CONTAGENS_ESPERADAS: dict[str, dict[str, int]] = {
         "loading": 4,
         "tile": 4,
     },
-    "item": {"item_icon": 1},
+    "item": {"item_icon": 2},
     "summoner_spell": {"summoner_spell_icon": 1},
     "profile_icon": {"profile_icon": 1},
     "rune": {"rune_tree_icon": 1, "rune_icon": 1, "stat_mod_icon": 1},
@@ -299,3 +299,51 @@ def test_caixa_divergente_no_nome_do_arquivo_nao_perde_a_skin(scan: TarballScan)
     # E o nome do arquivo que oferecemos segue a nossa convenção, com o id do dado.
     assert splashes[0].file_name.startswith("Fiddlesticks_")
     assert scan.case_mismatches, "a divergência precisa ficar registrada"
+
+
+# --- etiquetas de filtro (T-21) ------------------------------------------------------
+
+
+def test_item_compravel_leva_a_etiqueta(scan: TarballScan) -> None:
+    """§B.1.6: `purchasable: false` é o que separa item de verdade de item de missão."""
+    itens = {a.ref_id: a for a in build_all(scan)["item"]}
+    assert "compravel" in (itens["3031"].tags or [])
+    assert "compravel" not in (itens["3901"].tags or []), "item de missão não é comprável"
+
+
+def test_item_leva_os_mapas_em_que_aparece(scan: TarballScan) -> None:
+    etiquetas = {a.ref_id: set(a.tags or []) for a in build_all(scan)["item"]}
+    assert {"mapa:sr", "mapa:aram"} <= etiquetas["3031"]
+    assert "mapa:arena" not in etiquetas["3031"], "o JSON diz false para a Arena"
+
+
+def test_item_leva_a_classificacao_que_a_riot_ja_da(scan: TarballScan) -> None:
+    itens = {a.ref_id: a for a in build_all(scan)["item"]}
+    assert "classe:criticalstrike" in (itens["3031"].tags or [])
+
+
+def test_runa_leva_a_arvore_a_que_pertence(scan: TarballScan) -> None:
+    """É o que faz filtrar "Precisão" trazer a árvore e as runas dela de uma vez."""
+    por_tipo = {a.type: a for a in build_all(scan)["rune"]}
+    assert "arvore:8000" in (por_tipo["rune_tree_icon"].tags or [])
+    assert "arvore:8000" in (por_tipo["rune_icon"].tags or [])
+
+
+def test_stat_mod_nao_finge_pertencer_a_uma_arvore(scan: TarballScan) -> None:
+    """Filtro por árvore precisa poder deixá-los de fora sem mentir."""
+    stat_mods = [a for a in build_all(scan)["rune"] if a.type == "stat_mod_icon"]
+    assert stat_mods
+    assert all("arvore:nenhuma" in (a.tags or []) for a in stat_mods)
+
+
+def test_mapa_leva_o_numero_dele(scan: TarballScan) -> None:
+    mapas = build_all(scan)["map"]
+    assert mapas
+    assert "mapa:11" in (mapas[0].tags or [])
+
+
+def test_categoria_sem_etiqueta_nao_ganha_lista_vazia(scan: TarballScan) -> None:
+    """`tags: []` no índice seria ruído: ausência é ausência."""
+    icones = build_all(scan)["profile_icon"]
+    assert icones
+    assert all(a.tags is None for a in icones)
