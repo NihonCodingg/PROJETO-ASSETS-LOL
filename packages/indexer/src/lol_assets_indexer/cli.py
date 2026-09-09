@@ -31,6 +31,7 @@ import typer
 from lol_assets_schema import SCHEMA_VERSION
 from lol_assets_schema.models import (
     Asset,
+    AssetCategory,
     AssetType,
     IndexManifest,
     IndexShard,
@@ -40,7 +41,7 @@ from lol_assets_schema.models import (
 from lol_assets_schema.validators import validate_status
 
 from lol_assets_indexer import __version__, logging_setup
-from lol_assets_indexer.adapters.cdragon import fetch_champion_assets
+from lol_assets_indexer.adapters.cdragon import fetch_champion_assets, fetch_emotes, fetch_wards
 from lol_assets_indexer.adapters.ddragon import latest_version, tarball_url
 from lol_assets_indexer.adapters.records import build_all, build_champion_snapshots
 from lol_assets_indexer.adapters.tarball import TarballScan, scan_tarball
@@ -298,6 +299,10 @@ async def _run(
         por_categoria["champion"], execucao.fusao = await _fundir_com_cdragon(
             settings, scan, por_categoria.get("champion", [])
         )
+        # Emotes e wards não vêm do tarball: só existem no cdragon (T-22).
+        for categoria, assets in (await _categorias_so_do_cdragon(settings)).items():
+            if assets:
+                por_categoria[categoria] = assets
     execucao.por_categoria = {str(c): a for c, a in por_categoria.items()}
     catalog = project_catalog(
         game_version=scan.game_version,
@@ -404,6 +409,29 @@ async def _run(
     return resumo
 
 
+async def _categorias_so_do_cdragon(
+    settings: IndexerSettings,
+) -> dict[AssetCategory, list[Asset]]:
+    """Emotes e ward skins. Falhar aqui custa a categoria, não a indexação."""
+    buscadores: tuple[tuple[AssetCategory, Any], ...] = (
+        ("emote", fetch_emotes),
+        ("ward", fetch_wards),
+    )
+    resultado: dict[AssetCategory, list[Asset]] = {}
+    async with SourceClient(settings) as client:
+        for categoria, buscar in buscadores:
+            try:
+                assets, _ = await buscar(client)
+            except Exception as erro:
+                logger.info(
+                    "categoria do cdragon falhou",
+                    extra={"categoria": categoria, "kind": type(erro).__name__},
+                )
+                continue
+            resultado[categoria] = assets
+    return resultado
+
+
 async def _fundir_com_cdragon(
     settings: IndexerSettings, scan: TarballScan, do_ddragon: list[Asset]
 ) -> tuple[list[Asset], MergeReport]:
@@ -456,11 +484,12 @@ async def _fundir_com_cdragon(
     return fundidos, relatorio
 
 
-def _amostra_de_verificacao(game_version: str, chaves: list[int], quantos: int = 3) -> set[int]:
+def _amostra_de_verificacao(game_version: str, chaves: list[int], quantos: int = 12) -> set[int]:
     """Os campeões que vêm completos do cdragon nesta execução.
 
-    Gira com o patch: em ~58 patches todo campeão terá sido conferido pelo menos
-    uma vez, e cada execução custa uns dois minutos a mais em vez de duas horas.
+    Gira com o patch: em ~15 patches todo campeão terá sido conferido pelo menos
+    uma vez. Eram 3 quando o cdragon respondia a 2,8 assets/s; com a busca em
+    paralelo são 32/s, e 12 campeões custam ~45 s.
     """
     if not chaves:
         return set()

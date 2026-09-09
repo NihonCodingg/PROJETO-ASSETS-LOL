@@ -1,0 +1,41 @@
+{
+  "medidoEm": "2026-09-09",
+  "fonte": "cdragon",
+  "nota": "O S4 extrapolou de uma amostra de 40 arquivos por categoria. Para emotes a extrapolacao ficou dentro da margem; para wards, a mediana da amostra (15,3 KB) nao representava a media real (65 KB).",
+  "emote": {
+    "arquivos": 2338,
+    "naoMapeaveis": 9,
+    "bytes": 155492024,
+    "megabytes": 148.3,
+    "projetadoNoS4Mb": 156.5,
+    "desvio": "-5.2%",
+    "dimensoes": {
+      "256x256": 2337,
+      "512x512": 1
+    },
+    "formatos": {
+      "png": 2338
+    }
+  },
+  "ward": {
+    "arquivos": 530,
+    "naoMapeaveis": 0,
+    "bytes": 26530052,
+    "megabytes": 25.3,
+    "projetadoNoS4Mb": 7.7,
+    "desvio": "+228.6%",
+    "dimensoes": {
+      "460x550": 529,
+      "1623x1536": 1
+    },
+    "formatos": {
+      "png": 530
+    }
+  },
+  "estabilidade": {
+    "verificado": "duas passadas seguidas na mesma execucao",
+    "arquivos": 530,
+    "divergentes": 0,
+    "nota": "Bytes e sha256 identicos nas duas passadas: a fonte serve o mesmo arquivo. Uma execucao anterior reportou 33,1 MB para wards e nao foi reproduzida; as duas medicoes seguintes concordam em 25,3 MB. A conclusao nao muda — a amostra de 40 arquivos do S4 subestimou o total em ~3x."
+  }
+}
