@@ -1,38 +1,38 @@
 {
   "schemaVersion": "1.1.0",
-  "startedAt": "2026-09-08T23:24:48Z",
-  "finishedAt": "2026-09-08T23:25:47Z",
-  "durationSeconds": 59.066,
+  "startedAt": "2026-09-09T19:54:20Z",
+  "finishedAt": "2026-09-09T19:54:47Z",
+  "durationSeconds": 27.046,
   "ok": true,
-  "gameVersion": "16.17.1",
-  "runId": "34290512626",
+  "gameVersion": "16.18.1",
+  "runId": "34397812070",
   "counts": {
-    "assets": 15515,
+    "assets": 15548,
     "champions": 173,
-    "skins": 2118,
+    "skins": 2121,
     "categories": 6,
     "assetsByCategory": {
-      "champion": 9510,
+      "champion": 9522,
       "item": 868,
       "map": 5,
-      "profile_icon": 5021,
+      "profile_icon": 5042,
       "rune": 77,
       "summoner_spell": 34
     },
     "assetsBySource": {
-      "ddragon": 15515
+      "ddragon": 15548
     }
   },
   "bytes": {
-    "index": 10583827,
-    "catalogGzip": 62647,
-    "largestShardGzip": 667772,
-    "describedAssets": 1439374815
+    "index": 10604790,
+    "catalogGzip": 62746,
+    "largestShardGzip": 668570,
+    "describedAssets": 1443598477
   },
   "source": {
-    "files": 34305,
-    "imagesMeasured": 15526,
-    "imagesSkipped": 18421,
+    "files": 34613,
+    "imagesMeasured": 15559,
+    "imagesSkipped": 18696,
     "caseMismatches": 52
   }
 }

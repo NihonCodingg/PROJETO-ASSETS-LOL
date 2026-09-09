@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.1.0",
-  "gameVersion": "16.17.1",
-  "generatedAt": "2026-09-08T23:24:48Z",
+  "gameVersion": "16.18.1",
+  "generatedAt": "2026-09-09T19:54:20Z",
   "champions": [
     {
       "championKey": 266,
@@ -20,7 +20,7 @@
       "skinCount": 13,
       "chromaCount": 28,
       "baseSkinId": 266000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Aatrox.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Aatrox.png"
     },
     {
       "championKey": 103,
@@ -40,7 +40,7 @@
       "skinCount": 22,
       "chromaCount": 73,
       "baseSkinId": 103000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Ahri.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Ahri.png"
     },
     {
       "championKey": 84,
@@ -57,9 +57,9 @@
         "Assassin"
       ],
       "skinCount": 22,
-      "chromaCount": 79,
+      "chromaCount": 80,
       "baseSkinId": 84000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Akali.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Akali.png"
     },
     {
       "championKey": 166,
@@ -79,7 +79,7 @@
       "skinCount": 5,
       "chromaCount": 25,
       "baseSkinId": 166000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Akshan.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Akshan.png"
     },
     {
       "championKey": 12,
@@ -99,7 +99,7 @@
       "skinCount": 17,
       "chromaCount": 30,
       "baseSkinId": 12000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Alistar.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Alistar.png"
     },
     {
       "championKey": 799,
@@ -119,7 +119,7 @@
       "skinCount": 3,
       "chromaCount": 12,
       "baseSkinId": 799000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Ambessa.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Ambessa.png"
     },
     {
       "championKey": 32,
@@ -139,7 +139,7 @@
       "skinCount": 15,
       "chromaCount": 47,
       "baseSkinId": 32000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Amumu.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Amumu.png"
     },
     {
       "championKey": 34,
@@ -158,7 +158,7 @@
       "skinCount": 13,
       "chromaCount": 42,
       "baseSkinId": 34000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Anivia.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Anivia.png"
     },
     {
       "championKey": 1,
@@ -178,7 +178,7 @@
       "skinCount": 20,
       "chromaCount": 40,
       "baseSkinId": 1000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Annie.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Annie.png"
     },
     {
       "championKey": 523,
@@ -197,7 +197,7 @@
       "skinCount": 7,
       "chromaCount": 33,
       "baseSkinId": 523000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Aphelios.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Aphelios.png"
     },
     {
       "championKey": 22,
@@ -217,7 +217,7 @@
       "skinCount": 21,
       "chromaCount": 72,
       "baseSkinId": 22000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Ashe.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Ashe.png"
     },
     {
       "championKey": 136,
@@ -236,7 +236,7 @@
       "skinCount": 7,
       "chromaCount": 31,
       "baseSkinId": 136000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/AurelionSol.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/AurelionSol.png"
     },
     {
       "championKey": 893,
@@ -256,7 +256,7 @@
       "skinCount": 4,
       "chromaCount": 25,
       "baseSkinId": 893000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Aurora.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Aurora.png"
     },
     {
       "championKey": 268,
@@ -276,7 +276,7 @@
       "skinCount": 8,
       "chromaCount": 20,
       "baseSkinId": 268000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Azir.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Azir.png"
     },
     {
       "championKey": 432,
@@ -296,7 +296,7 @@
       "skinCount": 9,
       "chromaCount": 37,
       "baseSkinId": 432000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Bard.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Bard.png"
     },
     {
       "championKey": 200,
@@ -315,7 +315,7 @@
       "skinCount": 5,
       "chromaCount": 33,
       "baseSkinId": 200000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Belveth.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Belveth.png"
     },
     {
       "championKey": 53,
@@ -335,7 +335,7 @@
       "skinCount": 19,
       "chromaCount": 57,
       "baseSkinId": 53000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Blitzcrank.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Blitzcrank.png"
     },
     {
       "championKey": 63,
@@ -355,7 +355,7 @@
       "skinCount": 14,
       "chromaCount": 40,
       "baseSkinId": 63000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Brand.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Brand.png"
     },
     {
       "championKey": 201,
@@ -375,7 +375,7 @@
       "skinCount": 10,
       "chromaCount": 51,
       "baseSkinId": 201000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Braum.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Braum.png"
     },
     {
       "championKey": 233,
@@ -395,7 +395,7 @@
       "skinCount": 4,
       "chromaCount": 25,
       "baseSkinId": 233000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Briar.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Briar.png"
     },
     {
       "championKey": 51,
@@ -414,7 +414,7 @@
       "skinCount": 21,
       "chromaCount": 42,
       "baseSkinId": 51000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Caitlyn.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Caitlyn.png"
     },
     {
       "championKey": 164,
@@ -434,7 +434,7 @@
       "skinCount": 9,
       "chromaCount": 44,
       "baseSkinId": 164000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Camille.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Camille.png"
     },
     {
       "championKey": 69,
@@ -453,7 +453,7 @@
       "skinCount": 10,
       "chromaCount": 28,
       "baseSkinId": 69000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Cassiopeia.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Cassiopeia.png"
     },
     {
       "championKey": 31,
@@ -473,7 +473,7 @@
       "skinCount": 12,
       "chromaCount": 30,
       "baseSkinId": 31000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Chogath.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Chogath.png"
     },
     {
       "championKey": 42,
@@ -493,7 +493,7 @@
       "skinCount": 12,
       "chromaCount": 33,
       "baseSkinId": 42000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Corki.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Corki.png"
     },
     {
       "championKey": 122,
@@ -513,7 +513,7 @@
       "skinCount": 16,
       "chromaCount": 57,
       "baseSkinId": 122000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Darius.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Darius.png"
     },
     {
       "championKey": 131,
@@ -533,7 +533,7 @@
       "skinCount": 17,
       "chromaCount": 66,
       "baseSkinId": 131000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Diana.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Diana.png"
     },
     {
       "championKey": 36,
@@ -553,7 +553,7 @@
       "skinCount": 12,
       "chromaCount": 18,
       "baseSkinId": 36000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/DrMundo.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/DrMundo.png"
     },
     {
       "championKey": 119,
@@ -572,7 +572,7 @@
       "skinCount": 15,
       "chromaCount": 63,
       "baseSkinId": 119000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Draven.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Draven.png"
     },
     {
       "championKey": 245,
@@ -592,7 +592,7 @@
       "skinCount": 13,
       "chromaCount": 46,
       "baseSkinId": 245000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Ekko.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Ekko.png"
     },
     {
       "championKey": 60,
@@ -612,7 +612,7 @@
       "skinCount": 10,
       "chromaCount": 26,
       "baseSkinId": 60000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Elise.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Elise.png"
     },
     {
       "championKey": 28,
@@ -632,7 +632,7 @@
       "skinCount": 17,
       "chromaCount": 48,
       "baseSkinId": 28000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Evelynn.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Evelynn.png"
     },
     {
       "championKey": 81,
@@ -652,7 +652,7 @@
       "skinCount": 22,
       "chromaCount": 55,
       "baseSkinId": 81000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Ezreal.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Ezreal.png"
     },
     {
       "championKey": 9,
@@ -672,7 +672,7 @@
       "skinCount": 13,
       "chromaCount": 42,
       "baseSkinId": 9000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Fiddlesticks.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Fiddlesticks.png"
     },
     {
       "championKey": 114,
@@ -692,7 +692,7 @@
       "skinCount": 17,
       "chromaCount": 83,
       "baseSkinId": 114000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Fiora.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Fiora.png"
     },
     {
       "championKey": 105,
@@ -712,7 +712,7 @@
       "skinCount": 14,
       "chromaCount": 30,
       "baseSkinId": 105000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Fizz.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Fizz.png"
     },
     {
       "championKey": 3,
@@ -732,7 +732,7 @@
       "skinCount": 12,
       "chromaCount": 42,
       "baseSkinId": 3000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Galio.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Galio.png"
     },
     {
       "championKey": 41,
@@ -751,7 +751,7 @@
       "skinCount": 13,
       "chromaCount": 29,
       "baseSkinId": 41000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Gangplank.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Gangplank.png"
     },
     {
       "championKey": 86,
@@ -771,7 +771,7 @@
       "skinCount": 17,
       "chromaCount": 37,
       "baseSkinId": 86000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Garen.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Garen.png"
     },
     {
       "championKey": 150,
@@ -791,7 +791,7 @@
       "skinCount": 11,
       "chromaCount": 33,
       "baseSkinId": 150000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Gnar.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Gnar.png"
     },
     {
       "championKey": 79,
@@ -811,7 +811,7 @@
       "skinCount": 15,
       "chromaCount": 33,
       "baseSkinId": 79000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Gragas.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Gragas.png"
     },
     {
       "championKey": 104,
@@ -830,7 +830,7 @@
       "skinCount": 14,
       "chromaCount": 40,
       "baseSkinId": 104000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Graves.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Graves.png"
     },
     {
       "championKey": 887,
@@ -849,7 +849,7 @@
       "skinCount": 7,
       "chromaCount": 50,
       "baseSkinId": 887000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Gwen.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Gwen.png"
     },
     {
       "championKey": 120,
@@ -869,7 +869,7 @@
       "skinCount": 13,
       "chromaCount": 37,
       "baseSkinId": 120000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Hecarim.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Hecarim.png"
     },
     {
       "championKey": 74,
@@ -889,7 +889,7 @@
       "skinCount": 10,
       "chromaCount": 17,
       "baseSkinId": 74000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Heimerdinger.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Heimerdinger.png"
     },
     {
       "championKey": 910,
@@ -909,7 +909,7 @@
       "skinCount": 4,
       "chromaCount": 18,
       "baseSkinId": 910000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Hwei.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Hwei.png"
     },
     {
       "championKey": 420,
@@ -929,7 +929,7 @@
       "skinCount": 7,
       "chromaCount": 39,
       "baseSkinId": 420000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Illaoi.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Illaoi.png"
     },
     {
       "championKey": 39,
@@ -949,7 +949,7 @@
       "skinCount": 17,
       "chromaCount": 56,
       "baseSkinId": 39000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Irelia.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Irelia.png"
     },
     {
       "championKey": 427,
@@ -969,7 +969,7 @@
       "skinCount": 7,
       "chromaCount": 32,
       "baseSkinId": 427000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Ivern.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Ivern.png"
     },
     {
       "championKey": 40,
@@ -989,7 +989,7 @@
       "skinCount": 17,
       "chromaCount": 50,
       "baseSkinId": 40000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Janna.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Janna.png"
     },
     {
       "championKey": 59,
@@ -1009,7 +1009,7 @@
       "skinCount": 16,
       "chromaCount": 39,
       "baseSkinId": 59000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/JarvanIV.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/JarvanIV.png"
     },
     {
       "championKey": 24,
@@ -1028,7 +1028,7 @@
       "skinCount": 18,
       "chromaCount": 26,
       "baseSkinId": 24000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Jax.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Jax.png"
     },
     {
       "championKey": 126,
@@ -1048,7 +1048,7 @@
       "skinCount": 13,
       "chromaCount": 34,
       "baseSkinId": 126000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Jayce.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Jayce.png"
     },
     {
       "championKey": 202,
@@ -1068,7 +1068,7 @@
       "skinCount": 14,
       "chromaCount": 49,
       "baseSkinId": 202000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Jhin.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Jhin.png"
     },
     {
       "championKey": 222,
@@ -1087,7 +1087,7 @@
       "skinCount": 16,
       "chromaCount": 57,
       "baseSkinId": 222000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Jinx.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Jinx.png"
     },
     {
       "championKey": 897,
@@ -1107,7 +1107,7 @@
       "skinCount": 4,
       "chromaCount": 14,
       "baseSkinId": 897000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/KSante.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/KSante.png"
     },
     {
       "championKey": 145,
@@ -1127,7 +1127,7 @@
       "skinCount": 16,
       "chromaCount": 63,
       "baseSkinId": 145000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Kaisa.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Kaisa.png"
     },
     {
       "championKey": 429,
@@ -1146,7 +1146,7 @@
       "skinCount": 7,
       "chromaCount": 26,
       "baseSkinId": 429000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Kalista.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Kalista.png"
     },
     {
       "championKey": 43,
@@ -1166,7 +1166,7 @@
       "skinCount": 16,
       "chromaCount": 60,
       "baseSkinId": 43000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Karma.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Karma.png"
     },
     {
       "championKey": 30,
@@ -1185,7 +1185,7 @@
       "skinCount": 11,
       "chromaCount": 33,
       "baseSkinId": 30000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Karthus.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Karthus.png"
     },
     {
       "championKey": 38,
@@ -1205,7 +1205,7 @@
       "skinCount": 10,
       "chromaCount": 22,
       "baseSkinId": 38000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Kassadin.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Kassadin.png"
     },
     {
       "championKey": 55,
@@ -1225,7 +1225,7 @@
       "skinCount": 20,
       "chromaCount": 58,
       "baseSkinId": 55000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Katarina.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Katarina.png"
     },
     {
       "championKey": 10,
@@ -1245,7 +1245,7 @@
       "skinCount": 19,
       "chromaCount": 70,
       "baseSkinId": 10000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Kayle.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Kayle.png"
     },
     {
       "championKey": 141,
@@ -1265,7 +1265,7 @@
       "skinCount": 8,
       "chromaCount": 23,
       "baseSkinId": 141000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Kayn.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Kayn.png"
     },
     {
       "championKey": 85,
@@ -1284,7 +1284,7 @@
       "skinCount": 11,
       "chromaCount": 23,
       "baseSkinId": 85000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Kennen.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Kennen.png"
     },
     {
       "championKey": 121,
@@ -1303,7 +1303,7 @@
       "skinCount": 9,
       "chromaCount": 49,
       "baseSkinId": 121000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Khazix.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Khazix.png"
     },
     {
       "championKey": 203,
@@ -1322,7 +1322,7 @@
       "skinCount": 10,
       "chromaCount": 34,
       "baseSkinId": 203000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Kindred.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Kindred.png"
     },
     {
       "championKey": 240,
@@ -1341,7 +1341,7 @@
       "skinCount": 5,
       "chromaCount": 22,
       "baseSkinId": 240000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Kled.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Kled.png"
     },
     {
       "championKey": 96,
@@ -1361,7 +1361,7 @@
       "skinCount": 16,
       "chromaCount": 49,
       "baseSkinId": 96000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/KogMaw.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/KogMaw.png"
     },
     {
       "championKey": 7,
@@ -1379,9 +1379,9 @@
         "Mage"
       ],
       "skinCount": 15,
-      "chromaCount": 46,
+      "chromaCount": 47,
       "baseSkinId": 7000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Leblanc.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Leblanc.png"
     },
     {
       "championKey": 64,
@@ -1401,7 +1401,7 @@
       "skinCount": 20,
       "chromaCount": 60,
       "baseSkinId": 64000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/LeeSin.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/LeeSin.png"
     },
     {
       "championKey": 89,
@@ -1421,7 +1421,7 @@
       "skinCount": 19,
       "chromaCount": 52,
       "baseSkinId": 89000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Leona.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Leona.png"
     },
     {
       "championKey": 876,
@@ -1441,7 +1441,7 @@
       "skinCount": 7,
       "chromaCount": 46,
       "baseSkinId": 876000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Lillia.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Lillia.png"
     },
     {
       "championKey": 127,
@@ -1460,7 +1460,7 @@
       "skinCount": 10,
       "chromaCount": 43,
       "baseSkinId": 127000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Lissandra.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Lissandra.png"
     },
     {
       "championKey": 805,
@@ -1480,7 +1480,7 @@
       "skinCount": 2,
       "chromaCount": 8,
       "baseSkinId": 805000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Locke.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Locke.png"
     },
     {
       "championKey": 236,
@@ -1500,7 +1500,7 @@
       "skinCount": 15,
       "chromaCount": 58,
       "baseSkinId": 236000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Lucian.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Lucian.png"
     },
     {
       "championKey": 117,
@@ -1520,7 +1520,7 @@
       "skinCount": 15,
       "chromaCount": 50,
       "baseSkinId": 117000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Lulu.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Lulu.png"
     },
     {
       "championKey": 99,
@@ -1540,7 +1540,7 @@
       "skinCount": 23,
       "chromaCount": 59,
       "baseSkinId": 99000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Lux.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Lux.png"
     },
     {
       "championKey": 54,
@@ -1560,7 +1560,7 @@
       "skinCount": 15,
       "chromaCount": 42,
       "baseSkinId": 54000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Malphite.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Malphite.png"
     },
     {
       "championKey": 90,
@@ -1579,7 +1579,7 @@
       "skinCount": 14,
       "chromaCount": 44,
       "baseSkinId": 90000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Malzahar.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Malzahar.png"
     },
     {
       "championKey": 57,
@@ -1599,7 +1599,7 @@
       "skinCount": 12,
       "chromaCount": 24,
       "baseSkinId": 57000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Maokai.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Maokai.png"
     },
     {
       "championKey": 11,
@@ -1619,7 +1619,7 @@
       "skinCount": 19,
       "chromaCount": 71,
       "baseSkinId": 11000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/MasterYi.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/MasterYi.png"
     },
     {
       "championKey": 800,
@@ -1639,7 +1639,7 @@
       "skinCount": 3,
       "chromaCount": 9,
       "baseSkinId": 800000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Mel.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Mel.png"
     },
     {
       "championKey": 902,
@@ -1659,7 +1659,7 @@
       "skinCount": 4,
       "chromaCount": 25,
       "baseSkinId": 902000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Milio.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Milio.png"
     },
     {
       "championKey": 21,
@@ -1679,7 +1679,7 @@
       "skinCount": 24,
       "chromaCount": 52,
       "baseSkinId": 21000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/MissFortune.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/MissFortune.png"
     },
     {
       "championKey": 82,
@@ -1699,7 +1699,7 @@
       "skinCount": 14,
       "chromaCount": 43,
       "baseSkinId": 82000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Mordekaiser.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Mordekaiser.png"
     },
     {
       "championKey": 25,
@@ -1719,7 +1719,7 @@
       "skinCount": 18,
       "chromaCount": 64,
       "baseSkinId": 25000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Morgana.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Morgana.png"
     },
     {
       "championKey": 950,
@@ -1739,7 +1739,7 @@
       "skinCount": 5,
       "chromaCount": 33,
       "baseSkinId": 950000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Naafiri.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Naafiri.png"
     },
     {
       "championKey": 267,
@@ -1759,7 +1759,7 @@
       "skinCount": 15,
       "chromaCount": 53,
       "baseSkinId": 267000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Nami.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Nami.png"
     },
     {
       "championKey": 75,
@@ -1779,7 +1779,7 @@
       "skinCount": 14,
       "chromaCount": 49,
       "baseSkinId": 75000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Nasus.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Nasus.png"
     },
     {
       "championKey": 111,
@@ -1799,7 +1799,7 @@
       "skinCount": 12,
       "chromaCount": 34,
       "baseSkinId": 111000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Nautilus.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Nautilus.png"
     },
     {
       "championKey": 518,
@@ -1819,7 +1819,7 @@
       "skinCount": 10,
       "chromaCount": 40,
       "baseSkinId": 518000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Neeko.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Neeko.png"
     },
     {
       "championKey": 76,
@@ -1839,7 +1839,7 @@
       "skinCount": 17,
       "chromaCount": 50,
       "baseSkinId": 76000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Nidalee.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Nidalee.png"
     },
     {
       "championKey": 895,
@@ -1859,7 +1859,7 @@
       "skinCount": 4,
       "chromaCount": 26,
       "baseSkinId": 895000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Nilah.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Nilah.png"
     },
     {
       "championKey": 56,
@@ -1879,7 +1879,7 @@
       "skinCount": 11,
       "chromaCount": 25,
       "baseSkinId": 56000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Nocturne.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Nocturne.png"
     },
     {
       "championKey": 20,
@@ -1899,7 +1899,7 @@
       "skinCount": 13,
       "chromaCount": 41,
       "baseSkinId": 20000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Nunu.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Nunu.png"
     },
     {
       "championKey": 2,
@@ -1919,7 +1919,7 @@
       "skinCount": 12,
       "chromaCount": 41,
       "baseSkinId": 2000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Olaf.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Olaf.png"
     },
     {
       "championKey": 61,
@@ -1936,10 +1936,10 @@
         "Mage",
         "Support"
       ],
-      "skinCount": 13,
-      "chromaCount": 27,
+      "skinCount": 14,
+      "chromaCount": 29,
       "baseSkinId": 61000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Orianna.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Orianna.png"
     },
     {
       "championKey": 516,
@@ -1958,7 +1958,7 @@
       "skinCount": 6,
       "chromaCount": 32,
       "baseSkinId": 516000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Ornn.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Ornn.png"
     },
     {
       "championKey": 80,
@@ -1978,7 +1978,7 @@
       "skinCount": 14,
       "chromaCount": 33,
       "baseSkinId": 80000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Pantheon.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Pantheon.png"
     },
     {
       "championKey": 78,
@@ -1998,7 +1998,7 @@
       "skinCount": 14,
       "chromaCount": 37,
       "baseSkinId": 78000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Poppy.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Poppy.png"
     },
     {
       "championKey": 555,
@@ -2018,7 +2018,7 @@
       "skinCount": 13,
       "chromaCount": 72,
       "baseSkinId": 555000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Pyke.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Pyke.png"
     },
     {
       "championKey": 246,
@@ -2037,7 +2037,7 @@
       "skinCount": 10,
       "chromaCount": 41,
       "baseSkinId": 246000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Qiyana.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Qiyana.png"
     },
     {
       "championKey": 133,
@@ -2057,7 +2057,7 @@
       "skinCount": 8,
       "chromaCount": 25,
       "baseSkinId": 133000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Quinn.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Quinn.png"
     },
     {
       "championKey": 497,
@@ -2076,7 +2076,7 @@
       "skinCount": 13,
       "chromaCount": 45,
       "baseSkinId": 497000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Rakan.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Rakan.png"
     },
     {
       "championKey": 33,
@@ -2095,7 +2095,7 @@
       "skinCount": 13,
       "chromaCount": 23,
       "baseSkinId": 33000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Rammus.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Rammus.png"
     },
     {
       "championKey": 421,
@@ -2115,7 +2115,7 @@
       "skinCount": 6,
       "chromaCount": 30,
       "baseSkinId": 421000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/RekSai.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/RekSai.png"
     },
     {
       "championKey": 526,
@@ -2135,7 +2135,7 @@
       "skinCount": 5,
       "chromaCount": 26,
       "baseSkinId": 526000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Rell.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Rell.png"
     },
     {
       "championKey": 888,
@@ -2155,7 +2155,7 @@
       "skinCount": 6,
       "chromaCount": 26,
       "baseSkinId": 888000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Renata.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Renata.png"
     },
     {
       "championKey": 58,
@@ -2175,7 +2175,7 @@
       "skinCount": 16,
       "chromaCount": 41,
       "baseSkinId": 58000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Renekton.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Renekton.png"
     },
     {
       "championKey": 107,
@@ -2195,7 +2195,7 @@
       "skinCount": 10,
       "chromaCount": 49,
       "baseSkinId": 107000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Rengar.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Rengar.png"
     },
     {
       "championKey": 92,
@@ -2215,7 +2215,7 @@
       "skinCount": 18,
       "chromaCount": 55,
       "baseSkinId": 92000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Riven.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Riven.png"
     },
     {
       "championKey": 68,
@@ -2235,7 +2235,7 @@
       "skinCount": 7,
       "chromaCount": 25,
       "baseSkinId": 68000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Rumble.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Rumble.png"
     },
     {
       "championKey": 13,
@@ -2254,7 +2254,7 @@
       "skinCount": 15,
       "chromaCount": 24,
       "baseSkinId": 13000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Ryze.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Ryze.png"
     },
     {
       "championKey": 360,
@@ -2274,7 +2274,7 @@
       "skinCount": 7,
       "chromaCount": 35,
       "baseSkinId": 360000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Samira.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Samira.png"
     },
     {
       "championKey": 113,
@@ -2293,7 +2293,7 @@
       "skinCount": 14,
       "chromaCount": 43,
       "baseSkinId": 113000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Sejuani.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Sejuani.png"
     },
     {
       "championKey": 235,
@@ -2313,7 +2313,7 @@
       "skinCount": 12,
       "chromaCount": 68,
       "baseSkinId": 235000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Senna.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Senna.png"
     },
     {
       "championKey": 147,
@@ -2333,7 +2333,7 @@
       "skinCount": 14,
       "chromaCount": 68,
       "baseSkinId": 147000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Seraphine.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Seraphine.png"
     },
     {
       "championKey": 875,
@@ -2353,7 +2353,7 @@
       "skinCount": 11,
       "chromaCount": 65,
       "baseSkinId": 875000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Sett.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Sett.png"
     },
     {
       "championKey": 35,
@@ -2372,7 +2372,7 @@
       "skinCount": 17,
       "chromaCount": 56,
       "baseSkinId": 35000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Shaco.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Shaco.png"
     },
     {
       "championKey": 98,
@@ -2391,7 +2391,7 @@
       "skinCount": 14,
       "chromaCount": 48,
       "baseSkinId": 98000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Shen.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Shen.png"
     },
     {
       "championKey": 102,
@@ -2411,7 +2411,7 @@
       "skinCount": 9,
       "chromaCount": 17,
       "baseSkinId": 102000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Shyvana.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Shyvana.png"
     },
     {
       "championKey": 27,
@@ -2431,7 +2431,7 @@
       "skinCount": 13,
       "chromaCount": 16,
       "baseSkinId": 27000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Singed.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Singed.png"
     },
     {
       "championKey": 14,
@@ -2451,7 +2451,7 @@
       "skinCount": 12,
       "chromaCount": 47,
       "baseSkinId": 14000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Sion.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Sion.png"
     },
     {
       "championKey": 15,
@@ -2470,7 +2470,7 @@
       "skinCount": 20,
       "chromaCount": 61,
       "baseSkinId": 15000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Sivir.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Sivir.png"
     },
     {
       "championKey": 72,
@@ -2490,7 +2490,7 @@
       "skinCount": 7,
       "chromaCount": 8,
       "baseSkinId": 72000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Skarner.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Skarner.png"
     },
     {
       "championKey": 901,
@@ -2510,7 +2510,7 @@
       "skinCount": 3,
       "chromaCount": 17,
       "baseSkinId": 901000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Smolder.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Smolder.png"
     },
     {
       "championKey": 37,
@@ -2530,7 +2530,7 @@
       "skinCount": 17,
       "chromaCount": 60,
       "baseSkinId": 37000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Sona.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Sona.png"
     },
     {
       "championKey": 16,
@@ -2550,7 +2550,7 @@
       "skinCount": 19,
       "chromaCount": 53,
       "baseSkinId": 16000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Soraka.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Soraka.png"
     },
     {
       "championKey": 50,
@@ -2570,7 +2570,7 @@
       "skinCount": 11,
       "chromaCount": 40,
       "baseSkinId": 50000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Swain.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Swain.png"
     },
     {
       "championKey": 517,
@@ -2590,7 +2590,7 @@
       "skinCount": 10,
       "chromaCount": 44,
       "baseSkinId": 517000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Sylas.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Sylas.png"
     },
     {
       "championKey": 134,
@@ -2609,7 +2609,7 @@
       "skinCount": 14,
       "chromaCount": 60,
       "baseSkinId": 134000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Syndra.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Syndra.png"
     },
     {
       "championKey": 223,
@@ -2629,7 +2629,7 @@
       "skinCount": 8,
       "chromaCount": 39,
       "baseSkinId": 223000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/TahmKench.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/TahmKench.png"
     },
     {
       "championKey": 163,
@@ -2647,9 +2647,9 @@
         "Support"
       ],
       "skinCount": 7,
-      "chromaCount": 18,
+      "chromaCount": 19,
       "baseSkinId": 163000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Taliyah.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Taliyah.png"
     },
     {
       "championKey": 91,
@@ -2668,7 +2668,7 @@
       "skinCount": 13,
       "chromaCount": 47,
       "baseSkinId": 91000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Talon.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Talon.png"
     },
     {
       "championKey": 44,
@@ -2688,7 +2688,7 @@
       "skinCount": 8,
       "chromaCount": 28,
       "baseSkinId": 44000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Taric.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Taric.png"
     },
     {
       "championKey": 17,
@@ -2708,7 +2708,7 @@
       "skinCount": 16,
       "chromaCount": 47,
       "baseSkinId": 17000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Teemo.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Teemo.png"
     },
     {
       "championKey": 412,
@@ -2728,7 +2728,7 @@
       "skinCount": 17,
       "chromaCount": 51,
       "baseSkinId": 412000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Thresh.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Thresh.png"
     },
     {
       "championKey": 18,
@@ -2745,10 +2745,10 @@
         "Marksman",
         "Assassin"
       ],
-      "skinCount": 17,
+      "skinCount": 19,
       "chromaCount": 62,
       "baseSkinId": 18000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Tristana.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Tristana.png"
     },
     {
       "championKey": 48,
@@ -2768,7 +2768,7 @@
       "skinCount": 9,
       "chromaCount": 21,
       "baseSkinId": 48000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Trundle.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Trundle.png"
     },
     {
       "championKey": 23,
@@ -2788,7 +2788,7 @@
       "skinCount": 14,
       "chromaCount": 33,
       "baseSkinId": 23000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Tryndamere.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Tryndamere.png"
     },
     {
       "championKey": 4,
@@ -2808,7 +2808,7 @@
       "skinCount": 17,
       "chromaCount": 37,
       "baseSkinId": 4000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/TwistedFate.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/TwistedFate.png"
     },
     {
       "championKey": 29,
@@ -2828,7 +2828,7 @@
       "skinCount": 15,
       "chromaCount": 44,
       "baseSkinId": 29000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Twitch.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Twitch.png"
     },
     {
       "championKey": 77,
@@ -2848,7 +2848,7 @@
       "skinCount": 7,
       "chromaCount": 5,
       "baseSkinId": 77000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Udyr.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Udyr.png"
     },
     {
       "championKey": 6,
@@ -2868,7 +2868,7 @@
       "skinCount": 8,
       "chromaCount": 33,
       "baseSkinId": 6000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Urgot.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Urgot.png"
     },
     {
       "championKey": 110,
@@ -2888,7 +2888,7 @@
       "skinCount": 16,
       "chromaCount": 55,
       "baseSkinId": 110000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Varus.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Varus.png"
     },
     {
       "championKey": 67,
@@ -2908,7 +2908,7 @@
       "skinCount": 20,
       "chromaCount": 54,
       "baseSkinId": 67000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Vayne.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Vayne.png"
     },
     {
       "championKey": 45,
@@ -2927,7 +2927,7 @@
       "skinCount": 17,
       "chromaCount": 52,
       "baseSkinId": 45000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Veigar.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Veigar.png"
     },
     {
       "championKey": 161,
@@ -2947,7 +2947,7 @@
       "skinCount": 8,
       "chromaCount": 28,
       "baseSkinId": 161000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Velkoz.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Velkoz.png"
     },
     {
       "championKey": 711,
@@ -2966,7 +2966,7 @@
       "skinCount": 5,
       "chromaCount": 33,
       "baseSkinId": 711000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Vex.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Vex.png"
     },
     {
       "championKey": 254,
@@ -2986,7 +2986,7 @@
       "skinCount": 14,
       "chromaCount": 37,
       "baseSkinId": 254000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Vi.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Vi.png"
     },
     {
       "championKey": 234,
@@ -3006,7 +3006,7 @@
       "skinCount": 8,
       "chromaCount": 35,
       "baseSkinId": 234000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Viego.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Viego.png"
     },
     {
       "championKey": 112,
@@ -3025,7 +3025,7 @@
       "skinCount": 9,
       "chromaCount": 25,
       "baseSkinId": 112000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Viktor.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Viktor.png"
     },
     {
       "championKey": 8,
@@ -3045,7 +3045,7 @@
       "skinCount": 15,
       "chromaCount": 43,
       "baseSkinId": 8000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Vladimir.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Vladimir.png"
     },
     {
       "championKey": 106,
@@ -3065,7 +3065,7 @@
       "skinCount": 11,
       "chromaCount": 26,
       "baseSkinId": 106000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Volibear.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Volibear.png"
     },
     {
       "championKey": 19,
@@ -3085,7 +3085,7 @@
       "skinCount": 17,
       "chromaCount": 44,
       "baseSkinId": 19000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Warwick.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Warwick.png"
     },
     {
       "championKey": 62,
@@ -3105,7 +3105,7 @@
       "skinCount": 10,
       "chromaCount": 26,
       "baseSkinId": 62000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/MonkeyKing.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/MonkeyKing.png"
     },
     {
       "championKey": 498,
@@ -3124,7 +3124,7 @@
       "skinCount": 13,
       "chromaCount": 52,
       "baseSkinId": 498000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Xayah.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Xayah.png"
     },
     {
       "championKey": 101,
@@ -3144,7 +3144,7 @@
       "skinCount": 10,
       "chromaCount": 23,
       "baseSkinId": 101000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Xerath.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Xerath.png"
     },
     {
       "championKey": 5,
@@ -3164,7 +3164,7 @@
       "skinCount": 13,
       "chromaCount": 46,
       "baseSkinId": 5000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/XinZhao.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/XinZhao.png"
     },
     {
       "championKey": 157,
@@ -3184,7 +3184,7 @@
       "skinCount": 19,
       "chromaCount": 78,
       "baseSkinId": 157000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Yasuo.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Yasuo.png"
     },
     {
       "championKey": 777,
@@ -3204,7 +3204,7 @@
       "skinCount": 12,
       "chromaCount": 64,
       "baseSkinId": 777000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Yone.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Yone.png"
     },
     {
       "championKey": 83,
@@ -3224,7 +3224,7 @@
       "skinCount": 10,
       "chromaCount": 49,
       "baseSkinId": 83000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Yorick.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Yorick.png"
     },
     {
       "championKey": 804,
@@ -3243,7 +3243,7 @@
       "skinCount": 3,
       "chromaCount": 14,
       "baseSkinId": 804000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Yunara.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Yunara.png"
     },
     {
       "championKey": 350,
@@ -3263,7 +3263,7 @@
       "skinCount": 11,
       "chromaCount": 68,
       "baseSkinId": 350000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Yuumi.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Yuumi.png"
     },
     {
       "championKey": 904,
@@ -3282,7 +3282,7 @@
       "skinCount": 2,
       "chromaCount": 8,
       "baseSkinId": 904000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Zaahen.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Zaahen.png"
     },
     {
       "championKey": 154,
@@ -3302,7 +3302,7 @@
       "skinCount": 8,
       "chromaCount": 34,
       "baseSkinId": 154000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Zac.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Zac.png"
     },
     {
       "championKey": 238,
@@ -3321,7 +3321,7 @@
       "skinCount": 15,
       "chromaCount": 56,
       "baseSkinId": 238000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Zed.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Zed.png"
     },
     {
       "championKey": 221,
@@ -3340,7 +3340,7 @@
       "skinCount": 7,
       "chromaCount": 40,
       "baseSkinId": 221000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Zeri.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Zeri.png"
     },
     {
       "championKey": 115,
@@ -3359,7 +3359,7 @@
       "skinCount": 13,
       "chromaCount": 39,
       "baseSkinId": 115000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Ziggs.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Ziggs.png"
     },
     {
       "championKey": 26,
@@ -3379,7 +3379,7 @@
       "skinCount": 9,
       "chromaCount": 24,
       "baseSkinId": 26000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Zilean.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Zilean.png"
     },
     {
       "championKey": 142,
@@ -3398,7 +3398,7 @@
       "skinCount": 10,
       "chromaCount": 35,
       "baseSkinId": 142000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Zoe.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Zoe.png"
     },
     {
       "championKey": 143,
@@ -3418,7 +3418,7 @@
       "skinCount": 13,
       "chromaCount": 61,
       "baseSkinId": 143000,
-      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.17.1/img/champion/Zyra.png"
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/champion/Zyra.png"
     }
   ],
   "skins": [
@@ -4091,7 +4091,7 @@
         "en_US": "Empyrean Akali"
       },
       "isBase": false,
-      "chromaCount": 9,
+      "chromaCount": 10,
       "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/img/champion/tiles/Akali_82.jpg"
     },
     {
@@ -13943,7 +13943,7 @@
         "en_US": "Elderwood LeBlanc"
       },
       "isBase": false,
-      "chromaCount": 0,
+      "chromaCount": 1,
       "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/img/champion/tiles/Leblanc_5.jpg"
     },
     {
@@ -18373,6 +18373,18 @@
       "isBase": false,
       "chromaCount": 1,
       "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/img/champion/tiles/Orianna_38.jpg"
+    },
+    {
+      "skinId": 61040,
+      "skinNum": 40,
+      "championKey": 61,
+      "names": {
+        "pt_BR": "Orianna Lenda Ascendida",
+        "en_US": "Risen Legend Orianna"
+      },
+      "isBase": false,
+      "chromaCount": 2,
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/img/champion/tiles/Orianna_40.jpg"
     },
     {
       "skinId": 516000,
@@ -23267,7 +23279,7 @@
         "en_US": "Freljord Taliyah"
       },
       "isBase": false,
-      "chromaCount": 0,
+      "chromaCount": 1,
       "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/img/champion/tiles/Taliyah_1.jpg"
     },
     {
@@ -24181,6 +24193,30 @@
       "isBase": false,
       "chromaCount": 8,
       "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/img/champion/tiles/Tristana_70.jpg"
+    },
+    {
+      "skinId": 18079,
+      "skinNum": 79,
+      "championKey": 18,
+      "names": {
+        "pt_BR": "Tristana Lenda Ascendida",
+        "en_US": "Risen Legend Tristana"
+      },
+      "isBase": false,
+      "chromaCount": 0,
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/img/champion/tiles/Tristana_79.jpg"
+    },
+    {
+      "skinId": 18080,
+      "skinNum": 80,
+      "championKey": 18,
+      "names": {
+        "pt_BR": "Tristana Lenda Imortalizada",
+        "en_US": "Immortalized Legend Tristana"
+      },
+      "isBase": false,
+      "chromaCount": 0,
+      "thumbnailUrl": "https://ddragon.leagueoflegends.com/cdn/img/champion/tiles/Tristana_80.jpg"
     },
     {
       "skinId": 48000,
@@ -26011,7 +26047,7 @@
       "skinNum": 10,
       "championKey": 234,
       "names": {
-        "pt_BR": "Viego Dissonância da Pentakill",
+        "pt_BR": "Viego Dissonância do Pentakill",
         "en_US": "Dissonance of Pentakill Viego"
       },
       "isBase": false,
