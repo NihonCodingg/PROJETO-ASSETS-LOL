@@ -34,7 +34,7 @@ describe("o filtro do cmdk fica desligado (ADR 0011)", () => {
 
   it("quem ordena é o nosso search, não o componente", () => {
     expect(fonte).toContain('from "@/lib/search"');
-    expect(fonte).toMatch(/search\(indice, consulta\)/);
+    expect(fonte).toMatch(/search\(indice, consulta/);
   });
 });
 
@@ -47,5 +47,22 @@ describe("o atalho não escreve a barra no campo (RF-02)", () => {
 
   it("ignora a barra digitada dentro de um campo de texto", () => {
     expect(fonte).toContain('alvo.tagName === "INPUT"');
+  });
+});
+
+
+describe("virtualização dos resultados de skin (ADR 0011)", () => {
+  it("a lista usa TanStack Virtual", () => {
+    expect(fonte).toContain("@tanstack/react-virtual");
+    expect(fonte).toMatch(/useVirtualizer\(/);
+  });
+
+  it("a altura do item é fixa — é o que a virtualização exige para medir", () => {
+    expect(fonte).toMatch(/ALTURA_DO_ITEM = \d+/);
+    expect(fonte).toMatch(/estimateSize: \(\) => ALTURA_DO_ITEM/);
+  });
+
+  it("a busca não tem teto de resultados: quem segura a lista é a virtualização", () => {
+    expect(fonte).toContain("Number.POSITIVE_INFINITY");
   });
 });

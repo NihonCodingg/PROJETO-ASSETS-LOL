@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@lol-assets/schema": "workspace:*",
+    "@tanstack/react-virtual": "^3.14.11",
     "cmdk": "^1.1.1",
     "next": "^15.5.0",
     "react": "^19.1.0",
