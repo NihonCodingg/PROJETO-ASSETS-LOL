@@ -373,9 +373,7 @@ def test_a_categoria_dos_dois_catalogos_e_a_certa() -> None:
 async def test_emotes_viram_registros_validos() -> None:
     from lol_assets_indexer.adapters.cdragon import EMOTES_JSON, catalog_url, fetch_emotes
 
-    respx.get(catalog_url(CDRAGON, EMOTES_JSON)).mock(
-        return_value=httpx.Response(200, json=EMOTES)
-    )
+    respx.get(catalog_url(CDRAGON, EMOTES_JSON)).mock(return_value=httpx.Response(200, json=EMOTES))
     respx.get(re.compile(rf"{re.escape(CDRAGON)}/latest/.*emote2\.png")).mock(
         return_value=httpx.Response(200, content=imagem(256, 256, "PNG", alfa=True))
     )
@@ -425,9 +423,7 @@ async def test_nenhuma_das_duas_categorias_produz_rank() -> None:
     """Critério 4 do T-22: emblema de elo saiu da v1 pelo ADR 0012."""
     from lol_assets_indexer.adapters.cdragon import EMOTES_JSON, catalog_url, fetch_emotes
 
-    respx.get(catalog_url(CDRAGON, EMOTES_JSON)).mock(
-        return_value=httpx.Response(200, json=EMOTES)
-    )
+    respx.get(catalog_url(CDRAGON, EMOTES_JSON)).mock(return_value=httpx.Response(200, json=EMOTES))
     respx.get(re.compile(rf"{re.escape(CDRAGON)}/latest/.*\.png")).mock(
         return_value=httpx.Response(200, content=imagem(256, 256, "PNG", alfa=True))
     )
