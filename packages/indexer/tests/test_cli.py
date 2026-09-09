@@ -42,9 +42,15 @@ def destino(tmp_path: Path) -> Path:
 
 
 def indexar(tarball: Path, destino: Path, *extra: str) -> Any:
+    """O caminho do ddragon, sozinho.
+
+    `--sem-cdragon` porque estes testes são sobre o tarball: a segunda fonte tem
+    testes próprios (`test_cdragon.py`, `test_merge.py`) e, ligada aqui, cada
+    teste tentaria falar com a rede.
+    """
     return runner.invoke(
         app,
-        ["index", "--tarball", str(tarball), "--output", str(destino), *extra],
+        ["index", "--tarball", str(tarball), "--output", str(destino), "--sem-cdragon", *extra],
     )
 
 
@@ -185,7 +191,7 @@ def test_sem_tarball_local_ele_e_baixado(destino: Path, tarball_bytes: bytes) ->
         return_value=httpx.Response(200, content=tarball_bytes)
     )
 
-    resultado = runner.invoke(app, ["index", "--output", str(destino)])
+    resultado = runner.invoke(app, ["index", "--output", str(destino), "--sem-cdragon"])
 
     assert resultado.exit_code == 0, resultado.output
     assert rota.called
@@ -241,7 +247,7 @@ def test_registro_invalido_aborta_sem_escrever_nada(
 @respx.mock
 def test_fonte_indisponivel_sai_diferente_de_zero(destino: Path) -> None:
     respx.get(f"{DDRAGON}/api/versions.json").mock(return_value=httpx.Response(500))
-    resultado = runner.invoke(app, ["index", "--output", str(destino)])
+    resultado = runner.invoke(app, ["index", "--output", str(destino), "--sem-cdragon"])
 
     assert resultado.exit_code != 0
     assert not (destino / "manifest.json").exists()
@@ -291,7 +297,7 @@ def test_o_log_conta_o_que_foi_descartado(tarball_local: Path, destino: Path) ->
 @respx.mock
 def test_o_log_de_falha_diz_o_tipo_do_erro(destino: Path) -> None:
     respx.get(f"{DDRAGON}/api/versions.json").mock(return_value=httpx.Response(500))
-    eventos = eventos_de(runner.invoke(app, ["index", "--output", str(destino)]))
+    eventos = eventos_de(runner.invoke(app, ["index", "--output", str(destino), "--sem-cdragon"]))
 
     falhas = [evento for evento in eventos if evento["level"] == "error"]
     assert falhas
@@ -320,7 +326,7 @@ def test_help_descreve_as_opcoes_em_portugues() -> None:
     assert resultado.exit_code == 0
 
     limpo = re.sub("\x1b\\[[0-9;]*m", "", resultado.output)
-    for trecho in ("--game-version", "--dry-run", "--output", "--tarball"):
+    for trecho in ("--game-version", "--dry-run", "--output", "--tarball", "--cdragon"):
         assert trecho in limpo, limpo
     assert "--champion" not in limpo, "o recorte por campeão morreu com o tarball"
     assert "Patch" in limpo
@@ -653,3 +659,128 @@ def test_check_nao_baixa_nada(tarball_local: Path, destino: Path) -> None:
 def test_check_falha_alto_se_a_fonte_estiver_fora(destino: Path) -> None:
     respx.get(f"{DDRAGON}/api/versions.json").mock(return_value=httpx.Response(500))
     assert runner.invoke(app, ["check", "--output", str(destino)]).exit_code != 0
+
+
+# --- a segunda fonte, ligada na CLI (T-16 / T-17) -------------------------------------
+
+CDRAGON = "https://raw.communitydragon.org"
+
+
+def _ficha_do_cdragon() -> Any:
+    from pathlib import Path as _Path
+
+    caminho = _Path(__file__).parent / "fixtures" / "cdragon-jax-24.json"
+    return json.loads(caminho.read_text(encoding="utf-8"))
+
+
+def _rotas_do_cdragon() -> None:
+    """Só o Jax responde; os outros campeões dão 404 de propósito.
+
+    O cdragon é fonte **secundária**: um campeão que ela não tem não pode
+    derrubar a indexação inteira.
+    """
+    import io as _io
+
+    from lol_assets_indexer.adapters.cdragon import asset_url, champion_json_url, declared_assets
+    from PIL import Image as _Image
+
+    def png(largura: int, altura: int) -> bytes:
+        buffer = _io.BytesIO()
+        _Image.new("RGBA", (largura, altura), (1, 2, 3, 0)).save(buffer, format="PNG")
+        return buffer.getvalue()
+
+    ficha = _ficha_do_cdragon()
+    respx.get(champion_json_url(CDRAGON, 24)).mock(return_value=httpx.Response(200, json=ficha))
+    respx.get(champion_json_url(CDRAGON, 9)).mock(return_value=httpx.Response(404))
+    for declarado in declared_assets(ficha).assets:
+        respx.get(asset_url(CDRAGON, declarado.declared) or "").mock(
+            return_value=httpx.Response(200, content=png(270, 303))
+        )
+
+
+def indexar_com_cdragon(tarball: Path, destino: Path, *extra: str) -> Any:
+    return runner.invoke(
+        app,
+        ["index", "--tarball", str(tarball), "--output", str(destino), "--cdragon", *extra],
+    )
+
+
+@respx.mock
+def test_o_cdragon_acrescenta_chroma_que_o_ddragon_nao_tem(
+    tarball_local: Path, destino: Path
+) -> None:
+    """É por isso que a segunda fonte existe — o S2 mediu empate no resto."""
+    _rotas_do_cdragon()
+    assert indexar_com_cdragon(tarball_local, destino).exit_code == 0
+
+    versao = ler(destino, "manifest.json")["versions"][0]
+    fatia = next(f for f in versao["shards"] if f["category"] == "champion")
+    tipos = {a["type"] for a in ler(destino, fatia["url"])["assets"]}
+
+    assert "chroma" in tipos
+    assert "loading_vintage" in tipos
+
+
+@respx.mock
+def test_o_chroma_do_indice_carrega_o_parent_skin_num(tarball_local: Path, destino: Path) -> None:
+    _rotas_do_cdragon()
+    indexar_com_cdragon(tarball_local, destino)
+
+    versao = ler(destino, "manifest.json")["versions"][0]
+    fatia = next(f for f in versao["shards"] if f["category"] == "champion")
+    chromas = [a for a in ler(destino, fatia["url"])["assets"] if a["type"] == "chroma"]
+
+    assert chromas
+    assert all("parentSkinNum" in c for c in chromas)
+
+
+@respx.mock
+def test_o_ddragon_continua_ganhando_o_empate(tarball_local: Path, destino: Path) -> None:
+    """Critério 2 do T-17, verificado ponta a ponta."""
+    _rotas_do_cdragon()
+    indexar_com_cdragon(tarball_local, destino)
+
+    versao = ler(destino, "manifest.json")["versions"][0]
+    fatia = next(f for f in versao["shards"] if f["category"] == "champion")
+    assets = ler(destino, fatia["url"])["assets"]
+
+    # A skin 24000 existe nas duas fontes: é a única disputa de verdade aqui.
+    disputada = [a for a in assets if a["type"] == "splash_centered" and a["skinId"] == 24000]
+    assert len(disputada) == 1, "duas fontes, um registro só"
+    assert disputada[0]["source"] == "ddragon"
+
+    # E a skin que só o cdragon tem sobrevive, em vez de sumir na fusão.
+    so_no_cdragon = [a for a in assets if a["type"] == "splash_centered" and a["skinId"] == 24001]
+    assert so_no_cdragon and so_no_cdragon[0]["source"] == "cdragon"
+
+
+@respx.mock
+def test_campeao_que_o_cdragon_nao_tem_nao_derruba_a_indexacao(
+    tarball_local: Path, destino: Path
+) -> None:
+    """Fonte secundária que falha custa cobertura, não o índice."""
+    _rotas_do_cdragon()
+    resultado = indexar_com_cdragon(tarball_local, destino)
+
+    assert resultado.exit_code == 0, resultado.output
+    catalogo = ler(destino, ler(destino, "manifest.json")["versions"][0]["catalog"]["url"])
+    assert len(catalogo["champions"]) == 2, "o Fiddlesticks deu 404 e continua no catálogo"
+
+
+@respx.mock
+def test_o_relatorio_de_fusao_entra_no_status(tarball_local: Path, destino: Path) -> None:
+    from lol_assets_schema.validators import validate_status
+
+    _rotas_do_cdragon()
+    indexar_com_cdragon(tarball_local, destino)
+
+    status = ler(destino, "status.json")
+    validate_status(status)
+    assert status["merge"]["exclusiveBySource"]["cdragon"] > 0
+    assert status["counts"]["assetsBySource"]["cdragon"] > 0
+
+
+@respx.mock
+def test_sem_cdragon_nao_ha_relatorio_de_fusao(tarball_local: Path, destino: Path) -> None:
+    indexar(tarball_local, destino)
+    assert "merge" not in ler(destino, "status.json")

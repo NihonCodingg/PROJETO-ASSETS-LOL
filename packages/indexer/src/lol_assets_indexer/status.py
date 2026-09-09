@@ -25,11 +25,13 @@ from lol_assets_schema.models import (
     StatusBytes,
     StatusCounts,
     StatusFailure,
+    StatusMerge,
     StatusSource,
 )
 
 from lol_assets_indexer.adapters.tarball import TarballScan
 from lol_assets_indexer.limits import BudgetReport
+from lol_assets_indexer.merge import MergeReport
 
 #: Dimensões medidas no S1 para 100 % das imagens do patch 16.17.1. O que fugir
 #: daqui não é rejeitado — é relatado. Um corte que muda de tamanho é notícia.
@@ -80,6 +82,7 @@ def build_status(
     catalog_champions: int | None = None,
     catalog_skins: int | None = None,
     budget: BudgetReport | None = None,
+    merge: MergeReport | None = None,
 ) -> IndexStatus:
     """Monta o relatório com o que existir.
 
@@ -136,6 +139,17 @@ def build_status(
                 images_skipped=scan.skipped,
                 unreadable=dict(scan.unreadable) or None,
                 case_mismatches=len(scan.case_mismatches),
+            )
+        ),
+        merge=(
+            None
+            if merge is None
+            else StatusMerge(
+                winners_by_source=merge.winners_by_source or None,
+                losers_by_source=merge.losers_by_source or None,
+                exclusive_by_source=merge.exclusive_by_source or None,
+                ties=merge.ties,
+                resolution_wins=merge.resolution_wins,
             )
         ),
         unexpected_dimensions=dimension_deviations(todos) or None,

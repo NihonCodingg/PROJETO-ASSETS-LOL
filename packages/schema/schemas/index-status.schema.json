@@ -55,6 +55,9 @@
     "source": {
       "$ref": "#/$defs/source"
     },
+    "merge": {
+      "$ref": "#/$defs/merge"
+    },
     "unexpectedDimensions": {
       "description": "Assets cujas dimensões fogem do que os spikes mediram. Não é erro: é o detector de mudança silenciosa na fonte.",
       "type": "array",
@@ -130,6 +133,26 @@
         },
         "caseMismatches": {
           "description": "Arquivos achados só por busca insensível a caixa. 52 no patch 16.17.1, todos do Fiddlesticks.",
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "merge": {
+      "description": "O que a fusão de fontes fez (T-17). Ausente quando só o ddragon foi lido.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "winnersBySource": { "type": "object", "additionalProperties": { "type": "integer", "minimum": 0 } },
+        "losersBySource": { "type": "object", "additionalProperties": { "type": "integer", "minimum": 0 } },
+        "exclusiveBySource": {
+          "description": "Registros que só existem numa fonte. É o valor real do cdragon.",
+          "type": "object",
+          "additionalProperties": { "type": "integer", "minimum": 0 }
+        },
+        "ties": { "type": "integer", "minimum": 0 },
+        "resolutionWins": {
+          "description": "Disputas decididas por resolução. O S2 mediu empate em tudo; se isto passar de zero, a premissa mudou.",
           "type": "integer",
           "minimum": 0
         }

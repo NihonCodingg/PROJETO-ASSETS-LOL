@@ -1,0 +1,140 @@
+{
+  "id": 24,
+  "name": "Jax",
+  "alias": "Jax",
+  "title": "Grandmaster at Arms",
+  "squarePortraitPath": "/lol-game-data/assets/v1/champion-icons/24.png",
+  "stingerSfxPath": "/lol-game-data/assets/v1/champion-sfx-audios/24.ogg",
+  "chooseVoPath": "/lol-game-data/assets/v1/champion-choose-vo/24.ogg",
+  "skins": [
+    {
+      "id": 24000,
+      "contentId": "e65a29e1-7f77-4deb-94e0-fb554aedf39d",
+      "isBase": true,
+      "name": "Jax",
+      "skinClassification": "kChampion",
+      "splashPath": "/lol-game-data/assets/ASSETS/Characters/Jax/Skins/Base/Images/jax_splash_centered_0.jpg",
+      "uncenteredSplashPath": "/lol-game-data/assets/ASSETS/Characters/Jax/Skins/Base/Images/jax_splash_uncentered_0.jpg",
+      "tilePath": "/lol-game-data/assets/ASSETS/Characters/Jax/Skins/Base/Images/jax_splash_tile_0.jpg",
+      "loadScreenPath": "/lol-game-data/assets/ASSETS/Characters/Jax/Skins/Base/JaxLoadscreen_0.jpg",
+      "skinType": "",
+      "rarity": "kNoRarity",
+      "isLegacy": false,
+      "chromaPath": null,
+      "emblems": null,
+      "regionRarityId": 0,
+      "rarityGemPath": null
+    },
+    {
+      "id": 24001,
+      "contentId": "de8a7718-b504-4118-bd7b-a2919adf7e3b",
+      "isBase": false,
+      "name": "The Mighty Jax",
+      "skinClassification": "kChampion",
+      "splashPath": "/lol-game-data/assets/ASSETS/Characters/Jax/Skins/Skin01/Images/jax_splash_centered_1.jpg",
+      "uncenteredSplashPath": "/lol-game-data/assets/ASSETS/Characters/Jax/Skins/Skin01/Images/jax_splash_uncentered_1.jpg",
+      "tilePath": "/lol-game-data/assets/ASSETS/Characters/Jax/Skins/Skin01/Images/jax_splash_tile_1.jpg",
+      "loadScreenPath": "/lol-game-data/assets/ASSETS/Characters/Jax/Skins/Skin01/JaxLoadScreen_1.jpg",
+      "loadScreenVintagePath": "/lol-game-data/assets/ASSETS/Characters/Jax/Skins/Skin01/JaxLoadScreen_1_LE.jpg",
+      "skinType": "",
+      "rarity": "kNoRarity",
+      "isLegacy": true,
+      "chromaPath": null,
+      "emblems": null,
+      "regionRarityId": 0,
+      "rarityGemPath": null
+    },
+    {
+      "id": 24007,
+      "contentId": "6ece0444-1abc-45f6-ad2d-4100e4986d81",
+      "isBase": false,
+      "name": "Nemesis Jax",
+      "skinClassification": "kChampion",
+      "splashPath": "/lol-game-data/assets/ASSETS/Characters/Jax/Skins/Skin07/Images/jax_splash_centered_7.jpg",
+      "uncenteredSplashPath": "/lol-game-data/assets/ASSETS/Characters/Jax/Skins/Skin07/Images/jax_splash_uncentered_7.jpg",
+      "tilePath": "/lol-game-data/assets/ASSETS/Characters/Jax/Skins/Skin07/Images/jax_splash_tile_7.jpg",
+      "loadScreenPath": "/lol-game-data/assets/ASSETS/Characters/Jax/Skins/Skin07/JaxLoadScreen_7.jpg",
+      "skinType": "",
+      "rarity": "kNoRarity",
+      "isLegacy": false,
+      "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/24/24007.png",
+      "chromas": [
+        {
+          "id": 24009,
+          "name": "Nemesis Jax Sand Cream",
+          "contentId": "fe660b55-0f0c-4031-8be9-4a897bc124d7",
+          "relatedPrimeContentId": "",
+          "skinClassification": "kRecolor",
+          "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/24/24009.png",
+          "tilePath": "/lol-game-data/assets/v1/champion-chroma-images/24/24009.png",
+          "rarities": [
+            {
+              "region": "riot",
+              "rarity": 0
+            }
+          ]
+        },
+        {
+          "id": 24010,
+          "name": "Nemesis Jax Sand Amber",
+          "contentId": "ac8c9e38-e31d-4081-b7b4-e44b7b70a3ad",
+          "relatedPrimeContentId": "",
+          "skinClassification": "kRecolor",
+          "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/24/24010.png",
+          "tilePath": "/lol-game-data/assets/v1/champion-chroma-images/24/24010.png",
+          "rarities": [
+            {
+              "region": "riot",
+              "rarity": 0
+            }
+          ]
+        },
+        {
+          "id": 24011,
+          "name": "Nemesis Jax Sand Brick",
+          "contentId": "bb684fa5-fe96-4dda-bbcf-1e2b736b8bcd",
+          "relatedPrimeContentId": "",
+          "skinClassification": "kRecolor",
+          "chromaPath": "/lol-game-data/assets/v1/champion-chroma-images/24/24011.png",
+          "tilePath": "/lol-game-data/assets/v1/champion-chroma-images/24/24011.png",
+          "rarities": [
+            {
+              "region": "riot",
+              "rarity": 0
+            }
+          ]
+        }
+      ],
+      "emblems": null,
+      "regionRarityId": 0,
+      "rarityGemPath": null
+    }
+  ],
+  "passive": {
+    "name": "Relentless Assault",
+    "abilityIconPath": "/lol-game-data/assets/ASSETS/Characters/Jax/HUD/Icons2D/JaxP.png",
+    "abilityVideoImagePath": "champion-abilities/0024/ability_0024_P1.jpg"
+  },
+  "spells": [
+    {
+      "name": "Leap Strike",
+      "abilityIconPath": "/lol-game-data/assets/ASSETS/Characters/Jax/HUD/Icons2D/JaxQ.png",
+      "abilityVideoImagePath": "champion-abilities/0024/ability_0024_Q1.jpg"
+    },
+    {
+      "name": "Empower",
+      "abilityIconPath": "/lol-game-data/assets/ASSETS/Characters/Jax/HUD/Icons2D/JaxW.png",
+      "abilityVideoImagePath": "champion-abilities/0024/ability_0024_W1.jpg"
+    },
+    {
+      "name": "Counter Strike",
+      "abilityIconPath": "/lol-game-data/assets/ASSETS/Characters/Jax/HUD/Icons2D/JaxE.png",
+      "abilityVideoImagePath": "champion-abilities/0024/ability_0024_E1.jpg"
+    },
+    {
+      "name": "Grandmaster-at-Arms",
+      "abilityIconPath": "/lol-game-data/assets/ASSETS/Characters/Jax/HUD/Icons2D/JaxR.png",
+      "abilityVideoImagePath": "champion-abilities/0024/ability_0024_R1.jpg"
+    }
+  ]
+}

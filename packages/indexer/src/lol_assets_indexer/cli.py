@@ -16,6 +16,7 @@ precisa abortar sem ter deixado nada meio escrito.
 from __future__ import annotations
 
 import asyncio
+import hashlib
 import json
 import logging
 import os
@@ -30,6 +31,7 @@ import typer
 from lol_assets_schema import SCHEMA_VERSION
 from lol_assets_schema.models import (
     Asset,
+    AssetType,
     IndexManifest,
     IndexShard,
     IndexStatus,
@@ -38,6 +40,7 @@ from lol_assets_schema.models import (
 from lol_assets_schema.validators import validate_status
 
 from lol_assets_indexer import __version__, logging_setup
+from lol_assets_indexer.adapters.cdragon import fetch_champion_assets
 from lol_assets_indexer.adapters.ddragon import latest_version, tarball_url
 from lol_assets_indexer.adapters.records import build_all, build_champion_snapshots
 from lol_assets_indexer.adapters.tarball import TarballScan, scan_tarball
@@ -45,6 +48,7 @@ from lol_assets_indexer.catalog import project_catalog, verify_catalog
 from lol_assets_indexer.github import reporter_from_env
 from lol_assets_indexer.http import IndexerSettings, SourceClient
 from lol_assets_indexer.limits import BudgetReport, check_budget, measure
+from lol_assets_indexer.merge import MergeReport, merge_assets
 from lol_assets_indexer.publish.storage import (
     MANIFEST_KEY,
     LocalObjectStore,
@@ -59,6 +63,19 @@ from lol_assets_indexer.status import build_status, render_summary
 logger = logging.getLogger("lol_assets_indexer.cli")
 
 app = typer.Typer(help="Indexador de assets de League of Legends.", no_args_is_help=True)
+
+#: O que se busca no cdragon quando o ddragon não traz. Ver `_fundir_com_cdragon`.
+TIPOS_DO_CDRAGON: tuple[AssetType, ...] = (
+    "chroma",
+    "loading_vintage",
+    "splash_centered",
+    "splash_wide",
+    "loading",
+    "tile",
+    "square",
+    "passive_icon",
+    "ability_icon",
+)
 
 #: O índice é servido pelo próprio Next como estático — ADR 0012.
 DEFAULT_OUTPUT = Path("apps/web/public/indice")
@@ -83,6 +100,7 @@ class _Execucao:
     champions: int | None = None
     skins: int | None = None
     budget: BudgetReport | None = None
+    fusao: MergeReport | None = None
 
 
 @app.callback()
@@ -161,6 +179,10 @@ def index(
         Path | None,
         typer.Option("--summary", help="Onde escrever o resumo em Markdown do job."),
     ] = None,
+    cdragon: Annotated[
+        bool,
+        typer.Option("--cdragon/--sem-cdragon", help="Buscar do cdragon o que o ddragon não tem."),
+    ] = True,
 ) -> None:
     """Indexa o patch inteiro: manifesto, catálogo e fatias."""
     logging_setup.configure()
@@ -180,6 +202,7 @@ def index(
                 output=output,
                 tarball=tarball,
                 execucao=execucao,
+                cdragon=cdragon,
             )
         )
     except Exception as erro:
@@ -203,6 +226,7 @@ def index(
         catalog_champions=execucao.champions,
         catalog_skins=execucao.skins,
         budget=execucao.budget,
+        merge=execucao.fusao,
     )
     if not dry_run:
         _entregar_status(status, output=output, summary=summary)
@@ -262,6 +286,7 @@ async def _run(
     output: Path,
     tarball: Path | None,
     execucao: _Execucao,
+    cdragon: bool = False,
 ) -> dict[str, Any]:
     generated_at = _agora()
     scan = await _scan_source(settings, game_version, tarball)
@@ -269,6 +294,10 @@ async def _run(
     execucao.game_version = scan.game_version
 
     por_categoria = {categoria: assets for categoria, assets in build_all(scan).items() if assets}
+    if cdragon:
+        por_categoria["champion"], execucao.fusao = await _fundir_com_cdragon(
+            settings, scan, por_categoria.get("champion", [])
+        )
     execucao.por_categoria = {str(c): a for c, a in por_categoria.items()}
     catalog = project_catalog(
         game_version=scan.game_version,
@@ -373,6 +402,71 @@ async def _run(
     )
     resumo["sweptDocuments"] = removidos
     return resumo
+
+
+async def _fundir_com_cdragon(
+    settings: IndexerSettings, scan: TarballScan, do_ddragon: list[Asset]
+) -> tuple[list[Asset], MergeReport]:
+    """Busca no cdragon **só o que o ddragon não trouxe** e funde.
+
+    Medido: o cdragon responde a 2,8 assets/s com a concorrência de 4 da regra 4
+    do CLAUDE.md. Buscar os 173 campeões inteiros custaria ~2 horas por patch, e
+    o S2 já mediu que square, splash, loading e tile **empatam** entre as duas
+    fontes — pagar duas horas para confirmar empate seria caro e inútil.
+
+    O que se busca é a cobertura que o ddragon não tem: `chroma` e
+    `loading_vintage`. A hipótese de empate continua **verificada**, não assumida:
+    um punhado de campeões por execução vem completo, e o relatório de fusão
+    denuncia se o cdragon vencer alguma disputa por resolução.
+    """
+    tipos_do_ddragon = {asset.type for asset in do_ddragon}
+    faltando = [tipo for tipo in TIPOS_DO_CDRAGON if tipo not in tipos_do_ddragon]
+    snapshots = build_champion_snapshots(scan)
+    amostra = _amostra_de_verificacao(scan.game_version, [s.key for s in snapshots])
+
+    do_cdragon: list[Asset] = []
+    nao_mapeaveis: dict[str, str] = {}
+    async with SourceClient(settings) as client:
+        for snapshot in snapshots:
+            completo = snapshot.key in amostra
+            try:
+                assets, restos = await fetch_champion_assets(
+                    client, snapshot.key, only=None if completo else faltando
+                )
+            except Exception as erro:
+                logger.info(
+                    "cdragon falhou para um campeão",
+                    extra={"campeao": snapshot.champion_id, "kind": type(erro).__name__},
+                )
+                continue
+            do_cdragon.extend(assets)
+            nao_mapeaveis.update(restos)
+
+    fundidos, relatorio = merge_assets(do_ddragon, do_cdragon)
+    logger.info(
+        "cdragon consultado",
+        extra={
+            "campeoes": len(snapshots),
+            "amostraCompleta": len(amostra),
+            "assets": len(do_cdragon),
+            "naoMapeaveis": len(nao_mapeaveis),
+            **relatorio.as_log(),
+        },
+    )
+    return fundidos, relatorio
+
+
+def _amostra_de_verificacao(game_version: str, chaves: list[int], quantos: int = 3) -> set[int]:
+    """Os campeões que vêm completos do cdragon nesta execução.
+
+    Gira com o patch: em ~58 patches todo campeão terá sido conferido pelo menos
+    uma vez, e cada execução custa uns dois minutos a mais em vez de duas horas.
+    """
+    if not chaves:
+        return set()
+    ordenadas = sorted(chaves)
+    inicio = int(hashlib.sha256(game_version.encode()).hexdigest(), 16) % len(ordenadas)
+    return {ordenadas[(inicio + i) % len(ordenadas)] for i in range(min(quantos, len(ordenadas)))}
 
 
 def _agora() -> str:
