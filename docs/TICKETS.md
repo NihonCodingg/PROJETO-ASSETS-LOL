@@ -1964,8 +1964,23 @@ limite de 500 linhas.
 
 > **Gatilho explícito:** este ticket só é executado quando o dono do projeto disser
 > "vamos publicar". **Ele não bloqueia nenhuma onda anterior.** Até lá, o site roda em
-> preview da Vercel com o nome de trabalho, o que é uso privado e não dispara nenhuma
-> obrigação da política da Riot.
+> preview da Vercel, o que é uso privado e não dispara nenhuma obrigação da política da Riot.
+>
+> 🟡 **Parcialmente entregue em 10/09/2026.** O gatilho foi puxado e tudo que **não** depende
+> de conta ou dinheiro do dono está feito, com teste: o D1 fechou, o checklist virou
+> [`docs/LANCAMENTO.md`](LANCAMENTO.md), e há teste que impede marcador de decisão novo de
+> entrar sem justificativa escrita.
+>
+> **O que falta é só 🔑** — três coisas que nenhuma máquina fecha:
+>
+> | | O que é |
+> |---|---|
+> | **D6** texto | Abrir a Developer API Policy e comparar o aviso **palavra a palavra** |
+> | **D6** registro | Registrar "Biblioteca de Assets" no Developer Portal |
+> | **D7** | Contratar o domínio e apontar para a Vercel |
+>
+> O **D2** não está bloqueado, está **esperando**: se o consentimento da Weird Gloop chegar,
+> é uma variável de ambiente — o crédito já está escrito e desligado.
 
 **Entra**
 - **D1** — nome público definido, sem "Riot", "League of Legends" nem "LoL"; trocado em
@@ -1985,15 +2000,97 @@ limite de 500 linhas.
 - Qualquer forma de monetização — proibida pelo [ADR 0005](adr/0005-arquitetura-estatica-custo-zero.md).
 
 **Critérios de aceite**
-1. `siteConfig.displayName` não é mais placeholder e passa na regra do ADR 0003.
-2. O aviso legal é idêntico ao texto oficial (comparação manual registrada no PR).
-3. O produto aparece registrado no Developer Portal (print no PR).
-4. O domínio resolve para o site.
-5. Nenhum marcador `[A DECIDIR]` ou `[A CONFIRMAR]` resta no código.
+1. ✅ `siteConfig.displayName` não é mais placeholder e passa na regra do ADR 0003.
+2. 🔑 O aviso legal é idêntico ao texto oficial (comparação manual registrada no PR).
+3. 🔑 O produto aparece registrado no Developer Portal (print no PR).
+4. 🔑 O domínio resolve para o site.
+5. 🟡 Um marcador resta — o `[A CONFIRMAR]` do critério 2 — e ele está **na lista do
+   teste, com o motivo escrito**. O `[A DECIDIR]` do nome acabou.
 
 **Testes que provam**
-- Teste que falha se `displayName` for o placeholder.
-- Teste que varre o código atrás de `[A DECIDIR]` e `[A CONFIRMAR]` e falha se achar.
+- Teste que falha se `displayName` for o placeholder, e que confere as três palavras
+  proibidas.
+- Teste que varre o código atrás de `[A DECIDIR]` e `[A CONFIRMAR]`. Ele **não** falha pelos
+  marcadores que já existem — falha por marcador **novo** sem justificativa, e falha também
+  se a lista de pendentes ficar desatualizada. Suíte vermelha por semanas é suíte que
+  ninguém lê.
+- Teste de que o aviso citado no checklist é o mesmo que o site publica.
+
+---
+
+### ⏳ T-40 — Densidade da grade
+
+| | |
+|---|---|
+| **Objetivo** | Deixar quem quer ver mais cartões ver mais cartões |
+| **Dependências** | T-30 |
+| **Estimativa** | ~40 linhas |
+| **Effort** | baixo |
+| **Cobre** | — |
+
+> Aberto em **10/09/2026**, na ingestão do design. O arquivo do Claude Design expõe uma
+> propriedade `density` com dois valores — `densa` (alvo de 152px por cartão) e `confortável`
+> (210px) — e **nenhum requisito pede isso**. O T-30 implementou só o denso, que é o padrão
+> do design, e os dois valores já estão no tema como `--spacing-alvo-cartao-*`.
+
+**Entra**
+- Um controle na barra do título da grade que alterna entre as duas larguras-alvo.
+- A escolha guardada no `localStorage` — é preferência de quem usa, não estado de sessão.
+
+**NÃO entra**
+- Uma terceira densidade. O design tem duas.
+- Guardar em conta. Não há conta ([ADR 0005](adr/0005-arquitetura-estatica-custo-zero.md)).
+
+**Critérios de aceite**
+1. Alternar muda o número de colunas na mesma largura de janela.
+2. A escolha sobrevive a recarregar a página.
+3. Sem `localStorage` disponível, o padrão é `densa` e nada quebra.
+
+**Testes que provam**
+- Vitest com as duas densidades na mesma largura, contando colunas.
+- Teste com `localStorage` que lança, porque navegador em modo privado faz isso.
+
+---
+
+### ⏳ T-41 — Navegação unificada na barra lateral
+
+| | |
+|---|---|
+| **Objetivo** | Uma navegação só, como o design desenhou |
+| **Dependências** | T-30 |
+| **Estimativa** | ~150 linhas |
+| **Effort** | médio |
+| **Cobre** | RF-04, RF-08 |
+
+> Aberto em **10/09/2026**. O design trata **"Campeões" como a primeira categoria da barra
+> lateral**, e a grade principal mostra uma categoria por vez. Hoje são duas navegações
+> empilhadas: a grade de campeões sempre visível, e a de categorias abaixo dela.
+>
+> O T-30 **não** fez essa mudança de propósito — o ticket dele diz "se o design pedir
+> comportamento diferente, abre-se ticket novo; este só veste". Mudar a arquitetura de
+> informação altera o que os testes do T-19 e do T-24 afirmam, e alterá-los era exatamente o
+> que o critério 1 do T-30 proibia.
+
+**Entra**
+- A barra lateral passa a listar "Campeões" junto com as outras categorias, com contagem.
+- A coluna principal mostra **uma** grade por vez.
+- Os testes do T-19 e do T-24 são ajustados para a estrutura nova — este ticket **pode**
+  alterá-los, com a justificativa no PR.
+
+**NÃO entra**
+- Mudar o que cada grade mostra. `champion` continua um cartão por campeão (RF-04) e a busca
+  continua operando em skin ([ADR 0010](adr/0010-navegacao-por-campeao-busca-por-skin.md)).
+
+**Critérios de aceite**
+1. A barra lateral lista todas as categorias, "Campeões" inclusive, com contagem.
+2. Abrir uma categoria troca a grade; a home abre em "Campeões" (RF-04).
+3. Nenhuma fatia é carregada antes do clique (RNF-03) — o e2e do T-29 continua valendo.
+4. O grupo de filtro de uma categoria com muitas opções (item tem ~30 `classe:*`) não empurra
+   a grade para fora da tela.
+
+**Testes que provam**
+- Os do T-24, ajustados, mais um novo de "só uma grade por vez".
+- O e2e do T-29, inalterado.
 
 ---
 

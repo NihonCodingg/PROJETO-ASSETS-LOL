@@ -186,7 +186,7 @@ Funcionalidades:
 - **Resiliência:** se ddragon/cdragon caírem, o site continua funcionando com o último índice publicado.
 - **Atualização:** novo patch refletido em até 24 h, sem intervenção manual.
 - **Abuso:** não se aplica — não há servidor a abusar. Zips de categoria são estáticos e pré-gerados; o zip de seleção roda no navegador do próprio usuário.
-- **Legal:** aviso obrigatório da Riot (Legal Jibber Jabber) visível; sem monetização direta dos assets; sem "Riot", "League of Legends" ou "LoL" no nome público do produto — o nome exibido está [A DECIDIR] até o lançamento ([ADR 0003](adr/0003-nome-publico-do-produto.md)); repositório e pacotes internos ficam como estão. Assets vindos da wiki exibem crédito à League of Legends Wiki / Weird Gloop (o texto da wiki é CC BY-SA; as imagens continuam sendo propriedade da Riot).
+- **Legal:** aviso obrigatório da Riot (Legal Jibber Jabber) visível; sem monetização direta dos assets; sem "Riot", "League of Legends" ou "LoL" no nome público do produto — o nome público é **Biblioteca de Assets**, decidido em 10/09/2026 ([ADR 0003](adr/0003-nome-publico-do-produto.md)); repositório e pacotes internos ficam como estão. Assets vindos da wiki exibem crédito à League of Legends Wiki / Weird Gloop (o texto da wiki é CC BY-SA; as imagens continuam sendo propriedade da Riot).
 - **Etiqueta com a wiki:** indexador usa a API oficial do MediaWiki com User-Agent identificado (nome do projeto + contato), rate limit conservador, cache agressivo e respeito aos termos de uso da Weird Gloop. O site nunca faz hotlink de imagens da wiki — tudo é copiado pro storage próprio no momento da indexação.
 - **Acessibilidade básica:** navegável por teclado, contraste adequado, alt em todas as imagens.
 
