@@ -14,6 +14,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 
 import type { Asset, Catalog, CatalogChampion, IndexManifest } from "@lol-assets/schema";
 
+import { AvisoDeIndiceVelho } from "@/components/aviso-de-indice-velho";
 import { GradeDeCampeoes } from "@/components/grade-de-campeoes";
 import { NavegacaoPorCategoria } from "@/components/navegacao-por-categoria";
 import { PainelDoCampeao } from "@/components/painel-do-campeao";
@@ -105,6 +106,9 @@ export default function HomePage() {
         patch {manifest.currentVersion} · {catalog.champions.length} campeões ·{" "}
         {catalog.skins.length} skins
       </p>
+
+      {/* T-31: o único alarme que existe. Sem monitoramento, o site é o detector. */}
+      <AvisoDeIndiceVelho manifest={manifest} />
 
       <PaletaDeBusca
         catalog={catalog}

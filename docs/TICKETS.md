@@ -1620,12 +1620,18 @@ limite de 500 linhas.
 - Decisão visual — ver a nota no topo.
 
 **Critérios de aceite**
-1. Manifesto com 71 h → sem aviso. Com 73 h → aviso.
-2. O aviso mostra a data.
-3. O site continua plenamente funcional com o aviso na tela.
+1. ✅ Manifesto com 71 h → sem aviso. Com 73 h → aviso. No limite exato, ainda sem aviso.
+2. ✅ O aviso mostra a data legível e o `datetime` da máquina, mais a idade em palavras.
+3. ✅ O site continua plenamente funcional: é `role="status"`, não `alert`, e não bloqueia
+   nada.
 
 **Testes que provam**
 - Vitest com relógio fake nos dois lados do limite.
+
+> ✅ **Entregue em 09/09/2026.** O limite de 72 h é escolhido, não herdado: o workflow roda a
+> cada 6 h, então são **doze execuções seguidas sem sucesso** — isso não é lentidão da Riot
+> nem fila do Actions, é coisa quebrada. Apertar mais transformaria fim de semana devagar em
+> alarme falso, e alarme falso é como se aprende a ignorar alarme.
 
 ---
 
