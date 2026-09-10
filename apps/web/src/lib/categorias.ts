@@ -25,7 +25,7 @@
  * traduzir 30 tags à mão seria inventar rótulo, que é justamente o que este
  * projeto não faz.
  */
-import type { Asset, AssetCategory } from "@lol-assets/schema";
+import type { Asset, AssetCategory, CatalogChampion } from "@lol-assets/schema";
 
 import { normalize } from "@/lib/search";
 
@@ -249,4 +249,50 @@ export function descreverFiltro(
   const partes = [...tags].sort().map((tag) => rotulos.get(tag) ?? tag);
   if (consulta.trim()) partes.push(`texto: “${consulta.trim()}”`);
   return partes;
+}
+
+// --- função do campeão -------------------------------------------------------------------
+
+/**
+ * As seis classes que a Riot dá a campeão, em português.
+ *
+ * Esta é a exceção à regra de não traduzir do topo do arquivo, e a linha é
+ * proposital: são **seis** valores, o conjunto é fechado, não muda há mais de
+ * dez anos, e o próprio cliente do jogo em pt-BR usa exatamente estas palavras.
+ * As ~30 `classe:*` de item não têm nenhuma dessas três propriedades. Valor fora
+ * da tabela sai cru, como em todo o resto.
+ */
+const FUNCOES: Record<string, string> = {
+  Assassin: "Assassino",
+  Fighter: "Lutador",
+  Mage: "Mago",
+  Marksman: "Atirador",
+  Support: "Suporte",
+  Tank: "Tanque",
+};
+
+/**
+ * As funções presentes no catálogo, com quantos campeões cada uma tem.
+ *
+ * É o filtro de "função" do RF-08, e é o único dos seis nomeados lá que sobrevive
+ * fora das categorias: `lane` nenhuma fonte declara, e `elo` saiu da v1 com o
+ * [ADR 0012]. Ver a nota do T-24 nos tickets.
+ */
+export function funcoesDe(champions: readonly CatalogChampion[]): Opcao[] {
+  const contagem = new Map<string, number>();
+  for (const champion of champions) {
+    for (const tag of champion.tags ?? []) contagem.set(tag, (contagem.get(tag) ?? 0) + 1);
+  }
+  return [...contagem]
+    .map(([tag, total]) => ({ tag, rotulo: FUNCOES[tag] ?? tag, total }))
+    .sort((a, b) => a.rotulo.localeCompare(b.rotulo, "pt-BR"));
+}
+
+/** OU entre funções: um campeão Lutador/Tanque aparece nas duas. */
+export function filtrarCampeoes(
+  champions: readonly CatalogChampion[],
+  funcoes: ReadonlySet<string>,
+): CatalogChampion[] {
+  if (funcoes.size === 0) return [...champions];
+  return champions.filter((champion) => champion.tags?.some((tag) => funcoes.has(tag)));
 }

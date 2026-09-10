@@ -11,6 +11,16 @@
  */
 import type { Asset, AssetType } from "@lol-assets/schema";
 
+/**
+ * Acima disto o painel vira scroller virtual ([ADR 0011]).
+ *
+ * O número é a fronteira entre os dois usos do painel: o de um campeão mostra
+ * dezenas de cartões e não deve pagar scroller próprio; o de uma categoria
+ * mostra 5.042 ícones de perfil e não pode não pagar. 200 fica com folga dos
+ * dois lados — o campeão mais carregado do patch tem 18 skins.
+ */
+export const LIMITE_DE_VIRTUALIZACAO = 200;
+
 export const TYPE_ORDER: readonly AssetType[] = [
   "splash_centered",
   "splash_wide",

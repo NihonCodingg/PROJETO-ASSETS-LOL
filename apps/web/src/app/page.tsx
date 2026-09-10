@@ -15,6 +15,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import type { Asset, Catalog, CatalogChampion, IndexManifest } from "@lol-assets/schema";
 
 import { GradeDeCampeoes } from "@/components/grade-de-campeoes";
+import { NavegacaoPorCategoria } from "@/components/navegacao-por-categoria";
 import { PainelDoCampeao } from "@/components/painel-do-campeao";
 import { PaletaDeBusca } from "@/components/paleta-de-busca";
 import { AssetsClient } from "@/lib/assets-client";
@@ -119,6 +120,14 @@ export default function HomePage() {
         onAbrir={(champion) => void abrir(champion)}
       />
 
+      {/* RF-08: o outro caminho, para quem não tem nome para digitar. Nenhuma
+          fatia é buscada até alguém abrir uma categoria. */}
+      <NavegacaoPorCategoria
+        shards={versaoAtual(manifest).shards}
+        carregar={(category) => cliente.loadShard(manifest, category)}
+        assetsBaseUrl={BASE_ASSETS}
+      />
+
       {aberto && (
         <PainelDoCampeao
           champion={aberto.champion}
@@ -132,6 +141,11 @@ export default function HomePage() {
       )}
     </Moldura>
   );
+}
+
+/** A única versão que existe desde o [ADR 0013]. */
+function versaoAtual(manifest: IndexManifest): IndexManifest["versions"][number] {
+  return manifest.versions.find((v) => v.gameVersion === manifest.currentVersion) ?? manifest.versions[0];
 }
 
 function Moldura({ children }: { children: React.ReactNode }) {
