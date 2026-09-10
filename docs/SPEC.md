@@ -7,6 +7,13 @@
 >
 > Data: 03/09/2026 · patch de referência: 16.17.1 · contrato do índice: `1.1.0`
 >
+> **Revisão de 09/09/2026:** a primeira indexação com **as duas fontes e as oito
+> categorias** mediu 18,1 MB e bateu no teto de 15 MiB do RNF-05, sem escrever nada. O teto
+> subiu para 24 MiB — [ADR 0015](adr/0015-orcamento-do-indice-depois-da-segunda-fonte.md).
+> Mantê-lo custaria chroma (RF-06), emote ou ward; mudá-lo custa bytes de clone que o
+> [ADR 0014](adr/0014-onde-vive-o-indice-gerado.md) já mediu e aceitou nessa ordem de
+> grandeza. **D4 fecha com "sim"**: emotes e wards entram na v1.
+>
 > **Revisão de 08/09/2026:** o índice guarda **uma versão só, a corrente** —
 > [ADR 0013](adr/0013-uma-versao-por-vez-no-indice.md), que emenda o
 > [ADR 0007](adr/0007-politica-de-versoes-e-orcamento.md). **RF-19 e RF-20 saem da v1**:
@@ -131,7 +138,7 @@ implementa e pelo teste que o prova.
 | **RNF-02** | Imagem abre rápido | < 1 s para a prévia da splash em conexão de banda larga | e2e com timing |
 | **RNF-03** | Carga inicial enxuta | **Catálogo ≤ 150 KB comprimido** (é o único documento pesado da abertura); fatia de assets ≤ 1,5 MB comprimida e carregada **sob demanda** | Falha o build se qualquer um passar |
 | **RNF-04** | Custo de operação | **R$ 0,00/mês**: Vercel Hobby + Actions em repo público. **Sem storage e sem conta a manter** ([ADR 0012](adr/0012-onde-guardar-os-assets.md)) | Não há painel de cobrança a revisar |
-| **RNF-05** | Armazenamento | **Nenhum asset é armazenado.** O repositório carrega o índice de **uma versão só**: **10,6 MB medidos** no patch 16.17.1 ([ADR 0013](adr/0013-uma-versao-por-vez-no-indice.md)) | O indexador falha se o índice passar de 15 MiB; o manifesto tem exatamente uma versão |
+| **RNF-05** | Armazenamento | **Nenhum asset é armazenado.** O repositório carrega o índice de **uma versão só**: **18,1 MB medidos** no patch 16.17.1 com as duas fontes e as oito categorias ([ADR 0013](adr/0013-uma-versao-por-vez-no-indice.md), [ADR 0015](adr/0015-orcamento-do-indice-depois-da-segunda-fonte.md)) | O indexador falha se o índice passar de 24 MiB; o manifesto tem exatamente uma versão |
 | **RNF-06** | Atualização | Novo patch refletido em ≤ 24 h, sem intervenção | Workflow agendado + `status.json` |
 | **RNF-07** | Resiliência **degradada, e assumida** | Se ddragon/cdragon caírem, **as imagens não carregam** — o catálogo e a busca continuam, porque são estáticos do app. O site diz que a fonte está fora, em vez de mostrar quadrado quebrado | e2e com as fontes bloqueadas: busca funciona, imagem mostra estado de erro |
 | **RNF-08** | Etiqueta de rede | User-Agent identificado, concorrência ≤ 4, backoff em 429/5xx | Teste unitário do cliente HTTP |
@@ -486,7 +493,7 @@ jeito de o site apodrecer.
 | **D1** | Nome público do produto | Escolher antes do lançamento; não pode conter "Riot", "League of Legends" nem "LoL" | Lançamento |
 | **D2** | Consentimento da Weird Gloop | Pedir agora — é o único caminho para arte acima de 1280×720 | Tier HD |
 | ~~**D3**~~ | ~~Mover o repositório para caminho ASCII~~ | ✅ **Resolvida em 03/09/2026.** Repositório em `D:\PROJETOS\PROJETO-ASSETS-LOL`; `pnpm install` em exit 0 | — |
-| **D4** | Emotes (2.347) e ward skins (265) entram na v1? | Sim, mas **medir os bytes primeiro** — é o único buraco no orçamento do RNF-05 | Fechar o orçamento |
+| ~~**D4**~~ | ~~Emotes (2.347) e ward skins (265) entram na v1?~~ | **Fechada em 09/09/2026.** Entram: medidos 2.338 emotes e 530 arquivos de ward no T-22, e o orçamento foi refeito para caber ([ADR 0015](adr/0015-orcamento-do-indice-depois-da-segunda-fonte.md)) | — |
 | **D5** | Ícones de perfil (5.021, 554 MB) valem 32 % do armazenamento? | Manter na v1; se apertar, é a primeira fatia a sair | Nada |
 | **D6** | Texto exato do aviso legal + registro no Developer Portal | Copiar literalmente da política e registrar antes de divulgar | Lançamento |
 | **D7** | Domínio | Só depois de D1 | Lançamento |
@@ -509,4 +516,5 @@ jeito de o site apodrecer.
 | [0011](adr/0011-base-de-componentes-do-front.md) base de componentes | RF-01, RF-03, RF-08, RF-24, RNF-01, RNF-11 |
 | [0012](adr/0012-onde-guardar-os-assets.md) sem storage | §1.2, §5, §6.1, §8, §9, RNF-05, RNF-07, RNF-13; remove RF-16 e a categoria `rank` |
 | [0013](adr/0013-uma-versao-por-vez-no-indice.md) uma versão por vez | RNF-05, §8; remove RF-19 e RF-20 |
+| [0015](adr/0015-orcamento-do-indice-depois-da-segunda-fonte.md) orçamento depois da segunda fonte | RNF-05, D4 — emenda o 0007 e o 0013 |
 | [0009](adr/0009-apelidos-de-busca-mantidos-a-mao.md) apelidos | RF-03, §6, §10 |

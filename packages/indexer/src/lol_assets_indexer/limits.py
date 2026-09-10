@@ -6,10 +6,11 @@ Três limites, três motivos diferentes:
   site. Se ele engordar, engorda para todo mundo, em toda visita.
 - **Fatia `champion` ≤ 1,5 MiB comprimida.** É a maior, e é carregada no primeiro
   clique. As outras vêm depois, ao entrar na categoria.
-- **Índice de uma versão ≤ 15 MiB escritos.** Desde o [ADR 0012] o índice é
+- **Índice de uma versão ≤ 24 MiB escritos.** Desde o [ADR 0012] o índice é
   versionado no repositório: o limite aqui é do Git, não do navegador. Medido no
-  patch 16.17.1: 10.583.827 bytes, com o [T-11] ainda por empilhar ~3 MB por
-  versão antiga.
+  patch 16.17.1 com as duas fontes e as oito categorias: 19.013.632 bytes. O teto
+  antigo, de 15 MiB, reservava ~3 MB por versão antiga que o [ADR 0013] eliminou;
+  o [ADR 0015] refez a conta com a medição da fonte dupla.
 
 Os dois primeiros medem **gzip**, porque é assim que a Vercel serve. O terceiro
 mede os bytes **escritos**, porque é assim que o Git guarda.
@@ -27,8 +28,8 @@ from dataclasses import dataclass
 CATALOG_GZIP_LIMIT = 150 * 1024
 #: RNF-03. A maior fatia, carregada sob demanda.
 SHARD_GZIP_LIMIT = 3 * 1024 * 1024 // 2
-#: RNF-05. O que o repositório carrega por versão.
-INDEX_RAW_LIMIT = 15 * 1024 * 1024
+#: RNF-05. O que o repositório carrega por versão ([ADR 0015]).
+INDEX_RAW_LIMIT = 24 * 1024 * 1024
 
 
 class BudgetExceededError(RuntimeError):

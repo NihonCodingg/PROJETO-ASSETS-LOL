@@ -19,3 +19,4 @@ com contexto, decisão e consequências. A Spec referencia; não repete.
 | [0012](0012-onde-guardar-os-assets.md) | **Sem storage**: o índice aponta para as URLs das fontes | ✅ aceito — emenda 0005 e 0007 |
 | [0013](0013-uma-versao-por-vez-no-indice.md) | **Uma versão por vez** no índice; histórico sai da v1 | ✅ aceito — emenda 0007 |
 | [0014](0014-onde-vive-o-indice-gerado.md) | Índice gerado vive no `main`; crescimento medido | ✅ aceito |
+| [0015](0015-orcamento-do-indice-depois-da-segunda-fonte.md) | Teto do índice vai a **24 MiB**; emotes, wards e chromas cabem | ✅ aceito — emenda 0007 e 0013 |
