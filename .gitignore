@@ -39,3 +39,7 @@ Thumbs.db
 .idea/
 .vscode/*
 !.vscode/extensions.json
+
+# Playwright (T-29): relatório, traces e downloads dos testes.
+playwright-report/
+test-results/

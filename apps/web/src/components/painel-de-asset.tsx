@@ -266,6 +266,24 @@ function CartaoDeAsset({
         </label>
       )}
       <h3>{asset.type}</h3>
+      {/* RNF-02: a prévia é o que responde "é esta arte?" antes de baixar 121 KB.
+          `loading="lazy"` porque uma categoria tem centenas de cartões e nem
+          todos passam pela tela.
+
+          `<img>` e não `next/image`: a URL é de terceiro e o [ADR 0012] não tem
+          storage nem proxy — otimizar exigiria servir os bytes por conta
+          própria, que é exatamente o que o projeto decidiu não fazer. */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={url}
+        alt={`Prévia de ${asset.names.pt_BR}`}
+        width={asset.width}
+        height={asset.height}
+        loading="lazy"
+        decoding="async"
+        data-previa={asset.type}
+        style={{ maxWidth: 240, height: "auto" }}
+      />
       {/* RF-09: a ficha aparece antes de qualquer clique de download. */}
       <p>{assetSummary(asset)}</p>
 

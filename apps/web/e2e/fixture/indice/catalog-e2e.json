@@ -1,0 +1,72 @@
+{
+  "schemaVersion": "1.2.0",
+  "gameVersion": "16.18.1",
+  "generatedAt": "2026-09-09T00:00:00Z",
+  "champions": [
+    {
+      "championKey": 24,
+      "championId": "Jax",
+      "names": {
+        "pt_BR": "Jax"
+      },
+      "title": {
+        "pt_BR": "Grão-Mestre das Armas"
+      },
+      "tags": [
+        "Fighter"
+      ],
+      "skinCount": 2,
+      "baseSkinId": 24000,
+      "thumbnailUrl": "http://127.0.0.1:4321/imagens/Jax_square.png"
+    },
+    {
+      "championKey": 99,
+      "championId": "Lux",
+      "names": {
+        "pt_BR": "Lux"
+      },
+      "title": {
+        "pt_BR": "a Dama Luminosa"
+      },
+      "tags": [
+        "Mage",
+        "Support"
+      ],
+      "skinCount": 1,
+      "baseSkinId": 99000,
+      "thumbnailUrl": "http://127.0.0.1:4321/imagens/Lux_square.png"
+    }
+  ],
+  "skins": [
+    {
+      "skinId": 24000,
+      "skinNum": 0,
+      "championKey": 24,
+      "names": {
+        "pt_BR": "Jax"
+      },
+      "isBase": true,
+      "thumbnailUrl": "http://127.0.0.1:4321/imagens/Jax_000_tile.jpg"
+    },
+    {
+      "skinId": 24007,
+      "skinNum": 7,
+      "championKey": 24,
+      "names": {
+        "pt_BR": "Jax Deus da Guerra"
+      },
+      "isBase": false,
+      "thumbnailUrl": "http://127.0.0.1:4321/imagens/Jax_007_tile.jpg"
+    },
+    {
+      "skinId": 99000,
+      "skinNum": 0,
+      "championKey": 99,
+      "names": {
+        "pt_BR": "Lux"
+      },
+      "isBase": true,
+      "thumbnailUrl": "http://127.0.0.1:4321/imagens/Lux_000_tile.jpg"
+    }
+  ]
+}

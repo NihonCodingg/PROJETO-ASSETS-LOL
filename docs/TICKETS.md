@@ -1568,14 +1568,34 @@ limite de 500 linhas.
 - Teste visual de regressão. Depois de T-30, se fizer sentido.
 
 **Critérios de aceite**
-1. J1 e J2 completam em ≤ 3 cliques; o teste falha em 4.
-2. O arquivo baixado tem o `fileName` esperado e o MIME correto.
-3. O PNG convertido tem as mesmas dimensões do original.
-4. Busca responde em < 50 ms e a prévia abre em < 1 s.
-5. O job roda em todo PR.
+1. ✅ J1 e J2 completam em ≤ 3 cliques, contados por um contador de verdade — e há um teste
+   provando que o contador falha no quarto.
+2. ✅ O arquivo baixado tem o `fileName` esperado e o **conteúdo** certo: `sha256` igual ao
+   do índice e assinatura de JPEG nos bytes. Conferir o conteúdo vale mais que o MIME
+   anunciado.
+3. ✅ O PNG convertido tem as mesmas dimensões do original, lidas do IHDR do arquivo salvo.
+4. ✅ Busca em < 50 ms medidos **dentro da página** e prévia em < 1 s.
+5. ✅ O job roda em todo PR.
 
 **Testes que provam**
-- Os próprios cenários Playwright.
+- Os próprios cenários Playwright: 13, em ~20 s.
+
+> ✅ **Entregue em 09/09/2026.** Três coisas que valem registro:
+>
+> - **A fixture é servida de outra origem** (`127.0.0.1:4321` contra `localhost:3000`), como
+>   o ddragon é em produção. É isso que faz o teste do RF-11 valer: sem CORS aberto o canvas
+>   fica *tainted* e o `toBlob` falha — a hipótese inteira do
+>   [ADR 0001](adr/0001-formato-de-entrega-dos-assets.md), rodando de verdade.
+> - **A prévia da imagem não existia.** O RNF-02 mede "a prévia da splash em < 1 s" e o
+>   cartão só mostrava a ficha. Sem prévia o critério 4 era immensurável, então o cartão
+>   ganhou um `<img>` — `loading="lazy"`, `alt` com o nome do asset, e `<img>` cru em vez de
+>   `next/image` porque a URL é de terceiro e o [ADR 0012] não tem proxy.
+> - **O RNF-01 é medido dentro da página**, com `performance.now()` em volta do evento de
+>   input até o quadro seguinte. Medir por fora somaria o custo do protocolo do Playwright
+>   ao número do requisito.
+>
+> Só Chromium na CI: o e2e prova comportamento e o caminho do canvas, não compatibilidade
+> entre motores.
 
 ---
 

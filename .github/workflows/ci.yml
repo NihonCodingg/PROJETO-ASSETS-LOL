@@ -62,3 +62,41 @@ jobs:
 
       - name: Testes
         run: pnpm -r --if-present test
+
+  e2e:
+    name: e2e (Playwright)
+    runs-on: ubuntu-latest
+    # O fluxo inteiro sobe dois servidores e roda 13 cenários em ~20 s local.
+    # O teto é folgado para timeout significar "travou", não "o runner estava lento".
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Instalar pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Instalar Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Instalar dependências
+        run: pnpm install --frozen-lockfile
+
+      # Só o Chromium: o e2e prova comportamento e o caminho do canvas do
+      # ADR 0001, não compatibilidade entre motores. Três navegadores custariam
+      # três vezes o download para provar a mesma coisa.
+      - name: Instalar o Chromium do Playwright
+        run: pnpm --filter @lol-assets/web exec playwright install --with-deps chromium
+
+      - name: Fluxo completo
+        run: pnpm --filter @lol-assets/web exec playwright test
+
+      - name: Guardar o relatório quando falhar
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-${{ github.run_id }}
+          path: apps/web/playwright-report/
+          retention-days: 7
