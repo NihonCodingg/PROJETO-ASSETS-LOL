@@ -88,7 +88,27 @@ jobs:
           git add -- apps/web/public/indice
           git commit -m "chore(indice): patch ${{ steps.decidir.outputs.game_version }}" \
             -m "Gerado por .github/workflows/index.yml, execução ${{ github.run_id }}."
-          git push
+
+          # A indexação leva ~40 min. Nesse tempo a `main` anda: um PR mergeado
+          # no meio faz o push ser recusado com "fetch first", e 40 minutos de
+          # trabalho vão embora sem nada publicado — foi o que aconteceu na
+          # execução 34422295740.
+          #
+          # `rebase` e não `merge` porque o commit é um só e a `main` não precisa
+          # de um merge commit por indexação. Conflito é praticamente impossível:
+          # o `concurrency: indexacao` garante que só esta workflow escreve em
+          # `apps/web/public/indice`, e nada mais toca esse diretório. Se
+          # acontecer mesmo assim, o rebase falha e o job falha junto — que é o
+          # certo: ninguém quer índice meio resolvido.
+          for tentativa in 1 2 3; do
+            if git push; then
+              exit 0
+            fi
+            echo "push recusado (tentativa $tentativa); a main andou. Rebase e de novo."
+            git pull --rebase origin main
+          done
+          echo "três tentativas de push recusadas; desistindo" >&2
+          exit 1
 
       - name: Publicar o status como artefato
         # Vale também quando a indexação falha: é o relatório do T-12, e é o
