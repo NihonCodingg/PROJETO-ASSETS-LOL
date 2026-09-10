@@ -291,6 +291,19 @@ test.describe("a origem cruzada", () => {
     expect(externas.some((url) => url.includes("/api/"))).toBe(false);
   });
 
+  test("nenhum chroma aparece sem alguém pedir (RF-06)", async ({ page }) => {
+    await irParaHome(page);
+    await page.click('button:has-text("Jax")');
+    await expect(page.locator("img[data-previa]").first()).toBeVisible();
+
+    // São 6.994 no índice real. Um deles vazando para a grade ou para a lista de
+    // skins quebraria o RF-06 sem erro nenhum.
+    expect(await page.locator("article[data-tipo='chroma']").count()).toBe(0);
+
+    await page.getByRole("button", { name: /Mostrar 2 chromas/ }).click();
+    expect(await page.locator("article[data-tipo='chroma']").count()).toBe(2);
+  });
+
   test("o aviso de índice velho não aparece com índice fresco (T-31)", async ({ page }) => {
     await irParaHome(page);
     expect(await page.locator("[data-indice='velho']").count()).toBe(0);
