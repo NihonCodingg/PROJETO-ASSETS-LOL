@@ -1971,13 +1971,17 @@ limite de 500 linhas.
 > [`docs/LANCAMENTO.md`](LANCAMENTO.md), e há teste que impede marcador de decisão novo de
 > entrar sem justificativa escrita.
 >
-> **O que falta é só 🔑** — três coisas que nenhuma máquina fecha:
+> ✅ **D6, o texto, fechou no mesmo dia**, no segundo "vamos publicar". A comparação achou
+> **duas** políticas que alcançam o site — o boilerplate das *General Policies* do Developer
+> Portal e o aviso do *Legal Jibber Jabber* —, e os dois textos foram copiados das páginas e
+> travados em teste. O `[A CONFIRMAR]` saiu e a lista de pendentes chegou a zero.
+>
+> **O que falta é só 🔑:**
 >
 > | | O que é |
 > |---|---|
-> | **D6** texto | Abrir a Developer API Policy e comparar o aviso **palavra a palavra** |
-> | **D6** registro | Registrar "Biblioteca de Assets" no Developer Portal |
-> | **D7** | Contratar o domínio e apontar para a Vercel |
+> | **D6** registro | Registrar "Biblioteca de Assets" no Developer Portal — passo a passo no checklist |
+> | **D7** | Criar o projeto na Vercel como `biblioteca-de-assets` — sem domínio próprio, decidido pelo dono |
 >
 > O **D2** não está bloqueado, está **esperando**: se o consentimento da Weird Gloop chegar,
 > é uma variável de ambiente — o crédito já está escrito e desligado.
@@ -1985,9 +1989,10 @@ limite de 500 linhas.
 **Entra**
 - **D1** — nome público definido, sem "Riot", "League of Legends" nem "LoL"; trocado em
   `siteConfig.displayName`, que é o único lugar.
-- **D6** — texto do aviso legal copiado **literalmente** da Developer API Policy, e produto
+- **D6** — texto dos avisos legais copiado **literalmente** das políticas da Riot, e produto
   registrado no Developer Portal.
-- **D7** — domínio contratado e apontado, depois de D1.
+- **D7** — endereço público no ar, depois de D1. Em 10/09/2026 o dono decidiu publicar pela
+  URL da Vercel, sem domínio próprio.
 - **D2** — se o consentimento da Weird Gloop tiver chegado, ligar o crédito à wiki na
   página "Sobre" e registrar a evidência em `docs/SPIKES.md` com data. Se não tiver, a
   página diz que o teto de resolução é 1280×720.
@@ -2001,11 +2006,14 @@ limite de 500 linhas.
 
 **Critérios de aceite**
 1. ✅ `siteConfig.displayName` não é mais placeholder e passa na regra do ADR 0003.
-2. 🔑 O aviso legal é idêntico ao texto oficial (comparação manual registrada no PR).
+2. ✅ Os avisos legais são idênticos aos textos oficiais — comparação registrada no PR, no
+   checklist e em `docs/evidencias/politicas-da-riot-2026-09-10.md`.
 3. 🔑 O produto aparece registrado no Developer Portal (print no PR).
-4. 🔑 O domínio resolve para o site.
-5. 🟡 Um marcador resta — o `[A CONFIRMAR]` do critério 2 — e ele está **na lista do
-   teste, com o motivo escrito**. O `[A DECIDIR]` do nome acabou.
+4. 🔑 A URL de produção da Vercel resolve para o site. *Ajustado em 10/09/2026:* era "o
+   domínio resolve"; o dono decidiu publicar sem domínio próprio, e o subdomínio segue a
+   mesma regra de nome.
+5. ✅ Nenhum marcador resta. O `[A DECIDIR]` do nome e o `[A CONFIRMAR]` do texto legal
+   acabaram, e a lista de pendentes do teste está vazia.
 
 **Testes que provam**
 - Teste que falha se `displayName` for o placeholder, e que confere as três palavras
@@ -2014,7 +2022,9 @@ limite de 500 linhas.
   marcadores que já existem — falha por marcador **novo** sem justificativa, e falha também
   se a lista de pendentes ficar desatualizada. Suíte vermelha por semanas é suíte que
   ninguém lê.
-- Teste de que o aviso citado no checklist é o mesmo que o site publica.
+- Teste de que os avisos citados no checklist são os mesmos que o site publica, inteiros.
+- Trava literal: os dois textos oficiais guardados no teste, e falha se o publicado diferir
+  deles em qualquer coisa além do marcador de lugar.
 
 ---
 

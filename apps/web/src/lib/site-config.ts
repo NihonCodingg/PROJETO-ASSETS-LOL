@@ -7,22 +7,57 @@
  * exige, e há teste garantindo que continue assim. Este é o **único** lugar onde
  * o nome exibido existe — repositório e pacotes internos ficam como estão.
  *
- * [A CONFIRMAR] o texto exato do aviso legal precisa ser copiado da Developer API
- * Policy antes do lançamento: https://developer.riotgames.com/docs/lol
- * O aviso é obrigatório e visível para os jogadores (KICKOFF §A.5 e §B.5.1), assim
- * como o registro do produto no Developer Portal.
+ * ## Os dois avisos da Riot
+ *
+ * São dois porque são duas políticas, e as duas alcançam este site:
+ *
+ * | Política | O que ela pede | Por que vale aqui |
+ * |---|---|---|
+ * | Developer Portal, *General Policies* | "readily visible to players" | o site usa o Data Dragon, que a política lista como ferramenta do portal |
+ * | *Legal Jibber Jabber*, §6 | "conspicuously include" | o site usa arte da Riot e é compartilhado com outras pessoas |
+ *
+ * Os dois textos foram **copiados** das páginas oficiais em 10/09/2026 e ficam
+ * guardados com o marcador de lugar que cada política usa. A única
+ * transformação permitida é trocar o marcador pelo nome do produto; o teste
+ * confere que todo o resto é idêntico, caractere a caractere. A comparação, com a
+ * variante que a documentação de LoL traz, está em `docs/LANCAMENTO.md` (D6).
  */
 
 const displayName = "Biblioteca de Assets";
 
-/** Aviso legal exigido pela Riot, derivado do nome exibido. */
-function riotLegalNotice(productName: string): string {
-  return (
-    `${productName} isn't endorsed by Riot Games and doesn't reflect the views or ` +
-    "opinions of Riot Games or anyone officially involved in producing or managing " +
-    "Riot Games properties. Riot Games, and all associated properties are trademarks " +
-    "or registered trademarks of Riot Games, Inc."
-  );
+/** As páginas de onde os dois avisos foram copiados. */
+export const RIOT_POLICY_URLS = {
+  portal: "https://developer.riotgames.com/policies/general",
+  jibberJabber: "https://www.riotgames.com/en/legal",
+} as const;
+
+/**
+ * Developer Portal → Policies → General → Core Policies (atualizada em
+ * 29/05/2025): "You must post the following legal boilerplate to your product in
+ * a location that is readily visible to players".
+ */
+export const RIOT_PORTAL_BOILERPLATE =
+  "[Your product] isn't endorsed by Riot Games and doesn't reflect the views or " +
+  "opinions of Riot Games or anyone officially involved in producing or managing " +
+  "Riot Games properties. Riot Games, and all associated properties are trademarks " +
+  "or registered trademarks of Riot Games, Inc.";
+
+/**
+ * Legal Jibber Jabber, §6 (atualizada em agosto de 2018): "If you share your
+ * Project with others, please conspicuously include the following notice (e.g.,
+ * on your Project's website)".
+ */
+export const RIOT_JIBBER_JABBER_NOTICE =
+  "[The title of your Project] was created under Riot Games' \"Legal Jibber Jabber\" " +
+  "policy using assets owned by Riot Games. Riot Games does not endorse or sponsor " +
+  "this project.";
+
+/** Troca o marcador de lugar da política pelo nome. Não mexe em mais nada. */
+function fillPlaceholder(template: string, placeholder: string, productName: string): string {
+  if (!template.includes(placeholder)) {
+    throw new Error(`o texto oficial não traz o marcador ${placeholder}`);
+  }
+  return template.replace(placeholder, productName);
 }
 
 /**
@@ -44,5 +79,12 @@ export const siteConfig = {
   description:
     "Assets visuais de League of Legends na melhor fonte disponível, prontos para baixar.",
   repositoryUrl: "https://github.com/NihonCodingg/lol-assets",
-  riotLegalNotice: riotLegalNotice(displayName),
+  /** O boilerplate do Developer Portal. Rodapé de toda página e página Sobre (RF-21). */
+  riotLegalNotice: fillPlaceholder(RIOT_PORTAL_BOILERPLATE, "[Your product]", displayName),
+  /** O aviso do Legal Jibber Jabber. Vai junto do outro, nos mesmos dois lugares. */
+  riotJibberJabberNotice: fillPlaceholder(
+    RIOT_JIBBER_JABBER_NOTICE,
+    "[The title of your Project]",
+    displayName,
+  ),
 } as const;

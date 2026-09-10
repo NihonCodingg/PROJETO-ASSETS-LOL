@@ -34,10 +34,11 @@ describe("nome público (D1)", () => {
     }
   });
 
-  it("o aviso legal é derivado do nome, não escrito à mão", () => {
+  it("os dois avisos legais são derivados do nome, não escritos à mão", () => {
     // Se alguém trocar o nome e esquecer o aviso, o aviso deixa de citar o
-    // produto — e é o produto que a política manda nomear.
+    // produto — e é o produto que as duas políticas mandam nomear.
     expect(siteConfig.riotLegalNotice.startsWith(siteConfig.displayName)).toBe(true);
+    expect(siteConfig.riotJibberJabberNotice.startsWith(siteConfig.displayName)).toBe(true);
   });
 });
 
@@ -46,22 +47,15 @@ describe("nome público (D1)", () => {
 /**
  * Os marcadores que **ainda** existem no código, e por quê.
  *
- * A lista tem que chegar a zero antes de publicar — é o critério 5 do T-33. Ela
- * está aqui em vez de o teste simplesmente falhar porque o item que falta
- * (`[A CONFIRMAR]` do texto legal) depende de alguém abrir a Developer API
- * Policy e comparar palavra a palavra. Fingir que não existe seria pior; deixar
- * a suíte vermelha até lá tornaria a suíte inútil.
+ * A lista tinha que chegar a zero antes de publicar — é o critério 5 do T-33 — e
+ * chegou em 10/09/2026, quando o `[A CONFIRMAR]` do texto legal saiu: os dois
+ * avisos foram copiados das páginas da Riot e comparados caractere a caractere
+ * (`site-config.test.ts` guarda a trava).
  *
- * O que o teste garante é que **nenhum marcador novo** apareça sem que alguém
- * tenha que vir aqui e escrever o motivo.
+ * A estrutura continua porque o que ela garante continua valendo: **nenhum
+ * marcador novo** entra sem que alguém venha aqui e escreva o motivo.
  */
-const PENDENTES: ReadonlyArray<{ arquivo: string; marcador: string; porque: string }> = [
-  {
-    arquivo: "lib/site-config.ts",
-    marcador: "[A CONFIRMAR]",
-    porque: "D6: o texto do aviso precisa ser comparado com a Developer API Policy à mão.",
-  },
-];
+const PENDENTES: ReadonlyArray<{ arquivo: string; marcador: string; porque: string }> = [];
 
 function arquivosDeCodigo(pasta: string): string[] {
   return readdirSync(pasta).flatMap((nome) => {
@@ -122,9 +116,10 @@ describe("docs/LANCAMENTO.md", () => {
     expect(checklist).toContain("🔑");
   });
 
-  it("o texto do aviso no checklist é o que o site publica", () => {
+  it("os dois avisos citados no checklist são os que o site publica, inteiros", () => {
     // Um checklist que cita um aviso diferente do publicado é pior que nenhum.
-    const trecho = siteConfig.riotLegalNotice.slice(0, 60);
-    expect(checklist.replace(/\s+/g, " ")).toContain(trecho.replace(/\s+/g, " "));
+    for (const aviso of [siteConfig.riotLegalNotice, siteConfig.riotJibberJabberNotice]) {
+      expect(checklist).toContain(aviso);
+    }
   });
 });

@@ -87,13 +87,18 @@ export function Rodape() {
         </a>
       </nav>
 
-      {/* RF-21: o texto da Riot, **inteiro**, em toda página. Em tela estreita
-          ele ocupa a linha toda da faixa em vez de ser cortado — "visível" com
-          reticências não é visível. `mt-auto` põe ele no pé da coluna quando há
-          coluna. */}
-      <footer className="w-full flex-none px-3.5 pb-2 leading-solta md:mt-auto md:w-auto md:py-3">
-        <p data-aviso="riot" className="font-mono text-10 text-texto-suave">
+      {/* RF-21: os dois textos da Riot, **inteiros**, em toda página — o do
+          Developer Portal e o do Legal Jibber Jabber (ver `site-config.ts`). Em
+          tela estreita eles ocupam a linha toda da faixa em vez de serem
+          cortados: "visível" com reticências não é visível. `mt-auto` põe o
+          rodapé no pé da coluna quando há coluna. `lang="en"` porque o texto é
+          copiado, não traduzido. */}
+      <footer className="flex w-full flex-none flex-col gap-1.5 px-3.5 pb-2 leading-solta md:mt-auto md:w-auto md:py-3">
+        <p data-aviso="riot" lang="en" className="font-mono text-10 text-texto-suave">
           {siteConfig.riotLegalNotice}
+        </p>
+        <p data-aviso="jibber-jabber" lang="en" className="font-mono text-10 text-texto-suave">
+          {siteConfig.riotJibberJabberNotice}
         </p>
       </footer>
     </aside>

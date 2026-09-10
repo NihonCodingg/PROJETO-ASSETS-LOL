@@ -26,10 +26,15 @@ jogadores**, não do nome interno de um repositório privado de código.
 4. **Repositório, pacotes e identificadores ficam como estão**: `lol-assets`,
    `lol_assets_indexer`, `@lol-assets/schema`. Não são o nome do produto — e o repositório
    foi renomeado para `lol-assets` em 09/09/2026 justamente para combinar com eles.
-5. O aviso legal obrigatório é gerado **a partir** do nome exibido, então acompanha a
-   decisão automaticamente. O texto exato ainda precisa ser copiado literalmente da
-   Developer API Policy — marcado `[A CONFIRMAR]` no mesmo arquivo.
+5. Os avisos legais obrigatórios são gerados **a partir** do nome exibido, então acompanham
+   a decisão automaticamente. São dois — o boilerplate das *General Policies* do Developer
+   Portal e o aviso do *Legal Jibber Jabber* —, **copiados** das páginas oficiais em
+   10/09/2026 no T-33, com teste que trava o texto literal
+   ([LANCAMENTO.md, D6](../LANCAMENTO.md)).
 6. Registrar o produto no Developer Portal antes do lançamento público, com o nome final.
+7. **O subdomínio também é nome público.** O Legal Jibber Jabber (§5) proíbe domínio com
+   marca da Riot, e o nome do projeto na Vercel vira `<nome>.vercel.app`. O projeto se chama
+   `biblioteca-de-assets`, não `lol-assets` — decidido em 10/09/2026, no T-33.
 
 ## Consequências
 
@@ -54,6 +59,12 @@ jogadores**, não do nome interno de um repositório privado de código.
 
 ## O que ainda depende disto
 
-O **T-33** (checklist de lançamento) estava esperando esta decisão para duas coisas: o
-registro do produto no Developer Portal e a conferência do texto legal `[A CONFIRMAR]`
-contra a Developer API Policy.
+O **T-33** (checklist de lançamento) esperava esta decisão para duas coisas. A conferência
+do texto legal fechou em 10/09/2026. Resta o registro do produto no Developer Portal, que é
+conta do dono.
+
+> **Correção de 10/09/2026.** O contexto acima fala de "repositório privado". O repositório
+> é **público** — é o que deixa as Actions de graça (RNF-04). A decisão 4 continua de pé: o
+> §5 do Legal Jibber Jabber fala de domínios e contas, e o nome do repositório não é o nome
+> do produto. O risco que sobra é baixo, e está escrito: se a Riot pedir, renomear o
+> repositório é um PR, e o GitHub redireciona o endereço antigo.

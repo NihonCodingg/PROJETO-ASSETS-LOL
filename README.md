@@ -146,5 +146,7 @@ que ainda não foi solicitado (KICKOFF §B.3.2).
 
 ## Legal
 
-Projeto não oficial, sem vínculo com a Riot Games. O aviso legal exigido pela
-Developer API Policy fica visível no rodapé do site.
+Projeto não oficial, sem vínculo com a Riot Games. Os dois avisos que a Riot exige — o das
+políticas do Developer Portal e o do Legal Jibber Jabber — ficam no rodapé de toda página e
+em destaque na página "Sobre", copiados das políticas, não parafraseados. A comparação está em
+[`docs/LANCAMENTO.md`](docs/LANCAMENTO.md), no D6.
