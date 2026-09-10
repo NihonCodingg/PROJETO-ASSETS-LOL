@@ -729,6 +729,7 @@ version = "0.0.0"
 source = { editable = "apps/api" }
 dependencies = [
     { name = "fastapi" },
+    { name = "lol-assets-indexer" },
     { name = "lol-assets-schema" },
     { name = "pydantic" },
     { name = "pydantic-settings" },
@@ -738,6 +739,7 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "fastapi", specifier = ">=0.115.0" },
+    { name = "lol-assets-indexer", editable = "packages/indexer" },
     { name = "lol-assets-schema", editable = "packages/schema" },
     { name = "pydantic", specifier = ">=2.9.0" },
     { name = "pydantic-settings", specifier = ">=2.6.0" },

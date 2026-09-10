@@ -1,0 +1,57 @@
+name: API opcional
+
+# Roda só quando a API (ou o que ela depende) muda. Ela é componente opcional
+# pelo ADR 0006, e construir uma imagem em todo PR do front seria cobrar de todo
+# mundo o custo de uma peça que ninguém precisa para o site funcionar.
+on:
+  pull_request:
+    paths:
+      - "apps/api/**"
+      - "packages/**"
+      - "docker-compose.yml"
+      - "uv.lock"
+      - ".github/workflows/api.yml"
+  push:
+    branches: [main]
+    paths:
+      - "apps/api/**"
+      - "docker-compose.yml"
+
+concurrency:
+  group: api-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  compose:
+    name: docker compose up e /health
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      # O critério 1 do T-32 é literalmente "docker compose up sobe a API e
+      # /health responde". Este job é o critério, executado.
+      - name: Subir
+        run: docker compose up --build --detach --wait
+
+      - name: /health responde
+        run: |
+          set -euo pipefail
+          resposta="$(curl -sS --fail --max-time 10 http://localhost:8000/health)"
+          echo "$resposta"
+          echo "$resposta" | grep -q '"status":"ok"'
+
+      # O índice do repositório entra como volume: as rotas têm o que servir.
+      - name: /versions devolve o manifesto publicado
+        run: |
+          set -euo pipefail
+          curl -sS --fail --max-time 10 http://localhost:8000/versions \
+            | python -c "import json,sys; d=json.load(sys.stdin); print(d['currentVersion'], len(d['versions'][0]['shards']), 'fatias')"
+
+      - name: Logs quando falhar
+        if: failure()
+        run: docker compose logs --no-color
+
+      - name: Derrubar
+        if: always()
+        run: docker compose down --volumes

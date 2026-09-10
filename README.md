@@ -90,9 +90,29 @@ Para conferir se já há índice sem gerar nada:
 uv run lol-assets-indexer check
 ```
 
-> **O índice gerado aparece como não rastreado no `git status`.** É esperado: enquanto o
-> **T-37** ([ADR 0014](docs/adr/0014-onde-vive-o-indice-gerado.md), proposto) não for
-> decidido, ele não é commitado à mão. Quem vai commitá-lo é o workflow do T-13.
+> **O índice gerado é versionado.** O [ADR 0014](docs/adr/0014-onde-vive-o-indice-gerado.md)
+> decidiu que ele vive no `main`, e quem o commita é o workflow do T-13 — não você. Se o
+> `git status` mostrar `apps/web/public/indice` alterado depois de rodar o indexador
+> localmente, é só a sua cópia; descarte com `git checkout -- apps/web/public/indice`.
+
+### A API opcional
+
+O site funciona inteiro sem ela ([ADR 0006](docs/adr/0006-api-como-componente-opcional.md)).
+Se quiser subir mesmo assim:
+
+```bash
+docker compose up --build
+```
+
+`http://localhost:8000/docs` traz o Swagger. As rotas leem o índice do próprio repositório,
+montado como volume somente-leitura — **não há bucket** desde o
+[ADR 0012](docs/adr/0012-onde-guardar-os-assets.md).
+
+Sem Docker, dá para rodar direto:
+
+```bash
+uv run uvicorn lol_assets_api.main:app --reload
+```
 
 ## Fontes dos assets
 
