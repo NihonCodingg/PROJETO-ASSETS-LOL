@@ -1382,9 +1382,27 @@ limite de 500 linhas.
 | **Effort** | médio |
 | **Cobre** | RF-17, RF-18, [ADR 0005](adr/0005-arquitetura-estatica-custo-zero.md) |
 
+> ✅ **Entregue em 09/09/2026.** Três decisões que o ticket não previa e que valem registro:
+>
+> - **Falha de um arquivo não derruba o lote.** Numa seleção de 300, abortar por causa de um
+>   404 é hostil. O que não veio entra num `FALHAS.txt` **dentro do zip**, com motivo e URL —
+>   quem abrir vê o que falta, em vez de contar 299 e não saber qual sumiu.
+> - **Nome repetido não sobrescreve.** `zip.file()` sobrescreve em silêncio: 300 selecionados
+>   virariam 299 arquivos sem erro nenhum. Colisão vira `(2)`, `(3)`.
+> - **Chroma só entra se estiver revelado.** "Tudo do Jax" com os chromas escondidos leva 3
+>   assets; com o controle aberto, 5. Arrastar 43 chromas que a tela não mostrou é a mesma
+>   surpresa que o RF-06 existe para evitar.
+>
+> A §6.1 da Spec dizia "3 minutos e meio" para os ícones de perfil; pela taxa que ela mesma
+> declara (28/s) são **3 min 1 s**. A linha foi corrigida junto com o teste que calcula.
+
 **Entra**
-- Selecionar vários assets e baixar como zip montado com JSZip.
-- Ação "tudo deste campeão" que pré-monta a seleção.
+- Selecionar vários assets e baixar como zip montado com JSZip, em modo `STORE` — JPEG e
+  PNG já vêm comprimidos, e deflatar de novo gasta CPU do usuário para economizar ~0%.
+- Concorrência 4 na busca dos bytes (regra 4 do CLAUDE.md: são as mesmas fontes de
+  terceiros do indexador), e cancelamento.
+- Ação "tudo deste campeão" que pré-monta a seleção, e "selecionar os N filtrados" na
+  navegação por categoria.
 - Acima de 300 arquivos ou 500 MB, **avisar** com estimativa de tempo honesta. Não há mais
   zip por categoria para onde empurrar (T-23 suspenso), então o aviso precisa informar em
   vez de redirecionar. Base medida: ~28 arquivos/s.
@@ -1395,16 +1413,18 @@ limite de 500 linhas.
 - Qualquer chamada a servidor próprio.
 
 **Critérios de aceite**
-1. Selecionar N assets e baixar produz um zip com N arquivos, com os `fileName` corretos.
-2. Nenhuma requisição a servidor próprio durante a montagem.
-3. Acima do limite, aparece o aviso com a estimativa de tempo e ainda assim é possível
-   prosseguir.
-4. "Tudo do Jax" seleciona todos os assets do campeão, chromas incluídos se revelados.
+1. ✅ Selecionar N assets e baixar produz um zip com N arquivos, com os `fileName` corretos —
+   gerado com o JSZip real e **relido** com o JSZip real, bytes conferidos.
+2. ✅ Nenhuma requisição a servidor próprio durante a montagem: o teste lista as URLs
+   pedidas e confere o host de cada uma.
+3. ✅ Acima do limite aparece o aviso com a estimativa, e o botão **continua habilitado**.
+4. ✅ "Tudo do Jax" seleciona todos os assets do campeão, chromas incluídos se revelados.
 
 **Testes que provam**
 - Vitest montando um zip de fixture e lendo de volta a lista de nomes.
 - Teste do limite (aparece o aviso com estimativa, o botão continua habilitado).
 - Teste de rede confirmando ausência de chamada a servidor próprio.
+- Teste de que a concorrência nunca passa de 4.
 
 ---
 

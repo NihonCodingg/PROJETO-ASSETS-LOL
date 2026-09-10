@@ -10,14 +10,22 @@
  * Chromas ficam atrás de um controle (RF-06): eles são 7.037 e não podem poluir
  * nem a grade nem a lista de skins. O controle só existe quando a skin tem
  * chroma.
+ *
+ * **A seleção do lote mora aqui, não nos painéis.** "Tudo do Jax" (RF-18)
+ * atravessa duas listas — a da skin e a dos chromas — e um estado por painel
+ * faria o botão selecionar metade. Chroma só entra se estiver revelado, pela
+ * mesma razão do RF-06: seleção que arrasta 43 chromas escondidos é a surpresa
+ * que o RF-06 existe para evitar.
  */
 
 import { useEffect, useMemo, useState } from "react";
 
 import type { Asset, CatalogChampion, CatalogSkin } from "@lol-assets/schema";
 
+import { BarraDeLote } from "@/components/barra-de-lote";
 import { PainelDeAsset } from "@/components/painel-de-asset";
 import { baseSkin, chromasOf, panelAssets, skinsOf } from "@/lib/champion-panel";
+import { alternar, selecionados, tudoDo } from "@/lib/selecao";
 
 export interface PainelDoCampeaoProps {
   readonly champion: CatalogChampion;
@@ -46,18 +54,30 @@ export function PainelDoCampeao({
   );
   const [skinNum, setSkinNum] = useState(padrao);
   const [chromasAbertos, setChromasAbertos] = useState(false);
+  const [selecao, setSelecao] = useState<ReadonlySet<string>>(new Set());
 
   // A busca pode trocar de campeão com o painel aberto: sem isto, a skin
-  // selecionada ficaria a do campeão anterior.
+  // selecionada ficaria a do campeão anterior — e a seleção levaria assets de
+  // um campeão que já não está na tela.
   useEffect(() => {
     setSkinNum(padrao);
     setChromasAbertos(false);
+    setSelecao(new Set());
   }, [padrao, champion.championKey]);
 
   const lista = useMemo(() => assets ?? [], [assets]);
   const visiveis = useMemo(() => panelAssets(lista, skinNum), [lista, skinNum]);
   const chromas = useMemo(() => chromasOf(lista, skinNum), [lista, skinNum]);
   const skinAtual = doCampeao.find((skin) => skin.skinNum === skinNum);
+
+  // O que o lote pode alcançar: o que está na tela agora. Chroma escondido não
+  // está na tela e por isso não entra nem no "tudo", nem na conta.
+  const alcancaveis = useMemo(
+    () => (chromasAbertos ? [...visiveis, ...chromas] : visiveis),
+    [visiveis, chromas, chromasAbertos],
+  );
+  const noLote = useMemo(() => selecionados(alcancaveis, selecao), [alcancaveis, selecao]);
+  const alternarNoLote = (id: string) => setSelecao((antes) => alternar(antes, id));
 
   return (
     <section aria-label={`Painel de ${champion.names.pt_BR}`}>
@@ -81,12 +101,28 @@ export function PainelDoCampeao({
       {erro && <p role="alert">{erro}</p>}
       {!assets && !erro && <p>carregando os assets…</p>}
 
+      {/* RF-18: um clique pré-monta a seleção do campeão inteiro. */}
+      {assets && alcancaveis.length > 0 && (
+        <button type="button" onClick={() => setSelecao(tudoDo(alcancaveis, chromasAbertos))}>
+          Tudo de {champion.names.pt_BR} ({alcancaveis.length})
+        </button>
+      )}
+
+      <BarraDeLote
+        assets={noLote}
+        rotulo={champion.names.pt_BR}
+        assetsBaseUrl={assetsBaseUrl}
+        onLimpar={() => setSelecao(new Set())}
+      />
+
       {assets && (
         <PainelDeAsset
           titulo={skinAtual?.names.pt_BR ?? champion.names.pt_BR}
           assets={visiveis}
           assetsBaseUrl={assetsBaseUrl}
           onClose={onClose}
+          selecao={selecao}
+          onAlternar={alternarNoLote}
         />
       )}
 
@@ -107,6 +143,8 @@ export function PainelDoCampeao({
               assets={chromas}
               assetsBaseUrl={assetsBaseUrl}
               onClose={() => setChromasAbertos(false)}
+              selecao={selecao}
+              onAlternar={alternarNoLote}
             />
           )}
         </section>

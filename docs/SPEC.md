@@ -281,7 +281,9 @@ preservados.
 montagem vai demorar e mostra progresso. Continua sendo aviso, não bloqueio — mas agora não
 há alternativa pronta para oferecer, então o aviso precisa ser honesto sobre o tempo.
 Medido: ~28 arquivos/s, o que põe a categoria `item` (868) em torno de **31 s** e a de
-ícones de perfil (5.021) em torno de **3 minutos e meio**, com meio GB em memória.
+ícones de perfil (5.042) em torno de **3 minutos**, com meio GB em memória. (Esta linha
+dizia "3 minutos e meio" até 09/09/2026; o número não saía da taxa declarada logo acima, e
+foi corrigido no T-25 junto com o teste que o calcula.)
 
 ---
 
