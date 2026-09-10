@@ -173,8 +173,15 @@ interface ListaVirtualProps {
   readonly fecharComEsc?: boolean;
 }
 
-/** Altura estimada de um cartão. Chute honesto: o design (T-30) mede de verdade. */
-const ALTURA_DO_CARTAO = 132;
+/**
+ * Altura **estimada** de um cartão, só para o primeiro quadro.
+ *
+ * O virtualizador mede cada linha de verdade depois de desenhá-la (ver
+ * `measureElement` abaixo); esta constante existe só para ele dimensionar a
+ * barra de rolagem antes de ter medido qualquer coisa. Errar aqui custa um
+ * salto no scroll, não um cartão por cima do outro.
+ */
+const ALTURA_ESTIMADA = 93;
 
 function ListaVirtual({
   assets,
@@ -193,8 +200,21 @@ function ListaVirtual({
   const virtual = useVirtualizer({
     count: assets.length,
     getScrollElement: () => scroller.current,
-    estimateSize: () => ALTURA_DO_CARTAO,
+    estimateSize: () => ALTURA_ESTIMADA,
     overscan: 6,
+    /**
+     * Mede cada linha de verdade, em vez de assumir uma altura.
+     *
+     * Altura cravada não sobrevive: o cartão muda de forma entre telefone e
+     * desktop, o nome do asset quebra em duas linhas ou não, e os botões descem
+     * quando não cabem. Já quebrou duas vezes — a categoria `emote` chegou a
+     * desenhar imagem por cima do texto da linha seguinte.
+     *
+     * O `|| ALTURA_ESTIMADA` é o que mantém isto testável: o jsdom não faz
+     * layout e devolve 0 para tudo, e uma lista de alturas zero não desenha
+     * nada. Fora do navegador, vale a estimativa.
+     */
+    measureElement: (elemento) => elemento.getBoundingClientRect().height || ALTURA_ESTIMADA,
   });
 
   return (
@@ -213,12 +233,12 @@ function ListaVirtual({
             <li
               key={asset.id}
               data-index={item.index}
+              ref={virtual.measureElement}
               style={{
                 position: "absolute",
                 top: 0,
                 left: 0,
                 width: "100%",
-                height: ALTURA_DO_CARTAO,
                 transform: `translateY(${item.start}px)`,
               }}
             >
@@ -283,12 +303,12 @@ function CartaoDeAsset({
       aria-label={asset.fileName}
       data-tipo={asset.type}
       data-estado={estado}
-      className="grid grid-cols-[auto_1fr_auto] items-center gap-x-3 gap-y-1 border-b border-borda py-2.5"
+      className="flex flex-col items-start gap-2 border-b border-borda px-0.5 py-2.5 sm:flex-row sm:items-center sm:gap-3"
     >
       {onAlternar && (
         <label
           className={cn(
-            "grid size-controle-min cursor-pointer place-items-center self-start rounded-tecla border",
+            "grid size-controle-min flex-none cursor-pointer place-items-center rounded-tecla border",
             "font-mono text-10",
             selecionado
               ? "border-acento bg-acento text-superficie"
@@ -307,34 +327,43 @@ function CartaoDeAsset({
           <span aria-hidden="true">{selecionado ? "✓" : "+"}</span>
         </label>
       )}
-      {!onAlternar && <span />}
-      <h3 className="col-start-2 text-13 font-medium text-texto-forte">
-        {rotuloDoTipo(asset.type)}
-      </h3>
+
       {/* RNF-02: a prévia é o que responde "é esta arte?" antes de baixar 121 KB.
-          `loading="lazy"` porque uma categoria tem centenas de cartões e nem
+          `loading="lazy"` porque uma categoria tem milhares de cartões e nem
           todos passam pela tela.
 
           `<img>` e não `next/image`: a URL é de terceiro e o [ADR 0012] não tem
           storage nem proxy — otimizar exigiria servir os bytes por conta
-          própria, que é exatamente o que o projeto decidiu não fazer. */}
+          própria, que é exatamente o que o projeto decidiu não fazer.
+
+          Altura cravada e `object-contain`: a linha da lista virtual tem altura
+          fixa, e prévia livre a estoura — foi o que fez a categoria `emote`
+          desenhar imagem por cima do texto da linha seguinte. */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src={url}
         alt={`Prévia de ${asset.names.pt_BR}`}
-        width={asset.width}
-        height={asset.height}
         loading="lazy"
         decoding="async"
         data-previa={asset.type}
-        className="col-start-2 row-start-2 max-w-60 rounded-padrao bg-campo"
+        className="h-18 w-24 flex-none rounded-padrao bg-campo object-contain"
       />
-      {/* RF-09: a ficha aparece antes de qualquer clique de download. */}
-      <p className="col-start-2 row-start-3 font-mono text-11 text-texto-suave">
-        {assetSummary(asset)}
-      </p>
 
-      <div className="col-start-3 row-start-1 row-span-3 flex flex-none flex-col gap-1.5 self-center">
+      {/* **Nome primeiro, tipo depois.** No painel de um campeão as linhas são
+          tipos da mesma arte e o nome se repete; numa categoria são 2.338
+          assets diferentes e o tipo se repete. Mostrar os dois é o único
+          arranjo que serve aos dois casos — sem ele, `emote` vira 2.338 linhas
+          escritas "Emote". */}
+      <div className="min-w-0 flex-1">
+        <h3 className="truncate text-13 font-medium text-texto-forte">{asset.names.pt_BR}</h3>
+        <p className="truncate font-mono text-10 uppercase tracking-rotulo text-texto-suave">
+          {rotuloDoTipo(asset.type)}
+        </p>
+        {/* RF-09: a ficha aparece antes de qualquer clique de download. */}
+        <p className="truncate font-mono text-11 text-texto-suave">{assetSummary(asset)}</p>
+      </div>
+
+      <div className="flex w-full flex-none flex-wrap items-center gap-1.5 sm:w-auto sm:justify-end">
         <Botao
           variante="primario"
           tamanho="md"
@@ -356,7 +385,7 @@ function CartaoDeAsset({
       </div>
 
       {estado === "erro" && (
-        <p role="alert" className="col-start-2 text-11 text-acento-mais-claro">
+        <p role="alert" className="flex-none text-11 text-acento-mais-claro">
           Falhou ao baixar. Tente de novo.
         </p>
       )}
