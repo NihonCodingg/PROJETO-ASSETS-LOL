@@ -16,6 +16,10 @@
     "plugins": [{ "name": "next" }],
     "paths": { "@/*": ["./src/*"] }
   },
+  // `next-env.d.ts` e `.next/types` são gerados, e o `next dev` reescreve esta
+  // linha se ela sumir — então ela fica. O que o T-35 mudou foi tirar o
+  // `next-env.d.ts` do controle de versão: padrão ausente não é erro para o
+  // `tsc`, e `src/types` cobre o que ele precisa saber sem os gerados.
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
   "exclude": ["node_modules"]
 }

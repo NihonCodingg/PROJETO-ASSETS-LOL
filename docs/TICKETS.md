@@ -1675,12 +1675,22 @@ limite de 500 linhas.
 - Rodar `next build` na CI. O ticket é sobre o `tsc`, que é o que a CI já roda.
 
 **Critérios de aceite**
-1. `tsc --noEmit` passa com `.next/` ausente e com `next-env.d.ts` ausente.
-2. `next dev` não deixa mais a árvore suja.
-3. A CI continua verde.
+1. ✅ `tsc --noEmit` passa com `.next/` ausente e com `next-env.d.ts` ausente.
+2. ✅ `next dev` não deixa mais a árvore suja — verificado rodando `next build` inteiro: o
+   arquivo é regerado e o `git status` não o vê.
+3. ✅ A CI continua verde.
 
 **Testes que provam**
 - A própria CI, que roda a partir de um clone limpo, sem `.next/`.
+
+> ✅ **Entregue em 09/09/2026.** O `include` do tsconfig **continua o que o Next escreve**,
+> e isso é a parte não óbvia: tirar `next-env.d.ts` de lá parecia mais limpo, mas o
+> `next dev` reescreve o tsconfig e põe a linha de volta — a árvore ficaria suja pelo outro
+> arquivo. Padrão de `include` que aponta para arquivo ausente não é erro para o `tsc`, e é
+> isso que faz a solução simples funcionar.
+>
+> Sobrou uma declaração ambiente própria em `src/types/ambiente.d.ts`, com o que o `tsc` da
+> CI precisa sem os tipos gerados. Hoje é uma linha: `declare module "*.css"`.
 
 ---
 
