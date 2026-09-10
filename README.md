@@ -57,26 +57,45 @@ uv run ruff check . && uv run ruff format --check . && uv run mypy && uv run pyt
 
 ### Abrir o site local
 
-**O front não funciona sem índice.** Ele é um site estático que lê
-`apps/web/public/indice/`, e esse diretório **não está no repositório** — é gerado. Sem
-ele, a página abre no estado de erro dizendo exatamente isso.
-
-Três passos, na ordem:
+**Um comando.** O índice está versionado no repositório desde o
+[ADR 0014](docs/adr/0014-onde-vive-o-indice-gerado.md), então um clone já vem com tudo o que
+o site precisa:
 
 ```bash
-uv run lol-assets-indexer index
 pnpm -C apps/web dev
 ```
 
 E abrir <http://localhost:3000>.
 
-O primeiro comando **baixa o `dragontail` do patch atual: 2,39 GB, ~15 minutos** na
-primeira vez. Ele mede 15.526 imagens e escreve ~10,6 MB de JSON em
-`apps/web/public/indice/`. Não copia imagem nenhuma ([ADR 0012](docs/adr/0012-onde-guardar-os-assets.md)).
+O que você vê: **173 campeões, 2.121 skins e 27.283 assets** do patch 16.18.1, com as
+categorias na barra da esquerda. As imagens vêm direto do ddragon e do cdragon — o
+repositório guarda o índice (~19 MB de JSON), nunca os arquivos
+([ADR 0012](docs/adr/0012-onde-guardar-os-assets.md)).
 
-**`--dry-run` não serve para isto.** Ele mede e valida **sem escrever nada** — é ensaio,
-não geração. Depois de um `--dry-run` o diretório continua vazio e o site continua no
-estado de erro.
+> Se a página abrir dizendo "Falhou ao carregar o catálogo", o índice sumiu do seu clone.
+> `git checkout -- apps/web/public/indice` traz de volta.
+
+### Gerar o índice você mesmo
+
+Só é preciso para trabalhar **no indexador** — o site não depende disso.
+
+```bash
+uv run lol-assets-indexer index
+```
+
+Ele **baixa o `dragontail` do patch atual: 2,39 GB**. Na CI leva ~105 s; numa conexão
+doméstica, bem mais. Mede 15.559 imagens, busca o que só o cdragon tem, e escreve ~19 MB de
+JSON em `apps/web/public/indice/`.
+
+**`--dry-run` não serve para isto.** Ele mede e valida **sem escrever nada** — é ensaio, não
+geração.
+
+Depois de rodar, o `git status` vai mostrar o índice alterado. **Descarte:** quem o commita é
+o workflow, não você.
+
+```bash
+git checkout -- apps/web/public/indice
+```
 
 Se você já tem o tarball em disco, pule o download:
 
@@ -89,11 +108,6 @@ Para conferir se já há índice sem gerar nada:
 ```bash
 uv run lol-assets-indexer check
 ```
-
-> **O índice gerado é versionado.** O [ADR 0014](docs/adr/0014-onde-vive-o-indice-gerado.md)
-> decidiu que ele vive no `main`, e quem o commita é o workflow do T-13 — não você. Se o
-> `git status` mostrar `apps/web/public/indice` alterado depois de rodar o indexador
-> localmente, é só a sua cópia; descarte com `git checkout -- apps/web/public/indice`.
 
 ### A API opcional
 
