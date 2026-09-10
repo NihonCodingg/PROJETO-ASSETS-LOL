@@ -290,7 +290,8 @@ foi corrigido no T-25 junto com o teste que o calcula.)
 ## 6. Contrato do índice
 
 Fonte de verdade: [`packages/schema/schemas/`](../packages/schema/schemas/).
-Versão do contrato: **1.0.0**. Mudança exige ADR e nova versão.
+Versão do contrato: **1.2.0**. Mudança exige ADR e nova versão — o `1.1.0` acrescentou o
+`index-status`, e o `1.2.0` acrescentou a **assinatura de geração** do manifesto (T-38).
 
 | Arquivo | Papel |
 |---|---|

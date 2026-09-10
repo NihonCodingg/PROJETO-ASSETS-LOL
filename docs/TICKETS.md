@@ -1714,14 +1714,74 @@ limite de 500 linhas.
 - Reindexação a pedido pela interface. Não há back-end (ADR 0005).
 
 **Critérios de aceite**
-1. Mesma versão e mesma assinatura → não reindexa.
-2. Mesma versão e assinatura diferente → reindexa, e o motivo diz "assinatura".
-3. Versão diferente → reindexa como hoje.
-4. Manifesto sem assinatura (o publicado hoje) → reindexa, e não quebra.
+1. ✅ Mesma versão e mesma assinatura → não reindexa.
+2. ✅ Mesma versão e assinatura diferente → reindexa, e o motivo diz "assinatura" **e qual**
+   parte mudou: o número do indexador ou quais categorias entraram e saíram.
+3. ✅ Versão diferente → reindexa como hoje, e o motivo fala do patch, não da assinatura.
+4. ✅ Manifesto sem assinatura (o publicado hoje) → reindexa, e não quebra.
+5. ✅ Contrato diferente também reindexa — `schemaVersion` novo é saída nova.
 
 **Testes que provam**
-- Unitários de `decide` para as quatro combinações.
-- Teste do contrato com um manifesto antigo, sem o campo.
+- Unitários de `decide` para as cinco combinações, mais ordem de categorias e precedência.
+- Testes de ponta a ponta no `check`, inclusive o caso real do T-22 (índice sem `emote` nem
+  `ward`), **sem baixar nada** para descobrir.
+
+> ✅ **Entregue em 09/09/2026.** Contrato do índice em **1.2.0**: o manifesto ganhou
+> `generation` com `indexer` (número que sobe à mão) e `categories` (o que a execução
+> emitiu de verdade).
+>
+> **Por que o número é manual.** Hash do código reindexaria 2,39 GB a cada refatoração e a
+> cada bump de dependência. O preço de ser manual é lembrar de subir, e por isso o histórico
+> de cada bump está escrito ao lado da constante: "por que este número é 3?" tem resposta
+> sem `git log`.
+>
+> **`categories` é o que foi emitido, não o que uma execução padrão emitiria.** Rodar com
+> `--sem-cdragon` grava uma assinatura menor, e a próxima execução reindexa por causa
+> disso — que é o certo, porque esse índice está mesmo incompleto.
+>
+> **O índice publicado hoje não tem o campo** (foi gerado antes deste ticket), então a
+> próxima execução agendada vai reindexar uma vez dizendo "sem assinatura de geração". É o
+> comportamento pedido no critério 4.
+
+---
+
+### T-39 — Fatiar `champion` quando ela apertar o RNF-03
+
+| | |
+|---|---|
+| **Objetivo** | Não deixar a fatia da primeira abertura estourar o orçamento do navegador |
+| **Dependências** | T-10 |
+| **Estimativa** | ~120 linhas |
+| **Effort** | médio |
+| **Cobre** | RNF-03 |
+
+> Medido em **09/09/2026**, na primeira publicação com as duas fontes: a fatia `champion`
+> tem **1.488.627 bytes gzip** contra o limite de **1.572.864** do RNF-03 — **5,4% de
+> folga**. A ~2,5 KiB gzip por patch, ela estoura em cerca de **33 patches**, pouco mais de
+> um ano. O [ADR 0015](adr/0015-orcamento-do-indice-depois-da-segunda-fonte.md) subiu o teto
+> do RNF-05 e **não** o do RNF-03 de propósito: este é o limite que o navegador paga, e a
+> saída aqui não é subir o número.
+
+**Entra**
+- `champion` deixa de ser uma fatia e passa a ser N, fatiadas por **tipo** — os 6.994
+  chromas são metade do peso e ninguém os abre por acaso (RF-06).
+- O manifesto passa a declarar as fatias por `(category, type)`, e o `AssetsClient` carrega
+  só a que o painel precisa.
+- A guarda do `limits.py` continua valendo por fatia.
+
+**NÃO entra**
+- Subir o `SHARD_GZIP_LIMIT`. É exatamente o que este ticket existe para não fazer.
+- Fatiar as outras categorias. `profile_icon` está em 336 KiB gzip, com folga de 4×.
+
+**Critérios de aceite**
+1. Nenhuma fatia passa de 1,5 MiB gzip no patch corrente.
+2. Abrir o painel de um campeão carrega menos bytes do que hoje.
+3. Revelar os chromas de uma skin carrega a fatia de chroma, e só então.
+4. O contrato sobe de versão e o front antigo falha explicitamente, não em silêncio.
+
+**Testes que provam**
+- Teste de orçamento por fatia com o índice real.
+- Teste de rede: abrir um campeão não busca a fatia de chroma.
 
 ---
 

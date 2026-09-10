@@ -1,8 +1,16 @@
 {
-  "schemaVersion": "1.1.0",
+  "schemaVersion": "1.2.0",
   "generatedAt": "2026-09-04T00:00:00Z",
   "assetsBaseUrl": "https://assets.exemplo.invalido/lol",
   "currentVersion": "16.17.1",
+  "generation": {
+    "indexer": 1,
+    "categories": [
+      "champion",
+      "item",
+      "rune"
+    ]
+  },
   "versions": [
     {
       "gameVersion": "16.17.1",

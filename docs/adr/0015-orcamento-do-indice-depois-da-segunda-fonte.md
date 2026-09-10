@@ -67,10 +67,15 @@ sobre a medição da época.
 
 **O teto do RNF-05 passa de 15 MiB para 24 MiB de bytes escritos por versão.**
 
-Os outros dois limites do RNF-03 **não mudam**: o catálogo continua em 150 KiB gzip
-(medido: 63,4 KiB) e a maior fatia em 1,5 MiB gzip. A fatia `champion` dobra de tamanho com
-o cdragon e chega a ~1,39 MiB gzip — passa, mas com 8% de folga. Ela é a próxima a apertar,
-e é de propósito que o limite dela não subiu junto: essa é a que o navegador paga.
+Os outros dois limites do RNF-03 **não mudam**: o catálogo continua em 150 KiB gzip e a
+maior fatia em 1,5 MiB gzip. Ela é a próxima a apertar, e é de propósito que o limite dela
+não subiu junto: essa é a que o navegador paga.
+
+> **Medido na publicação real** (16.18.1, execução 34425113348): índice de **19.034.271
+> bytes** (18,15 MiB) — a estimativa deste ADR errou por 660 bytes. Catálogo em 63,5 KiB
+> gzip, com folga larga. A fatia `champion` ficou em **1.488.627 bytes gzip contra o limite
+> de 1.572.864**: passa com **5,4% de folga**, não os 8% estimados acima. A ~2,5 KiB gzip
+> por patch, ela estoura em cerca de **33 patches** — pouco mais de um ano. Ver o T-39.
 
 ## Por quê
 

@@ -4,7 +4,7 @@
  * O JSON Schema em `schemas/` é a fonte de verdade; os tipos abaixo são
  * escritos à mão por enquanto e passam a ser gerados no ticket da etapa 6.
  */
-export const SCHEMA_VERSION = "1.1.0";
+export const SCHEMA_VERSION = "1.2.0";
 
 export type AssetCategory =
   | "champion"
@@ -126,11 +126,19 @@ export interface IndexShard {
   assets: Asset[];
 }
 
+/** T-38: o que o indexador produziria diferente hoje, mesmo no mesmo patch. */
+export interface Generation {
+  indexer: number;
+  categories: string[];
+}
+
 export interface IndexManifest {
   schemaVersion: string;
   generatedAt: string;
   assetsBaseUrl?: string;
   currentVersion: string;
+  /** Ausente nos índices gerados antes do T-38. */
+  generation?: Generation;
   versions: Array<{
     gameVersion: string;
     indexedAt: string;
