@@ -10,7 +10,8 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run --passWithNoTests",
     "e2e": "playwright test",
-    "e2e:ui": "playwright test --ui"
+    "e2e:ui": "playwright test --ui",
+    "conferir:navegador": "playwright test -c playwright.publicacao.config.ts"
   },
   "dependencies": {
     "@lol-assets/schema": "workspace:*",
