@@ -43,7 +43,7 @@ from lol_assets_schema.validators import validate_status
 from lol_assets_indexer import __version__, logging_setup
 from lol_assets_indexer.adapters.cdragon import fetch_champion_assets, fetch_emotes, fetch_wards
 from lol_assets_indexer.adapters.ddragon import latest_version, tarball_url
-from lol_assets_indexer.adapters.records import build_all, build_champion_snapshots
+from lol_assets_indexer.adapters.records import BUILDERS, build_all, build_champion_snapshots
 from lol_assets_indexer.adapters.tarball import TarballScan, scan_tarball
 from lol_assets_indexer.catalog import project_catalog, verify_catalog
 from lol_assets_indexer.github import reporter_from_env
@@ -58,12 +58,25 @@ from lol_assets_indexer.publish.storage import (
     prepare_manifest,
     prepare_shard,
 )
-from lol_assets_indexer.scheduling import decide, indexed_version, write_github_output
+from lol_assets_indexer.scheduling import (
+    current_generation,
+    decide,
+    published,
+    write_github_output,
+)
 from lol_assets_indexer.status import build_status, render_summary
 
 logger = logging.getLogger("lol_assets_indexer.cli")
 
 app = typer.Typer(help="Indexador de assets de League of Legends.", no_args_is_help=True)
+
+#: As categorias que só o cdragon tem. Ver `_categorias_so_do_cdragon`.
+CATEGORIAS_DO_CDRAGON: tuple[AssetCategory, ...] = ("emote", "ward")
+
+#: Tudo o que uma execução completa emite — a lista que entra na assinatura de
+#: geração do T-38. Mora aqui, e não repetida em dois lugares, porque "a lista de
+#: categorias" ser duas listas é exatamente como uma delas fica para trás.
+CATEGORIAS: tuple[AssetCategory, ...] = tuple(BUILDERS) + CATEGORIAS_DO_CDRAGON
 
 #: O que se busca no cdragon quando o ddragon não traz. Ver `_fundir_com_cdragon`.
 TIPOS_DO_CDRAGON: tuple[AssetType, ...] = (
@@ -140,7 +153,9 @@ def check(
         )
         raise typer.Exit(code=1) from erro
 
-    decisao = decide(latest, indexed_version(output))
+    # A assinatura desta execucao usa as categorias que os construtores emitem,
+    # sem indexar nada: e so a tabela BUILDERS mais o que so o cdragon traz.
+    decisao = decide(latest, published(output), generation=current_generation(CATEGORIAS))
     write_github_output(decisao)
     logger.info(
         "decisão de indexação",
@@ -337,6 +352,10 @@ async def _run(
         schema_version=SCHEMA_VERSION,
         generated_at=generated_at,
         current_version=scan.game_version,
+        # T-38: o que foi **realmente** emitido, não o que uma execução padrão
+        # emitiria. Rodar com `--sem-cdragon` grava uma assinatura menor, e a
+        # próxima execução reindexa por causa disso — que é o certo.
+        generation=current_generation(por_categoria),
         versions=[
             ManifestVersion(
                 game_version=scan.game_version,
@@ -413,9 +432,8 @@ async def _categorias_so_do_cdragon(
     settings: IndexerSettings,
 ) -> dict[AssetCategory, list[Asset]]:
     """Emotes e ward skins. Falhar aqui custa a categoria, não a indexação."""
-    buscadores: tuple[tuple[AssetCategory, Any], ...] = (
-        ("emote", fetch_emotes),
-        ("ward", fetch_wards),
+    buscadores: tuple[tuple[AssetCategory, Any], ...] = tuple(
+        zip(CATEGORIAS_DO_CDRAGON, (fetch_emotes, fetch_wards), strict=True)
     )
     resultado: dict[AssetCategory, list[Asset]] = {}
     async with SourceClient(settings) as client:

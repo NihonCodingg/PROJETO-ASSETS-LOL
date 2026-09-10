@@ -19,10 +19,10 @@ __all__ = [
     "__version__",
 ]
 
-__version__ = "1.1.0"
+__version__ = "1.2.0"
 
 #: Versão do contrato do índice. Muda junto com um ADR (regra 12).
-SCHEMA_VERSION = "1.1.0"
+SCHEMA_VERSION = "1.2.0"
 
 # src/lol_assets_schema/__init__.py -> src -> raiz do pacote.
 # Assume instalação editável, que é como o workspace do uv instala os membros.

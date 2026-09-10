@@ -219,6 +219,26 @@ class ManifestVersion(_Base):
     zips: list[ZipRef] | None = None
 
 
+class Generation(_Base):
+    """Assinatura de geração: o que o indexador **produziria diferente** hoje (T-38).
+
+    Existe porque a decisão de reindexar comparava só a versão do jogo, e a Riot
+    publica patch a cada duas semanas. Uma melhoria no indexador — etiquetas de
+    filtro, uma categoria nova — ficava até quinze dias sem chegar ao site, sem
+    ninguém perceber que o índice publicado estava velho **de código** enquanto
+    parecia novo de versão.
+
+    Deliberadamente **não** é hash do código-fonte: isso reindexaria 2,39 GB a
+    cada refatoração e a cada bump de dependência. São dois campos, e os dois
+    mudam só quando a saída muda de verdade.
+    """
+
+    #: Sobe à mão quando um construtor passa a produzir registro diferente.
+    indexer: int = Field(ge=1)
+    #: As categorias que esta execução emite. Categoria nova muda a assinatura.
+    categories: list[str] = Field(min_length=1)
+
+
 class IndexManifest(_Base):
     """O único arquivo de nome fixo no bucket."""
 
@@ -226,6 +246,8 @@ class IndexManifest(_Base):
     generated_at: str
     assets_base_url: str | None = None
     current_version: Version
+    #: Ausente nos índices gerados antes do T-38 — e ausente significa reindexar.
+    generation: Generation | None = None
     versions: list[ManifestVersion] = Field(min_length=1)
 
 

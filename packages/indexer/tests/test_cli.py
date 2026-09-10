@@ -17,6 +17,7 @@ import httpx
 import pytest
 import respx
 from lol_assets_indexer import logging_setup
+from lol_assets_indexer.cli import CATEGORIAS as CATEGORIAS_COMPLETAS
 from lol_assets_indexer.cli import app
 from lol_assets_schema.models import Asset
 from lol_assets_schema.validators import validate_catalog, validate_manifest, validate_shard
@@ -641,10 +642,24 @@ def test_check_diz_para_indexar_quando_nao_ha_indice(destino: Path, tmp_path: Pa
     assert "needs_index=true" in saida.read_text(encoding="utf-8")
 
 
+def _assinatura_completa(destino: Path) -> None:
+    """Finge que a indexação teve as duas fontes.
+
+    Os testes rodam com `--sem-cdragon` para não tocar a rede, e uma indexação
+    sem cdragon não tem `emote` nem `ward` — o que faz o `check` pedir reindexação
+    com razão. Este ajuste isola o que o teste quer medir.
+    """
+    manifesto = destino / "manifest.json"
+    documento = json.loads(manifesto.read_text(encoding="utf-8"))
+    documento["generation"]["categories"] = sorted(CATEGORIAS_COMPLETAS)
+    manifesto.write_text(json.dumps(documento), encoding="utf-8")
+
+
 @respx.mock
 def test_check_nao_baixa_nada(tarball_local: Path, destino: Path) -> None:
     """O ponto do ticket: "nada a fazer" custa segundos, não 2,39 GB."""
     indexar(tarball_local, destino)
+    _assinatura_completa(destino)
     respx.get(f"{DDRAGON}/api/versions.json").mock(return_value=httpx.Response(200, json=[VERSAO]))
     tarball = respx.get(f"{DDRAGON}/cdn/dragontail-{VERSAO}.tgz")
 
@@ -653,6 +668,42 @@ def test_check_nao_baixa_nada(tarball_local: Path, destino: Path) -> None:
     assert resultado.exit_code == 0
     assert "nada a fazer" in resultado.output
     assert not tarball.called
+
+
+@respx.mock
+def test_check_pede_reindexacao_quando_falta_categoria(tarball_local: Path, destino: Path) -> None:
+    """T-38, de ponta a ponta: mesmo patch, índice sem emote e ward.
+
+    É literalmente o que aconteceu com o T-22: o indexador passou a produzir duas
+    categorias novas e o índice publicado ficaria sem elas até a Riot lançar
+    patch. E continua sem baixar nada para descobrir isso.
+    """
+    indexar(tarball_local, destino)  # `--sem-cdragon`: sai sem emote nem ward
+    respx.get(f"{DDRAGON}/api/versions.json").mock(return_value=httpx.Response(200, json=[VERSAO]))
+    tarball = respx.get(f"{DDRAGON}/cdn/dragontail-{VERSAO}.tgz")
+
+    resultado = runner.invoke(app, ["check", "--output", str(destino)])
+
+    assert resultado.exit_code == 0
+    assert "assinatura" in resultado.output
+    assert "emote" in resultado.output and "ward" in resultado.output
+    assert not tarball.called
+
+
+@respx.mock
+def test_check_pede_reindexacao_sem_assinatura(tarball_local: Path, destino: Path) -> None:
+    """O índice publicado hoje foi gerado antes do T-38 e não tem o campo."""
+    indexar(tarball_local, destino)
+    manifesto = destino / "manifest.json"
+    documento = json.loads(manifesto.read_text(encoding="utf-8"))
+    del documento["generation"]
+    manifesto.write_text(json.dumps(documento), encoding="utf-8")
+    respx.get(f"{DDRAGON}/api/versions.json").mock(return_value=httpx.Response(200, json=[VERSAO]))
+
+    resultado = runner.invoke(app, ["check", "--output", str(destino)])
+
+    assert resultado.exit_code == 0
+    assert "sem assinatura" in resultado.output
 
 
 @respx.mock
