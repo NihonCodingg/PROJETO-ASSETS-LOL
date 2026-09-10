@@ -1,11 +1,11 @@
 /**
  * Configuração estática do site.
  *
- * [A DECIDIR] `displayName` é o nome público do produto e ainda não foi escolhido.
- * Ele não pode conter "Riot", "League of Legends" nem "LoL" (KICKOFF §B.5.1).
- * Até a decisão fica um rótulo descritivo neutro. Este é o **único** lugar onde o
- * nome exibido existe — repositório e pacotes internos ficam como estão.
- * Ver docs/adr/0003-nome-publico-do-produto.md.
+ * `displayName` é o nome público do produto, **decidido em 10/09/2026**:
+ * *Biblioteca de Assets* ([ADR 0003](../../../../docs/adr/0003-nome-publico-do-produto.md)).
+ * Ele não contém "Riot", "League of Legends" nem "LoL", como o KICKOFF §B.5.1
+ * exige, e há teste garantindo que continue assim. Este é o **único** lugar onde
+ * o nome exibido existe — repositório e pacotes internos ficam como estão.
  *
  * [A CONFIRMAR] o texto exato do aviso legal precisa ser copiado da Developer API
  * Policy antes do lançamento: https://developer.riotgames.com/docs/lol
@@ -13,7 +13,7 @@
  * como o registro do produto no Developer Portal.
  */
 
-const displayName = "Catálogo de Assets";
+const displayName = "Biblioteca de Assets";
 
 /** Aviso legal exigido pela Riot, derivado do nome exibido. */
 function riotLegalNotice(productName: string): string {

@@ -1,11 +1,162 @@
 @import "tailwindcss";
 
-:root {
-  color-scheme: dark;
+/**
+ * O tema, traduzido de `docs/design/TOKENS.md` — e **só** dele.
+ *
+ * Cada valor abaixo foi lido do design, não estimado, e há um teste que compara
+ * os dois: mexer aqui sem mexer lá (ou o contrário) fica vermelho. É o critério 1
+ * do T-34, e é o que impede o tema de virar uma coleção de cinzas *parecidos*
+ * com o desenho.
+ *
+ * Os nomes são em português porque é o idioma da documentação do projeto
+ * (regra 8 do CLAUDE.md).
+ */
+@theme {
+  /* --- superfícies ------------------------------------------------------ */
+  --color-fundo: #09090b;
+  --color-fundo-barra: #0a0a0c;
+  --color-superficie: #0b0b0d;
+  --color-superficie-alta: #0f0f11;
+  --color-superficie-lote: #101012;
+  --color-campo: #18181b;
+  --color-campo-alto: #212124;
+  --color-selecionado: #1c1c1f;
+  --color-acento-suave: #1e1b2e;
+
+  /* --- bordas ----------------------------------------------------------- */
+  --color-borda: #1c1c1f;
+  --color-borda-forte: #27272a;
+  --color-borda-tecla: #2c2c30;
+  --color-borda-fraca: #3f3f46;
+
+  /* --- texto ------------------------------------------------------------
+   * `texto-fraco` e `texto-tenue` são fiéis ao design e reprovam em AA nos
+   * tamanhos em que ele os usa. Ficam no tema porque o teste de paridade os
+   * verifica, mas não vão para `color` — ver a decisão de 10/09 no TOKENS.md.
+   */
+  --color-texto: #fafafa;
+  --color-texto-forte: #e4e4e7;
+  --color-texto-medio: #d4d4d8;
+  --color-texto-suave: #a1a1aa;
+  --color-texto-fraco: #71717a;
+  --color-texto-tenue: #52525b;
+
+  /* --- acento: um só ---------------------------------------------------- */
+  --color-acento: #8b5cf6;
+  --color-acento-claro: #a78bfa;
+  --color-acento-mais-claro: #c4b5fd;
+
+  /* --- tipografia ------------------------------------------------------- */
+  --font-interface: var(--fonte-interface), system-ui, sans-serif;
+  --font-mono: var(--fonte-mono), ui-monospace, monospace;
+
+  --text-9: 9px;
+  --text-10: 10px;
+  --text-11: 11px;
+  --text-12: 12px;
+  --text-13: 13px;
+  --text-14: 14px;
+  --text-19: 19px;
+
+  --tracking-titulo: -0.02em;
+  --tracking-marca: -0.01em;
+  --tracking-rotulo: 0.06em;
+
+  --leading-apertada: 1.2;
+  --leading-cartao: 1.3;
+  --leading-solta: 1.7;
+
+  /* --- raio ------------------------------------------------------------- */
+  --radius-min: 3px;
+  --radius-tecla: 4px;
+  --radius-marca: 5px;
+  --radius-padrao: 6px;
+  --radius-medio: 8px;
+  --radius-grande: 10px;
+
+  /* --- altura de controle ----------------------------------------------- */
+  --spacing-controle-min: 17px;
+  --spacing-controle-xs: 24px;
+  --spacing-controle-sm: 26px;
+  --spacing-controle-md: 28px;
+  --spacing-controle: 30px;
+  --spacing-controle-lg: 32px;
+  --spacing-barra: 36px;
+  --spacing-paleta-rodape: 34px;
+  --spacing-paleta-campo: 44px;
+  --spacing-cabecalho: 48px;
+  --spacing-bandeja: 52px;
+
+  /* --- largura ---------------------------------------------------------- */
+  --spacing-barra-lateral: 208px;
+  --spacing-busca-max: 560px;
+  /* Largura-alvo do cartão: é ela que decide quantas colunas cabem. */
+  --spacing-alvo-cartao-denso: 152px;
+  --spacing-alvo-cartao-confortavel: 210px;
+
+  /* --- movimento: uma animação no design inteiro ------------------------ */
+  --animate-pulsar: pulsar 1.2s ease-in-out infinite;
 }
 
+@keyframes pulsar {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.45;
+  }
+}
+
+:root {
+  color-scheme: dark;
+  /* Véus e sombra: valores do design que não são cor de token. */
+  --sombra-paleta: 0 24px 60px rgba(0, 0, 0, 0.6);
+  --veu: rgba(9, 9, 11, 0.6);
+  --veu-forte: rgba(9, 9, 11, 0.7);
+  --etiqueta-skin: rgba(30, 27, 46, 0.85);
+}
+
+html,
 body {
-  background-color: #0a0a0a;
-  color: #f5f5f5;
+  margin: 0;
+  height: 100%;
+  background-color: var(--color-fundo);
+  color: var(--color-texto);
+  font-family: var(--font-interface);
+  font-size: var(--text-14);
   -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: rgba(139, 92, 246, 0.35);
+}
+
+/* O anel de foco é o acento. `:focus { outline: none }` sozinho esconderia o
+   foco de quem navega por teclado — o T-28 tem teste para isso. */
+:focus {
+  outline: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-acento);
+  outline-offset: 1px;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-borda-forte);
+  border-radius: var(--radius-padrao);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-borda-fraca);
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
 }

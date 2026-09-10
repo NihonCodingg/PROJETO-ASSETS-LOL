@@ -718,7 +718,7 @@ limite de 500 linhas.
 
 ---
 
-### 🚧 T-34 — Base de componentes e tokens do design
+### ✅ T-34 — Base de componentes e tokens do design
 
 | | |
 |---|---|
@@ -728,9 +728,9 @@ limite de 500 linhas.
 | **Effort** | médio |
 | **Cobre** | RNF-11, [ADR 0011](adr/0011-base-de-componentes-do-front.md) |
 
-> 🚧 **Bloqueado.** Precisa de `docs/design/TOKENS.md`, que só existe depois da ingestão do
-> design. Enquanto isso, T-14, T-15, T-19, T-20, T-24 e T-25 rodam sem ele — ficam
-> com a tela crua, que é o combinado da nota no topo.
+> ✅ **Entregue em 10/09/2026**, com o design em `docs/design/telas/` e o
+> [TOKENS.md](design/TOKENS.md) escrito **por leitura** do arquivo — 22 cores, 6 raios, 11
+> alturas de controle e 7 tamanhos de texto, nenhum estimado.
 
 **Entra**
 - `shadcn/ui` inicializado sobre Radix, com os componentes efetivamente usados copiados
@@ -749,19 +749,51 @@ limite de 500 linhas.
 - Qualquer componente que nenhum ticket use ainda.
 
 **Critérios de aceite**
-1. Os tokens do Tailwind batem, valor a valor, com `docs/design/TOKENS.md` — teste que lê
-   os dois e compara.
-2. Nenhum valor de cor, espaçamento ou raio literal fora do tema; o lint falha se aparecer.
-3. Existe **uma** cor de destaque; um segundo acento faz o teste falhar.
-4. Os pares de token de texto sobre fundo passam em contraste AA.
-5. `cmdk` não filtra: passar uma lista e uma consulta que não casa devolve a lista inteira,
-   porque quem filtra somos nós.
+1. ✅ Os tokens do Tailwind batem, valor a valor, com `docs/design/TOKENS.md` — o teste lê
+   os dois arquivos e compara **nos dois sentidos**: token no tema que não está no documento
+   é token não documentado; token no documento que não está no tema é decisão de design que
+   ninguém implementou.
+2. ✅ Nenhuma **cor** literal fora do tema; o lint falha se aparecer. *Escopo ajustado —
+   ver a nota abaixo.*
+3. ✅ Existe **uma** cor de destaque. O teste compara matiz: os três tons de violeta ficam
+   dentro de 10°, e nenhuma outra cor do tema passa de 0,2 de saturação.
+4. ✅ Os pares de texto × fundo passam em AA — **depois de clarear dois cinzas do design**,
+   que reprovavam. Ver a decisão de 10/09.
+5. ✅ `cmdk` não filtra: consulta que não casa com nada devolve a lista inteira.
 
 **Testes que provam**
-- Teste de paridade tokens × tema do Tailwind.
-- Teste de contraste dos pares.
-- Teste do cmdk com filtro desligado.
-- axe nos componentes primitivos.
+- Teste de paridade tokens × tema do Tailwind (12 casos).
+- Teste de contraste dos pares, com a fórmula da WCAG escrita no teste.
+- Teste do cmdk com filtro desligado, mais a asserção de que a paleta do produto passa
+  `shouldFilter={false}`.
+- 17 testes dos primitivos; o axe cobre os componentes montados nas telas (T-28).
+
+> **Três decisões, todas levadas ao dono antes de executar:**
+>
+> - **Contraste.** `#71717a` (4,12:1) e `#52525b` (2,57:1) reprovam em AA nos tamanhos em
+>   que o design os usa (9–11px). Não era gosto: a suíte de axe do T-28 roda `color-contrast`
+>   como *serious*, então aplicá-los deixaria a CI vermelha. **Decidido: clarear** — metadado
+>   e contagem passam a `#a1a1aa` (6,91:1). Os dois continuam no tema, e o teste garante que
+>   não virem `color`.
+> - **ADR 0002.** O mock rotulava 1280×720 como "corte do cliente" e 1215×717 como "corte
+>   centralizado" — o inverso do contrato medido. **Decidido: corrigir o mapeamento**,
+>   mantendo as palavras do design.
+> - **Rodapé legal** (RF-21). O layout do design é `100vh` sem rodapé. **Decidido: no pé da
+>   barra lateral**, onde ficam as contagens.
+>
+> **Escopo do critério 2, ajustado com justificativa:** a regra de lint cobre **cor**, não
+> espaçamento nem raio. O Tailwind v4 já expressa a escala inteira do design sem valor
+> arbitrário (`px-2.5` são 10px, `p-1.25` são 5px), e uma regra que também proibisse
+> `[Npx]` pegaria `top-[3px]` de posicionamento — ruído sem ganho. O que quebra um sistema de
+> design duplicado é a cor, e é a cor que a regra proíbe. Provado com um arquivo de exemplo:
+> a regra acusa `#8b5cf6` fora do tema.
+>
+> **shadcn/ui:** inicializado (`components.json`, `cn` em `src/lib/utils.ts`) com **um**
+> componente sobre Radix — o `PainelLateral`, sobre `Dialog`. É o único primitivo que
+> justifica a dependência, e justifica bem: diálogo modal escrito à mão erra sempre nas
+> mesmas três coisas — foco que não fica preso, fundo que continua rolando, leitor de tela
+> que continua lendo a página de baixo. Os outros primitivos (botão, campo, tecla, rótulos)
+> são código nosso sobre os tokens, porque não têm comportamento a acertar.
 
 ---
 
