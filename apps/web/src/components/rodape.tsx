@@ -41,7 +41,7 @@ export function Rodape() {
       {categorias.length > 0 && (
         <nav
           aria-label="Categorias"
-          className="flex flex-none flex-row flex-wrap gap-0.5 px-2 md:flex-col md:flex-nowrap"
+          className="flex w-full flex-row flex-wrap gap-0.5 px-2 md:w-auto md:flex-none md:flex-col md:flex-nowrap"
         >
           <span className="hidden px-2 pt-1.5 pb-1 font-mono text-10 uppercase tracking-rotulo text-texto-suave md:block">
             Categorias
@@ -62,7 +62,7 @@ export function Rodape() {
 
       <nav
         aria-label="Seções"
-        className="flex flex-none flex-row gap-0.5 px-2 md:mt-3 md:flex-col"
+        className="flex w-full flex-row flex-wrap gap-0.5 px-2 md:mt-3 md:w-auto md:flex-none md:flex-col md:flex-nowrap"
       >
         <span className="hidden px-2 pt-1.5 pb-1 font-mono text-10 uppercase tracking-rotulo text-texto-suave md:block">
           Projeto

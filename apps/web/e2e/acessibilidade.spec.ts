@@ -293,6 +293,31 @@ test.describe("tela estreita", () => {
     expect(largura).toBeGreaterThan(300);
   });
 
+  test("a categoria aberta também cabe na tela", async ({ page }) => {
+    // Os outros cenários estreitos olham a home. Este olha a categoria, que é
+    // onde a barra lateral vira faixa **e** a lista virtual entra: as duas
+    // coisas que já transbordaram.
+    await irParaHome(page);
+    await page
+      .getByRole("navigation", { name: "Categorias" })
+      .getByRole("button", { name: "Itens" })
+      .click();
+    await expect(page.locator("[data-virtual='sim'] article").first()).toBeVisible();
+
+    const medidas = await page.evaluate(() => {
+      const doc = document.documentElement;
+      const caixas = [...document.querySelectorAll("[data-virtual='sim'] article")].map((a) =>
+        a.getBoundingClientRect(),
+      );
+      return {
+        transborda: doc.scrollWidth > doc.clientWidth + 1,
+        sobrepoe: caixas.slice(1).some((caixa, i) => caixa.top < caixas[i].bottom - 1),
+      };
+    });
+    expect(medidas.transborda, "a categoria transbordou na horizontal").toBe(false);
+    expect(medidas.sobrepoe, "um cartão está por cima do outro").toBe(false);
+  });
+
   test("o axe não reclama em tela estreita", async ({ page }) => {
     await irParaHome(page);
     expect(resumir(await violacoesGraves(page))).toBe("");

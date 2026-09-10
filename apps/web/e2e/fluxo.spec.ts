@@ -328,6 +328,27 @@ test.describe("a origem cruzada", () => {
     expect(cartoes).toBeLessThan(100);
   });
 
+  test("os cartões da lista virtual não se sobrepõem", async ({ page }) => {
+    // O virtualizador posiciona por `top` absoluto. Com altura cravada e
+    // conteúdo mais alto, cada cartão invade o de baixo — foi assim que a
+    // categoria `emote` desenhou imagem por cima do texto seguinte. Agora ele
+    // **mede** cada linha, e este teste é o que garante que continue medindo.
+    await irParaHome(page);
+    await page
+      .getByRole("navigation", { name: "Categorias" })
+      .getByRole("button", { name: "Itens" })
+      .click();
+    await expect(page.locator("[data-virtual='sim'] article").first()).toBeVisible();
+
+    const sobrepoe = await page.evaluate(() => {
+      const caixas = [...document.querySelectorAll("[data-virtual='sim'] article")].map((a) =>
+        a.getBoundingClientRect(),
+      );
+      return caixas.slice(1).some((caixa, i) => caixa.top < caixas[i].bottom - 1);
+    });
+    expect(sobrepoe, "um cartão está por cima do outro").toBe(false);
+  });
+
   test("a grade de campeões some quando uma categoria abre (T-41)", async ({ page }) => {
     await irParaHome(page);
     await page
