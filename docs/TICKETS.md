@@ -2221,6 +2221,36 @@ limite de 500 linhas.
 
 ---
 
+### ⏳ T-44 — A faixa do topo no telefone
+
+| | |
+|---|---|
+| **Objetivo** | Devolver ao conteúdo a altura que a barra lateral come no telefone |
+| **Dependências** | T-33, T-41 |
+| **Estimativa** | ~60 linhas |
+| **Effort** | baixo |
+| **Cobre** | RF-21, RNF-11 |
+
+> Aberto em **10/09/2026**, medido no T-33. Abaixo de `md` a barra lateral vira faixa no
+> topo, e com os dois avisos da Riot ela ocupa **289 px de 844** num telefone de 390 px: um
+> terço da tela antes da busca. São nove categorias em duas linhas, três links e os dois
+> avisos em mono de 10 px.
+>
+> **Depende de design** — o design não desenhou telefone, e o que sai daqui é arquitetura de
+> tela. Por isso fica ⏳, com a medição e os caminhos anotados.
+
+**Caminhos considerados**
+- Categorias numa linha só, com rolagem horizontal — devolve uma linha.
+- Os avisos no fim do conteúdo, em vez do topo. Continuam em toda página, mas deixam de estar
+  à vista antes de rolar — e a política pede "readily visible". Precisa de decisão.
+- Recolher os avisos atrás de um botão — **não**: aviso escondido não é aviso visível.
+
+**Critérios de aceite**
+1. Num telefone de 390×844, a faixa do topo ocupa menos de 200 px.
+2. Os dois avisos continuam em toda página, inteiros — o e2e de tela estreita segue passando.
+
+---
+
 ### ✅ T-36 — Teto de versões guardadas no índice
 
 > **Fechado em 08/09/2026 pela decisão, não pelo código.** Levantado durante o T-11, quando
