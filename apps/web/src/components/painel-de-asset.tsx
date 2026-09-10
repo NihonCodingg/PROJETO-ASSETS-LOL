@@ -58,6 +58,14 @@ export interface PainelDeAssetProps {
    */
   readonly selecao?: ReadonlySet<string>;
   readonly onAlternar?: (id: string) => void;
+  /**
+   * Se `Escape` fecha **este** painel.
+   *
+   * `false` quando ele está dentro de outro que já trata a tecla: dois
+   * ouvintes na mesma tecla fechariam os dois de uma vez, e quem tem chroma
+   * aberto perderia o painel do campeão junto.
+   */
+  readonly fecharComEsc?: boolean;
 }
 
 async function baixarDeVerdade(asset: Asset, comoPng: boolean, url: string): Promise<void> {
@@ -81,17 +89,19 @@ export function PainelDeAsset({
   copiar = copiarDeVerdade,
   selecao,
   onAlternar,
+  fecharComEsc = true,
 }: PainelDeAssetProps) {
   const ordenados = useMemo(() => orderAssets(assets), [assets]);
   const [estados, setEstados] = useState<Record<string, EstadoDoCartao>>({});
 
   useEffect(() => {
+    if (!fecharComEsc) return;
     function aoTeclar(evento: KeyboardEvent) {
       if (evento.key === "Escape") onClose();
     }
     window.addEventListener("keydown", aoTeclar);
     return () => window.removeEventListener("keydown", aoTeclar);
-  }, [onClose]);
+  }, [onClose, fecharComEsc]);
 
   const marcar = useCallback((id: string, estado: EstadoDoCartao) => {
     setEstados((anteriores) => ({ ...anteriores, [id]: estado }));
@@ -149,6 +159,14 @@ interface ListaVirtualProps {
   readonly copiar: (texto: string) => Promise<void>;
   readonly selecao?: ReadonlySet<string>;
   readonly onAlternar?: (id: string) => void;
+  /**
+   * Se `Escape` fecha **este** painel.
+   *
+   * `false` quando ele está dentro de outro que já trata a tecla: dois
+   * ouvintes na mesma tecla fechariam os dois de uma vez, e quem tem chroma
+   * aberto perderia o painel do campeão junto.
+   */
+  readonly fecharComEsc?: boolean;
 }
 
 /** Altura estimada de um cartão. Chute honesto: o design (T-30) mede de verdade. */

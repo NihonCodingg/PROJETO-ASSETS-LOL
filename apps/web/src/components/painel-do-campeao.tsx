@@ -56,6 +56,27 @@ export function PainelDoCampeao({
   const [chromasAbertos, setChromasAbertos] = useState(false);
   const [selecao, setSelecao] = useState<ReadonlySet<string>>(new Set());
 
+  /**
+   * `Escape` mora aqui, e não nos painéis de dentro, por dois motivos.
+   *
+   * O primeiro é ordem: com os chromas abertos, `Escape` fecha os chromas — o
+   * de dentro primeiro, como todo mundo espera. Dois ouvintes na mesma tecla
+   * fechariam os dois de uma vez.
+   *
+   * O segundo é tempo: o painel aparece antes de a fatia chegar, e um ouvinte
+   * que só existe depois dos assets deixa `Escape` sem efeito exatamente
+   * durante a espera, que é quando alguém mais desiste.
+   */
+  useEffect(() => {
+    function aoTeclar(evento: KeyboardEvent) {
+      if (evento.key !== "Escape") return;
+      if (chromasAbertos) setChromasAbertos(false);
+      else onClose();
+    }
+    window.addEventListener("keydown", aoTeclar);
+    return () => window.removeEventListener("keydown", aoTeclar);
+  }, [chromasAbertos, onClose]);
+
   // A busca pode trocar de campeão com o painel aberto: sem isto, a skin
   // selecionada ficaria a do campeão anterior — e a seleção levaria assets de
   // um campeão que já não está na tela.
@@ -123,6 +144,7 @@ export function PainelDoCampeao({
           onClose={onClose}
           selecao={selecao}
           onAlternar={alternarNoLote}
+          fecharComEsc={false}
         />
       )}
 
@@ -145,6 +167,7 @@ export function PainelDoCampeao({
               onClose={() => setChromasAbertos(false)}
               selecao={selecao}
               onAlternar={alternarNoLote}
+              fecharComEsc={false}
             />
           )}
         </section>

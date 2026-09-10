@@ -1536,14 +1536,32 @@ limite de 500 linhas.
   **verificação** automática; o ajuste de paleta é feito lá.
 
 **Critérios de aceite**
-1. Todo o fluxo J1 é possível só com teclado.
-2. axe não reporta violação crítica nem séria.
-3. Toda `img` tem `alt` não vazio.
-4. O foco é visível em todo elemento interativo.
+1. ✅ Todo o fluxo J1 é possível só com teclado — digitar, `Enter` no resultado, `Enter` no
+   botão de baixar, com o arquivo salvo conferido.
+2. ✅ axe não reporta violação crítica nem séria em nenhuma das quatro telas.
+3. ✅ Toda `img` tem `alt` não vazio, e a prévia traz o nome do asset.
+4. ✅ O foco é visível em todo elemento interativo — nenhum controle zera o `outline` do
+   `:focus-visible` sem substituto.
 
 **Testes que provam**
-- axe no Playwright em home, painel e categoria.
-- Teste de percurso por teclado do fluxo completo.
+- axe no Playwright em home, painel, categoria e "Sobre".
+- Percurso por teclado do fluxo completo, mais `Escape`, `/` e a ordem de tabulação.
+
+> ✅ **Entregue em 09/09/2026.** Duas correções de comportamento saíram daqui, e as duas
+> vieram de teste que falhou por motivo certo:
+>
+> - **`Escape` não funcionava antes de a fatia chegar.** O ouvinte morava no
+>   `PainelDeAsset`, que só monta depois dos assets — então a tecla ficava sem efeito
+>   exatamente durante a espera, que é quando alguém mais desiste. Subiu para o
+>   `PainelDoCampeao`.
+> - **`Escape` com chromas abertos fechava tudo de uma vez.** Dois ouvintes na mesma tecla.
+>   Agora é um só, e fecha o de dentro primeiro.
+>
+> O teste do axe **verifica que o axe rodou**: sem isso, uma análise que não injetou
+> devolveria zero violações e o teste passaria provando nada.
+>
+> **O contraste é o critério que este ticket não fecha**, e é de propósito: a paleta chega
+> com o design (T-30). O que fica pronto é a verificação, para o design chegar já sob ela.
 
 ---
 

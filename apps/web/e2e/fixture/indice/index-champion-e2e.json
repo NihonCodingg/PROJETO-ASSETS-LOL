@@ -24,6 +24,50 @@
       "championId": "Jax"
     },
     {
+      "id": "chroma:24009",
+      "type": "chroma",
+      "category": "champion",
+      "names": {
+        "pt_BR": "Jax chroma 9"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Chroma_24009.png",
+      "fileName": "Chroma_24009.png",
+      "width": 270,
+      "height": 303,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 2850,
+      "sha256": "dc29310bfb500c26b4de70bb051011a0611b5438eb16a39de37e6c78ae40f564",
+      "championKey": 24,
+      "championId": "Jax",
+      "skinId": 24009,
+      "skinNum": 9,
+      "parentSkinNum": 0
+    },
+    {
+      "id": "chroma:24010",
+      "type": "chroma",
+      "category": "champion",
+      "names": {
+        "pt_BR": "Jax chroma 10"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Chroma_24010.png",
+      "fileName": "Chroma_24010.png",
+      "width": 270,
+      "height": 303,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 2742,
+      "sha256": "dabf9a2fe52d245c06b6211c828102e159429a4f205a87d6f06b6fb313d2bbf0",
+      "championKey": 24,
+      "championId": "Jax",
+      "skinId": 24010,
+      "skinNum": 10,
+      "parentSkinNum": 0
+    },
+    {
       "id": "splash_centered:24000",
       "type": "splash_centered",
       "category": "champion",

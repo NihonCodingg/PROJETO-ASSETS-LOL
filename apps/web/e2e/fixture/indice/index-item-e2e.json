@@ -1,0 +1,81 @@
+{
+  "schemaVersion": "1.2.0",
+  "gameVersion": "16.18.1",
+  "category": "item",
+  "generatedAt": "2026-09-09T00:00:00Z",
+  "assets": [
+    {
+      "id": "item_icon:1001",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Botas de Velocidade"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_1001.png",
+      "fileName": "Item_1001.png",
+      "width": 64,
+      "height": 64,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 1280,
+      "sha256": "533c1ac1a3344bd64273d3a68785fb062695c43da95a2bd57c673f089f2a2376",
+      "itemId": 1001,
+      "refId": "1001",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:boots"
+      ]
+    },
+    {
+      "id": "item_icon:3031",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Gume do Infinito"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_3031.png",
+      "fileName": "Item_3031.png",
+      "width": 64,
+      "height": 64,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 1339,
+      "sha256": "03d96af393574ded6d673b5d33e086b2b485f463d4927ecdb827c10bc2be632a",
+      "itemId": 3031,
+      "refId": "3031",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:criticalstrike"
+      ]
+    },
+    {
+      "id": "item_icon:2052",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Petisco de Poro"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_2052.png",
+      "fileName": "Item_2052.png",
+      "width": 64,
+      "height": 64,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 1340,
+      "sha256": "11fafa396b58f91f7b2992e628baee3897a8c7cabd2a6db9527eb0fb4d701d40",
+      "itemId": 2052,
+      "refId": "2052",
+      "tags": [
+        "compravel",
+        "mapa:aram",
+        "classe:consumable"
+      ]
+    }
+  ]
+}

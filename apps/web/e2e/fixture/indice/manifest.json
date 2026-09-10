@@ -5,7 +5,8 @@
   "generation": {
     "indexer": 3,
     "categories": [
-      "champion"
+      "champion",
+      "item"
     ]
   },
   "versions": [
@@ -19,14 +20,20 @@
         "skins": 3,
         "bytes": 1588
       },
-      "totalAssets": 11,
-      "totalBytes": 210698,
+      "totalAssets": 16,
+      "totalBytes": 220249,
       "shards": [
         {
           "category": "champion",
           "url": "index-champion-e2e.json",
-          "assets": 11,
-          "bytes": 6993
+          "assets": 13,
+          "bytes": 8239
+        },
+        {
+          "category": "item",
+          "url": "index-item-e2e.json",
+          "assets": 3,
+          "bytes": 2085
         }
       ]
     }

@@ -65,6 +65,14 @@ SKINS = (
     Skin(99, 0, "Lux", True),
 )
 
+#: Três itens com as etiquetas que o T-21 escreve de verdade — é o que faz a
+#: navegação por categoria e os filtros do T-24 terem o que filtrar no e2e.
+ITENS: tuple[tuple[str, str, tuple[str, ...]], ...] = (
+    ("1001", "Botas de Velocidade", ("compravel", "mapa:sr", "mapa:aram", "classe:boots")),
+    ("3031", "Gume do Infinito", ("compravel", "mapa:sr", "classe:criticalstrike")),
+    ("2052", "Petisco de Poro", ("compravel", "mapa:aram", "classe:consumable")),
+)
+
 
 def desenhar(largura: int, altura: int, texto: str, formato: str) -> bytes:
     """Uma imagem legível a olho, para quando um teste falhar e alguém abrir."""
@@ -143,6 +151,28 @@ def main() -> None:
                 "skinNum": num,
                 "isBaseSkin": skin.base,
             }
+            # Chroma só na skin base do Jax: o suficiente para o e2e provar o
+            # RF-06 (não aparece sem alguém pedir) e a ordem do `Escape`.
+            if chave == 24 and num == 0:
+                for chroma in (9, 10):
+                    assets.append(
+                        asset(
+                            asset_id=f"chroma:{chave}{chroma:03d}",
+                            tipo="chroma",
+                            nome_do_arquivo=f"Chroma_{chave}{chroma:03d}.png",
+                            largura=270,
+                            altura=303,
+                            formato="png",
+                            nomes={"pt_BR": f"{skin.nome} chroma {chroma}"},
+                            extra={
+                                **comum,
+                                "skinId": chave * 1000 + chroma,
+                                "skinNum": chroma,
+                                "parentSkinNum": num,
+                            },
+                        )
+                    )
+
             # ADR 0002: o centrado é 1280x720 e o aberto é 1215x717. Nunca o contrário.
             assets.append(
                 asset(
@@ -180,6 +210,23 @@ def main() -> None:
                     extra=de_skin,
                 )
             )
+
+    # Uma segunda categoria: sem ela o e2e não passa pela navegação por
+    # categoria nem pelos filtros do T-24, que são metade da tela.
+    itens: list[dict[str, object]] = []
+    for item_id, nome, etiquetas in ITENS:
+        registro = asset(
+            asset_id=f"item_icon:{item_id}",
+            tipo="item_icon",
+            nome_do_arquivo=f"Item_{item_id}.png",
+            largura=64,
+            altura=64,
+            formato="png",
+            nomes={"pt_BR": nome},
+            extra={"itemId": int(item_id), "refId": item_id, "tags": list(etiquetas)},
+        )
+        registro["category"] = "item"
+        itens.append(registro)
 
     por_id = {a["id"]: a for a in assets}
     catalogo = {
@@ -226,13 +273,27 @@ def main() -> None:
     (INDICE / "index-champion-e2e.json").write_text(
         json.dumps(fatia, ensure_ascii=False, indent=2), encoding="utf-8"
     )
+    (INDICE / "index-item-e2e.json").write_text(
+        json.dumps(
+            {
+                "schemaVersion": "1.2.0",
+                "gameVersion": VERSAO,
+                "category": "item",
+                "generatedAt": "2026-09-09T00:00:00Z",
+                "assets": itens,
+            },
+            ensure_ascii=False,
+            indent=2,
+        ),
+        encoding="utf-8",
+    )
 
     manifesto = {
         "schemaVersion": "1.2.0",
         # Recente de propósito: o aviso do T-31 não pode aparecer e atrapalhar.
         "generatedAt": "2026-09-09T00:00:00Z",
         "currentVersion": VERSAO,
-        "generation": {"indexer": 3, "categories": ["champion"]},
+        "generation": {"indexer": 3, "categories": ["champion", "item"]},
         "versions": [
             {
                 "gameVersion": VERSAO,
@@ -244,15 +305,21 @@ def main() -> None:
                     "skins": len(SKINS),
                     "bytes": (INDICE / "catalog-e2e.json").stat().st_size,
                 },
-                "totalAssets": len(assets),
-                "totalBytes": sum(cast("int", a["bytes"]) for a in assets),
+                "totalAssets": len(assets) + len(itens),
+                "totalBytes": sum(cast("int", a["bytes"]) for a in [*assets, *itens]),
                 "shards": [
                     {
                         "category": "champion",
                         "url": "index-champion-e2e.json",
                         "assets": len(assets),
                         "bytes": (INDICE / "index-champion-e2e.json").stat().st_size,
-                    }
+                    },
+                    {
+                        "category": "item",
+                        "url": "index-item-e2e.json",
+                        "assets": len(itens),
+                        "bytes": (INDICE / "index-item-e2e.json").stat().st_size,
+                    },
                 ],
             }
         ],
@@ -261,7 +328,7 @@ def main() -> None:
         json.dumps(manifesto, ensure_ascii=False, indent=2), encoding="utf-8"
     )
 
-    print(f"{len(assets)} assets, {len(list(IMAGENS.iterdir()))} imagens")
+    print(f"{len(assets) + len(itens)} assets, {len(list(IMAGENS.iterdir()))} imagens")
 
 
 if __name__ == "__main__":
