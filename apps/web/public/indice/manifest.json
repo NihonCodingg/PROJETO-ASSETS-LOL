@@ -1,77 +1,90 @@
 {
-  "schemaVersion": "1.1.0",
-  "generatedAt": "2026-09-10T01:21:15Z",
+  "schemaVersion": "1.2.0",
+  "generatedAt": "2026-09-10T08:09:41Z",
   "currentVersion": "16.18.1",
+  "generation": {
+    "indexer": 3,
+    "categories": [
+      "champion",
+      "emote",
+      "item",
+      "map",
+      "profile_icon",
+      "rune",
+      "summoner_spell",
+      "ward"
+    ]
+  },
   "versions": [
     {
       "gameVersion": "16.18.1",
-      "indexedAt": "2026-09-10T01:21:15Z",
+      "indexedAt": "2026-09-10T08:09:41Z",
       "assetsCopied": false,
       "catalog": {
-        "url": "catalog-cffd0380b510.json",
+        "url": "catalog-c63d0024187c.json",
         "champions": 173,
         "skins": 2121,
         "bytes": 780498,
-        "sha256": "cffd0380b5103ee1ce6e96cf18f8f38a9948cfd7fdf8184250f98dc325f3745a"
+        "sha256": "c63d0024187c9edd2bd481b68acb0f2bdfadad6418c104713d430dfbd8b76d29"
       },
-      "totalAssets": 27283,
-      "totalBytes": 2165722658,
+      "totalAssets": 27313,
+      "totalBytes": 2374683373,
       "shards": [
         {
           "category": "champion",
-          "url": "index-champion-5656a30c0407.json",
-          "assets": 18389,
-          "bytes": 13015967,
-          "sha256": "5656a30c040751da6189c23d810c06e3afba74a601da5938a56057fb8a1a0442"
+          "url": "index-champion-82964b988c6f.json",
+          "assets": 18397,
+          "bytes": 13022464,
+          "sha256": "82964b988c6f17ab7ba7513de6b198fe6a9686e0c69b58037ac6770a0e6fb511"
         },
         {
           "category": "item",
-          "url": "index-item-589fcf72ff50.json",
+          "url": "index-item-71fe4cb7fc47.json",
           "assets": 868,
           "bytes": 625623,
-          "sha256": "589fcf72ff50e09095d29cb279d8ec2dab59ad18d16d857036208ff16cc8297f"
+          "sha256": "71fe4cb7fc47949473a5694da9c69de0d307e7a31bdb51f4b5c86e2c049c557f"
         },
         {
           "category": "summoner_spell",
-          "url": "index-summoner_spell-d501020519ab.json",
+          "url": "index-summoner_spell-ccb9930fcde8.json",
           "assets": 34,
           "bytes": 21724,
-          "sha256": "d501020519aba5d7b532100722120e32190995a223a20c3236ecf8a8743c4e76"
+          "sha256": "ccb9930fcde8c2db527514c462373ca4477f3047cd0759ca63dc639fc7aa7300"
         },
         {
           "category": "profile_icon",
-          "url": "index-profile_icon-0e4036587bc6.json",
+          "url": "index-profile_icon-60f09e3eac3c.json",
           "assets": 5042,
           "bytes": 2728556,
-          "sha256": "0e4036587bc6825733e032306e904f9155b68c9144e28e9390d6dbc8a64aeebc"
+          "sha256": "60f09e3eac3c853d3bcc118d15f733ae877ac7c3b0a3146e0d4a3195d361ff08"
         },
         {
           "category": "rune",
-          "url": "index-rune-e7cb359072a1.json",
+          "url": "index-rune-3a6e655c2a61.json",
           "assets": 77,
           "bytes": 50795,
-          "sha256": "e7cb359072a1dbb0089a9cef9731a170ed87c85dbfbc776ffb852b54eb34012d"
+          "sha256": "3a6e655c2a61455ae0ac10abeda5723fbc121be0a08c769fe954a7fee01e13e7"
         },
         {
           "category": "map",
-          "url": "index-map-6e009d959291.json",
+          "url": "index-map-c0f0771bca64.json",
           "assets": 5,
           "bytes": 2941,
-          "sha256": "6e009d9592915c49a4a626c31f80b42863548eb0b054cede58982a0e86699673"
+          "sha256": "c0f0771bca643dd6cb761545cde718a2ff4e0a562d086239ac848342a8991b03"
         },
         {
           "category": "emote",
-          "url": "index-emote-6df8bb4fe3fa.json",
-          "assets": 2338,
-          "bytes": 1483332,
-          "sha256": "6df8bb4fe3fa3ccc016abf167289848ba04b20b0cb9097137b02dda9f8ffc193"
+          "url": "index-emote-0ac6c6313126.json",
+          "assets": 2358,
+          "bytes": 1496009,
+          "sha256": "0ac6c63131265290185aa43839ac4f81af3f4b3c0d089b6d4efb09e6ad74801a"
         },
         {
           "category": "ward",
-          "url": "index-ward-bd67ffe282bf.json",
-          "assets": 530,
-          "bytes": 322323,
-          "sha256": "bd67ffe282bfc7d7144edfa0de90a8c5a523d1ff999070e61a01138c89e5083b"
+          "url": "index-ward-ecae6e7bdf8e.json",
+          "assets": 532,
+          "bytes": 323607,
+          "sha256": "ecae6e7bdf8ec429cefeb2d5202a3c42c968168667e641ffa4b9f6c122f1e987"
         }
       ]
     }
