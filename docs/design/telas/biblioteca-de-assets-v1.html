@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Lora:wght@400;600&display=swap">
+<style>
+  html, body { margin: 0; height: 100%; background: #171615; color: #eae7e7; font-family: "Lora", Georgia, serif; }
+  * { box-sizing: border-box; }
+  ::selection { background: rgba(225,173,102,0.3); }
+  :focus { outline: none; }
+  :focus-visible { outline: 2px solid #e1ad66; outline-offset: 2px; }
+  a { color: #e1ad66; text-underline-offset: 3px; }
+  a:hover { color: #facb8d; }
+  input::placeholder { color: rgba(234,231,231,0.38); }
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-thumb { background: rgba(234,231,231,0.16); border-radius: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+</style>
+</helmet>
+
+<div style="height:100vh;display:grid;grid-template-columns:236px 1fr;background:#171615;color:#eae7e7;overflow:hidden;position:relative">
+
+  <aside style="display:flex;flex-direction:column;border-right:1px solid rgba(234,231,231,0.14);min-height:0">
+    <div style="display:flex;align-items:center;gap:10px;padding:16px 18px;border-bottom:1px solid rgba(234,231,231,0.14)">
+      <div style="width:30px;height:30px;flex:none;display:grid;place-items:center;border:1px solid rgba(234,231,231,0.28);border-radius:2px;font-family:'Cormorant Garamond',serif;font-size:15px;color:#e1ad66">◈</div>
+      <div style="min-width:0">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:15px;letter-spacing:0.02em">[ nome do produto ]</div>
+        <div style="font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(234,231,231,0.45)">biblioteca de assets</div>
+      </div>
+    </div>
+
+    <div style="padding:16px 12px 8px 18px;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(234,231,231,0.42)">Categorias</div>
+    <nav style="display:flex;flex-direction:column;gap:1px;padding:0 8px;overflow-y:auto;min-height:0">
+      <sc-for list="{{ cats }}" as="c" hint-placeholder-count="8">
+        <button onClick="{{ c.onPick }}" style="display:flex;align-items:center;gap:10px;width:100%;text-align:left;cursor:pointer;background:{{ c.bg }};border:0;border-left:2px solid {{ c.mark }};border-radius:0 3px 3px 0;padding:8px 10px;color:{{ c.fg }};font-family:'Lora',serif;font-size:13px" style-hover="background:rgba(234,231,231,0.06)">
+          <span style="flex:1">{{ c.name }}</span>
+          <span style="font-size:11px;font-variant-numeric:tabular-nums;color:rgba(234,231,231,0.4)">{{ c.count }}</span>
+        </button>
+      </sc-for>
+    </nav>
+
+    <div style="margin-top:auto;padding:14px 18px;border-top:1px solid rgba(234,231,231,0.14);font-size:11px;color:rgba(234,231,231,0.4);line-height:1.7">
+      <div>Catálogo 15.3 · atualizado hoje</div>
+      <div>2.149 skins · 173 campeões</div>
+    </div>
+  </aside>
+
+  <main style="display:flex;flex-direction:column;min-width:0;min-height:0;position:relative">
+
+    <header style="display:flex;align-items:center;gap:14px;padding:12px 20px;border-bottom:1px solid rgba(234,231,231,0.14)">
+      <div style="position:relative;flex:1;max-width:680px;display:flex;align-items:center">
+        <span style="position:absolute;left:12px;font-size:13px;color:rgba(234,231,231,0.45)">⌕</span>
+        <input ref="{{ inputRef }}" value="{{ q }}" onChange="{{ onQuery }}" placeholder="Buscar skin, campeão, item, runa…" autoFocus="{{ true }}" style="width:100%;height:40px;padding:0 96px 0 32px;font-family:'Lora',serif;font-size:15px;color:#eae7e7;caret-color:#e1ad66;background:#201f1d;border:1px solid rgba(234,231,231,0.2);border-radius:4px" style-focus="border-color:#e1ad66">
+        <div style="position:absolute;right:10px;display:flex;align-items:center;gap:6px">
+          <sc-if value="{{ hasQuery }}" hint-placeholder-val="{{ false }}">
+            <button onClick="{{ onClear }}" style="cursor:pointer;background:transparent;border:0;color:rgba(234,231,231,0.5);font-size:13px;padding:4px 6px" style-hover="color:#e1ad66">limpar</button>
+          </sc-if>
+          <kbd style="display:grid;place-items:center;width:22px;height:20px;border:1px solid rgba(234,231,231,0.24);border-radius:3px;font-family:'Lora',serif;font-size:11px;color:rgba(234,231,231,0.55)">/</kbd>
+        </div>
+      </div>
+      <div style="margin-left:auto;font-size:12px;font-variant-numeric:tabular-nums;color:rgba(234,231,231,0.5)">{{ resultLabel }}</div>
+    </header>
+
+    <div style="flex:1;overflow-y:auto;min-height:0;padding:22px 20px {{ scrollPad }}px">
+
+      <sc-if value="{{ showHome }}" hint-placeholder-val="{{ true }}">
+        <div style="max-width:940px">
+          <h1 style="font-family:'Cormorant Garamond',serif;font-weight:400;font-size:38px;line-height:1.1;letter-spacing:-0.015em;margin:8px 0 6px">Busque um asset.</h1>
+          <p style="font-size:14px;color:rgba(234,231,231,0.6);margin:0 0 4px;max-width:60ch">O campo acima já está com o foco. Digite parte do nome da skin ou do campeão — os resultados aparecem enquanto você digita.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:10px 26px;margin:18px 0 26px;font-size:12px;color:rgba(234,231,231,0.5)">
+            <span><kbd style="border:1px solid rgba(234,231,231,0.24);border-radius:3px;padding:1px 6px;font-family:'Lora',serif">/</kbd> voltar à busca</span>
+            <span><kbd style="border:1px solid rgba(234,231,231,0.24);border-radius:3px;padding:1px 6px;font-family:'Lora',serif">Enter</kbd> abrir o primeiro resultado</span>
+            <span><kbd style="border:1px solid rgba(234,231,231,0.24);border-radius:3px;padding:1px 6px;font-family:'Lora',serif">Esc</kbd> fechar o painel</span>
+            <span><kbd style="border:1px solid rgba(234,231,231,0.24);border-radius:3px;padding:1px 6px;font-family:'Lora',serif">Shift</kbd>+clique selecionar para o lote</span>
+          </div>
+          <hr style="height:1px;border:0;background:rgba(234,231,231,0.14);margin:0 0 18px">
+          <div style="font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(234,231,231,0.42);margin-bottom:12px">Ou navegue por categoria</div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px">
+            <sc-for list="{{ cats }}" as="c" hint-placeholder-count="8">
+              <button onClick="{{ c.onPick }}" style="display:flex;flex-direction:column;gap:6px;text-align:left;cursor:pointer;background:transparent;border:1px solid rgba(234,231,231,0.14);border-radius:4px;padding:14px;color:#eae7e7;font-family:'Lora',serif" style-hover="border-color:#e1ad66;background:rgba(225,173,102,0.06)">
+                <span style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:17px">{{ c.name }}</span>
+                <span style="font-size:11px;font-variant-numeric:tabular-nums;color:rgba(234,231,231,0.45)">{{ c.sub }}</span>
+              </button>
+            </sc-for>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ showGrid }}" hint-placeholder-val="{{ false }}">
+        <div>
+          <div style="display:flex;align-items:baseline;gap:12px;margin-bottom:14px">
+            <h2 style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:22px;margin:0">{{ gridTitle }}</h2>
+            <span style="font-size:12px;color:rgba(234,231,231,0.45)">{{ gridSub }}</span>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax({{ tileMin }}px,1fr));gap:14px">
+            <sc-for list="{{ results }}" as="r" hint-placeholder-count="12">
+              <div onClick="{{ r.onOpen }}" style="cursor:pointer;border:1px solid {{ r.border }};border-radius:4px;background:#1b1a19;overflow:hidden;position:relative" style-hover="border-color:#e1ad66">
+                <div style="position:relative;aspect-ratio:{{ r.ratio }};background:linear-gradient(150deg,#2b2826 0%,#1a1918 60%,#221f1d 100%);border-bottom:1px solid rgba(234,231,231,0.12);display:grid;place-items:center;padding:14px">
+                  <span style="font-family:'Cormorant Garamond',serif;font-size:13px;text-align:center;color:rgba(234,231,231,0.3);line-height:1.3">{{ r.plate }}</span>
+                  <span style="position:absolute;left:8px;bottom:8px;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(234,231,231,0.42);border:1px solid rgba(234,231,231,0.18);border-radius:2px;padding:1px 5px;background:rgba(23,22,21,0.6)">{{ r.kind }}</span>
+                  <button onClick="{{ r.onToggle }}" title="Selecionar para o lote" style="position:absolute;right:8px;top:8px;width:22px;height:22px;display:grid;place-items:center;cursor:pointer;border:1px solid {{ r.checkBorder }};border-radius:3px;background:{{ r.checkBg }};color:{{ r.checkFg }};font-size:12px;font-family:'Lora',serif" style-hover="border-color:#e1ad66">{{ r.checkMark }}</button>
+                </div>
+                <div style="padding:9px 11px 11px">
+                  <div style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:15px;line-height:1.25;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ r.name }}</div>
+                  <div style="display:flex;justify-content:space-between;gap:8px;margin-top:3px;font-size:11px;color:rgba(234,231,231,0.45);font-variant-numeric:tabular-nums">
+                    <span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ r.sub }}</span>
+                    <span style="flex:none">{{ r.variantCount }}</span>
+                  </div>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ showNone }}" hint-placeholder-val="{{ false }}">
+        <div style="padding:60px 0;text-align:center">
+          <div style="font-family:'Cormorant Garamond',serif;font-size:24px;margin-bottom:6px">Nenhum asset para “{{ q }}”</div>
+          <div style="font-size:13px;color:rgba(234,231,231,0.5)">Tente o nome do campeão, ou parte do nome da skin.</div>
+        </div>
+      </sc-if>
+    </div>
+
+    <sc-if value="{{ trayOpen }}" hint-placeholder-val="{{ false }}">
+      <div style="position:absolute;left:0;right:0;bottom:0;z-index:30;display:flex;align-items:center;gap:14px;padding:12px 20px;background:#201f1d;border-top:1px solid rgba(234,231,231,0.2);box-shadow:0 -12px 32px rgba(0,0,0,0.45)">
+        <div style="display:flex;flex-direction:column;gap:1px;flex:none">
+          <span style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:15px;font-variant-numeric:tabular-nums">{{ trayTitle }}</span>
+          <span style="font-size:11px;color:rgba(234,231,231,0.5);font-variant-numeric:tabular-nums">{{ traySize }}</span>
+        </div>
+        <div style="display:flex;gap:6px;overflow-x:auto;flex:1;min-width:0;padding:2px 0">
+          <sc-for list="{{ trayItems }}" as="t" hint-placeholder-count="3">
+            <div style="display:flex;align-items:center;gap:8px;flex:none;border:1px solid rgba(234,231,231,0.16);border-radius:3px;padding:4px 6px 4px 8px;background:#1b1a19">
+              <span style="font-size:11px;max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ t.name }}</span>
+              <span style="font-size:10px;color:rgba(234,231,231,0.42);font-variant-numeric:tabular-nums;flex:none">{{ t.kb }}</span>
+              <button onClick="{{ t.onRemove }}" title="Remover" style="cursor:pointer;background:transparent;border:0;color:rgba(234,231,231,0.5);font-size:12px;padding:0 2px;font-family:'Lora',serif" style-hover="color:#e1ad66">×</button>
+            </div>
+          </sc-for>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;flex:none">
+          <button onClick="{{ onClearTray }}" style="cursor:pointer;background:transparent;border:1px solid rgba(234,231,231,0.2);border-radius:4px;padding:8px 14px;color:#eae7e7;font-family:'Cormorant Garamond',serif;font-weight:600;font-size:14px" style-hover="background:rgba(234,231,231,0.07)">Limpar</button>
+          <button onClick="{{ onZip }}" style="cursor:pointer;background:transparent;border:1px solid #e1ad66;border-radius:4px;padding:8px 16px;color:#e1ad66;font-family:'Cormorant Garamond',serif;font-weight:600;font-size:14px" style-hover="background:rgba(225,173,102,0.14)">{{ zipLabel }}</button>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ panelOpen }}" hint-placeholder-val="{{ false }}">
+      <div>
+        <div onClick="{{ onClosePanel }}" style="position:absolute;inset:0;z-index:20;background:rgba(10,9,9,0.5)"></div>
+        <section style="position:absolute;top:0;right:0;bottom:0;z-index:25;width:min(560px,72%);display:flex;flex-direction:column;background:#201f1d;border-left:1px solid rgba(234,231,231,0.2);box-shadow:-16px 0 40px rgba(0,0,0,0.5)">
+
+          <div style="display:flex;align-items:flex-start;gap:12px;padding:16px 18px;border-bottom:1px solid rgba(234,231,231,0.14)">
+            <div style="min-width:0;flex:1">
+              <div style="font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:#e1ad66;margin-bottom:3px">{{ panel.kicker }}</div>
+              <h2 style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:26px;line-height:1.1;margin:0">{{ panel.title }}</h2>
+              <div style="font-size:12px;color:rgba(234,231,231,0.5);margin-top:3px;font-variant-numeric:tabular-nums">{{ panel.meta }}</div>
+            </div>
+            <button onClick="{{ onClosePanel }}" title="Fechar (Esc)" style="flex:none;width:30px;height:30px;display:grid;place-items:center;cursor:pointer;background:transparent;border:1px solid rgba(234,231,231,0.2);border-radius:4px;color:rgba(234,231,231,0.65);font-family:'Lora',serif;font-size:14px" style-hover="border-color:#e1ad66;color:#e1ad66">×</button>
+          </div>
+
+          <div style="flex:1;overflow-y:auto;min-height:0">
+            <div style="padding:16px 18px 0">
+              <div style="aspect-ratio:16/9;background:linear-gradient(150deg,#2b2826 0%,#1a1918 60%,#221f1d 100%);border:6px solid #262423;outline:1px solid rgba(234,231,231,0.14);display:grid;place-items:center">
+                <span style="font-family:'Cormorant Garamond',serif;font-size:14px;color:rgba(234,231,231,0.32);text-align:center;padding:0 20px">{{ panel.plate }}</span>
+              </div>
+            </div>
+
+            <sc-if value="{{ panel.hasSkins }}" hint-placeholder-val="{{ true }}">
+              <div style="padding:18px 18px 0">
+                <div style="display:flex;align-items:center;gap:10px;margin-bottom:9px">
+                  <span style="font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(234,231,231,0.5)">Skin</span>
+                  <span style="font-size:12px;font-variant-numeric:tabular-nums;color:rgba(234,231,231,0.5)">{{ panel.skinPos }}</span>
+                  <div style="margin-left:auto;display:flex;gap:6px">
+                    <button onClick="{{ onPrevSkin }}" title="Skin anterior" style="width:28px;height:26px;display:grid;place-items:center;cursor:pointer;background:transparent;border:1px solid rgba(234,231,231,0.2);border-radius:3px;color:#eae7e7;font-family:'Lora',serif;font-size:12px" style-hover="border-color:#e1ad66;color:#e1ad66">‹</button>
+                    <button onClick="{{ onNextSkin }}" title="Próxima skin" style="width:28px;height:26px;display:grid;place-items:center;cursor:pointer;background:transparent;border:1px solid rgba(234,231,231,0.2);border-radius:3px;color:#eae7e7;font-family:'Lora',serif;font-size:12px" style-hover="border-color:#e1ad66;color:#e1ad66">›</button>
+                  </div>
+                </div>
+                <div style="display:flex;gap:8px;overflow-x:auto;padding-bottom:8px">
+                  <sc-for list="{{ skinStrip }}" as="s" hint-placeholder-count="6">
+                    <button onClick="{{ s.onPick }}" style="flex:none;width:104px;cursor:pointer;background:transparent;border:1px solid {{ s.border }};border-radius:3px;padding:0;overflow:hidden;text-align:left;color:#eae7e7;font-family:'Lora',serif" style-hover="border-color:#e1ad66">
+                      <div style="aspect-ratio:4/3;background:linear-gradient(150deg,#2b2826,#1a1918);display:grid;place-items:center;font-family:'Cormorant Garamond',serif;font-size:11px;color:rgba(234,231,231,0.28)">{{ s.short }}</div>
+                      <div style="padding:5px 6px;font-size:10px;line-height:1.25;height:34px;overflow:hidden;color:{{ s.fg }}">{{ s.name }}</div>
+                    </button>
+                  </sc-for>
+                </div>
+              </div>
+            </sc-if>
+
+            <div style="padding:16px 18px 22px">
+              <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+                <span style="font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(234,231,231,0.5)">Variantes</span>
+                <span style="font-size:11px;color:rgba(234,231,231,0.42)">cortes diferentes da mesma arte — confira a resolução</span>
+              </div>
+              <div style="display:flex;flex-direction:column">
+                <sc-for list="{{ variants }}" as="v" hint-placeholder-count="4">
+                  <div style="display:grid;grid-template-columns:1fr auto;gap:10px 14px;align-items:center;padding:12px 0;border-top:1px solid rgba(234,231,231,0.14)">
+                    <div style="min-width:0">
+                      <div style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:15px">{{ v.label }}</div>
+                      <div style="display:flex;flex-wrap:wrap;gap:4px 10px;margin-top:4px;font-size:11px;font-variant-numeric:tabular-nums;color:rgba(234,231,231,0.6)">
+                        <span style="color:#e1ad66">{{ v.res }}</span>
+                        <span>·</span>
+                        <span>{{ v.fmt }}</span>
+                        <span>·</span>
+                        <span>{{ v.kb }}</span>
+                        <span>·</span>
+                        <span style="color:rgba(234,231,231,0.45)">{{ v.note }}</span>
+                      </div>
+                    </div>
+                    <div style="display:flex;gap:6px;flex:none">
+                      <button onClick="{{ v.onOriginal }}" style="cursor:pointer;background:transparent;border:1px solid #e1ad66;border-radius:4px;padding:7px 12px;color:#e1ad66;font-family:'Cormorant Garamond',serif;font-weight:600;font-size:13px;white-space:nowrap" style-hover="background:rgba(225,173,102,0.14)">{{ v.originalLabel }}</button>
+                      <sc-if value="{{ v.showPng }}" hint-placeholder-val="{{ true }}">
+                        <button onClick="{{ v.onPng }}" style="cursor:pointer;background:transparent;border:1px solid rgba(234,231,231,0.24);border-radius:4px;padding:7px 12px;color:#eae7e7;font-family:'Cormorant Garamond',serif;font-weight:600;font-size:13px;white-space:nowrap" style-hover="background:rgba(234,231,231,0.08)">Baixar PNG</button>
+                      </sc-if>
+                    </div>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+          </div>
+
+          <div style="display:flex;align-items:center;gap:12px;padding:11px 18px;border-top:1px solid rgba(234,231,231,0.2);background:#1b1a19">
+            <span style="font-size:11px;color:rgba(234,231,231,0.5);flex:1;min-width:0">{{ panel.status }}</span>
+            <button onClick="{{ onTogglePanelItem }}" style="cursor:pointer;background:transparent;border:1px solid rgba(234,231,231,0.24);border-radius:4px;padding:7px 12px;color:#eae7e7;font-family:'Cormorant Garamond',serif;font-weight:600;font-size:13px" style-hover="border-color:#e1ad66;color:#e1ad66">{{ panel.trayLabel }}</button>
+          </div>
+        </section>
+      </div>
+    </sc-if>
+  </main>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:900},&quot;initialQuery&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Estado inicial&quot;},&quot;density&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;confortável&quot;,&quot;compacta&quot;],&quot;default&quot;:&quot;confortável&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Grade&quot;}}">
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.inputRef = React.createRef();
+    this.CHAMPS = [
+      ["Ahri", ["Ahri Clássica","Ahri Dinastia","Ahri Meia-Noite","Ahri Popstar","Ahri Guardiã Estelar","Ahri Espírito Selvagem","Ahri K/DA","Ahri Mata Antiga","Ahri Arcana","Ahri Coven","Ahri Prestígio K/DA","Ahri Lua Imortal"]],
+      ["Jinx", ["Jinx Clássica","Jinx Mafiosa","Jinx Rainha Cerejeira","Jinx Estrela Negra","Jinx Ambiciosa","Jinx Odisseia","Jinx Arcane","Jinx Vencedora","Jinx Coelhinha"]],
+      ["Yasuo", ["Yasuo Clássico","Yasuo Alto Nascido","Yasuo Odisseia","Yasuo Guerreiro Nightbringer","Yasuo Lâmina de Sangue","Yasuo Cavaleiro Verdejante","Yasuo Chamas Espirituais"]],
+      ["Lux", ["Lux Clássica","Lux Feiticeira Elementalista","Lux Bruxa Estelar","Lux Comandante Psíquica","Lux Guardiã Estelar","Lux Rainha do Gelo","Lux Batalha Acadêmica","Lux Porcelana"]],
+      ["Thresh", ["Thresh Clássico","Thresh Deep Terror","Thresh Sangue da Lua","Thresh Alto Executor","Thresh Espírito Guardião","Thresh Mata Antiga"]],
+      ["Ezreal", ["Ezreal Clássico","Ezreal Explorador Nottingham","Ezreal Pulsefire","Ezreal Batalha Acadêmica","Ezreal Estrela Negra","Ezreal Porcelana","Ezreal Espadachim"]],
+      ["Katarina", ["Katarina Clássica","Katarina Sangrenta","Katarina Mercenária","Katarina Lâmina de Aço","Katarina Coven","Katarina Batalha Acadêmica"]],
+      ["Zed", ["Zed Clássico","Zed Shockblade","Zed Projeto","Zed Campeão Galáctico","Zed Dinastia Espiritual","Zed Sangue da Lua"]],
+      ["Akali", ["Akali Clássica","Akali Prestígio K/DA","Akali Cavaleira Estelar","Akali Sombra do Crepúsculo","Akali Coven","Akali Sentinela"]],
+      ["Sett", ["Sett Clássico","Sett Mafioso","Sett Herói Obsidiana","Sett Sangue da Lua","Sett Batalha Acadêmica"]],
+      ["Kai'Sa", ["Kai'Sa Clássica","Kai'Sa K/DA","Kai'Sa Prestígio K/DA","Kai'Sa Vazio Iridescente","Kai'Sa Arcada","Kai'Sa Porcelana"]],
+      ["Vi", ["Vi Clássica","Vi Neon","Vi Punho de Aço","Vi Arcane","Vi Guardiã Estelar","Vi Herói Obsidiana"]],
+      ["Jhin", ["Jhin Clássico","Jhin Cravo Sangrento","Jhin Alto Nascido","Jhin Escuridão Estelar","Jhin Máscara Divina"]],
+      ["Senna", ["Senna Clássica","Senna Alto Nascido","Senna Sentinela","Senna Rainha do Gelo","Senna Bruxa Estelar"]]
+    ];
+    this.CATS = [
+      ["Campeões", 2149, "2.149 skins · 173 campeões"],
+      ["Itens", 312, "312 ícones de item"],
+      ["Runas", 63, "63 runas e estilos"],
+      ["Emotes", 428, "428 emotes"],
+      ["Ícones de perfil", 1874, "1.874 ícones"],
+      ["Ranks", 10, "10 emblemas de elo"],
+      ["Ward skins", 196, "196 sentinelas"],
+      ["Mapas", 12, "12 mapas e minimapas"]
+    ];
+    this.OTHER = {
+      "Itens": ["Lâmina do Rei Destruído","Coifa de Rabadon","Cutelo Negro","Guardião Solar","Lembrança do Zhonya","Manoplas de Trindade","Elmo de Sol Nascente","Arco Curvo de Runaan"],
+      "Runas": ["Conquistador","Eletrocutar","Cometa Arcano","Aperto do Morto-Vivo","Primeiro Ataque","Colheita Sombria","Precisão","Feitiçaria"],
+      "Emotes": ["Sorriso Provocante","Choro Falso","Vitória Coroada","Polegar Erguido","Poro Feliz","Riso Maligno","Coração Partido","Sinal de Paz"],
+      "Ícones de perfil": ["Ícone 4568 · Temporada 14","Ícone 4211 · Poro","Ícone 3902 · Mestre","Ícone 4890 · Aniversário","Ícone 3020 · Yordle","Ícone 4102 · Coven","Ícone 4770 · Arcane","Ícone 3600 · Pré-temporada"],
+      "Ranks": ["Ferro","Bronze","Prata","Ouro","Platina","Esmeralda","Diamante","Mestre","Grão-Mestre","Desafiante"],
+      "Ward skins": ["Sentinela Poro","Sentinela Coven","Sentinela Odisseia","Sentinela Estrela Negra","Sentinela Porcelana","Sentinela Arcana","Sentinela Mata Antiga","Sentinela Lunar"],
+      "Mapas": ["Fenda do Invocador — Verão","Fenda do Invocador — Inverno","Minimapa da Fenda","Abismo dos Uivos","Minimapa do Abismo","Arena","Fenda — Vista Aérea","Fenda — Camada de Selva"]
+    };
+    this.state = { q: this.props.initialQuery ?? "", cat: "Campeões", openId: null, skinIdx: 0, tray: [], toast: "" };
+  }
+
+  componentDidMount() {
+    const el = this.inputRef.current;
+    if (el) el.focus();
+    this.onKey = (e) => {
+      if (e.key === "/" && document.activeElement !== this.inputRef.current) {
+        e.preventDefault();
+        if (this.inputRef.current) { this.inputRef.current.focus(); this.inputRef.current.select(); }
+      } else if (e.key === "Escape") {
+        if (this.state.openId) this.setState({ openId: null });
+      } else if (e.key === "Enter" && document.activeElement === this.inputRef.current) {
+        const first = this.rows()[0];
+        if (first) this.open(first.id);
+      }
+    };
+    window.addEventListener("keydown", this.onKey);
+  }
+  componentWillUnmount() { window.removeEventListener("keydown", this.onKey); }
+
+  allSkins() {
+    const out = [];
+    this.CHAMPS.forEach(([champ, skins]) => skins.forEach((name, i) => {
+      out.push({ id: champ + "/" + i, name, champ, idx: i, total: skins.length, kind: "skin" });
+    }));
+    return out;
+  }
+
+  rows() {
+    const q = this.state.q.trim().toLowerCase();
+    if (q) {
+      const hits = this.allSkins().filter(s => (s.name + " " + s.champ).toLowerCase().includes(q));
+      const others = [];
+      Object.keys(this.OTHER).forEach(cat => this.OTHER[cat].forEach((name, i) => {
+        if (name.toLowerCase().includes(q)) others.push({ id: cat + "/" + i, name, champ: cat, idx: i, total: 0, kind: cat });
+      }));
+      return hits.concat(others).slice(0, 48);
+    }
+    if (this.state.cat !== "Campeões") {
+      return this.OTHER[this.state.cat].map((name, i) => ({ id: this.state.cat + "/" + i, name, champ: this.state.cat, idx: i, total: 0, kind: this.state.cat }));
+    }
+    return [];
+  }
+
+  find(id) {
+    if (!id) return null;
+    const cut = id.lastIndexOf("/");
+    const group = id.slice(0, cut), i = Number(id.slice(cut + 1));
+    const ch = this.CHAMPS.find(c => c[0] === group);
+    if (ch) return { id, name: ch[1][i], champ: group, idx: i, total: ch[1].length, kind: "skin" };
+    if (this.OTHER[group]) return { id, name: this.OTHER[group][i], champ: group, idx: i, total: 0, kind: group };
+    return null;
+  }
+
+  open(id) {
+    const it = this.find(id);
+    this.setState({ openId: id, skinIdx: it ? it.idx : 0 });
+  }
+
+  variantsFor(item) {
+    if (!item) return [];
+    if (item.kind === "skin") {
+      const seed = item.name.length + item.idx * 7;
+      return [
+        { label: "Splash — corte do cliente", res: "1280×720", fmt: "JPG", kb: 402 + seed * 3, note: "arte completa, 16:9" },
+        { label: "Splash — corte centralizado", res: "1215×717", fmt: "JPG", kb: 361 + seed * 2, note: "mesma arte, sem margem direita" },
+        { label: "Tela de carregamento", res: "308×560", fmt: "JPG", kb: 84 + seed, note: "retrato vertical" },
+        { label: "Tile quadrado", res: "512×512", fmt: "PNG", kb: 196 + seed * 2, note: "recorte do rosto" },
+        { label: "Ícone circular", res: "120×120", fmt: "PNG", kb: 18 + Math.round(seed / 2), note: "avatar, fundo transparente" }
+      ];
+    }
+    const seed = item.name.length;
+    return [
+      { label: "Original do catálogo", res: "512×512", fmt: "PNG", kb: 62 + seed * 2, note: "fundo transparente" },
+      { label: "Tamanho do cliente", res: "64×64", fmt: "PNG", kb: 6 + Math.round(seed / 3), note: "usado na HUD" },
+      { label: "Vetor de origem", res: "escalável", fmt: "SVG", kb: 24 + seed, note: "traço editável" }
+    ];
+  }
+
+  toggleTray(item, e) {
+    if (e && e.stopPropagation) e.stopPropagation();
+    const v = this.variantsFor(item)[0];
+    this.setState(s => ({
+      tray: s.tray.some(t => t.id === item.id)
+        ? s.tray.filter(t => t.id !== item.id)
+        : s.tray.concat([{ id: item.id, name: item.name, kb: v ? v.kb : 0 }])
+    }));
+  }
+
+  fmtKb(n) { return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ".") + " KB"; }
+
+  renderVals() {
+    const st = this.state;
+    const dense = (this.props.density ?? "confortável") === "compacta";
+    const rows = this.rows();
+    const item = this.find(st.openId);
+    const champ = item && item.kind === "skin" ? this.CHAMPS.find(c => c[0] === item.champ) : null;
+    const shown = champ ? { id: item.champ + "/" + st.skinIdx, name: champ[1][st.skinIdx], champ: item.champ, idx: st.skinIdx, total: champ[1].length, kind: "skin" } : item;
+    const inTray = shown ? st.tray.some(t => t.id === shown.id) : false;
+    const trayKb = st.tray.reduce((a, t) => a + t.kb, 0);
+    const q = st.q.trim();
+
+    return {
+      inputRef: this.inputRef,
+      q: st.q,
+      hasQuery: st.q.length > 0,
+      onQuery: (e) => this.setState({ q: e.target.value, cat: "Campeões" }),
+      onClear: () => { this.setState({ q: "" }); if (this.inputRef.current) this.inputRef.current.focus(); },
+      tileMin: dense ? 148 : 196,
+      scrollPad: st.tray.length ? 86 : 26,
+
+      cats: this.CATS.map(([name, count, sub]) => ({
+        name, sub, count: count.toLocaleString("pt-BR"),
+        bg: st.cat === name && !q ? "rgba(225,173,102,0.10)" : "transparent",
+        mark: st.cat === name && !q ? "#e1ad66" : "transparent",
+        fg: st.cat === name && !q ? "#e1ad66" : "#eae7e7",
+        onPick: () => this.setState({ cat: name, q: "", openId: null })
+      })),
+
+      showHome: !q && st.cat === "Campeões",
+      showGrid: rows.length > 0,
+      showNone: !!q && rows.length === 0,
+      resultLabel: q ? rows.length + " resultado" + (rows.length === 1 ? "" : "s") + " para “" + q + "”" : st.cat + " · " + (this.CATS.find(c => c[0] === st.cat) || [0, 0])[1].toLocaleString("pt-BR") + " itens",
+      gridTitle: q ? "Resultados" : st.cat,
+      gridSub: q ? "ordenados por proximidade do nome" : "catálogo completo",
+
+      results: rows.map(r => {
+        const checked = st.tray.some(t => t.id === r.id);
+        return {
+          name: r.name,
+          sub: r.kind === "skin" ? r.champ + " · skin " + (r.idx + 1) + "/" + r.total : "catálogo",
+          plate: r.name,
+          kind: r.kind === "skin" ? "splash" : r.kind,
+          ratio: r.kind === "skin" ? "16/9" : "1/1",
+          variantCount: this.variantsFor(r).length + " var.",
+          border: st.openId === r.id ? "#e1ad66" : "rgba(234,231,231,0.14)",
+          checkBorder: checked ? "#e1ad66" : "rgba(234,231,231,0.28)",
+          checkBg: checked ? "rgba(225,173,102,0.9)" : "rgba(23,22,21,0.65)",
+          checkFg: checked ? "#171615" : "rgba(234,231,231,0.55)",
+          checkMark: checked ? "✓" : "+",
+          onOpen: (e) => { if (e && e.shiftKey) { this.toggleTray(r, e); return; } this.open(r.id); },
+          onToggle: (e) => this.toggleTray(r, e)
+        };
+      }),
+
+      panelOpen: !!shown,
+      onClosePanel: () => this.setState({ openId: null }),
+      panel: shown ? {
+        kicker: shown.kind === "skin" ? shown.champ : shown.kind,
+        title: shown.name,
+        meta: shown.kind === "skin" ? "5 variantes · splash, carregamento, tile, ícone" : this.variantsFor(shown).length + " variantes",
+        plate: shown.name + " — pré-visualização",
+        hasSkins: !!champ,
+        skinPos: champ ? (st.skinIdx + 1) + " de " + champ[1].length : "",
+        status: "Clique em baixar: o arquivo vai direto para a pasta de downloads.",
+        trayLabel: inTray ? "✓ na bandeja" : "+ bandeja"
+      } : null,
+      onTogglePanelItem: () => this.toggleTray(shown, null),
+      onPrevSkin: () => champ && this.setState({ skinIdx: (st.skinIdx - 1 + champ[1].length) % champ[1].length }),
+      onNextSkin: () => champ && this.setState({ skinIdx: (st.skinIdx + 1) % champ[1].length }),
+      skinStrip: champ ? champ[1].map((name, i) => ({
+        name, short: name.split(" ").slice(-1)[0],
+        border: i === st.skinIdx ? "#e1ad66" : "rgba(234,231,231,0.16)",
+        fg: i === st.skinIdx ? "#e1ad66" : "rgba(234,231,231,0.62)",
+        onPick: () => this.setState({ skinIdx: i })
+      })) : [],
+
+      variants: this.variantsFor(shown).map(v => ({
+        label: v.label, res: v.res, fmt: v.fmt, note: v.note, kb: this.fmtKb(v.kb),
+        originalLabel: v.fmt === "PNG" ? "Baixar original (PNG)" : "Baixar original (" + v.fmt + ")",
+        showPng: v.fmt !== "PNG",
+        onOriginal: () => {}, onPng: () => {}
+      })),
+
+      trayOpen: st.tray.length > 0,
+      trayTitle: st.tray.length + (st.tray.length === 1 ? " asset selecionado" : " assets selecionados"),
+      traySize: this.fmtKb(trayKb) + " · .zip",
+      zipLabel: "Baixar .zip",
+      trayItems: st.tray.map(t => ({ name: t.name, kb: this.fmtKb(t.kb), onRemove: () => this.setState(s => ({ tray: s.tray.filter(x => x.id !== t.id) })) })),
+      onClearTray: () => this.setState({ tray: [] }),
+      onZip: () => {}
+    };
+  }
+}
+
+</script>
+</body>
+</html>

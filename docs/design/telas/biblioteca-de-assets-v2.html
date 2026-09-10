@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+  html, body { margin: 0; height: 100%; background: #09090b; color: #fafafa;
+    font-family: "Inter Tight", system-ui, sans-serif; font-size: 14px; -webkit-font-smoothing: antialiased; }
+  * { box-sizing: border-box; }
+  ::selection { background: rgba(139,92,246,0.35); }
+  :focus { outline: none; }
+  :focus-visible { outline: 2px solid #8b5cf6; outline-offset: 1px; }
+  a { color: #a78bfa; text-decoration: none; }
+  a:hover { color: #c4b5fd; }
+  input::placeholder { color: #52525b; }
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-thumb { background: #27272a; border-radius: 6px; }
+  ::-webkit-scrollbar-thumb:hover { background: #3f3f46; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  @keyframes pulse { 0%,100% { opacity: 1 } 50% { opacity: 0.45 } }
+</style>
+</helmet>
+
+<div style="height:100vh;display:grid;grid-template-columns:208px 1fr;background:#09090b;color:#fafafa;overflow:hidden;position:relative">
+
+  <aside style="display:flex;flex-direction:column;min-height:0;border-right:1px solid #1c1c1f;background:#0b0b0d">
+    <div style="display:flex;align-items:center;gap:8px;height:48px;padding:0 14px;flex:none">
+      <div style="width:20px;height:20px;border-radius:5px;background:#8b5cf6;flex:none"></div>
+      <span style="font-size:13px;font-weight:600;letter-spacing:-0.01em;color:#e4e4e7">[ nome do produto ]</span>
+    </div>
+
+    <div style="padding:6px 8px 4px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:#52525b">Categorias</div>
+    <nav style="display:flex;flex-direction:column;gap:2px;padding:0 8px;overflow-y:auto;min-height:0">
+      <sc-for list="{{ cats }}" as="c" hint-placeholder-count="8">
+        <button onClick="{{ c.onPick }}" style="display:flex;align-items:center;gap:8px;width:100%;text-align:left;cursor:pointer;background:{{ c.bg }};border:0;border-radius:6px;padding:6px 8px;color:{{ c.fg }};font-family:'Inter Tight',sans-serif;font-size:13px" style-hover="background:#18181b">
+          <span style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ c.name }}</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#52525b">{{ c.count }}</span>
+        </button>
+      </sc-for>
+    </nav>
+
+    <div style="margin-top:auto;padding:12px 14px;font-family:'JetBrains Mono',monospace;font-size:10px;line-height:1.7;color:#52525b;flex:none">
+      <div>catálogo 15.3</div>
+      <div>{{ statSkins }} skins · {{ statChamps }} campeões</div>
+    </div>
+  </aside>
+
+  <main style="display:flex;flex-direction:column;min-width:0;min-height:0;position:relative">
+
+    <header style="display:flex;align-items:center;gap:10px;height:48px;padding:0 14px;flex:none;border-bottom:1px solid #1c1c1f">
+      <div style="position:relative;flex:1;max-width:560px;display:flex;align-items:center">
+        <span style="position:absolute;left:9px;font-family:'JetBrains Mono',monospace;font-size:12px;color:#52525b">⌕</span>
+        <input ref="{{ inputRef }}" value="{{ q }}" onChange="{{ onQuery }}" placeholder="Buscar skin, campeão, item, runa…" autoFocus="{{ true }}" style="width:100%;height:32px;padding:0 78px 0 26px;font-family:'Inter Tight',sans-serif;font-size:13px;color:#fafafa;caret-color:#8b5cf6;background:#18181b;border:1px solid #27272a;border-radius:6px" style-focus="border-color:#8b5cf6">
+        <div style="position:absolute;right:6px;display:flex;align-items:center;gap:4px">
+          <sc-if value="{{ hasQuery }}" hint-placeholder-val="{{ false }}">
+            <button onClick="{{ onClear }}" style="cursor:pointer;background:transparent;border:0;color:#71717a;font-family:'JetBrains Mono',monospace;font-size:11px;padding:2px 4px" style-hover="color:#fafafa">esc</button>
+          </sc-if>
+          <kbd style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#71717a;background:#212124;border:1px solid #2c2c30;border-radius:4px;padding:1px 5px">/</kbd>
+        </div>
+      </div>
+      <button onClick="{{ onOpenPalette }}" style="display:flex;align-items:center;gap:6px;cursor:pointer;height:32px;padding:0 10px;background:transparent;border:1px solid #27272a;border-radius:6px;color:#a1a1aa;font-family:'Inter Tight',sans-serif;font-size:12px" style-hover="background:#18181b;color:#fafafa">
+        Paleta
+        <kbd style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#71717a">⌘K</kbd>
+      </button>
+      <div style="margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:11px;color:#71717a">{{ resultLabel }}</div>
+    </header>
+
+    <div style="display:flex;align-items:center;gap:10px;height:36px;padding:0 14px;flex:none;border-bottom:1px solid #1c1c1f;background:#0a0a0c">
+      <span style="font-size:12px;font-weight:500;color:#e4e4e7">{{ gridTitle }}</span>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#52525b">{{ gridSub }}</span>
+      <div style="margin-left:auto;display:flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:10px;color:#52525b">
+        <span>/ buscar</span>
+        <span>↑↓ navegar</span>
+        <span>↵ abrir</span>
+        <span>⇧clique selecionar</span>
+      </div>
+    </div>
+
+    <div ref="{{ scrollRef }}" data-grid-scroll="1" onScroll="{{ onScroll }}" style="flex:1;overflow-y:auto;min-height:0;padding:8px 14px {{ scrollPad }}px">
+      <sc-if value="{{ loading }}" hint-placeholder-val="{{ true }}">
+        <div style="display:grid;grid-template-columns:repeat({{ cols }},1fr);gap:6px">
+          <sc-for list="{{ skeletons }}" as="s" hint-placeholder-count="24">
+            <div style="border-radius:6px;overflow:hidden">
+              <div style="aspect-ratio:16/9;background:#18181b;animation:pulse 1.2s ease-in-out {{ s.delay }}s infinite"></div>
+              <div style="height:8px;width:70%;margin:8px 0 6px;border-radius:3px;background:#18181b;animation:pulse 1.2s ease-in-out {{ s.delay }}s infinite"></div>
+            </div>
+          </sc-for>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ showGrid }}" hint-placeholder-val="{{ false }}">
+        <div style="position:relative;height:{{ virtualHeight }}px">
+          <sc-for list="{{ rows }}" as="row" hint-placeholder-count="6">
+            <div style="position:absolute;left:0;right:0;top:{{ row.top }}px;display:grid;grid-template-columns:repeat({{ cols }},1fr);gap:6px">
+              <sc-for list="{{ row.items }}" as="r" hint-placeholder-count="8">
+                <div onClick="{{ r.onOpen }}" style="cursor:pointer;border-radius:6px;position:relative;outline:{{ r.ring }};outline-offset:2px">
+                  <div style="position:relative;aspect-ratio:{{ r.ratio }};border-radius:6px;overflow:hidden;background:{{ r.plateBg }}">
+                    <div style="position:absolute;inset:0;display:grid;place-items:center;padding:8px;font-size:10px;line-height:1.25;text-align:center;color:rgba(250,250,250,0.34)">{{ r.name }}</div>
+                    <button onClick="{{ r.onToggle }}" title="Selecionar para o lote (⇧clique)" style="position:absolute;left:5px;top:5px;width:17px;height:17px;display:grid;place-items:center;cursor:pointer;border:1px solid {{ r.checkBorder }};border-radius:4px;background:{{ r.checkBg }};color:{{ r.checkFg }};font-size:10px;font-family:'JetBrains Mono',monospace;opacity:{{ r.checkOpacity }}" style-hover="opacity:1;border-color:#8b5cf6">{{ r.checkMark }}</button>
+                    <sc-if value="{{ r.isSkin }}" hint-placeholder-val="{{ false }}">
+                      <span style="position:absolute;right:5px;bottom:5px;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.06em;text-transform:uppercase;color:#c4b5fd;background:rgba(30,27,46,0.85);border-radius:3px;padding:1px 4px">skin</span>
+                    </sc-if>
+                  </div>
+                  <div style="padding:5px 1px 0;font-size:11px;line-height:1.3;color:#d4d4d8;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ r.name }}</div>
+                  <div style="padding:0 1px;font-family:'JetBrains Mono',monospace;font-size:10px;color:{{ r.subColor }};overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ r.sub }}</div>
+                </div>
+              </sc-for>
+            </div>
+          </sc-for>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ showNone }}" hint-placeholder-val="{{ false }}">
+        <div style="padding:80px 0;text-align:center">
+          <div style="font-size:14px;font-weight:500;margin-bottom:4px">Nenhum asset para “{{ q }}”</div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#71717a">tente o nome do campeão ou parte do nome da skin</div>
+        </div>
+      </sc-if>
+    </div>
+
+    <sc-if value="{{ trayOpen }}" hint-placeholder-val="{{ false }}">
+      <div style="position:absolute;left:0;right:0;bottom:0;z-index:30;display:flex;align-items:center;gap:12px;height:52px;padding:0 14px;background:#101012;border-top:1px solid #27272a">
+        <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#a1a1aa;flex:none">{{ trayTitle }} · {{ traySize }}</span>
+        <div style="display:flex;gap:5px;overflow-x:auto;flex:1;min-width:0">
+          <sc-for list="{{ trayItems }}" as="t" hint-placeholder-count="3">
+            <div style="display:flex;align-items:center;gap:6px;flex:none;background:#18181b;border:1px solid #27272a;border-radius:6px;padding:3px 5px 3px 8px">
+              <span style="font-size:11px;max-width:150px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#d4d4d8">{{ t.name }}</span>
+              <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#52525b;flex:none">{{ t.kb }}</span>
+              <button onClick="{{ t.onRemove }}" title="Remover" style="cursor:pointer;background:transparent;border:0;color:#71717a;font-size:11px;padding:0 2px;font-family:'JetBrains Mono',monospace" style-hover="color:#fafafa">×</button>
+            </div>
+          </sc-for>
+        </div>
+        <div style="display:flex;align-items:center;gap:6px;flex:none">
+          <button onClick="{{ onClearTray }}" style="cursor:pointer;height:30px;padding:0 10px;background:transparent;border:1px solid #27272a;border-radius:6px;color:#a1a1aa;font-family:'Inter Tight',sans-serif;font-size:12px" style-hover="background:#18181b;color:#fafafa">Limpar</button>
+          <button onClick="{{ onZip }}" style="cursor:pointer;height:30px;padding:0 12px;background:#8b5cf6;border:0;border-radius:6px;color:#0b0b0d;font-family:'Inter Tight',sans-serif;font-size:12px;font-weight:600" style-hover="background:#a78bfa">Baixar .zip</button>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ panelOpen }}" hint-placeholder-val="{{ false }}">
+      <div>
+        <div onClick="{{ onClosePanel }}" style="position:absolute;inset:0;z-index:20;background:rgba(9,9,11,0.6)"></div>
+        <section style="position:absolute;top:0;right:0;bottom:0;z-index:25;width:min(540px,74%);display:flex;flex-direction:column;background:#0b0b0d;border-left:1px solid #27272a">
+
+          <div style="display:flex;align-items:flex-start;gap:10px;padding:14px;flex:none;border-bottom:1px solid #1c1c1f">
+            <div style="min-width:0;flex:1">
+              <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:#8b5cf6;margin-bottom:3px">{{ panel.kicker }}</div>
+              <h2 style="font-family:'Inter Tight',sans-serif;font-weight:600;font-size:19px;letter-spacing:-0.02em;line-height:1.2;margin:0">{{ panel.title }}</h2>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#71717a;margin-top:3px">{{ panel.meta }}</div>
+            </div>
+            <button onClick="{{ onClosePanel }}" title="Fechar (Esc)" style="flex:none;width:26px;height:26px;display:grid;place-items:center;cursor:pointer;background:transparent;border:1px solid #27272a;border-radius:6px;color:#a1a1aa;font-family:'JetBrains Mono',monospace;font-size:12px" style-hover="background:#18181b;color:#fafafa">×</button>
+          </div>
+
+          <div style="flex:1;overflow-y:auto;min-height:0">
+            <div style="padding:14px 14px 0">
+              <div style="aspect-ratio:16/9;border-radius:8px;background:{{ panel.plateBg }};display:grid;place-items:center">
+                <span style="font-size:11px;color:rgba(250,250,250,0.32);text-align:center;padding:0 24px">{{ panel.title }}</span>
+              </div>
+            </div>
+
+            <sc-if value="{{ panel.hasSkins }}" hint-placeholder-val="{{ true }}">
+              <div style="padding:14px 14px 0">
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:7px">
+                  <span style="font-size:12px;font-weight:500;color:#e4e4e7">{{ panel.skinsLabel }}</span>
+                  <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#52525b">{{ panel.skinPos }}</span>
+                  <div style="margin-left:auto;display:flex;gap:4px">
+                    <button onClick="{{ onPrevSkin }}" title="Anterior" style="width:24px;height:24px;display:grid;place-items:center;cursor:pointer;background:transparent;border:1px solid #27272a;border-radius:6px;color:#a1a1aa;font-family:'JetBrains Mono',monospace;font-size:11px" style-hover="background:#18181b;color:#fafafa">‹</button>
+                    <button onClick="{{ onNextSkin }}" title="Próxima" style="width:24px;height:24px;display:grid;place-items:center;cursor:pointer;background:transparent;border:1px solid #27272a;border-radius:6px;color:#a1a1aa;font-family:'JetBrains Mono',monospace;font-size:11px" style-hover="background:#18181b;color:#fafafa">›</button>
+                  </div>
+                </div>
+                <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;max-height:232px;overflow-y:auto;padding:1px 1px 4px">
+                  <sc-for list="{{ skinStrip }}" as="s" hint-placeholder-count="8">
+                    <button onClick="{{ s.onPick }}" style="cursor:pointer;background:transparent;border:0;padding:0;text-align:left;color:#fafafa;font-family:'Inter Tight',sans-serif;outline:{{ s.ring }};outline-offset:2px;border-radius:6px">
+                      <div style="aspect-ratio:16/9;border-radius:6px;background:{{ s.plateBg }};display:grid;place-items:center;font-size:9px;color:rgba(250,250,250,0.3);padding:4px;text-align:center">{{ s.short }}</div>
+                      <div style="padding:4px 1px 0;font-size:10px;line-height:1.25;height:26px;overflow:hidden;color:{{ s.fg }}">{{ s.name }}</div>
+                    </button>
+                  </sc-for>
+                </div>
+              </div>
+            </sc-if>
+
+            <div style="padding:12px 14px 18px">
+              <div style="display:flex;align-items:center;gap:8px;margin-bottom:2px">
+                <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.06em;text-transform:uppercase;color:#71717a">Variantes</span>
+                <span style="font-size:11px;color:#52525b">cortes diferentes da mesma arte — confira a resolução</span>
+              </div>
+              <div style="display:flex;flex-direction:column">
+                <sc-for list="{{ variants }}" as="v" hint-placeholder-count="5">
+                  <div style="display:grid;grid-template-columns:1fr auto;gap:8px 12px;align-items:center;padding:10px 0;border-bottom:1px solid #1c1c1f">
+                    <div style="min-width:0">
+                      <div style="font-size:13px;font-weight:500;color:#e4e4e7">{{ v.label }}</div>
+                      <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#a1a1aa;margin-top:2px">{{ v.spec }}</div>
+                      <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#52525b">{{ v.note }}</div>
+                    </div>
+                    <div style="display:flex;gap:6px;flex:none">
+                      <button onClick="{{ v.onOriginal }}" style="cursor:pointer;height:28px;padding:0 10px;background:#8b5cf6;border:0;border-radius:6px;color:#0b0b0d;font-family:'Inter Tight',sans-serif;font-size:12px;font-weight:600;white-space:nowrap" style-hover="background:#a78bfa">{{ v.originalLabel }}</button>
+                      <sc-if value="{{ v.showPng }}" hint-placeholder-val="{{ true }}">
+                        <button onClick="{{ v.onPng }}" style="cursor:pointer;height:28px;padding:0 10px;background:transparent;border:1px solid #27272a;border-radius:6px;color:#e4e4e7;font-family:'Inter Tight',sans-serif;font-size:12px;white-space:nowrap" style-hover="background:#18181b">Baixar PNG</button>
+                      </sc-if>
+                    </div>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+          </div>
+
+          <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;flex:none;border-top:1px solid #1c1c1f">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#52525b;flex:1;min-width:0">o arquivo vai direto para a pasta de downloads</span>
+            <button onClick="{{ onTogglePanelItem }}" style="cursor:pointer;height:28px;padding:0 10px;background:transparent;border:1px solid #27272a;border-radius:6px;color:#e4e4e7;font-family:'Inter Tight',sans-serif;font-size:12px" style-hover="background:#18181b">{{ panel.trayLabel }}</button>
+          </div>
+        </section>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ paletteOpen }}" hint-placeholder-val="{{ false }}">
+      <div>
+        <div onClick="{{ onClosePalette }}" style="position:absolute;inset:0;z-index:40;background:rgba(9,9,11,0.7)"></div>
+        <div style="position:absolute;z-index:45;top:14%;left:50%;transform:translateX(-50%);width:min(620px,88%);background:#0f0f11;border:1px solid #27272a;border-radius:10px;box-shadow:0 24px 60px rgba(0,0,0,0.6);overflow:hidden">
+          <div style="display:flex;align-items:center;gap:8px;padding:0 12px;height:44px;border-bottom:1px solid #1c1c1f">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#52525b">⌕</span>
+            <input ref="{{ paletteRef }}" value="{{ pq }}" onChange="{{ onPaletteQuery }}" placeholder="Buscar em 2.149 skins e 2.895 assets…" style="flex:1;height:100%;background:transparent;border:0;color:#fafafa;caret-color:#8b5cf6;font-family:'Inter Tight',sans-serif;font-size:14px">
+            <kbd style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#71717a;background:#18181b;border:1px solid #27272a;border-radius:4px;padding:1px 5px">esc</kbd>
+          </div>
+          <div style="max-height:320px;overflow-y:auto;padding:6px">
+            <sc-for list="{{ paletteItems }}" as="p" hint-placeholder-count="6">
+              <button onClick="{{ p.onPick }}" onMouseEnter="{{ p.onHover }}" style="display:flex;align-items:center;gap:10px;width:100%;text-align:left;cursor:pointer;background:{{ p.bg }};border:0;border-radius:6px;padding:7px 8px;color:#fafafa;font-family:'Inter Tight',sans-serif">
+                <span style="width:44px;height:25px;flex:none;border-radius:4px;background:{{ p.plateBg }}"></span>
+                <span style="flex:1;min-width:0;font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ p.name }}</span>
+                <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#71717a;flex:none">{{ p.meta }}</span>
+              </button>
+            </sc-for>
+            <sc-if value="{{ paletteEmpty }}" hint-placeholder-val="{{ false }}">
+              <div style="padding:26px 0;text-align:center;font-family:'JetBrains Mono',monospace;font-size:11px;color:#52525b">sem resultados</div>
+            </sc-if>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;padding:0 12px;height:34px;border-top:1px solid #1c1c1f;font-family:'JetBrains Mono',monospace;font-size:10px;color:#52525b">
+            <span>↑↓ navegar</span><span>↵ abrir painel</span><span>esc fechar</span>
+          </div>
+        </div>
+      </div>
+    </sc-if>
+  </main>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:900},&quot;initialQuery&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Estado inicial&quot;},&quot;density&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;densa&quot;,&quot;confortável&quot;],&quot;default&quot;:&quot;densa&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Grade&quot;}}">
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.inputRef = React.createRef();
+    this.paletteRef = React.createRef();
+    this.scrollEl = null;
+    this.setScrollEl = (el) => {
+      if (!el || el === this.scrollEl) return;
+      this.scrollEl = el;
+      this.measure();
+      requestAnimationFrame(() => this.measure());
+      if (window.ResizeObserver) {
+        if (this.ro) this.ro.disconnect();
+        this.ro = new ResizeObserver(() => this.measure());
+        this.ro.observe(el);
+      }
+    };
+
+    const NAMED = {
+      "Ahri": ["Ahri Clássica","Ahri Dinastia","Ahri Meia-Noite","Ahri Popstar","Ahri Guardiã Estelar","Ahri Espírito Selvagem","Ahri K/DA","Ahri Mata Antiga","Ahri Arcana","Ahri Coven","Ahri Prestígio K/DA","Ahri Lua Imortal"],
+      "Jinx": ["Jinx Clássica","Jinx Mafiosa","Jinx Rainha Cerejeira","Jinx Estrela Negra","Jinx Ambiciosa","Jinx Odisseia","Jinx Arcane","Jinx Vencedora","Jinx Coelhinha"],
+      "Yasuo": ["Yasuo Clássico","Yasuo Alto Nascido","Yasuo Odisseia","Yasuo Nightbringer","Yasuo Lâmina de Sangue","Yasuo Cavaleiro Verdejante","Yasuo Chamas Espirituais"],
+      "Lux": ["Lux Clássica","Lux Feiticeira Elementalista","Lux Bruxa Estelar","Lux Comandante Psíquica","Lux Guardiã Estelar","Lux Rainha do Gelo","Lux Batalha Acadêmica","Lux Porcelana"],
+      "Thresh": ["Thresh Clássico","Thresh Terror Profundo","Thresh Sangue da Lua","Thresh Alto Executor","Thresh Espírito Guardião","Thresh Mata Antiga"],
+      "Ezreal": ["Ezreal Clássico","Ezreal Explorador Nottingham","Ezreal Pulsefire","Ezreal Batalha Acadêmica","Ezreal Estrela Negra","Ezreal Porcelana","Ezreal Espadachim"]
+    };
+    const CHAMPS = ["Aatrox","Ahri","Akali","Akshan","Alistar","Ambessa","Amumu","Anivia","Annie","Aphelios","Ashe","Aurelion Sol","Aurora","Azir","Bard","Bel'Veth","Blitzcrank","Brand","Braum","Briar","Caitlyn","Camille","Cassiopeia","Cho'Gath","Corki","Darius","Diana","Dr. Mundo","Draven","Ekko","Elise","Evelynn","Ezreal","Fiddlesticks","Fiora","Fizz","Galio","Gangplank","Garen","Gnar","Gragas","Graves","Gwen","Hecarim","Heimerdinger","Hwei","Illaoi","Irelia","Ivern","Janna","Jarvan IV","Jax","Jayce","Jhin","Jinx","K'Sante","Kai'Sa","Kalista","Karma","Karthus","Kassadin","Katarina","Kayle","Kayn","Kennen","Kha'Zix","Kindred","Kled","Kog'Maw","LeBlanc","Lee Sin","Leona","Lillia","Lissandra","Lucian","Lulu","Lux","Malphite","Malzahar","Maokai","Master Yi","Mel","Milio","Miss Fortune","Mordekaiser","Morgana","Naafiri","Nami","Nasus","Nautilus","Neeko","Nidalee","Nilah","Nocturne","Nunu e Willump","Olaf","Orianna","Ornn","Pantheon","Poppy","Pyke","Qiyana","Quinn","Rakan","Rammus","Rek'Sai","Rell","Renata Glasc","Renekton","Rengar","Riven","Rumble","Ryze","Samira","Sejuani","Senna","Seraphine","Sett","Shaco","Shen","Shyvana","Singed","Sion","Sivir","Skarner","Smolder","Sona","Soraka","Swain","Sylas","Syndra","Tahm Kench","Taliyah","Talon","Taric","Teemo","Thresh","Tristana","Trundle","Tryndamere","Twisted Fate","Twitch","Udyr","Urgot","Varus","Vayne","Veigar","Vel'Koz","Vex","Vi","Viego","Viktor","Vladimir","Volibear","Warwick","Wukong","Xayah","Xerath","Xin Zhao","Yasuo","Yone","Yorick","Yunara","Yuumi","Zac","Zed","Zeri","Ziggs","Zilean","Zoe","Zyra"];
+    const LINES = ["Mata Antiga","Coven","Guardião Estelar","Projeto","PsyOps","Odisseia","Batalha Acadêmica","Porcelana","Sangue da Lua","Arcada","Prestígio","Herói Obsidiana","Rainha do Gelo","Cavaleiro Verdejante","Alto Nascido","Estrela Negra","Espírito Guardião","Lua Imortal","Cravo Sangrento","Vencedor","Nightbringer","Dawnbringer","Pulsefire","Neon","Sentinela","Ruína","Praia Piscina","Comando Bandido","Astronauta","Espírito Selvagem","Esquadrão Anima","Dragonmancer","Feirinha Bandle","Empíreo","Inferno","Hextech","Vitória Radiante","Mafioso","Dinastia","Crepúsculo"];
+
+    // Counts tuned so the catalogue totals exactly 2.149 skins.
+    const counts = CHAMPS.map((c, i) => (NAMED[c] ? NAMED[c].length : 4 + ((i * 7) % 18)));
+    let sum = counts.reduce((a, b) => a + b, 0), k = 0;
+    while (sum !== 2149) {
+      const c = CHAMPS[k % CHAMPS.length];
+      if (!NAMED[c]) { const d = sum < 2149 ? 1 : -1; if (counts[k % CHAMPS.length] + d >= 3) { counts[k % CHAMPS.length] += d; sum += d; } }
+      k++;
+    }
+    this.champSkins = {};
+    CHAMPS.forEach((c, i) => {
+      if (NAMED[c]) { this.champSkins[c] = NAMED[c]; return; }
+      const arr = [c + " Clássico"];
+      for (let j = 1; j < counts[i]; j++) arr.push(c + " " + LINES[(i * 3 + j * 9) % LINES.length]);
+      this.champSkins[c] = arr;
+    });
+    this.champs = CHAMPS;
+    this.skins = [];
+    CHAMPS.forEach(c => this.champSkins[c].forEach((name, i) => {
+      this.skins.push({ id: c + "/" + i, name, champ: c, idx: i, total: this.champSkins[c].length, kind: "skin" });
+    }));
+
+    this.CATS = [
+      ["Campeões", 2149], ["Itens", 312], ["Runas", 63], ["Emotes", 428],
+      ["Ícones de perfil", 1874], ["Ranks", 10], ["Ward skins", 196], ["Mapas", 12]
+    ];
+    this.OTHER = {
+      "Itens": ["Lâmina do Rei Destruído","Coifa de Rabadon","Cutelo Negro","Guardião Solar","Lembrança do Zhonya","Manoplas de Trindade","Elmo de Sol Nascente","Arco Curvo de Runaan","Chuva de Lâminas","Botas de Mercúrio","Chama Abissal","Chicote de Água Viva"],
+      "Runas": ["Conquistador","Eletrocutar","Cometa Arcano","Aperto do Morto-Vivo","Primeiro Ataque","Colheita Sombria","Precisão","Feitiçaria","Dominação","Resolução","Inspiração","Aríete Cintilante"],
+      "Emotes": ["Sorriso Provocante","Choro Falso","Vitória Coroada","Polegar Erguido","Poro Feliz","Riso Maligno","Coração Partido","Sinal de Paz","Aplauso Lento","Susto","Boa Sorte","Dança do Yordle"],
+      "Ícones de perfil": ["Ícone 4568","Ícone 4211","Ícone 3902","Ícone 4890","Ícone 3020","Ícone 4102","Ícone 4770","Ícone 3600","Ícone 5120","Ícone 2831","Ícone 4455","Ícone 1907"],
+      "Ranks": ["Ferro","Bronze","Prata","Ouro","Platina","Esmeralda","Diamante","Mestre","Grão-Mestre","Desafiante"],
+      "Ward skins": ["Sentinela Poro","Sentinela Coven","Sentinela Odisseia","Sentinela Estrela Negra","Sentinela Porcelana","Sentinela Arcana","Sentinela Mata Antiga","Sentinela Lunar","Sentinela Hextech","Sentinela Ruína"],
+      "Mapas": ["Fenda do Invocador — Verão","Fenda do Invocador — Inverno","Minimapa da Fenda","Abismo dos Uivos","Minimapa do Abismo","Arena","Fenda — Vista Aérea","Fenda — Camada de Selva"]
+    };
+
+    this.state = {
+      q: this.props.initialQuery ?? "", cat: "Campeões", openId: null, skinIdx: 0, tray: [],
+      loading: false, scrollTop: 0, viewW: 1200, viewH: 720,
+      paletteOpen: false, pq: "", pIdx: 0
+    };
+  }
+
+  componentDidMount() {
+    this.measure();
+    requestAnimationFrame(() => this.measure());
+    setTimeout(() => this.measure(), 120);
+    this.onResize = () => this.measure();
+    window.addEventListener("resize", this.onResize);
+    // O container de rolagem pode não estar medido no primeiro paint: insiste até estabilizar.
+    let ticks = 0;
+    this.poll = setInterval(() => { this.measure(); if (++ticks > 30) clearInterval(this.poll); }, 100);
+    if (this.inputRef.current) this.inputRef.current.focus();
+    this.onKey = (e) => {
+      const mod = e.metaKey || e.ctrlKey;
+      if (mod && (e.key === "k" || e.key === "K")) {
+        e.preventDefault();
+        this.setState({ paletteOpen: true, pq: "", pIdx: 0 });
+        setTimeout(() => this.paletteRef.current && this.paletteRef.current.focus(), 0);
+        return;
+      }
+      if (this.state.paletteOpen) {
+        const list = this.paletteRows();
+        if (e.key === "ArrowDown") { e.preventDefault(); this.setState(s => ({ pIdx: Math.min(s.pIdx + 1, list.length - 1) })); }
+        else if (e.key === "ArrowUp") { e.preventDefault(); this.setState(s => ({ pIdx: Math.max(s.pIdx - 1, 0) })); }
+        else if (e.key === "Enter") { const it = list[this.state.pIdx]; if (it) { this.open(it.id); this.setState({ paletteOpen: false }); } }
+        else if (e.key === "Escape") this.setState({ paletteOpen: false });
+        return;
+      }
+      if (e.key === "Escape") {
+        if (this.state.openId) this.setState({ openId: null });
+        else if (this.state.q) this.setState({ q: "" });
+        return;
+      }
+      if (e.key === "/" && document.activeElement !== this.inputRef.current) {
+        e.preventDefault();
+        if (this.inputRef.current) { this.inputRef.current.focus(); this.inputRef.current.select(); }
+        return;
+      }
+      if (e.key === "Enter" && document.activeElement === this.inputRef.current) {
+        const first = this.rows()[0];
+        if (first) this.open(first.id);
+      }
+    };
+    window.addEventListener("keydown", this.onKey);
+  }
+  componentDidUpdate() { this.measure(); }
+
+  componentWillUnmount() {
+    clearInterval(this.poll);
+    window.removeEventListener("keydown", this.onKey);
+    window.removeEventListener("resize", this.onResize);
+    if (this.ro) this.ro.disconnect();
+    clearTimeout(this.loadTimer);
+  }
+
+  measure() {
+    let el = this.scrollEl;
+    if (!el) { el = document.querySelector("[data-grid-scroll]"); if (el) this.setScrollEl(el); }
+    if (!el) return;
+    const w = el.clientWidth, h = el.clientHeight;
+    if (!w || !h) return;
+    if (w !== this.state.viewW || h !== this.state.viewH) this.setState({ viewW: w, viewH: h });
+  }
+
+  // Deterministic neutral plate per asset — stands in for the real thumbnail.
+  plate(seedStr, kind) {
+    let h = 0;
+    for (let i = 0; i < seedStr.length; i++) h = (h * 31 + seedStr.charCodeAt(i)) % 360;
+    const a = 12 + (h % 9);
+    return "linear-gradient(" + (110 + (h % 60)) + "deg, hsl(" + h + " 14% " + a + "%), hsl(" + ((h + 40) % 360) + " 10% " + (a - 5) + "%))";
+  }
+
+  rows() {
+    const q = this.state.q.trim().toLowerCase();
+    if (q) {
+      const hits = this.skins.filter(s => (s.name + " " + s.champ).toLowerCase().includes(q));
+      const others = [];
+      Object.keys(this.OTHER).forEach(cat => this.OTHER[cat].forEach((name, i) => {
+        if (name.toLowerCase().includes(q)) others.push({ id: cat + "/" + i, name, champ: cat, idx: i, total: 0, kind: cat });
+      }));
+      return hits.concat(others);
+    }
+    if (this.state.cat !== "Campeões") {
+      return this.OTHER[this.state.cat].map((name, i) => ({ id: this.state.cat + "/" + i, name, champ: this.state.cat, idx: i, total: 0, kind: this.state.cat }));
+    }
+    // Navegar é por campeão: um card por campeão, abrindo o painel do campeão.
+    return this.champs.map(c => ({ id: c + "/0", name: c, champ: c, idx: 0, total: this.champSkins[c].length, kind: "champ" }));
+  }
+
+  paletteRows() {
+    const q = this.state.pq.trim().toLowerCase();
+    const base = q ? this.skins.filter(s => (s.name + " " + s.champ).toLowerCase().includes(q)) : this.skins;
+    const others = [];
+    if (q) Object.keys(this.OTHER).forEach(cat => this.OTHER[cat].forEach((name, i) => {
+      if (name.toLowerCase().includes(q)) others.push({ id: cat + "/" + i, name, champ: cat, idx: i, kind: cat });
+    }));
+    return base.concat(others).slice(0, 40);
+  }
+
+  find(id) {
+    if (!id) return null;
+    const cut = id.lastIndexOf("/");
+    const group = id.slice(0, cut), i = Number(id.slice(cut + 1));
+    if (this.champSkins[group]) return { id, name: this.champSkins[group][i], champ: group, idx: i, total: this.champSkins[group].length, kind: "skin" };
+    if (this.OTHER[group]) return { id, name: this.OTHER[group][i], champ: group, idx: i, total: 0, kind: group };
+    return null;
+  }
+
+  open(id) { const it = this.find(id); this.setState({ openId: id, skinIdx: it ? it.idx : 0 }); }
+
+  variantsFor(item) {
+    if (!item) return [];
+    if (item.kind === "skin") {
+      const seed = item.name.length + item.idx * 7;
+      return [
+        { label: "Splash — corte do cliente", res: "1280×720", fmt: "JPEG", kb: 402 + seed * 3, note: "arte completa, 16:9" },
+        { label: "Splash — corte centralizado", res: "1215×717", fmt: "JPEG", kb: 361 + seed * 2, note: "mesma arte, sem a margem direita" },
+        { label: "Tela de carregamento", res: "308×560", fmt: "JPEG", kb: 84 + seed, note: "retrato vertical" },
+        { label: "Tile quadrado", res: "512×512", fmt: "PNG", kb: 196 + seed * 2, note: "recorte do rosto" },
+        { label: "Ícone circular", res: "120×120", fmt: "PNG", kb: 18 + Math.round(seed / 2), note: "avatar, fundo transparente" }
+      ];
+    }
+    const seed = item.name.length;
+    return [
+      { label: "Original do catálogo", res: "512×512", fmt: "PNG", kb: 62 + seed * 2, note: "fundo transparente" },
+      { label: "Tamanho do cliente", res: "64×64", fmt: "PNG", kb: 6 + Math.round(seed / 3), note: "usado na HUD" },
+      { label: "Vetor de origem", res: "escalável", fmt: "SVG", kb: 24 + seed, note: "traço editável" }
+    ];
+  }
+
+  toggleTray(item, e) {
+    if (!item) return;
+    if (e && e.stopPropagation) e.stopPropagation();
+    const v = this.variantsFor(item)[0];
+    this.setState(s => ({
+      tray: s.tray.some(t => t.id === item.id)
+        ? s.tray.filter(t => t.id !== item.id)
+        : s.tray.concat([{ id: item.id, name: item.name, kb: v ? v.kb : 0 }])
+    }));
+  }
+
+  fmtKb(n) { return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ".") + " KB"; }
+  fmtNum(n) { return n.toLocaleString("pt-BR"); }
+
+  startLoading() {
+    clearTimeout(this.loadTimer);
+    this.setState({ loading: true });
+    this.loadTimer = setTimeout(() => this.setState({ loading: false }), 180);
+  }
+
+  renderVals() {
+    const st = this.state;
+    const dense = (this.props.density ?? "densa") === "densa";
+    const target = dense ? 152 : 210;
+    const gap = 6;
+    const inner = Math.max(240, st.viewW - 28);
+    const cols = Math.max(3, Math.floor((inner + gap) / (target + gap)));
+    const cellW = (inner - gap * (cols - 1)) / cols;
+    const list = this.rows();
+    const isSquare = st.cat !== "Campeões" && !st.q.trim();
+    const tileH = isSquare ? cellW : cellW * 9 / 16;
+    const rowH = tileH + 32 + gap;
+    const totalRows = Math.ceil(list.length / cols);
+    const start = Math.max(0, Math.floor(st.scrollTop / rowH) - 2);
+    const end = Math.min(totalRows, Math.ceil((st.scrollTop + st.viewH) / rowH) + 2);
+
+    const rows = [];
+    for (let r = start; r < end; r++) {
+      const items = list.slice(r * cols, r * cols + cols).map(it => {
+        const checked = st.tray.some(t => t.id === it.id);
+        return {
+          name: it.name,
+          sub: it.kind === "skin" ? "Skin · " + it.champ : (it.kind === "champ" ? it.total + " skins" : "catálogo"),
+          subColor: it.kind === "skin" ? "#a78bfa" : "#52525b",
+          isSkin: it.kind === "skin",
+          ratio: it.kind === "skin" || it.kind === "champ" ? "16/9" : "1/1",
+          plateBg: this.plate(it.kind === "champ" ? this.champSkins[it.champ][0] : it.name, it.kind),
+          ring: st.openId === it.id ? "2px solid #8b5cf6" : "0",
+          checkBorder: checked ? "#8b5cf6" : "#3f3f46",
+          checkBg: checked ? "#8b5cf6" : "rgba(9,9,11,0.7)",
+          checkFg: checked ? "#0b0b0d" : "#a1a1aa",
+          checkMark: checked ? "✓" : "+",
+          checkOpacity: checked ? "1" : "0.45",
+          onOpen: (e) => { if (e && e.shiftKey) { this.toggleTray(it, e); return; } this.open(it.id); },
+          onToggle: (e) => this.toggleTray(it, e)
+        };
+      });
+      rows.push({ top: Math.round(r * rowH), items });
+    }
+
+    const item = this.find(st.openId);
+    const champSkins = item && item.kind === "skin" ? this.champSkins[item.champ] : null;
+    const shown = champSkins ? { id: item.champ + "/" + st.skinIdx, name: champSkins[st.skinIdx], champ: item.champ, idx: st.skinIdx, total: champSkins.length, kind: "skin" } : item;
+    const inTray = shown ? st.tray.some(t => t.id === shown.id) : false;
+    const pList = this.paletteRows();
+    const q = st.q.trim();
+
+    return {
+      inputRef: this.inputRef, paletteRef: this.paletteRef, scrollRef: this.setScrollEl,
+      q: st.q, hasQuery: st.q.length > 0,
+      onQuery: (e) => { this.startLoading(); if (this.scrollEl) this.scrollEl.scrollTop = 0; this.setState({ q: e.target.value, cat: "Campeões", scrollTop: 0 }); },
+      onClear: () => { this.setState({ q: "" }); if (this.inputRef.current) this.inputRef.current.focus(); },
+      onScroll: (e) => { this.measure(); this.setState({ scrollTop: e.target.scrollTop }); },
+      statSkins: this.fmtNum(this.skins.length), statChamps: this.fmtNum(this.champs.length),
+
+      cats: this.CATS.map(([name, count]) => ({
+        name, count: this.fmtNum(count),
+        bg: st.cat === name && !q ? "#1c1c1f" : "transparent",
+        fg: st.cat === name && !q ? "#fafafa" : "#a1a1aa",
+        onPick: () => { this.startLoading(); if (this.scrollEl) this.scrollEl.scrollTop = 0; this.setState({ cat: name, q: "", openId: null, scrollTop: 0 }); }
+      })),
+
+      loading: st.loading,
+      skeletons: Array.from({ length: cols * 3 }, (_, i) => ({ delay: (i % cols) * 0.06 })),
+      cols, virtualHeight: Math.round(totalRows * rowH), rows,
+      showGrid: !st.loading && list.length > 0,
+      showNone: !st.loading && !!q && list.length === 0,
+      scrollPad: st.tray.length ? 66 : 14,
+      resultLabel: q ? this.fmtNum(list.length) + " skins" : this.fmtNum(list.length) + " itens",
+      gridTitle: q ? "Resultados · " + q : st.cat,
+      gridSub: q ? "skins de todos os campeões" : (st.cat === "Campeões" ? this.fmtNum(this.champs.length) + " campeões · " + this.fmtNum(this.skins.length) + " skins" : "catálogo completo"),
+
+      panelOpen: !!shown,
+      onClosePanel: () => this.setState({ openId: null }),
+      panel: shown ? {
+        kicker: champSkins ? "Campeão · " + shown.champ + " · " + champSkins.length + " skins" : shown.kind,
+        title: shown.name,
+        meta: champSkins ? "skin " + (st.skinIdx + 1) + "/" + champSkins.length + " · " + this.variantsFor(shown).length + " variantes"
+                         : this.variantsFor(shown).length + " variantes",
+        skinsLabel: champSkins ? "Skins de " + shown.champ + " (" + champSkins.length + ")" : "",
+        plateBg: this.plate(shown.name, shown.kind),
+        hasSkins: !!champSkins,
+        skinPos: champSkins ? (st.skinIdx + 1) + "/" + champSkins.length : "",
+        trayLabel: inTray ? "✓ na bandeja" : "+ bandeja"
+      } : null,
+      onTogglePanelItem: () => this.toggleTray(shown, null),
+      onPrevSkin: () => champSkins && this.setState({ skinIdx: (st.skinIdx - 1 + champSkins.length) % champSkins.length }),
+      onNextSkin: () => champSkins && this.setState({ skinIdx: (st.skinIdx + 1) % champSkins.length }),
+      skinStrip: champSkins ? champSkins.map((name, i) => ({
+        name, short: name.replace(item.champ, "").trim() || "Clássico",
+        plateBg: this.plate(name, "skin"),
+        ring: i === st.skinIdx ? "2px solid #8b5cf6" : "0",
+        fg: i === st.skinIdx ? "#fafafa" : "#71717a",
+        onPick: () => this.setState({ skinIdx: i })
+      })) : [],
+
+      variants: this.variantsFor(shown).map(v => ({
+        label: v.label, note: v.note,
+        spec: v.res + " · " + v.fmt + " · " + this.fmtKb(v.kb),
+        originalLabel: "Baixar original (" + v.fmt + ")",
+        showPng: v.fmt !== "PNG",
+        onOriginal: () => {}, onPng: () => {}
+      })),
+
+      paletteOpen: st.paletteOpen,
+      onOpenPalette: () => { this.setState({ paletteOpen: true, pq: "", pIdx: 0 }); setTimeout(() => this.paletteRef.current && this.paletteRef.current.focus(), 0); },
+      onClosePalette: () => this.setState({ paletteOpen: false }),
+      onPaletteQuery: (e) => this.setState({ pq: e.target.value, pIdx: 0 }),
+      pq: st.pq,
+      paletteEmpty: pList.length === 0,
+      paletteItems: pList.slice(0, 24).map((it, i) => ({
+        name: it.name,
+        meta: it.kind === "skin" ? it.champ : it.kind,
+        plateBg: this.plate(it.name, it.kind),
+        bg: i === st.pIdx ? "#1e1b2e" : "transparent",
+        onHover: () => this.setState({ pIdx: i }),
+        onPick: () => { this.open(it.id); this.setState({ paletteOpen: false }); }
+      })),
+
+      trayOpen: st.tray.length > 0,
+      trayTitle: st.tray.length + (st.tray.length === 1 ? " asset" : " assets"),
+      traySize: this.fmtKb(st.tray.reduce((a, t) => a + t.kb, 0)) + " · zip",
+      trayItems: st.tray.map(t => ({ name: t.name, kb: this.fmtKb(t.kb), onRemove: () => this.setState(s => ({ tray: s.tray.filter(x => x.id !== t.id) })) })),
+      onClearTray: () => this.setState({ tray: [] }),
+      onZip: () => {}
+    };
+  }
+}
+
+</script>
+</body>
+</html>
