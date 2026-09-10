@@ -24,6 +24,8 @@ import type { Asset, CatalogChampion, CatalogSkin } from "@lol-assets/schema";
 
 import { BarraDeLote } from "@/components/barra-de-lote";
 import { PainelDeAsset } from "@/components/painel-de-asset";
+import { Botao } from "@/components/ui/botao";
+import { PainelLateral } from "@/components/ui/painel-lateral";
 import { baseSkin, chromasOf, panelAssets, skinsOf } from "@/lib/champion-panel";
 import { alternar, selecionados, tudoDo } from "@/lib/selecao";
 
@@ -101,41 +103,72 @@ export function PainelDoCampeao({
   const alternarNoLote = (id: string) => setSelecao((antes) => alternar(antes, id));
 
   return (
-    <section aria-label={`Painel de ${champion.names.pt_BR}`}>
-      <h2>{champion.names.pt_BR}</h2>
+    <PainelLateral
+      aberto
+      onFechar={onClose}
+      titulo={`Painel de ${champion.names.pt_BR}`}
+      // O `Escape` daqui tem ordem própria (chroma antes do painel) e o clique
+      // fora nunca fechou. Ver o comentário em `PainelLateral`.
+      fecharPorEsc={false}
+      fecharPorFora={false}
+    >
+      <section
+        aria-label={`Painel de ${champion.names.pt_BR}`}
+        className="flex min-h-0 flex-1 flex-col"
+      >
+        <div className="flex flex-none flex-col gap-2 border-b border-borda px-3.5 py-3.5">
+          <div className="flex items-start gap-2.5">
+            <div className="min-w-0 flex-1">
+              <div className="mb-0.75 font-mono text-10 uppercase tracking-rotulo text-acento">
+                Campeão · {doCampeao.length} {doCampeao.length === 1 ? "skin" : "skins"}
+              </div>
+              <h2 className="text-19 font-semibold leading-apertada tracking-titulo">
+                {champion.names.pt_BR}
+              </h2>
+            </div>
+            <Botao tamanho="sm" onClick={onClose} aria-label="Fechar" title="Fechar (Esc)">
+              ×
+            </Botao>
+          </div>
 
-      <label>
-        Skin
-        <select
-          value={skinNum}
-          onChange={(evento) => setSkinNum(Number(evento.target.value))}
-          aria-label="Selecionar skin"
-        >
-          {doCampeao.map((skin) => (
-            <option key={skin.skinId} value={skin.skinNum}>
-              {skin.names.pt_BR}
-            </option>
-          ))}
-        </select>
-      </label>
+          <label className="flex items-center gap-2 font-mono text-10 uppercase tracking-rotulo text-texto-suave">
+            Skin
+            <select
+              value={skinNum}
+              onChange={(evento) => setSkinNum(Number(evento.target.value))}
+              aria-label="Selecionar skin"
+              className="h-controle-lg min-w-0 flex-1 rounded-padrao border border-borda-forte bg-campo px-2 font-interface text-13 normal-case tracking-normal text-texto"
+            >
+              {doCampeao.map((skin) => (
+                <option key={skin.skinId} value={skin.skinNum}>
+                  {skin.names.pt_BR}
+                </option>
+              ))}
+            </select>
+          </label>
 
-      {erro && <p role="alert">{erro}</p>}
-      {!assets && !erro && <p>carregando os assets…</p>}
+          {/* RF-18: um clique pré-monta a seleção do campeão inteiro. */}
+          {assets && alcancaveis.length > 0 && (
+            <Botao
+              tamanho="md"
+              className="self-start"
+              onClick={() => setSelecao(tudoDo(alcancaveis, chromasAbertos))}
+            >
+              Tudo de {champion.names.pt_BR} ({alcancaveis.length})
+            </Botao>
+          )}
+        </div>
 
-      {/* RF-18: um clique pré-monta a seleção do campeão inteiro. */}
-      {assets && alcancaveis.length > 0 && (
-        <button type="button" onClick={() => setSelecao(tudoDo(alcancaveis, chromasAbertos))}>
-          Tudo de {champion.names.pt_BR} ({alcancaveis.length})
-        </button>
-      )}
+        {erro && (
+          <p role="alert" className="px-3.5 py-3 text-13 text-acento-mais-claro">
+            {erro}
+          </p>
+        )}
+        {!assets && !erro && (
+          <p className="px-3.5 py-3 text-13 text-texto-suave">carregando os assets…</p>
+        )}
 
-      <BarraDeLote
-        assets={noLote}
-        rotulo={champion.names.pt_BR}
-        assetsBaseUrl={assetsBaseUrl}
-        onLimpar={() => setSelecao(new Set())}
-      />
-
+        <div className="min-h-0 flex-1 overflow-y-auto">
       {assets && (
         <PainelDeAsset
           titulo={skinAtual?.names.pt_BR ?? champion.names.pt_BR}
@@ -150,15 +183,17 @@ export function PainelDoCampeao({
 
       {/* RF-06: chroma não aparece sozinho; só quando alguém pede o desta skin. */}
       {assets && chromas.length > 0 && (
-        <section aria-label="Chromas">
-          <button
-            type="button"
+        <section aria-label="Chromas" className="border-t border-borda">
+          <Botao
+            variante="fantasma"
+            tamanho="md"
+            className="m-3.5"
             aria-expanded={chromasAbertos}
             onClick={() => setChromasAbertos((aberto) => !aberto)}
           >
             {chromasAbertos ? "Esconder" : "Mostrar"} {chromas.length}{" "}
             {chromas.length === 1 ? "chroma" : "chromas"}
-          </button>
+          </Botao>
           {chromasAbertos && (
             <PainelDeAsset
               titulo={`Chromas de ${skinAtual?.names.pt_BR ?? champion.names.pt_BR}`}
@@ -172,6 +207,17 @@ export function PainelDoCampeao({
           )}
         </section>
       )}
-    </section>
+        </div>
+
+        {/* A bandeja fica no pé do painel, fixa: com 40 assets selecionados, o
+            botão de baixar não pode estar a uma rolagem de distância. */}
+        <BarraDeLote
+          assets={noLote}
+          rotulo={champion.names.pt_BR}
+          assetsBaseUrl={assetsBaseUrl}
+          onLimpar={() => setSelecao(new Set())}
+        />
+      </section>
+    </PainelLateral>
   );
 }

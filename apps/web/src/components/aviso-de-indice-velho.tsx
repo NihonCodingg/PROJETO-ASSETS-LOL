@@ -26,7 +26,11 @@ export function AvisoDeIndiceVelho({ manifest, agora }: AvisoDeIndiceVelhoProps)
   if (!frescor.velho) return null;
 
   return (
-    <p role="status" data-indice="velho">
+    <p
+      role="status"
+      data-indice="velho"
+      className="flex-none border-b border-borda bg-acento-suave px-3.5 py-2 text-11 leading-cartao text-texto-medio"
+    >
       Este índice foi gerado há {idadeEmPalavras(frescor.horas)}, em{" "}
       <time dateTime={manifest.generatedAt}>{dataLegivel(frescor.geradoEm)}</time>. A
       indexação automática pode ter parado — o que está aqui continua funcionando, mas pode

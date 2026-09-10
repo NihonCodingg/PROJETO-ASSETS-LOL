@@ -19,6 +19,7 @@ import { useCallback, useRef, useState } from "react";
 
 import type { Asset } from "@lol-assets/schema";
 
+import { Botao } from "@/components/ui/botao";
 import { formatBytes, saveBlob } from "@/lib/asset-file";
 import { aviso, duracao, nomeDoZip, resumir } from "@/lib/selecao";
 import { montarZip, ZipCanceladoError, type Falha, type Progresso } from "@/lib/zip";
@@ -77,43 +78,61 @@ export function BarraDeLote({
   const montando = estado.fase === "montando";
 
   return (
-    <section aria-label="Seleção">
-      <p>
-        {resumo.arquivos} {resumo.arquivos === 1 ? "selecionado" : "selecionados"} ·{" "}
-        {formatBytes(resumo.bytes)} · ~{duracao(resumo.segundos)}
-      </p>
+    <section
+      aria-label="Seleção"
+      className="flex flex-none flex-col gap-1.5 border-t border-borda-forte bg-superficie-lote px-3.5 py-2.5"
+    >
+      <div className="flex items-center gap-2.5">
+        <p className="font-mono text-11 text-texto-suave">
+          {resumo.arquivos} {resumo.arquivos === 1 ? "selecionado" : "selecionados"} ·{" "}
+          {formatBytes(resumo.bytes)} · ~{duracao(resumo.segundos)}
+        </p>
+        <div className="ml-auto flex flex-none items-center gap-1.5">
+          <Botao onClick={onLimpar} disabled={montando}>
+            Limpar seleção
+          </Botao>
+          <Botao variante="primario" onClick={() => void baixar()} disabled={montando}>
+            Baixar {resumo.arquivos} como zip
+          </Botao>
+        </div>
+      </div>
 
       {/* Critério 3: acima do limite avisa, e o botão continua habilitado. */}
-      {resumo.pesada && <p role="alert">{aviso(resumo)}</p>}
-
-      <button type="button" onClick={() => void baixar()} disabled={montando}>
-        Baixar {resumo.arquivos} como zip
-      </button>
-      <button type="button" onClick={onLimpar} disabled={montando}>
-        Limpar seleção
-      </button>
+      {resumo.pesada && (
+        <p role="alert" className="text-11 leading-cartao text-acento-mais-claro">
+          {aviso(resumo)}
+        </p>
+      )}
 
       {montando && (
-        <div role="status">
-          <progress value={estado.progresso.feitos} max={estado.progresso.total} />
-          <p>
+        <div role="status" className="flex items-center gap-2.5">
+          <progress
+            value={estado.progresso.feitos}
+            max={estado.progresso.total}
+            className="h-1 flex-1 overflow-hidden rounded-min bg-campo [&::-webkit-progress-bar]:bg-campo [&::-webkit-progress-value]:bg-acento"
+          />
+          <p className="flex-none font-mono text-11 text-texto-suave">
             {estado.progresso.feitos} de {estado.progresso.total}
           </p>
-          <button type="button" onClick={() => cancelamento.current?.abort()}>
+          <Botao variante="fantasma" tamanho="md" onClick={() => cancelamento.current?.abort()}>
             Cancelar
-          </button>
+          </Botao>
         </div>
       )}
 
       {estado.fase === "pronto" && (
-        <p role="status">
+        <p role="status" className="font-mono text-11 text-texto-suave">
           Zip com {estado.arquivos} {estado.arquivos === 1 ? "arquivo" : "arquivos"}.
           {estado.falhas.length > 0 &&
             ` ${estado.falhas.length} não ${estado.falhas.length === 1 ? "veio" : "vieram"} — a lista está no FALHAS.txt dentro do zip.`}
         </p>
       )}
 
-      {estado.fase === "erro" && <p role="alert">Falhou ao montar o zip: {estado.motivo}</p>}
+      {estado.fase === "erro" && (
+        <p role="alert" className="text-11 text-acento-mais-claro">
+          Falhou ao montar o zip: {estado.motivo}
+        </p>
+      )}
     </section>
   );
 }

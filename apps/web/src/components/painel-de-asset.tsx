@@ -29,7 +29,9 @@ import { useVirtualizer } from "@tanstack/react-virtual";
 
 import type { Asset } from "@lol-assets/schema";
 
-import { LIMITE_DE_VIRTUALIZACAO, orderAssets } from "@/lib/asset-panel";
+import { LIMITE_DE_VIRTUALIZACAO, orderAssets, rotuloDoTipo } from "@/lib/asset-panel";
+import { Botao } from "@/components/ui/botao";
+import { cn } from "@/lib/utils";
 import {
   assetSummary,
   assetUrl,
@@ -108,14 +110,16 @@ export function PainelDeAsset({
   }, []);
 
   return (
-    <section aria-label={titulo}>
-      <h2>{titulo}</h2>
-      <button type="button" onClick={onClose}>
-        fechar
-      </button>
-      <p>
-        {ordenados.length} {ordenados.length === 1 ? "asset" : "assets"}
-      </p>
+    <section aria-label={titulo} className="flex min-h-0 flex-col">
+      <div className="flex flex-none items-center gap-2 px-3.5 py-2">
+        <h2 className="truncate text-12 font-medium text-texto-forte">{titulo}</h2>
+        <span className="font-mono text-11 text-texto-suave">
+          {ordenados.length} {ordenados.length === 1 ? "asset" : "assets"}
+        </span>
+        <Botao variante="fantasma" tamanho="md" onClick={onClose} className="ml-auto">
+          fechar
+        </Botao>
+      </div>
 
       {ordenados.length > LIMITE_DE_VIRTUALIZACAO ? (
         <ListaVirtual
@@ -129,7 +133,7 @@ export function PainelDeAsset({
           onAlternar={onAlternar}
         />
       ) : (
-        <ul>
+        <ul className="flex flex-col px-3.5 pb-4">
           {ordenados.map((asset) => (
             <li key={asset.id}>
               <CartaoDeAsset
@@ -197,7 +201,10 @@ function ListaVirtual({
     <div
       ref={scroller}
       data-virtual="sim"
-      style={{ height: "70vh", overflowY: "auto", contain: "strict" }}
+      // `flex-1 min-h-0` em vez de uma altura fixa: a altura vem do pai, que é
+      // a coluna do painel. Uma `70vh` cravada aqui ignoraria a bandeja do lote
+      // e a barra de filtros que dividem a mesma tela.
+      className="min-h-0 flex-1 overflow-y-auto contain-strict"
     >
       <ul style={{ height: virtual.getTotalSize(), position: "relative", margin: 0, padding: 0 }}>
         {virtual.getVirtualItems().map((item) => {
@@ -272,18 +279,38 @@ function CartaoDeAsset({
   const ocupado = estado === "baixando";
 
   return (
-    <article aria-label={asset.fileName} data-tipo={asset.type} data-estado={estado}>
+    <article
+      aria-label={asset.fileName}
+      data-tipo={asset.type}
+      data-estado={estado}
+      className="grid grid-cols-[auto_1fr_auto] items-center gap-x-3 gap-y-1 border-b border-borda py-2.5"
+    >
       {onAlternar && (
-        <label>
+        <label
+          className={cn(
+            "grid size-controle-min cursor-pointer place-items-center self-start rounded-tecla border",
+            "font-mono text-10",
+            selecionado
+              ? "border-acento bg-acento text-superficie"
+              : "border-borda-fraca text-texto-suave hover:border-acento",
+          )}
+        >
+          {/* O nome acessível vem do `aria-label`, não do texto do rótulo: o
+              que está escrito é "✓" ou "+", que não diz nada a quem não vê. */}
           <input
             type="checkbox"
+            className="sr-only"
+            aria-label={`Selecionar ${asset.fileName}`}
             checked={selecionado ?? false}
             onChange={() => onAlternar(asset.id)}
           />
-          Selecionar {asset.fileName}
+          <span aria-hidden="true">{selecionado ? "✓" : "+"}</span>
         </label>
       )}
-      <h3>{asset.type}</h3>
+      {!onAlternar && <span />}
+      <h3 className="col-start-2 text-13 font-medium text-texto-forte">
+        {rotuloDoTipo(asset.type)}
+      </h3>
       {/* RNF-02: a prévia é o que responde "é esta arte?" antes de baixar 121 KB.
           `loading="lazy"` porque uma categoria tem centenas de cartões e nem
           todos passam pela tela.
@@ -300,26 +327,39 @@ function CartaoDeAsset({
         loading="lazy"
         decoding="async"
         data-previa={asset.type}
-        style={{ maxWidth: 240, height: "auto" }}
+        className="col-start-2 row-start-2 max-w-60 rounded-padrao bg-campo"
       />
       {/* RF-09: a ficha aparece antes de qualquer clique de download. */}
-      <p>{assetSummary(asset)}</p>
+      <p className="col-start-2 row-start-3 font-mono text-11 text-texto-suave">
+        {assetSummary(asset)}
+      </p>
 
-      <button type="button" disabled={ocupado} onClick={() => void acionar(false)}>
-        Baixar original
-      </button>
-      <button
-        type="button"
-        disabled={ocupado || !canConvertToPng(asset)}
-        onClick={() => void acionar(true)}
-      >
-        {canConvertToPng(asset) ? "Baixar PNG" : "já é PNG"}
-      </button>
-      <button type="button" onClick={() => void copiar(url)}>
-        Copiar URL
-      </button>
+      <div className="col-start-3 row-start-1 row-span-3 flex flex-none flex-col gap-1.5 self-center">
+        <Botao
+          variante="primario"
+          tamanho="md"
+          disabled={ocupado}
+          onClick={() => void acionar(false)}
+        >
+          Baixar original
+        </Botao>
+        <Botao
+          tamanho="md"
+          disabled={ocupado || !canConvertToPng(asset)}
+          onClick={() => void acionar(true)}
+        >
+          {canConvertToPng(asset) ? "Baixar PNG" : "já é PNG"}
+        </Botao>
+        <Botao variante="fantasma" tamanho="md" onClick={() => void copiar(url)}>
+          Copiar URL
+        </Botao>
+      </div>
 
-      {estado === "erro" && <p role="alert">Falhou ao baixar. Tente de novo.</p>}
+      {estado === "erro" && (
+        <p role="alert" className="col-start-2 text-11 text-acento-mais-claro">
+          Falhou ao baixar. Tente de novo.
+        </p>
+      )}
     </article>
   );
 }

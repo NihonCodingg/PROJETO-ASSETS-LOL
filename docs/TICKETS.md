@@ -1649,7 +1649,7 @@ limite de 500 linhas.
 
 ---
 
-### T-30 — Integrar o design aprovado
+### ✅ T-30 — Integrar o design aprovado
 
 | | |
 |---|---|
@@ -1659,7 +1659,9 @@ limite de 500 linhas.
 | **Effort** | médio |
 | **Cobre** | §A.4 do KICKOFF, RNF-11 |
 
-> 🚧 **Bloqueado junto com T-34** até `docs/design/` existir no repositório.
+> ✅ **Entregue em 10/09/2026.** Todas as telas vestidas com os tokens do T-34, e a
+> suíte inteira das ondas anteriores passando **sem uma linha alterada** — é essa a
+> prova de que só a aparência mudou.
 
 **Entra**
 - Aplicação dos tokens de **T-34** nos componentes já existentes, **sem mudar
@@ -1672,15 +1674,44 @@ limite de 500 linhas.
   comportamento diferente, **abre-se ticket novo** — este só veste.
 
 **Critérios de aceite**
-1. Todos os testes das ondas anteriores continuam passando, sem alteração.
-2. axe continua sem violação crítica nem séria com a paleta nova.
-3. O layout funciona em telas estreitas.
-4. Nenhum valor de cor ou espaçamento fica solto no componente; tudo vem de token.
+1. ✅ **325 testes de vitest e os 28 cenários e2e anteriores passam sem alteração.**
+2. ✅ axe sem violação séria nem crítica em home, painel, categoria, "Sobre" **e em tela
+   estreita** — cinco varreduras.
+3. ✅ O layout funciona em telas estreitas: 4 cenários novos a 375px, incluindo "nada
+   transborda na horizontal" e "o aviso legal continua inteiro".
+4. ✅ Nenhuma cor solta: a regra de lint do T-34 é erro. Espaçamento vem da escala do
+   Tailwind (`px-2.5`, `p-1.25`), sem valor arbitrário.
 
 **Testes que provam**
-- A suíte inteira, inalterada — é essa a prova de que só a aparência mudou.
-- axe com a paleta nova.
+- A suíte inteira, inalterada.
+- axe com a paleta nova, agora incluindo a viewport estreita.
 - Teste de contraste dos pares de token.
+
+> **Três coisas que o axe pegou e nenhum teste de unidade pegaria:**
+>
+> 1. **O botão primário perdeu a cor do texto.** `cn("bg-acento text-superficie", "text-12")`
+>    — o `tailwind-merge` não sabe que `text-12` é **tamanho** e `text-superficie` é **cor**,
+>    então descartou a segunda. O botão herdou o branco do corpo e caiu para **3,1:1** sobre
+>    o violeta em vez de 4,64:1. O teste de tokens comparava valores e passou; quem viu foi o
+>    axe, no navegador, onde as classes viram cor. Corrigido ensinando o `twMerge` a escala
+>    do design.
+> 2. **Link só por cor** (WCAG 1.4.1, *serious*): o design usa `text-decoration: none` em
+>    link. Dentro de bloco de texto isso reprova, e os links da página "Sobre" ganharam
+>    sublinhado. Link de navegação, que não está em bloco de texto, ficou como o design quer.
+> 3. **O `Dialog` do Radix mudou comportamento sem avisar.** Ao virar diálogo, o painel do
+>    campeão passou a fechar por `Escape` do próprio Radix (atropelando a ordem
+>    chroma-primeiro) e por clique fora (que ele nunca teve). Dois testes de onda anterior
+>    caíram. O `PainelLateral` ganhou `fecharPorEsc` e `fecharPorFora`, e o painel do campeão
+>    desliga os dois — **vestir não é mudar comportamento**.
+>
+> **Uma adaptação do design ao dado real:** o cartão do campeão é **1:1**, não o 16:9 do
+> mock. A miniatura do campeão é o `square` de 128×128 do ddragon; cortá-la em 16:9 tiraria
+> 44% da altura, que é onde está o rosto. O 16:9 volta quando houver cartão de skin.
+>
+> **Uma dívida registrada:** na tela estreita o aviso legal fica no topo, porque a barra
+> lateral vira faixa. É conforme (o RF-21 pede visível, e ele está inteiro e visível), mas
+> come a primeira dobra. Levá-lo para o pé da página exigiria inverter a ordem de DOM entre
+> navegação e conteúdo, o que piora a ordem de tabulação. Fica como está, anotado.
 
 ---
 
