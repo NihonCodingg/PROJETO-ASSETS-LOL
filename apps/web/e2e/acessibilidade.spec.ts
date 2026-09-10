@@ -274,13 +274,15 @@ test.describe("tela estreita", () => {
     expect(transborda).toBe(false);
   });
 
-  test("o aviso legal continua inteiro (RF-21)", async ({ page }) => {
+  test("os dois avisos da Riot continuam inteiros (RF-21)", async ({ page }) => {
     await irParaHome(page);
-    const aviso = page.locator("[data-aviso='riot']");
-    await expect(aviso).toBeVisible();
-    // Sem corte: o texto renderizado tem que ser o texto todo.
-    const cortado = await aviso.evaluate((el) => el.scrollHeight > el.clientHeight + 1);
-    expect(cortado).toBe(false);
+    for (const qual of ["riot", "jibber-jabber"]) {
+      const aviso = page.locator(`[data-aviso='${qual}']`);
+      await expect(aviso).toBeVisible();
+      // Sem corte: o texto renderizado tem que ser o texto todo.
+      const cortado = await aviso.evaluate((el) => el.scrollHeight > el.clientHeight + 1);
+      expect(cortado, `o aviso ${qual} foi cortado`).toBe(false);
+    }
   });
 
   test("a grade e a busca continuam utilizáveis", async ({ page }) => {

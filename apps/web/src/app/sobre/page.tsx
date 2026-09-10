@@ -5,19 +5,17 @@
  * isso continua correta mesmo quando a indexação está quebrada. É também a
  * única página que precisa existir para o lançamento ser legal.
  *
- * O texto legal **definitivo** é o T-33, junto com a decisão do nome
- * ([ADR 0003](../../../../docs/adr/0003-nome-publico-do-produto.md)). O que está
- * aqui é o conteúdo obrigatório, com o aviso da Riot exatamente como ele deve
- * aparecer.
- *
- * Tela crua de propósito; o design chega no T-30.
+ * Os dois avisos da Riot aparecem aqui em destaque e no rodapé de toda página
+ * (RF-21), **copiados** das políticas no T-33 — a origem de cada um está em
+ * `lib/site-config.ts`. Ficam em inglês, marcados com `lang="en"`: traduzir
+ * seria parafrasear, e o leitor de tela precisa saber que idioma está lendo.
  */
 
 import type { Metadata } from "next";
 import Link from "next/link";
 
 import { creditosVisiveis } from "@/lib/creditos";
-import { siteConfig } from "@/lib/site-config";
+import { RIOT_POLICY_URLS, siteConfig } from "@/lib/site-config";
 
 export const metadata: Metadata = {
   title: `Sobre — ${siteConfig.displayName}`,
@@ -48,9 +46,24 @@ export default function SobrePage() {
 
       <section className="flex flex-col gap-2 text-13 leading-cartao text-texto-medio" aria-label="Não afiliação">
         <h2 className="mb-1.5 text-12 font-medium uppercase tracking-rotulo text-texto-suave">Não afiliação</h2>
-        {/* RF-21 e RNF-10. O mesmo texto do rodapé, aqui em destaque. */}
-        <p data-aviso="riot" className="rounded-padrao border border-borda-forte bg-campo p-2.5 font-mono text-11 leading-cartao text-texto-suave">
+        {/* RF-21 e RNF-10. Os mesmos dois textos do rodapé, aqui em destaque. */}
+        <p data-aviso="riot" lang="en" className="rounded-padrao border border-borda-forte bg-campo p-2.5 font-mono text-11 leading-cartao text-texto-suave">
           {siteConfig.riotLegalNotice}
+        </p>
+        <p data-aviso="jibber-jabber" lang="en" className="rounded-padrao border border-borda-forte bg-campo p-2.5 font-mono text-11 leading-cartao text-texto-suave">
+          {siteConfig.riotJibberJabberNotice}
+        </p>
+        <p>
+          Os dois avisos são exigidos pela Riot Games e ficam no idioma original, copiados
+          das políticas: o primeiro das{" "}
+          <a href={RIOT_POLICY_URLS.portal} className="underline underline-offset-2 text-acento-claro hover:text-acento-mais-claro">
+            políticas do Developer Portal
+          </a>
+          , o segundo da{" "}
+          <a href={RIOT_POLICY_URLS.jibberJabber} className="underline underline-offset-2 text-acento-claro hover:text-acento-mais-claro">
+            Legal Jibber Jabber
+          </a>
+          .
         </p>
         <p>
           Este é um projeto pessoal, sem fins lucrativos, sem publicidade e sem qualquer

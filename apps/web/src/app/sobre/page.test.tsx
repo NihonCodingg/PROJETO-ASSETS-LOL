@@ -5,7 +5,7 @@ import type { AssetSource } from "@lol-assets/schema";
 
 import { Rodape } from "@/components/rodape";
 import { CREDITOS, creditosVisiveis } from "@/lib/creditos";
-import { siteConfig } from "@/lib/site-config";
+import { RIOT_POLICY_URLS, siteConfig } from "@/lib/site-config";
 
 import SobrePage, { metadata } from "./page";
 
@@ -24,25 +24,53 @@ afterEach(cleanup);
 /** As fontes do contrato. Se o schema ganhar uma, esta lista tem que ganhar junto. */
 const FONTES_DO_CONTRATO: AssetSource[] = ["ddragon", "cdragon", "riot_static", "wiki"];
 
-// --- RF-21: o aviso em toda página ------------------------------------------------------
+// --- RF-21: os avisos em toda página ----------------------------------------------------
 
-describe("aviso legal da Riot", () => {
-  it("está no rodapé, que é por onde toda página passa", () => {
+describe("avisos legais da Riot", () => {
+  // O texto em si é travado em `site-config.test.ts`. Aqui o que se prova é
+  // que os dois chegam à tela, nos dois lugares, sem ninguém pular um.
+
+  it("os dois estão no rodapé, que é por onde toda página passa", () => {
     const { container } = render(<Rodape />);
     expect(container.querySelector("[data-aviso='riot']")?.textContent).toBe(
       siteConfig.riotLegalNotice,
     );
+    expect(container.querySelector("[data-aviso='jibber-jabber']")?.textContent).toBe(
+      siteConfig.riotJibberJabberNotice,
+    );
   });
 
-  it("o texto tem as duas frases que a política exige", () => {
-    expect(siteConfig.riotLegalNotice).toContain("isn't endorsed by Riot Games");
-    expect(siteConfig.riotLegalNotice).toContain("trademarks");
-  });
-
-  it("aparece também em destaque na página Sobre", () => {
+  it("os dois aparecem também em destaque na página Sobre", () => {
     const { container } = render(<SobrePage />);
     expect(container.querySelector("[data-aviso='riot']")?.textContent).toBe(
       siteConfig.riotLegalNotice,
+    );
+    expect(container.querySelector("[data-aviso='jibber-jabber']")?.textContent).toBe(
+      siteConfig.riotJibberJabberNotice,
+    );
+  });
+
+  it("ficam em inglês, e o leitor de tela sabe disso", () => {
+    // Traduzir seria parafrasear. Sem `lang`, o leitor de tela lê o inglês com
+    // a pronúncia do português da página.
+    const { container: rodape } = render(<Rodape />);
+    const { container: sobre } = render(<SobrePage />);
+    const avisos = [
+      ...rodape.querySelectorAll("[data-aviso]"),
+      ...sobre.querySelectorAll("[data-aviso]"),
+    ];
+    expect(avisos).toHaveLength(4);
+    for (const aviso of avisos) expect(aviso.getAttribute("lang")).toBe("en");
+  });
+
+  it("a página Sobre aponta para as duas políticas de onde os textos vieram", () => {
+    render(<SobrePage />);
+    const secao = within(screen.getByLabelText("Não afiliação"));
+    expect(secao.getByRole("link", { name: /Developer Portal/ }).getAttribute("href")).toBe(
+      RIOT_POLICY_URLS.portal,
+    );
+    expect(secao.getByRole("link", { name: "Legal Jibber Jabber" }).getAttribute("href")).toBe(
+      RIOT_POLICY_URLS.jibberJabber,
     );
   });
 
