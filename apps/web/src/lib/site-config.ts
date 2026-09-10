@@ -25,8 +25,22 @@ function riotLegalNotice(productName: string): string {
   );
 }
 
+/**
+ * O consentimento da Weird Gloop, do lado do navegador.
+ *
+ * Espelha o `WIKI_CONSENT_GRANTED` do indexador, que é o que de fato bloqueia a
+ * rede ([ADR 0004]). Aqui ele decide só uma coisa: se o crédito à wiki aparece
+ * na página "Sobre". Creditar antes da autorização seria afirmar que usamos
+ * conteúdo de quem pediu, nos termos, para não ser usado automatizadamente.
+ *
+ * `NEXT_PUBLIC_` porque é lido no cliente, e literal em vez de indexado porque o
+ * Next substitui essas variáveis no build por correspondência textual exata.
+ */
+const wikiConsentGranted = process.env.NEXT_PUBLIC_WIKI_CONSENT_GRANTED === "true";
+
 export const siteConfig = {
   displayName,
+  wikiConsentGranted,
   description:
     "Assets visuais de League of Legends na melhor fonte disponível, prontos para baixar.",
   repositoryUrl: "https://github.com/NihonCodingg/PROJETO-ASSETS-LOL",
