@@ -21,7 +21,7 @@ services:
       API_CORS_ORIGINS: http://localhost:3000
       API_ZIP_MAX_ITEMS: "500"
       # Regra 4 do CLAUDE.md: o zip busca nas fontes, e vai identificado.
-      INDEXER_CONTACT: https://github.com/NihonCodingg/PROJETO-ASSETS-LOL/issues
+      INDEXER_CONTACT: https://github.com/NihonCodingg/lol-assets/issues
     volumes:
       # Somente leitura: a API lê o índice publicado e nunca o escreve.
       - ./apps/web/public/indice:/indice:ro

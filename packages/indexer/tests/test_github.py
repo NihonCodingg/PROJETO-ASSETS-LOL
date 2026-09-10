@@ -25,7 +25,7 @@ from lol_assets_indexer.status import build_status
 from lol_assets_schema.models import IndexStatus
 
 API = "https://api.github.invalido"
-REPO = "NihonCodingg/PROJETO-ASSETS-LOL"
+REPO = "NihonCodingg/lol-assets"
 SEGREDO = "ghp_UmTokenBemLongoQueNaoPodeVazar"
 
 

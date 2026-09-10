@@ -123,7 +123,7 @@ cima dela.
 
 ### D — repositório separado de dados
 
-`PROJETO-ASSETS-LOL-indice`, só com o índice.
+`lol-assets-indice`, só com o índice.
 
 - **Custo de clone do código:** **zero de verdade** — o clone nunca vê o índice, nem o
   atual.

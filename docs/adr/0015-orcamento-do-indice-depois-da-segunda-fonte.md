@@ -12,7 +12,7 @@
 A primeira indexação com **todas as fontes e todas as categorias** — ddragon mais cdragon,
 emotes e ward skins incluídos — parou na guarda do RNF-05 e **não escreveu nada**. Duas
 vezes: local, no 16.17.1, e em produção, no 16.18.1
-([execução 34406397338](https://github.com/NihonCodingg/PROJETO-ASSETS-LOL/actions/runs/34406397338),
+([execução 34406397338](https://github.com/NihonCodingg/lol-assets/actions/runs/34406397338),
 que abriu sozinha a issue #27 pelo T-12).
 
 ```

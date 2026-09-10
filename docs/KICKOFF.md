@@ -2,7 +2,7 @@
 
 > Este arquivo unifica tudo o que foi definido antes de escrever código: o processo de trabalho, os padrões de engenharia, a ideia cristalizada (Parte A) e a pesquisa verificada (Parte B). Ele deve ser commitado em `docs/KICKOFF.md` no repositório e é a fonte de verdade até a Spec existir.
 
-**Repositório oficial:** `https://github.com/NihonCodingg/PROJETO-ASSETS-LOL.git`
+**Repositório oficial:** `https://github.com/NihonCodingg/lol-assets.git`
 **Regra absoluta:** tudo — código, docs, decisões, resultados de spikes, evidências de consentimento, relatórios de sessão — é registrado nesse repositório. Nada vive só no chat ou só na máquina local. Todo commit é enviado (`git push`) ao final de cada bloco de trabalho.
 
 ---
@@ -28,14 +28,14 @@
 1. Ler `docs/KICKOFF.md` (este arquivo) antes de qualquer coisa. Depois que existirem, `docs/SPEC.md` e `docs/TICKETS.md` têm precedência sobre ele.
 2. Nunca inventar um endpoint, path ou formato de asset. Se não está na Parte B, testar primeiro e registrar o resultado em `docs/SPIKES.md`.
 3. Nenhuma requisição automatizada à wiki (`wiki.leagueoflegends.com`) enquanto `WIKI_CONSENT_GRANTED` não estiver documentado em `docs/SPIKES.md` com data e evidência. O adaptador pode existir, mas desligado por flag.
-4. Requisições ao ddragon e cdragon sempre com `User-Agent: lol-assets-indexer/{versão} (+https://github.com/NihonCodingg/PROJETO-ASSETS-LOL; contato do mantenedor)`, concorrência ≤ 4, backoff exponencial em 429/5xx.
+4. Requisições ao ddragon e cdragon sempre com `User-Agent: lol-assets-indexer/{versão} (+https://github.com/NihonCodingg/lol-assets; contato do mantenedor)`, concorrência ≤ 4, backoff exponencial em 429/5xx.
 5. PRs com no máximo ~500 linhas de lógica (exclui lockfiles, fixtures e snapshots). Se um ticket não cabe, dividir o ticket, não inflar o PR.
 6. TDD nos módulos de lógica (indexador, fusão, conversão, busca). UI pode ter testes mais leves, mas o fluxo "buscar → baixar" tem teste e2e.
 7. Nada de segredo no código. Variáveis de ambiente documentadas em `.env.example`.
 8. Commits em Conventional Commits (`feat:`, `fix:`, `chore:`, `docs:`, `test:`). Idioma do código e dos identificadores: inglês. Idioma de docs e commits: português.
 9. Ao terminar qualquer tarefa, relatar em português: o que foi feito, o que foi assumido, o que ficou pendente, e qual o próximo passo sugerido. Esse relatório também é salvo em `docs/sessoes/AAAA-MM-DD-{tema}.md` e commitado.
 10. Se algo na Parte B se mostrar errado na prática, corrigir `docs/PESQUISA` via PR com a evidência, não contornar em silêncio.
-11. **Git:** remoto único é `https://github.com/NihonCodingg/PROJETO-ASSETS-LOL.git`. `main` só recebe merge via PR. Trabalho em branches `feat/T-XX-descricao`, `docs/...`, `chore/...`. Etapas 1–4 (bootstrap, spikes, protótipo, spec) podem ir direto na `main` porque ainda não há código de produção; a partir dos tickets, só PR. Push ao final de cada bloco, sem exceção — trabalho não enviado é trabalho que não existe.
+11. **Git:** remoto único é `https://github.com/NihonCodingg/lol-assets.git`. `main` só recebe merge via PR. Trabalho em branches `feat/T-XX-descricao`, `docs/...`, `chore/...`. Etapas 1–4 (bootstrap, spikes, protótipo, spec) podem ir direto na `main` porque ainda não há código de produção; a partir dos tickets, só PR. Push ao final de cada bloco, sem exceção — trabalho não enviado é trabalho que não existe.
 12. Decisões de arquitetura viram ADRs em `docs/adr/NNNN-titulo.md` (contexto, decisão, consequências). A Spec referencia os ADRs, não os repete.
 
 ### 0.3 Padrões de engenharia
@@ -43,7 +43,7 @@
 **Monorepo** (pnpm workspaces + uv para Python):
 
 ```
-PROJETO-ASSETS-LOL/
+lol-assets/
 ├── CLAUDE.md                 # regras da §0.2
 ├── docs/
 │   ├── KICKOFF.md            # este arquivo
@@ -482,12 +482,12 @@ Ver §3.2. Crédito à League of Legends Wiki / Weird Gloop obrigatório nos ass
 
 ## Parte C — Prompt inicial para o Claude Code
 
-Cole o texto abaixo como primeira mensagem no Claude Code, dentro da pasta onde você clonou o repositório (`git clone https://github.com/NihonCodingg/PROJETO-ASSETS-LOL.git`) e já salvou este arquivo em `docs/KICKOFF.md`.
+Cole o texto abaixo como primeira mensagem no Claude Code, dentro da pasta onde você clonou o repositório (`git clone https://github.com/NihonCodingg/lol-assets.git`) e já salvou este arquivo em `docs/KICKOFF.md`.
 
 ````
 Effort: alto.
 
-Você é o engenheiro principal do projeto "lol-assets", cujo repositório oficial é https://github.com/NihonCodingg/PROJETO-ASSETS-LOL.git (já clonado nesta pasta). Leia `docs/KICKOFF.md` inteiro antes de qualquer ação — ele contém o processo de trabalho (Parte 0), a ideia cristalizada (Parte A) e a pesquisa verificada das fontes de dados (Parte B). Estamos seguindo as 7 Etapas do Desenvolvimento com IA e as etapas 1 e 2 já estão concluídas. Sua missão nesta sessão é a etapa 3 (spikes + protótipo) e, se aprovada, a etapa 4 (Spec).
+Você é o engenheiro principal do projeto "lol-assets", cujo repositório oficial é https://github.com/NihonCodingg/lol-assets.git (já clonado nesta pasta). Leia `docs/KICKOFF.md` inteiro antes de qualquer ação — ele contém o processo de trabalho (Parte 0), a ideia cristalizada (Parte A) e a pesquisa verificada das fontes de dados (Parte B). Estamos seguindo as 7 Etapas do Desenvolvimento com IA e as etapas 1 e 2 já estão concluídas. Sua missão nesta sessão é a etapa 3 (spikes + protótipo) e, se aprovada, a etapa 4 (Spec).
 
 Regra absoluta: tudo é registrado neste repositório e enviado com `git push` ao final de cada bloco. Se o repositório já tiver conteúdo, me mostre o que existe antes de tocar em qualquer coisa.
 

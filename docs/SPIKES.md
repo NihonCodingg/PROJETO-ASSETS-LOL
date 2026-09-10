@@ -19,7 +19,7 @@ A partir da Onda 1, o cliente HTTP com a mesma etiqueta passa a viver em
 `packages/indexer/src/lol_assets_indexer/http.py` (ticket T-03), aí sim com testes.
 
 Todas as requisições usaram
-`User-Agent: lol-assets-indexer/0.0.0-spike (+https://github.com/NihonCodingg/PROJETO-ASSETS-LOL; …)`,
+`User-Agent: lol-assets-indexer/0.0.0-spike (+https://github.com/NihonCodingg/lol-assets; …)`,
 concorrência 4 e backoff exponencial, conforme a regra 4 do [CLAUDE.md](../CLAUDE.md).
 
 ## Wiki — status do consentimento
@@ -398,7 +398,7 @@ Recomendações para a Spec. Cada uma vira ADR.
 
 ## Ambiente — o acento no caminho quebra o pnpm (RESOLVIDO em 03/09/2026)
 
-> **Resolvido.** O repositório foi movido para `D:\PROJETOS\PROJETO-ASSETS-LOL` e o
+> **Resolvido.** O repositório foi movido para `D:\PROJETOS\lol-assets` e o
 > `pnpm install` passou a terminar em exit 0. O espelho ASCII foi apagado. A regra que
 > fica: **o caminho do repositório não pode ter caractere não-ASCII.** O diagnóstico
 > abaixo é o registro de como isso foi isolado.
@@ -412,7 +412,7 @@ nativo (`esbuild`, `unrs-resolver`). Isolado com quatro testes controlados:
 | `C:\…\lolassets-ascii-test` (ASCII, sem espaço) | instala |
 | `C:\…\lol assets com espaco` (ASCII, com espaço) | instala |
 | `C:\…\lolassets-ACENTUAÇÃO` (acentuado, sem espaço) | **EPERM** |
-| `D:\PROGRAMAÇÃO\…\PROJETO-ASSETS-LOL` (acentuado) | **EPERM** |
+| `D:\PROGRAMAÇÃO\…\lol-assets` (acentuado) | **EPERM** |
 
 Ou seja: **o acento no caminho é a causa**, não o espaço nem o antivírus. Seis tentativas
 com limpeza dos diretórios temporários não resolveram.
@@ -422,7 +422,7 @@ onde `pnpm install`, `eslint`, `tsc` e `vitest` rodaram e passaram; o `pnpm-lock
 gerado lá foi commitado. A CI roda em Linux e nunca foi afetada.
 
 **Confirmação da causa.** Depois de mover o repositório para
-`D:\PROJETOS\PROJETO-ASSETS-LOL` — mesma máquina, mesmo pnpm, mesmo Defender ligado,
+`D:\PROJETOS\lol-assets` — mesma máquina, mesmo pnpm, mesmo Defender ligado,
 mesmo lockfile — o `pnpm install` terminou em **exit 0**, com os postinstall de `esbuild`
 e `unrs-resolver` executados. Foi a única variável alterada. O espelho foi apagado.
 
