@@ -5,6 +5,9 @@ node_modules/
 
 # Next.js
 .next/
+# Gerado pelo `next dev`/`next build`. O T-35 o tirou do controle de versão:
+# o `next dev` acrescenta uma referência a `.next/types/`, que a CI não tem.
+next-env.d.ts
 out/
 
 # Python
