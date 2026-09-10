@@ -76,6 +76,5322 @@
         "mapa:aram",
         "classe:consumable"
       ]
+    },
+    {
+      "id": "item_icon:4000",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 0"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4000.png",
+      "fileName": "Item_4000.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4000,
+      "refId": "4000",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:damage"
+      ]
+    },
+    {
+      "id": "item_icon:4001",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 1"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4001.png",
+      "fileName": "Item_4001.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4001,
+      "refId": "4001",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:health"
+      ]
+    },
+    {
+      "id": "item_icon:4002",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 2"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4002.png",
+      "fileName": "Item_4002.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4002,
+      "refId": "4002",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:armor"
+      ]
+    },
+    {
+      "id": "item_icon:4003",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 3"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4003.png",
+      "fileName": "Item_4003.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4003,
+      "refId": "4003",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:mana"
+      ]
+    },
+    {
+      "id": "item_icon:4004",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 4"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4004.png",
+      "fileName": "Item_4004.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4004,
+      "refId": "4004",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:boots"
+      ]
+    },
+    {
+      "id": "item_icon:4005",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 5"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4005.png",
+      "fileName": "Item_4005.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4005,
+      "refId": "4005",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:consumable"
+      ]
+    },
+    {
+      "id": "item_icon:4006",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 6"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4006.png",
+      "fileName": "Item_4006.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4006,
+      "refId": "4006",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:damage"
+      ]
+    },
+    {
+      "id": "item_icon:4007",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 7"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4007.png",
+      "fileName": "Item_4007.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4007,
+      "refId": "4007",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:health"
+      ]
+    },
+    {
+      "id": "item_icon:4008",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 8"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4008.png",
+      "fileName": "Item_4008.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4008,
+      "refId": "4008",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:armor"
+      ]
+    },
+    {
+      "id": "item_icon:4009",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 9"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4009.png",
+      "fileName": "Item_4009.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4009,
+      "refId": "4009",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:mana"
+      ]
+    },
+    {
+      "id": "item_icon:4010",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 10"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4010.png",
+      "fileName": "Item_4010.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4010,
+      "refId": "4010",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:boots"
+      ]
+    },
+    {
+      "id": "item_icon:4011",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 11"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4011.png",
+      "fileName": "Item_4011.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4011,
+      "refId": "4011",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:consumable"
+      ]
+    },
+    {
+      "id": "item_icon:4012",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 12"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4012.png",
+      "fileName": "Item_4012.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4012,
+      "refId": "4012",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:damage"
+      ]
+    },
+    {
+      "id": "item_icon:4013",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 13"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4013.png",
+      "fileName": "Item_4013.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4013,
+      "refId": "4013",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:health"
+      ]
+    },
+    {
+      "id": "item_icon:4014",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 14"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4014.png",
+      "fileName": "Item_4014.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4014,
+      "refId": "4014",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:armor"
+      ]
+    },
+    {
+      "id": "item_icon:4015",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 15"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4015.png",
+      "fileName": "Item_4015.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4015,
+      "refId": "4015",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:mana"
+      ]
+    },
+    {
+      "id": "item_icon:4016",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 16"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4016.png",
+      "fileName": "Item_4016.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4016,
+      "refId": "4016",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:boots"
+      ]
+    },
+    {
+      "id": "item_icon:4017",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 17"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4017.png",
+      "fileName": "Item_4017.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4017,
+      "refId": "4017",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:consumable"
+      ]
+    },
+    {
+      "id": "item_icon:4018",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 18"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4018.png",
+      "fileName": "Item_4018.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4018,
+      "refId": "4018",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:damage"
+      ]
+    },
+    {
+      "id": "item_icon:4019",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 19"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4019.png",
+      "fileName": "Item_4019.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4019,
+      "refId": "4019",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:health"
+      ]
+    },
+    {
+      "id": "item_icon:4020",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 20"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4020.png",
+      "fileName": "Item_4020.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4020,
+      "refId": "4020",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:armor"
+      ]
+    },
+    {
+      "id": "item_icon:4021",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 21"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4021.png",
+      "fileName": "Item_4021.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4021,
+      "refId": "4021",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:mana"
+      ]
+    },
+    {
+      "id": "item_icon:4022",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 22"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4022.png",
+      "fileName": "Item_4022.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4022,
+      "refId": "4022",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:boots"
+      ]
+    },
+    {
+      "id": "item_icon:4023",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 23"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4023.png",
+      "fileName": "Item_4023.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4023,
+      "refId": "4023",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:consumable"
+      ]
+    },
+    {
+      "id": "item_icon:4024",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 24"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4024.png",
+      "fileName": "Item_4024.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4024,
+      "refId": "4024",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:damage"
+      ]
+    },
+    {
+      "id": "item_icon:4025",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 25"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4025.png",
+      "fileName": "Item_4025.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4025,
+      "refId": "4025",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:health"
+      ]
+    },
+    {
+      "id": "item_icon:4026",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 26"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4026.png",
+      "fileName": "Item_4026.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4026,
+      "refId": "4026",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:armor"
+      ]
+    },
+    {
+      "id": "item_icon:4027",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 27"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4027.png",
+      "fileName": "Item_4027.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4027,
+      "refId": "4027",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:mana"
+      ]
+    },
+    {
+      "id": "item_icon:4028",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 28"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4028.png",
+      "fileName": "Item_4028.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4028,
+      "refId": "4028",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:boots"
+      ]
+    },
+    {
+      "id": "item_icon:4029",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 29"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4029.png",
+      "fileName": "Item_4029.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4029,
+      "refId": "4029",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:consumable"
+      ]
+    },
+    {
+      "id": "item_icon:4030",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 30"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4030.png",
+      "fileName": "Item_4030.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4030,
+      "refId": "4030",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:damage"
+      ]
+    },
+    {
+      "id": "item_icon:4031",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 31"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4031.png",
+      "fileName": "Item_4031.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4031,
+      "refId": "4031",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:health"
+      ]
+    },
+    {
+      "id": "item_icon:4032",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 32"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4032.png",
+      "fileName": "Item_4032.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4032,
+      "refId": "4032",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:armor"
+      ]
+    },
+    {
+      "id": "item_icon:4033",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 33"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4033.png",
+      "fileName": "Item_4033.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4033,
+      "refId": "4033",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:mana"
+      ]
+    },
+    {
+      "id": "item_icon:4034",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 34"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4034.png",
+      "fileName": "Item_4034.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4034,
+      "refId": "4034",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:boots"
+      ]
+    },
+    {
+      "id": "item_icon:4035",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 35"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4035.png",
+      "fileName": "Item_4035.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4035,
+      "refId": "4035",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:consumable"
+      ]
+    },
+    {
+      "id": "item_icon:4036",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 36"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4036.png",
+      "fileName": "Item_4036.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4036,
+      "refId": "4036",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:damage"
+      ]
+    },
+    {
+      "id": "item_icon:4037",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 37"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4037.png",
+      "fileName": "Item_4037.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4037,
+      "refId": "4037",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:health"
+      ]
+    },
+    {
+      "id": "item_icon:4038",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 38"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4038.png",
+      "fileName": "Item_4038.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4038,
+      "refId": "4038",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:armor"
+      ]
+    },
+    {
+      "id": "item_icon:4039",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 39"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4039.png",
+      "fileName": "Item_4039.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4039,
+      "refId": "4039",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:mana"
+      ]
+    },
+    {
+      "id": "item_icon:4040",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 40"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4040.png",
+      "fileName": "Item_4040.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4040,
+      "refId": "4040",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:boots"
+      ]
+    },
+    {
+      "id": "item_icon:4041",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 41"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4041.png",
+      "fileName": "Item_4041.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4041,
+      "refId": "4041",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:consumable"
+      ]
+    },
+    {
+      "id": "item_icon:4042",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 42"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4042.png",
+      "fileName": "Item_4042.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4042,
+      "refId": "4042",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:damage"
+      ]
+    },
+    {
+      "id": "item_icon:4043",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 43"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4043.png",
+      "fileName": "Item_4043.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4043,
+      "refId": "4043",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:health"
+      ]
+    },
+    {
+      "id": "item_icon:4044",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 44"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4044.png",
+      "fileName": "Item_4044.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4044,
+      "refId": "4044",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:armor"
+      ]
+    },
+    {
+      "id": "item_icon:4045",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 45"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4045.png",
+      "fileName": "Item_4045.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4045,
+      "refId": "4045",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:mana"
+      ]
+    },
+    {
+      "id": "item_icon:4046",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 46"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4046.png",
+      "fileName": "Item_4046.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4046,
+      "refId": "4046",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:boots"
+      ]
+    },
+    {
+      "id": "item_icon:4047",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 47"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4047.png",
+      "fileName": "Item_4047.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4047,
+      "refId": "4047",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:consumable"
+      ]
+    },
+    {
+      "id": "item_icon:4048",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 48"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4048.png",
+      "fileName": "Item_4048.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4048,
+      "refId": "4048",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:damage"
+      ]
+    },
+    {
+      "id": "item_icon:4049",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 49"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4049.png",
+      "fileName": "Item_4049.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4049,
+      "refId": "4049",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:health"
+      ]
+    },
+    {
+      "id": "item_icon:4050",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 50"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4050.png",
+      "fileName": "Item_4050.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4050,
+      "refId": "4050",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:armor"
+      ]
+    },
+    {
+      "id": "item_icon:4051",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 51"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4051.png",
+      "fileName": "Item_4051.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4051,
+      "refId": "4051",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:mana"
+      ]
+    },
+    {
+      "id": "item_icon:4052",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 52"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4052.png",
+      "fileName": "Item_4052.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4052,
+      "refId": "4052",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:boots"
+      ]
+    },
+    {
+      "id": "item_icon:4053",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 53"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4053.png",
+      "fileName": "Item_4053.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4053,
+      "refId": "4053",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:consumable"
+      ]
+    },
+    {
+      "id": "item_icon:4054",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 54"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4054.png",
+      "fileName": "Item_4054.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4054,
+      "refId": "4054",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:damage"
+      ]
+    },
+    {
+      "id": "item_icon:4055",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 55"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4055.png",
+      "fileName": "Item_4055.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4055,
+      "refId": "4055",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:health"
+      ]
+    },
+    {
+      "id": "item_icon:4056",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 56"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4056.png",
+      "fileName": "Item_4056.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4056,
+      "refId": "4056",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:armor"
+      ]
+    },
+    {
+      "id": "item_icon:4057",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 57"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4057.png",
+      "fileName": "Item_4057.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4057,
+      "refId": "4057",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:mana"
+      ]
+    },
+    {
+      "id": "item_icon:4058",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 58"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4058.png",
+      "fileName": "Item_4058.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4058,
+      "refId": "4058",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:boots"
+      ]
+    },
+    {
+      "id": "item_icon:4059",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 59"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4059.png",
+      "fileName": "Item_4059.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4059,
+      "refId": "4059",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:consumable"
+      ]
+    },
+    {
+      "id": "item_icon:4060",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 60"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4060.png",
+      "fileName": "Item_4060.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4060,
+      "refId": "4060",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:damage"
+      ]
+    },
+    {
+      "id": "item_icon:4061",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 61"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4061.png",
+      "fileName": "Item_4061.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4061,
+      "refId": "4061",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:health"
+      ]
+    },
+    {
+      "id": "item_icon:4062",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 62"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4062.png",
+      "fileName": "Item_4062.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4062,
+      "refId": "4062",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:armor"
+      ]
+    },
+    {
+      "id": "item_icon:4063",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 63"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4063.png",
+      "fileName": "Item_4063.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4063,
+      "refId": "4063",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:mana"
+      ]
+    },
+    {
+      "id": "item_icon:4064",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 64"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4064.png",
+      "fileName": "Item_4064.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4064,
+      "refId": "4064",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:boots"
+      ]
+    },
+    {
+      "id": "item_icon:4065",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 65"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4065.png",
+      "fileName": "Item_4065.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4065,
+      "refId": "4065",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:consumable"
+      ]
+    },
+    {
+      "id": "item_icon:4066",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 66"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4066.png",
+      "fileName": "Item_4066.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4066,
+      "refId": "4066",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:damage"
+      ]
+    },
+    {
+      "id": "item_icon:4067",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 67"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4067.png",
+      "fileName": "Item_4067.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4067,
+      "refId": "4067",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:health"
+      ]
+    },
+    {
+      "id": "item_icon:4068",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 68"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4068.png",
+      "fileName": "Item_4068.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4068,
+      "refId": "4068",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:armor"
+      ]
+    },
+    {
+      "id": "item_icon:4069",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 69"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4069.png",
+      "fileName": "Item_4069.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4069,
+      "refId": "4069",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:mana"
+      ]
+    },
+    {
+      "id": "item_icon:4070",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 70"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4070.png",
+      "fileName": "Item_4070.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4070,
+      "refId": "4070",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:boots"
+      ]
+    },
+    {
+      "id": "item_icon:4071",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 71"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4071.png",
+      "fileName": "Item_4071.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4071,
+      "refId": "4071",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:consumable"
+      ]
+    },
+    {
+      "id": "item_icon:4072",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 72"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4072.png",
+      "fileName": "Item_4072.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4072,
+      "refId": "4072",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:damage"
+      ]
+    },
+    {
+      "id": "item_icon:4073",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 73"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4073.png",
+      "fileName": "Item_4073.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4073,
+      "refId": "4073",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:health"
+      ]
+    },
+    {
+      "id": "item_icon:4074",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 74"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4074.png",
+      "fileName": "Item_4074.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4074,
+      "refId": "4074",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:armor"
+      ]
+    },
+    {
+      "id": "item_icon:4075",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 75"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4075.png",
+      "fileName": "Item_4075.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4075,
+      "refId": "4075",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:mana"
+      ]
+    },
+    {
+      "id": "item_icon:4076",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 76"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4076.png",
+      "fileName": "Item_4076.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4076,
+      "refId": "4076",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:boots"
+      ]
+    },
+    {
+      "id": "item_icon:4077",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 77"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4077.png",
+      "fileName": "Item_4077.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4077,
+      "refId": "4077",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:consumable"
+      ]
+    },
+    {
+      "id": "item_icon:4078",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 78"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4078.png",
+      "fileName": "Item_4078.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4078,
+      "refId": "4078",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:damage"
+      ]
+    },
+    {
+      "id": "item_icon:4079",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 79"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4079.png",
+      "fileName": "Item_4079.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4079,
+      "refId": "4079",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:health"
+      ]
+    },
+    {
+      "id": "item_icon:4080",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 80"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4080.png",
+      "fileName": "Item_4080.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4080,
+      "refId": "4080",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:armor"
+      ]
+    },
+    {
+      "id": "item_icon:4081",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 81"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4081.png",
+      "fileName": "Item_4081.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4081,
+      "refId": "4081",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:mana"
+      ]
+    },
+    {
+      "id": "item_icon:4082",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 82"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4082.png",
+      "fileName": "Item_4082.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4082,
+      "refId": "4082",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:boots"
+      ]
+    },
+    {
+      "id": "item_icon:4083",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 83"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4083.png",
+      "fileName": "Item_4083.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4083,
+      "refId": "4083",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:consumable"
+      ]
+    },
+    {
+      "id": "item_icon:4084",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 84"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4084.png",
+      "fileName": "Item_4084.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4084,
+      "refId": "4084",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:damage"
+      ]
+    },
+    {
+      "id": "item_icon:4085",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 85"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4085.png",
+      "fileName": "Item_4085.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4085,
+      "refId": "4085",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:health"
+      ]
+    },
+    {
+      "id": "item_icon:4086",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 86"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4086.png",
+      "fileName": "Item_4086.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4086,
+      "refId": "4086",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:armor"
+      ]
+    },
+    {
+      "id": "item_icon:4087",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 87"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4087.png",
+      "fileName": "Item_4087.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4087,
+      "refId": "4087",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:mana"
+      ]
+    },
+    {
+      "id": "item_icon:4088",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 88"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4088.png",
+      "fileName": "Item_4088.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4088,
+      "refId": "4088",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:boots"
+      ]
+    },
+    {
+      "id": "item_icon:4089",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 89"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4089.png",
+      "fileName": "Item_4089.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4089,
+      "refId": "4089",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:consumable"
+      ]
+    },
+    {
+      "id": "item_icon:4090",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 90"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4090.png",
+      "fileName": "Item_4090.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4090,
+      "refId": "4090",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:damage"
+      ]
+    },
+    {
+      "id": "item_icon:4091",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 91"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4091.png",
+      "fileName": "Item_4091.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4091,
+      "refId": "4091",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:health"
+      ]
+    },
+    {
+      "id": "item_icon:4092",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 92"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4092.png",
+      "fileName": "Item_4092.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4092,
+      "refId": "4092",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:armor"
+      ]
+    },
+    {
+      "id": "item_icon:4093",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 93"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4093.png",
+      "fileName": "Item_4093.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4093,
+      "refId": "4093",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:mana"
+      ]
+    },
+    {
+      "id": "item_icon:4094",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 94"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4094.png",
+      "fileName": "Item_4094.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4094,
+      "refId": "4094",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:boots"
+      ]
+    },
+    {
+      "id": "item_icon:4095",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 95"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4095.png",
+      "fileName": "Item_4095.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4095,
+      "refId": "4095",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:consumable"
+      ]
+    },
+    {
+      "id": "item_icon:4096",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 96"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4096.png",
+      "fileName": "Item_4096.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4096,
+      "refId": "4096",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:damage"
+      ]
+    },
+    {
+      "id": "item_icon:4097",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 97"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4097.png",
+      "fileName": "Item_4097.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4097,
+      "refId": "4097",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:health"
+      ]
+    },
+    {
+      "id": "item_icon:4098",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 98"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4098.png",
+      "fileName": "Item_4098.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4098,
+      "refId": "4098",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:armor"
+      ]
+    },
+    {
+      "id": "item_icon:4099",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 99"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4099.png",
+      "fileName": "Item_4099.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4099,
+      "refId": "4099",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:mana"
+      ]
+    },
+    {
+      "id": "item_icon:4100",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 100"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4100.png",
+      "fileName": "Item_4100.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4100,
+      "refId": "4100",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:boots"
+      ]
+    },
+    {
+      "id": "item_icon:4101",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 101"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4101.png",
+      "fileName": "Item_4101.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4101,
+      "refId": "4101",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:consumable"
+      ]
+    },
+    {
+      "id": "item_icon:4102",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 102"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4102.png",
+      "fileName": "Item_4102.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4102,
+      "refId": "4102",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:damage"
+      ]
+    },
+    {
+      "id": "item_icon:4103",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 103"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4103.png",
+      "fileName": "Item_4103.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4103,
+      "refId": "4103",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:health"
+      ]
+    },
+    {
+      "id": "item_icon:4104",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 104"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4104.png",
+      "fileName": "Item_4104.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4104,
+      "refId": "4104",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:armor"
+      ]
+    },
+    {
+      "id": "item_icon:4105",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 105"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4105.png",
+      "fileName": "Item_4105.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4105,
+      "refId": "4105",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:mana"
+      ]
+    },
+    {
+      "id": "item_icon:4106",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 106"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4106.png",
+      "fileName": "Item_4106.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4106,
+      "refId": "4106",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:boots"
+      ]
+    },
+    {
+      "id": "item_icon:4107",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 107"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4107.png",
+      "fileName": "Item_4107.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4107,
+      "refId": "4107",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:consumable"
+      ]
+    },
+    {
+      "id": "item_icon:4108",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 108"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4108.png",
+      "fileName": "Item_4108.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4108,
+      "refId": "4108",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:damage"
+      ]
+    },
+    {
+      "id": "item_icon:4109",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 109"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4109.png",
+      "fileName": "Item_4109.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4109,
+      "refId": "4109",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:health"
+      ]
+    },
+    {
+      "id": "item_icon:4110",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 110"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4110.png",
+      "fileName": "Item_4110.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4110,
+      "refId": "4110",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:armor"
+      ]
+    },
+    {
+      "id": "item_icon:4111",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 111"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4111.png",
+      "fileName": "Item_4111.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4111,
+      "refId": "4111",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:mana"
+      ]
+    },
+    {
+      "id": "item_icon:4112",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 112"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4112.png",
+      "fileName": "Item_4112.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4112,
+      "refId": "4112",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:boots"
+      ]
+    },
+    {
+      "id": "item_icon:4113",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 113"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4113.png",
+      "fileName": "Item_4113.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4113,
+      "refId": "4113",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:consumable"
+      ]
+    },
+    {
+      "id": "item_icon:4114",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 114"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4114.png",
+      "fileName": "Item_4114.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4114,
+      "refId": "4114",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:damage"
+      ]
+    },
+    {
+      "id": "item_icon:4115",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 115"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4115.png",
+      "fileName": "Item_4115.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4115,
+      "refId": "4115",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:health"
+      ]
+    },
+    {
+      "id": "item_icon:4116",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 116"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4116.png",
+      "fileName": "Item_4116.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4116,
+      "refId": "4116",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:armor"
+      ]
+    },
+    {
+      "id": "item_icon:4117",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 117"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4117.png",
+      "fileName": "Item_4117.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4117,
+      "refId": "4117",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:mana"
+      ]
+    },
+    {
+      "id": "item_icon:4118",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 118"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4118.png",
+      "fileName": "Item_4118.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4118,
+      "refId": "4118",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:boots"
+      ]
+    },
+    {
+      "id": "item_icon:4119",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 119"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4119.png",
+      "fileName": "Item_4119.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4119,
+      "refId": "4119",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:consumable"
+      ]
+    },
+    {
+      "id": "item_icon:4120",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 120"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4120.png",
+      "fileName": "Item_4120.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4120,
+      "refId": "4120",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:damage"
+      ]
+    },
+    {
+      "id": "item_icon:4121",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 121"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4121.png",
+      "fileName": "Item_4121.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4121,
+      "refId": "4121",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:health"
+      ]
+    },
+    {
+      "id": "item_icon:4122",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 122"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4122.png",
+      "fileName": "Item_4122.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4122,
+      "refId": "4122",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:armor"
+      ]
+    },
+    {
+      "id": "item_icon:4123",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 123"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4123.png",
+      "fileName": "Item_4123.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4123,
+      "refId": "4123",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:mana"
+      ]
+    },
+    {
+      "id": "item_icon:4124",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 124"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4124.png",
+      "fileName": "Item_4124.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4124,
+      "refId": "4124",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:boots"
+      ]
+    },
+    {
+      "id": "item_icon:4125",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 125"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4125.png",
+      "fileName": "Item_4125.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4125,
+      "refId": "4125",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:consumable"
+      ]
+    },
+    {
+      "id": "item_icon:4126",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 126"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4126.png",
+      "fileName": "Item_4126.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4126,
+      "refId": "4126",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:damage"
+      ]
+    },
+    {
+      "id": "item_icon:4127",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 127"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4127.png",
+      "fileName": "Item_4127.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4127,
+      "refId": "4127",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:health"
+      ]
+    },
+    {
+      "id": "item_icon:4128",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 128"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4128.png",
+      "fileName": "Item_4128.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4128,
+      "refId": "4128",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:armor"
+      ]
+    },
+    {
+      "id": "item_icon:4129",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 129"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4129.png",
+      "fileName": "Item_4129.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4129,
+      "refId": "4129",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:mana"
+      ]
+    },
+    {
+      "id": "item_icon:4130",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 130"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4130.png",
+      "fileName": "Item_4130.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4130,
+      "refId": "4130",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:boots"
+      ]
+    },
+    {
+      "id": "item_icon:4131",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 131"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4131.png",
+      "fileName": "Item_4131.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4131,
+      "refId": "4131",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:consumable"
+      ]
+    },
+    {
+      "id": "item_icon:4132",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 132"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4132.png",
+      "fileName": "Item_4132.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4132,
+      "refId": "4132",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:damage"
+      ]
+    },
+    {
+      "id": "item_icon:4133",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 133"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4133.png",
+      "fileName": "Item_4133.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4133,
+      "refId": "4133",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:health"
+      ]
+    },
+    {
+      "id": "item_icon:4134",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 134"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4134.png",
+      "fileName": "Item_4134.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4134,
+      "refId": "4134",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:armor"
+      ]
+    },
+    {
+      "id": "item_icon:4135",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 135"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4135.png",
+      "fileName": "Item_4135.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4135,
+      "refId": "4135",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:mana"
+      ]
+    },
+    {
+      "id": "item_icon:4136",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 136"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4136.png",
+      "fileName": "Item_4136.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4136,
+      "refId": "4136",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:boots"
+      ]
+    },
+    {
+      "id": "item_icon:4137",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 137"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4137.png",
+      "fileName": "Item_4137.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4137,
+      "refId": "4137",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:consumable"
+      ]
+    },
+    {
+      "id": "item_icon:4138",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 138"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4138.png",
+      "fileName": "Item_4138.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4138,
+      "refId": "4138",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:damage"
+      ]
+    },
+    {
+      "id": "item_icon:4139",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 139"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4139.png",
+      "fileName": "Item_4139.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4139,
+      "refId": "4139",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:health"
+      ]
+    },
+    {
+      "id": "item_icon:4140",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 140"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4140.png",
+      "fileName": "Item_4140.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4140,
+      "refId": "4140",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:armor"
+      ]
+    },
+    {
+      "id": "item_icon:4141",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 141"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4141.png",
+      "fileName": "Item_4141.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4141,
+      "refId": "4141",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:mana"
+      ]
+    },
+    {
+      "id": "item_icon:4142",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 142"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4142.png",
+      "fileName": "Item_4142.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4142,
+      "refId": "4142",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:boots"
+      ]
+    },
+    {
+      "id": "item_icon:4143",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 143"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4143.png",
+      "fileName": "Item_4143.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4143,
+      "refId": "4143",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:consumable"
+      ]
+    },
+    {
+      "id": "item_icon:4144",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 144"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4144.png",
+      "fileName": "Item_4144.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4144,
+      "refId": "4144",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:damage"
+      ]
+    },
+    {
+      "id": "item_icon:4145",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 145"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4145.png",
+      "fileName": "Item_4145.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4145,
+      "refId": "4145",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:health"
+      ]
+    },
+    {
+      "id": "item_icon:4146",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 146"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4146.png",
+      "fileName": "Item_4146.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4146,
+      "refId": "4146",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:armor"
+      ]
+    },
+    {
+      "id": "item_icon:4147",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 147"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4147.png",
+      "fileName": "Item_4147.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4147,
+      "refId": "4147",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:mana"
+      ]
+    },
+    {
+      "id": "item_icon:4148",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 148"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4148.png",
+      "fileName": "Item_4148.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4148,
+      "refId": "4148",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:boots"
+      ]
+    },
+    {
+      "id": "item_icon:4149",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 149"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4149.png",
+      "fileName": "Item_4149.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4149,
+      "refId": "4149",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:consumable"
+      ]
+    },
+    {
+      "id": "item_icon:4150",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 150"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4150.png",
+      "fileName": "Item_4150.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4150,
+      "refId": "4150",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:damage"
+      ]
+    },
+    {
+      "id": "item_icon:4151",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 151"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4151.png",
+      "fileName": "Item_4151.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4151,
+      "refId": "4151",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:health"
+      ]
+    },
+    {
+      "id": "item_icon:4152",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 152"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4152.png",
+      "fileName": "Item_4152.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4152,
+      "refId": "4152",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:armor"
+      ]
+    },
+    {
+      "id": "item_icon:4153",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 153"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4153.png",
+      "fileName": "Item_4153.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4153,
+      "refId": "4153",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:mana"
+      ]
+    },
+    {
+      "id": "item_icon:4154",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 154"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4154.png",
+      "fileName": "Item_4154.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4154,
+      "refId": "4154",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:boots"
+      ]
+    },
+    {
+      "id": "item_icon:4155",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 155"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4155.png",
+      "fileName": "Item_4155.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4155,
+      "refId": "4155",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:consumable"
+      ]
+    },
+    {
+      "id": "item_icon:4156",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 156"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4156.png",
+      "fileName": "Item_4156.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4156,
+      "refId": "4156",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:damage"
+      ]
+    },
+    {
+      "id": "item_icon:4157",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 157"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4157.png",
+      "fileName": "Item_4157.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4157,
+      "refId": "4157",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:health"
+      ]
+    },
+    {
+      "id": "item_icon:4158",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 158"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4158.png",
+      "fileName": "Item_4158.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4158,
+      "refId": "4158",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:armor"
+      ]
+    },
+    {
+      "id": "item_icon:4159",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 159"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4159.png",
+      "fileName": "Item_4159.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4159,
+      "refId": "4159",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:mana"
+      ]
+    },
+    {
+      "id": "item_icon:4160",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 160"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4160.png",
+      "fileName": "Item_4160.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4160,
+      "refId": "4160",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:boots"
+      ]
+    },
+    {
+      "id": "item_icon:4161",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 161"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4161.png",
+      "fileName": "Item_4161.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4161,
+      "refId": "4161",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:consumable"
+      ]
+    },
+    {
+      "id": "item_icon:4162",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 162"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4162.png",
+      "fileName": "Item_4162.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4162,
+      "refId": "4162",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:damage"
+      ]
+    },
+    {
+      "id": "item_icon:4163",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 163"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4163.png",
+      "fileName": "Item_4163.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4163,
+      "refId": "4163",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:health"
+      ]
+    },
+    {
+      "id": "item_icon:4164",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 164"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4164.png",
+      "fileName": "Item_4164.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4164,
+      "refId": "4164",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:armor"
+      ]
+    },
+    {
+      "id": "item_icon:4165",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 165"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4165.png",
+      "fileName": "Item_4165.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4165,
+      "refId": "4165",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:mana"
+      ]
+    },
+    {
+      "id": "item_icon:4166",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 166"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4166.png",
+      "fileName": "Item_4166.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4166,
+      "refId": "4166",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:boots"
+      ]
+    },
+    {
+      "id": "item_icon:4167",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 167"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4167.png",
+      "fileName": "Item_4167.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4167,
+      "refId": "4167",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:consumable"
+      ]
+    },
+    {
+      "id": "item_icon:4168",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 168"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4168.png",
+      "fileName": "Item_4168.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4168,
+      "refId": "4168",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:damage"
+      ]
+    },
+    {
+      "id": "item_icon:4169",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 169"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4169.png",
+      "fileName": "Item_4169.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4169,
+      "refId": "4169",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:health"
+      ]
+    },
+    {
+      "id": "item_icon:4170",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 170"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4170.png",
+      "fileName": "Item_4170.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4170,
+      "refId": "4170",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:armor"
+      ]
+    },
+    {
+      "id": "item_icon:4171",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 171"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4171.png",
+      "fileName": "Item_4171.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4171,
+      "refId": "4171",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:mana"
+      ]
+    },
+    {
+      "id": "item_icon:4172",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 172"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4172.png",
+      "fileName": "Item_4172.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4172,
+      "refId": "4172",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:boots"
+      ]
+    },
+    {
+      "id": "item_icon:4173",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 173"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4173.png",
+      "fileName": "Item_4173.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4173,
+      "refId": "4173",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:consumable"
+      ]
+    },
+    {
+      "id": "item_icon:4174",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 174"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4174.png",
+      "fileName": "Item_4174.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4174,
+      "refId": "4174",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:damage"
+      ]
+    },
+    {
+      "id": "item_icon:4175",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 175"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4175.png",
+      "fileName": "Item_4175.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4175,
+      "refId": "4175",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:health"
+      ]
+    },
+    {
+      "id": "item_icon:4176",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 176"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4176.png",
+      "fileName": "Item_4176.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4176,
+      "refId": "4176",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:armor"
+      ]
+    },
+    {
+      "id": "item_icon:4177",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 177"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4177.png",
+      "fileName": "Item_4177.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4177,
+      "refId": "4177",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:mana"
+      ]
+    },
+    {
+      "id": "item_icon:4178",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 178"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4178.png",
+      "fileName": "Item_4178.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4178,
+      "refId": "4178",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:boots"
+      ]
+    },
+    {
+      "id": "item_icon:4179",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 179"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4179.png",
+      "fileName": "Item_4179.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4179,
+      "refId": "4179",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:consumable"
+      ]
+    },
+    {
+      "id": "item_icon:4180",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 180"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4180.png",
+      "fileName": "Item_4180.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4180,
+      "refId": "4180",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:damage"
+      ]
+    },
+    {
+      "id": "item_icon:4181",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 181"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4181.png",
+      "fileName": "Item_4181.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4181,
+      "refId": "4181",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:health"
+      ]
+    },
+    {
+      "id": "item_icon:4182",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 182"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4182.png",
+      "fileName": "Item_4182.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4182,
+      "refId": "4182",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:armor"
+      ]
+    },
+    {
+      "id": "item_icon:4183",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 183"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4183.png",
+      "fileName": "Item_4183.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4183,
+      "refId": "4183",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:mana"
+      ]
+    },
+    {
+      "id": "item_icon:4184",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 184"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4184.png",
+      "fileName": "Item_4184.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4184,
+      "refId": "4184",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:boots"
+      ]
+    },
+    {
+      "id": "item_icon:4185",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 185"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4185.png",
+      "fileName": "Item_4185.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4185,
+      "refId": "4185",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:consumable"
+      ]
+    },
+    {
+      "id": "item_icon:4186",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 186"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4186.png",
+      "fileName": "Item_4186.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4186,
+      "refId": "4186",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:damage"
+      ]
+    },
+    {
+      "id": "item_icon:4187",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 187"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4187.png",
+      "fileName": "Item_4187.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4187,
+      "refId": "4187",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:health"
+      ]
+    },
+    {
+      "id": "item_icon:4188",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 188"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4188.png",
+      "fileName": "Item_4188.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4188,
+      "refId": "4188",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:armor"
+      ]
+    },
+    {
+      "id": "item_icon:4189",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 189"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4189.png",
+      "fileName": "Item_4189.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4189,
+      "refId": "4189",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:mana"
+      ]
+    },
+    {
+      "id": "item_icon:4190",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 190"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4190.png",
+      "fileName": "Item_4190.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4190,
+      "refId": "4190",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:boots"
+      ]
+    },
+    {
+      "id": "item_icon:4191",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 191"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4191.png",
+      "fileName": "Item_4191.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4191,
+      "refId": "4191",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:consumable"
+      ]
+    },
+    {
+      "id": "item_icon:4192",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 192"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4192.png",
+      "fileName": "Item_4192.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4192,
+      "refId": "4192",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:damage"
+      ]
+    },
+    {
+      "id": "item_icon:4193",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 193"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4193.png",
+      "fileName": "Item_4193.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4193,
+      "refId": "4193",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:health"
+      ]
+    },
+    {
+      "id": "item_icon:4194",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 194"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4194.png",
+      "fileName": "Item_4194.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4194,
+      "refId": "4194",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:armor"
+      ]
+    },
+    {
+      "id": "item_icon:4195",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 195"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4195.png",
+      "fileName": "Item_4195.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4195,
+      "refId": "4195",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:mana"
+      ]
+    },
+    {
+      "id": "item_icon:4196",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 196"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4196.png",
+      "fileName": "Item_4196.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4196,
+      "refId": "4196",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:boots"
+      ]
+    },
+    {
+      "id": "item_icon:4197",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 197"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4197.png",
+      "fileName": "Item_4197.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4197,
+      "refId": "4197",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:consumable"
+      ]
+    },
+    {
+      "id": "item_icon:4198",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 198"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4198.png",
+      "fileName": "Item_4198.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4198,
+      "refId": "4198",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:damage"
+      ]
+    },
+    {
+      "id": "item_icon:4199",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 199"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4199.png",
+      "fileName": "Item_4199.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4199,
+      "refId": "4199",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:health"
+      ]
+    },
+    {
+      "id": "item_icon:4200",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 200"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4200.png",
+      "fileName": "Item_4200.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4200,
+      "refId": "4200",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:armor"
+      ]
+    },
+    {
+      "id": "item_icon:4201",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 201"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4201.png",
+      "fileName": "Item_4201.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4201,
+      "refId": "4201",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:mana"
+      ]
+    },
+    {
+      "id": "item_icon:4202",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 202"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4202.png",
+      "fileName": "Item_4202.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4202,
+      "refId": "4202",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:boots"
+      ]
+    },
+    {
+      "id": "item_icon:4203",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 203"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4203.png",
+      "fileName": "Item_4203.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4203,
+      "refId": "4203",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:consumable"
+      ]
+    },
+    {
+      "id": "item_icon:4204",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 204"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4204.png",
+      "fileName": "Item_4204.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4204,
+      "refId": "4204",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:damage"
+      ]
+    },
+    {
+      "id": "item_icon:4205",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 205"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4205.png",
+      "fileName": "Item_4205.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4205,
+      "refId": "4205",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:health"
+      ]
+    },
+    {
+      "id": "item_icon:4206",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 206"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4206.png",
+      "fileName": "Item_4206.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4206,
+      "refId": "4206",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:armor"
+      ]
+    },
+    {
+      "id": "item_icon:4207",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 207"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4207.png",
+      "fileName": "Item_4207.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4207,
+      "refId": "4207",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:mana"
+      ]
+    },
+    {
+      "id": "item_icon:4208",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 208"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4208.png",
+      "fileName": "Item_4208.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4208,
+      "refId": "4208",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:boots"
+      ]
+    },
+    {
+      "id": "item_icon:4209",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 209"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4209.png",
+      "fileName": "Item_4209.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4209,
+      "refId": "4209",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:consumable"
+      ]
+    },
+    {
+      "id": "item_icon:4210",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 210"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4210.png",
+      "fileName": "Item_4210.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4210,
+      "refId": "4210",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:damage"
+      ]
+    },
+    {
+      "id": "item_icon:4211",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 211"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4211.png",
+      "fileName": "Item_4211.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4211,
+      "refId": "4211",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:health"
+      ]
+    },
+    {
+      "id": "item_icon:4212",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 212"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4212.png",
+      "fileName": "Item_4212.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4212,
+      "refId": "4212",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:armor"
+      ]
+    },
+    {
+      "id": "item_icon:4213",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 213"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4213.png",
+      "fileName": "Item_4213.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4213,
+      "refId": "4213",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:mana"
+      ]
+    },
+    {
+      "id": "item_icon:4214",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 214"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4214.png",
+      "fileName": "Item_4214.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4214,
+      "refId": "4214",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:boots"
+      ]
+    },
+    {
+      "id": "item_icon:4215",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 215"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4215.png",
+      "fileName": "Item_4215.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4215,
+      "refId": "4215",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "mapa:aram",
+        "classe:consumable"
+      ]
+    },
+    {
+      "id": "item_icon:4216",
+      "type": "item_icon",
+      "category": "item",
+      "names": {
+        "pt_BR": "Item de Teste 216"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Item_4216.png",
+      "fileName": "Item_4216.png",
+      "width": 16,
+      "height": 16,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 127,
+      "sha256": "1d80a5bb5553feee8b5e50f4b3725a8b9a379bb00190d69fca8f91fff39ff73e",
+      "itemId": 4216,
+      "refId": "4216",
+      "tags": [
+        "compravel",
+        "mapa:sr",
+        "classe:damage"
+      ]
     }
   ]
 }

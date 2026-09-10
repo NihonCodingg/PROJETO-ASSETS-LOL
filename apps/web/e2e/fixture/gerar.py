@@ -65,12 +65,31 @@ SKINS = (
     Skin(99, 0, "Lux", True),
 )
 
-#: Três itens com as etiquetas que o T-21 escreve de verdade — é o que faz a
-#: navegação por categoria e os filtros do T-24 terem o que filtrar no e2e.
-ITENS: tuple[tuple[str, str, tuple[str, ...]], ...] = (
+#: Itens com as etiquetas que o T-21 escreve de verdade — é o que faz a navegação
+#: por categoria e os filtros do T-24 terem o que filtrar no e2e.
+#:
+#: São **220**, e o número não é decorativo: acima do `LIMITE_DE_VIRTUALIZACAO`
+#: de 200 a lista vira scroller virtual, e é justamente essa a que já quebrou
+#: duas vezes por medir altura zero num pai errado. Com três itens o e2e passava
+#: sem nunca exercitar o caminho virtual.
+_NOMEADOS: tuple[tuple[str, str, tuple[str, ...]], ...] = (
     ("1001", "Botas de Velocidade", ("compravel", "mapa:sr", "mapa:aram", "classe:boots")),
     ("3031", "Gume do Infinito", ("compravel", "mapa:sr", "classe:criticalstrike")),
     ("2052", "Petisco de Poro", ("compravel", "mapa:aram", "classe:consumable")),
+)
+
+_CLASSES = ("damage", "health", "armor", "mana", "boots", "consumable")
+ITENS: tuple[tuple[str, str, tuple[str, ...]], ...] = _NOMEADOS + tuple(
+    # Todos compráveis e no SR, porque é assim que a categoria `item` **abre**
+    # (§B.1.6): o filtro padrão precisa deixar mais de 200 na tela para o
+    # caminho virtual ser exercitado. Metade também é de ARAM, para o filtro de
+    # mapa continuar tendo o que filtrar.
+    (
+        str(4000 + i),
+        f"Item de Teste {i}",
+        ("compravel", "mapa:sr", *(("mapa:aram",) if i % 2 else ()), f"classe:{_CLASSES[i % 6]}"),
+    )
+    for i in range(220 - len(_NOMEADOS))
 )
 
 
@@ -214,13 +233,16 @@ def main() -> None:
     # Uma segunda categoria: sem ela o e2e não passa pela navegação por
     # categoria nem pelos filtros do T-24, que são metade da tela.
     itens: list[dict[str, object]] = []
-    for item_id, nome, etiquetas in ITENS:
+    for indice, (item_id, nome, etiquetas) in enumerate(ITENS):
+        # Os três nomeados ficam em 64x64 como o ddragon serve; os de volume
+        # ficam em 16x16, porque o que eles provam é a **contagem**, não o pixel.
+        lado = 64 if indice < len(_NOMEADOS) else 16
         registro = asset(
             asset_id=f"item_icon:{item_id}",
             tipo="item_icon",
             nome_do_arquivo=f"Item_{item_id}.png",
-            largura=64,
-            altura=64,
+            largura=lado,
+            altura=lado,
             formato="png",
             nomes={"pt_BR": nome},
             extra={"itemId": int(item_id), "refId": item_id, "tags": list(etiquetas)},

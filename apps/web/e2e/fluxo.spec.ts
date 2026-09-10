@@ -304,6 +304,45 @@ test.describe("a origem cruzada", () => {
     expect(await page.locator("article[data-tipo='chroma']").count()).toBe(2);
   });
 
+  test("a categoria virtualizada desenha cartões — e não uma lista vazia", async ({ page }) => {
+    // Este teste existe por um defeito que apareceu duas vezes: o scroller
+    // virtual dentro de um pai que também rola mede **altura zero** e desenha
+    // nada. A contagem fica certa, os filtros funcionam, e a lista vem vazia —
+    // sem erro nenhum no console. A fixture tem 220 itens de propósito, acima
+    // do limite de 200 que liga a virtualização.
+    await irParaHome(page);
+    await page
+      .getByRole("navigation", { name: "Categorias" })
+      .getByRole("button", { name: "Itens" })
+      .click();
+
+    const scroller = page.locator("[data-virtual='sim']");
+    await expect(scroller).toBeVisible();
+    await expect(scroller.locator("article").first()).toBeVisible();
+
+    const altura = await scroller.evaluate((el) => el.clientHeight);
+    expect(altura, "o scroller virtual ficou sem altura").toBeGreaterThan(100);
+
+    const cartoes = await scroller.locator("article").count();
+    expect(cartoes).toBeGreaterThan(2);
+    expect(cartoes).toBeLessThan(100);
+  });
+
+  test("a grade de campeões some quando uma categoria abre (T-41)", async ({ page }) => {
+    await irParaHome(page);
+    await page
+      .getByRole("navigation", { name: "Categorias" })
+      .getByRole("button", { name: "Itens" })
+      .click();
+    await expect(page.getByRole("list", { name: "Campeões" })).toBeHidden();
+
+    await page
+      .getByRole("navigation", { name: "Categorias" })
+      .getByRole("button", { name: "Campeões" })
+      .click();
+    await expect(page.getByRole("list", { name: "Campeões" })).toBeVisible();
+  });
+
   test("o aviso de índice velho não aparece com índice fresco (T-31)", async ({ page }) => {
     await irParaHome(page);
     expect(await page.locator("[data-indice='velho']").count()).toBe(0);

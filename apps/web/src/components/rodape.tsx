@@ -1,5 +1,7 @@
+"use client";
+
 /**
- * A barra lateral — marca no topo, navegação no meio, aviso legal no pé.
+ * A barra lateral — marca, categorias, seções e o aviso legal no pé.
  *
  * O nome do arquivo continua `rodape` porque é o que ele é para o **RF-21**: o
  * lugar por onde o aviso da Riot passa em toda página. O design não desenhou
@@ -7,18 +9,26 @@
  * 10/09 foi pôr o aviso aqui, no pé da coluna da esquerda, em vez de comer
  * altura da grade com uma faixa atravessada.
  *
- * O quadrado violeta de 20px no topo é a marca do design. Ele não é logotipo:
- * é o acento, do tamanho que o desenho pede, no lugar que o desenho reservou
- * para `[ nome do produto ]`.
+ * As **categorias** entraram no T-41. Antes elas ficavam abaixo dos 173 cartões
+ * de campeão, o que obrigava a rolar a grade inteira para chegar em "Itens".
+ * Aqui elas estão sempre à vista, que é onde o design as desenhou.
+ *
+ * O quadrado violeta de 20px no topo é a marca do design. Ele não é logotipo: é
+ * o acento, do tamanho que o desenho pede, no lugar que o desenho reservou para
+ * `[ nome do produto ]`.
  */
 
 import Link from "next/link";
 
+import { useNavegacao } from "@/components/navegacao-context";
 import { siteConfig } from "@/lib/site-config";
+import { cn } from "@/lib/utils";
 
 export function Rodape() {
+  const { categorias, aberta, abrir } = useNavegacao();
+
   return (
-    <aside className="flex min-h-0 flex-row flex-wrap items-center gap-x-2 border-b border-borda bg-superficie md:flex-col md:flex-nowrap md:items-stretch md:gap-x-0 md:border-b-0 md:border-r">
+    <aside className="flex min-h-0 flex-row flex-wrap items-center gap-x-2 border-b border-borda bg-superficie md:flex-col md:flex-nowrap md:items-stretch md:gap-x-0 md:overflow-y-auto md:border-b-0 md:border-r">
       <div className="flex h-cabecalho flex-none items-center gap-2 px-3.5">
         <div className="size-5 flex-none rounded-marca bg-acento" aria-hidden="true" />
         <span className="text-13 font-semibold tracking-marca text-texto-forte">
@@ -26,7 +36,37 @@ export function Rodape() {
         </span>
       </div>
 
-      <nav aria-label="Seções" className="flex flex-none flex-row gap-0.5 px-2 md:flex-col">
+      {/* Sem provedor — como no teste do T-27, que monta este componente sozinho
+          — a lista vem vazia e a barra desenha só o resto. */}
+      {categorias.length > 0 && (
+        <nav
+          aria-label="Categorias"
+          className="flex flex-none flex-row flex-wrap gap-0.5 px-2 md:flex-col md:flex-nowrap"
+        >
+          <span className="hidden px-2 pt-1.5 pb-1 font-mono text-10 uppercase tracking-rotulo text-texto-suave md:block">
+            Categorias
+          </span>
+          {/* RF-04: campeão é a navegação padrão, e no design ele é a primeira
+              categoria da lista. `null` é a grade de campeões. */}
+          <ItemDeCategoria rotulo="Campeões" ativo={aberta === null} onClick={() => abrir(null)} />
+          {categorias.map((categoria) => (
+            <ItemDeCategoria
+              key={categoria.category}
+              rotulo={categoria.rotulo}
+              ativo={aberta === categoria.category}
+              onClick={() => abrir(categoria.category)}
+            />
+          ))}
+        </nav>
+      )}
+
+      <nav
+        aria-label="Seções"
+        className="flex flex-none flex-row gap-0.5 px-2 md:mt-3 md:flex-col"
+      >
+        <span className="hidden px-2 pt-1.5 pb-1 font-mono text-10 uppercase tracking-rotulo text-texto-suave md:block">
+          Projeto
+        </span>
         <Link
           href="/"
           className="rounded-padrao px-2 py-1.5 text-13 text-texto-suave hover:bg-campo hover:text-texto"
@@ -57,5 +97,29 @@ export function Rodape() {
         </p>
       </footer>
     </aside>
+  );
+}
+
+function ItemDeCategoria({
+  rotulo,
+  ativo,
+  onClick,
+}: {
+  rotulo: string;
+  ativo: boolean;
+  onClick: () => void;
+}) {
+  return (
+    <button
+      type="button"
+      aria-pressed={ativo}
+      onClick={onClick}
+      className={cn(
+        "cursor-pointer rounded-padrao px-2 py-1.5 text-left text-13",
+        ativo ? "bg-selecionado text-texto" : "text-texto-suave hover:bg-campo hover:text-texto",
+      )}
+    >
+      {rotulo}
+    </button>
   );
 }
