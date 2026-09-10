@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/NihonCodingg/PROJETO-ASSETS-LOL/schemas/index-shard.schema.json",
+  "$id": "https://github.com/NihonCodingg/lol-assets/schemas/index-shard.schema.json",
   "title": "Fatia do índice de assets",
   "description": "Um arquivo por categoria e por versão, com os assets propriamente ditos. Carregado SOB DEMANDA, não na abertura do site: quem serve navegação e busca é o catalog.schema.json (ADR 0010). O manifesto lista as fatias disponíveis.",
   "type": "object",

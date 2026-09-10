@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/NihonCodingg/PROJETO-ASSETS-LOL/schemas/catalog.schema.json",
+  "$id": "https://github.com/NihonCodingg/lol-assets/schemas/catalog.schema.json",
   "title": "Catálogo — projeção de navegação e busca",
   "description": "Navegação e busca operam em níveis diferentes (ADR 0010): a grade padrão é de campeões, o índice de busca é de skins. Este documento carrega as duas projeções e nenhum asset. É o único arquivo pesado carregado na abertura do site; as fatias de asset vêm sob demanda.",
   "type": "object",

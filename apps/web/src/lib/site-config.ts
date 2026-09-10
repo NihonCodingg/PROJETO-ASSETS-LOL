@@ -43,6 +43,6 @@ export const siteConfig = {
   wikiConsentGranted,
   description:
     "Assets visuais de League of Legends na melhor fonte disponível, prontos para baixar.",
-  repositoryUrl: "https://github.com/NihonCodingg/PROJETO-ASSETS-LOL",
+  repositoryUrl: "https://github.com/NihonCodingg/lol-assets",
   riotLegalNotice: riotLegalNotice(displayName),
 } as const;

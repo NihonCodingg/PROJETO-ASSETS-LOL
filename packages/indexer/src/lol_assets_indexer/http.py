@@ -25,7 +25,7 @@ from lol_assets_indexer import __version__
 
 logger = logging.getLogger(__name__)
 
-REPO_URL = "https://github.com/NihonCodingg/PROJETO-ASSETS-LOL"
+REPO_URL = "https://github.com/NihonCodingg/lol-assets"
 
 #: Regra 3 do CLAUDE.md. Só sai daqui com consentimento documentado — ver ADR 0004.
 BLOCKED_HOSTS = frozenset({"wiki.leagueoflegends.com", "leagueoflegends.fandom.com"})

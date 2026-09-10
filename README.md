@@ -45,7 +45,7 @@ troque `uv` por `python -m uv` em todos os comandos.
 
 **Regra no Windows: o caminho do repositório não pode ter caractere não-ASCII.**
 Com acento, o `pnpm install` falha com `ERR_PNPM_EPERM` nos pacotes de binário nativo
-(`esbuild`, `unrs-resolver`). Mantenha em um caminho como `D:\PROJETOS\PROJETO-ASSETS-LOL`.
+(`esbuild`, `unrs-resolver`). Mantenha em um caminho como `D:\PROJETOS\lol-assets`.
 Detalhes em [`docs/SPIKES.md`](docs/SPIKES.md).
 
 Qualidade (é o que a CI roda):

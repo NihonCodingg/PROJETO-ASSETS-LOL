@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/NihonCodingg/PROJETO-ASSETS-LOL/schemas/index-manifest.schema.json",
+  "$id": "https://github.com/NihonCodingg/lol-assets/schemas/index-manifest.schema.json",
   "title": "Manifesto do índice",
   "description": "Único arquivo com nome fixo em todo o bucket (manifest.json). É o ponto de entrada: diz quais versões existem, qual é a atual, onde está o catálogo de navegação e busca de cada uma, quais fatias de índice ela tem e quais zips já estão pré-gerados. Tudo o mais é endereçado por hash.",
   "type": "object",

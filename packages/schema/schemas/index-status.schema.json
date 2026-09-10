@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/NihonCodingg/PROJETO-ASSETS-LOL/schemas/index-status.schema.json",
+  "$id": "https://github.com/NihonCodingg/lol-assets/schemas/index-status.schema.json",
   "title": "Status da última indexação",
   "description": "Escrito a cada execução do indexador, com sucesso ou com falha, ao lado do índice (status.json). Não faz parte do contrato que o front precisa para funcionar: é o que responde 'a indexação de hoje rodou, e o que ela viu' sem abrir o log do Actions. Como não há processo monitorando nada (§11 da Spec), este arquivo e a issue automática são o canal inteiro.",
   "type": "object",

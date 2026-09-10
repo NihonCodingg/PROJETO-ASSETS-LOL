@@ -22,7 +22,7 @@ jogadores**, não do nome interno de um repositório privado de código.
    `apps/web/src/lib/site-config.ts`. Até a decisão, a interface usa um rótulo
    descritivo e neutro ("Catálogo de Assets"), que é claramente um placeholder e já
    respeita a restrição.
-4. **Repositório, pacotes e identificadores ficam como estão**: `PROJETO-ASSETS-LOL`,
+4. **Repositório, pacotes e identificadores ficam como estão**: `lol-assets`,
    `lol-assets`, `lol_assets_indexer`, `@lol-assets/schema`. Não são o nome do produto.
 5. O aviso legal obrigatório é gerado **a partir** do nome exibido, então acompanha a
    decisão automaticamente. O texto exato ainda precisa ser copiado literalmente da
