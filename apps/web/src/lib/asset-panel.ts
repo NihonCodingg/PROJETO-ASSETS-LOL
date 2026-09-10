@@ -43,6 +43,49 @@ export const TYPE_ORDER: readonly AssetType[] = [
   "rank_emblem",
 ];
 
+/**
+ * O nome legível de cada tipo, na tela.
+ *
+ * As palavras vêm do design; **o mapeamento foi corrigido**. O mock entregue em
+ * 10/09 rotulava 1280×720 como "corte do cliente" e 1215×717 como "corte
+ * centralizado" — o inverso do [ADR 0002], que é medido e reverificado todo dia
+ * pelos testes de contrato das fontes. A divergência foi levantada e a decisão
+ * foi manter as palavras no tipo certo:
+ *
+ * | Tipo | Medido | Rótulo |
+ * |---|---|---|
+ * | `splash_centered` | 1280×720 | Splash — corte centralizado |
+ * | `splash_wide` | 1215×717 | Splash — corte do cliente |
+ *
+ * Tipo sem rótulo cai no próprio nome, que é feio mas honesto — melhor do que
+ * sumir da tela porque ninguém lembrou de traduzir.
+ */
+export const ROTULO_DO_TIPO: Partial<Record<AssetType, string>> = {
+  splash_centered: "Splash — corte centralizado",
+  splash_wide: "Splash — corte do cliente",
+  loading: "Tela de carregamento",
+  loading_vintage: "Tela de carregamento — versão antiga",
+  tile: "Tile quadrado",
+  chroma: "Chroma",
+  square: "Ícone do campeão",
+  passive_icon: "Ícone da passiva",
+  ability_icon: "Ícone de habilidade",
+  item_icon: "Ícone do item",
+  rune_icon: "Ícone da runa",
+  rune_tree_icon: "Ícone da árvore",
+  stat_mod_icon: "Ícone de fragmento",
+  summoner_spell_icon: "Ícone do feitiço",
+  profile_icon: "Ícone de perfil",
+  emote_icon: "Emote",
+  ward_icon: "Ward skin",
+  map_image: "Imagem do mapa",
+  rank_emblem: "Emblema de elo",
+};
+
+export function rotuloDoTipo(tipo: AssetType): string {
+  return ROTULO_DO_TIPO[tipo] ?? tipo;
+}
+
 const POSICAO = new Map(TYPE_ORDER.map((tipo, indice) => [tipo, indice]));
 
 /** Tipo desconhecido vai para o fim, em vez de sumir ou quebrar a ordenação. */

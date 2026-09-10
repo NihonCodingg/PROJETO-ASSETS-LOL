@@ -101,11 +101,10 @@ export default function HomePage() {
 
   const { catalog, manifest } = estado;
   return (
-    <Moldura>
-      <p>
-        patch {manifest.currentVersion} · {catalog.champions.length} campeões ·{" "}
-        {catalog.skins.length} skins
-      </p>
+    <main className="flex min-h-0 flex-1 flex-col">
+      {/* O `h1` é o nome do produto e existe para leitor de tela e para o SEO;
+          na tela ele já está na barra lateral, em cima do quadrado do acento. */}
+      <h1 className="sr-only">{siteConfig.displayName}</h1>
 
       {/* T-31: o único alarme que existe. Sem monitoramento, o site é o detector. */}
       <AvisoDeIndiceVelho manifest={manifest} />
@@ -118,19 +117,26 @@ export default function HomePage() {
         onSkin={(skin, champion) => champion && void abrir(champion, skin.skinNum)}
       />
 
-      <GradeDeCampeoes
-        champions={catalog.champions}
-        assetsBaseUrl={BASE_ASSETS}
-        onAbrir={(champion) => void abrir(champion)}
-      />
+      <div className="min-h-0 flex-1 overflow-y-auto">
+        <GradeDeCampeoes
+          champions={catalog.champions}
+          assetsBaseUrl={BASE_ASSETS}
+          onAbrir={(champion) => void abrir(champion)}
+        />
 
-      {/* RF-08: o outro caminho, para quem não tem nome para digitar. Nenhuma
-          fatia é buscada até alguém abrir uma categoria. */}
-      <NavegacaoPorCategoria
-        shards={versaoAtual(manifest).shards}
-        carregar={(category) => cliente.loadShard(manifest, category)}
-        assetsBaseUrl={BASE_ASSETS}
-      />
+        {/* RF-08: o outro caminho, para quem não tem nome para digitar. Nenhuma
+            fatia é buscada até alguém abrir uma categoria. */}
+        <NavegacaoPorCategoria
+          shards={versaoAtual(manifest).shards}
+          carregar={(category) => cliente.loadShard(manifest, category)}
+          assetsBaseUrl={BASE_ASSETS}
+        />
+      </div>
+
+      <p className="flex-none border-t border-borda px-3.5 py-1.5 font-mono text-10 text-texto-suave">
+        patch {manifest.currentVersion} · {catalog.champions.length} campeões ·{" "}
+        {catalog.skins.length} skins
+      </p>
 
       {aberto && (
         <PainelDoCampeao
@@ -143,19 +149,21 @@ export default function HomePage() {
           onClose={() => setAberto(null)}
         />
       )}
-    </Moldura>
+    </main>
   );
 }
 
 /** A única versão que existe desde o [ADR 0013]. */
 function versaoAtual(manifest: IndexManifest): IndexManifest["versions"][number] {
-  return manifest.versions.find((v) => v.gameVersion === manifest.currentVersion) ?? manifest.versions[0];
+  return (
+    manifest.versions.find((v) => v.gameVersion === manifest.currentVersion) ?? manifest.versions[0]
+  );
 }
 
 function Moldura({ children }: { children: React.ReactNode }) {
   return (
-    <main>
-      <h1>{siteConfig.displayName}</h1>
+    <main className="flex min-h-0 flex-1 flex-col items-center justify-center gap-2 px-3.5 text-center">
+      <h1 className="text-19 font-semibold tracking-titulo">{siteConfig.displayName}</h1>
       {children}
     </main>
   );

@@ -255,3 +255,43 @@ test.describe("axe", () => {
     expect(resumir(violacoes)).toBe("");
   });
 });
+
+// --- critério 3 do T-30: telas estreitas ------------------------------------------------
+
+test.describe("tela estreita", () => {
+  test.use({ viewport: { width: 375, height: 720 } });
+
+  test("nada transborda na horizontal", async ({ page }) => {
+    await irParaHome(page);
+    // Rolagem horizontal numa grade de cartões é o sintoma clássico de largura
+    // fixa que não coube. 375px é um telefone comum.
+    const transborda = await page.evaluate(
+      () => document.documentElement.scrollWidth > document.documentElement.clientWidth + 1,
+    );
+    expect(transborda).toBe(false);
+  });
+
+  test("o aviso legal continua inteiro (RF-21)", async ({ page }) => {
+    await irParaHome(page);
+    const aviso = page.locator("[data-aviso='riot']");
+    await expect(aviso).toBeVisible();
+    // Sem corte: o texto renderizado tem que ser o texto todo.
+    const cortado = await aviso.evaluate((el) => el.scrollHeight > el.clientHeight + 1);
+    expect(cortado).toBe(false);
+  });
+
+  test("a grade e a busca continuam utilizáveis", async ({ page }) => {
+    await irParaHome(page);
+    await expect(page.getByRole("combobox")).toBeVisible();
+    await expect(page.getByRole("list", { name: "Campeões" })).toBeVisible();
+    const largura = await page
+      .getByRole("list", { name: "Campeões" })
+      .evaluate((el) => el.getBoundingClientRect().width);
+    expect(largura).toBeGreaterThan(300);
+  });
+
+  test("o axe não reclama em tela estreita", async ({ page }) => {
+    await irParaHome(page);
+    expect(resumir(await violacoesGraves(page))).toBe("");
+  });
+});

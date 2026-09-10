@@ -25,6 +25,17 @@ export interface PainelLateralProps {
   readonly titulo: string;
   readonly children: ReactNode;
   readonly className?: string;
+  /**
+   * Se `Escape` e o clique fora fecham o painel.
+   *
+   * O padrão é o do Radix, que é o certo para um diálogo novo. O painel do
+   * campeão desliga os dois porque **já existia antes deste ticket** e não se
+   * comportava assim: ele trata `Escape` com ordem própria (chroma primeiro) e
+   * nunca fechou por clique fora. O T-30 veste, não muda comportamento — e há
+   * teste de onda anterior para cada uma das duas coisas.
+   */
+  readonly fecharPorEsc?: boolean;
+  readonly fecharPorFora?: boolean;
 }
 
 export function PainelLateral({
@@ -33,6 +44,8 @@ export function PainelLateral({
   titulo,
   children,
   className,
+  fecharPorEsc = true,
+  fecharPorFora = true,
 }: PainelLateralProps) {
   return (
     <Dialog.Root open={aberto} onOpenChange={(proximo) => !proximo && onFechar()}>
@@ -43,6 +56,10 @@ export function PainelLateral({
         />
         <Dialog.Content
           aria-label={titulo}
+          aria-describedby={undefined}
+          onEscapeKeyDown={(evento) => !fecharPorEsc && evento.preventDefault()}
+          onPointerDownOutside={(evento) => !fecharPorFora && evento.preventDefault()}
+          onInteractOutside={(evento) => !fecharPorFora && evento.preventDefault()}
           className={cn(
             "fixed inset-y-0 right-0 z-25 flex w-[min(540px,74%)] flex-col",
             "border-l border-borda-forte bg-superficie",

@@ -28,11 +28,12 @@ export default function SobrePage() {
   const creditos = creditosVisiveis(siteConfig.wikiConsentGranted);
 
   return (
-    <main>
-      <h1>Sobre</h1>
+    <main className="min-h-0 flex-1 overflow-y-auto px-3.5 py-6">
+      <div className="mx-auto flex max-w-busca-max flex-col gap-6">
+      <h1 className="text-19 font-semibold tracking-titulo">Sobre</h1>
 
-      <section aria-label="O que é">
-        <h2>O que é</h2>
+      <section className="flex flex-col gap-2 text-13 leading-cartao text-texto-medio" aria-label="O que é">
+        <h2 className="mb-1.5 text-12 font-medium uppercase tracking-rotulo text-texto-suave">O que é</h2>
         <p>
           {siteConfig.displayName} é um catálogo de assets visuais de League of Legends: um
           índice que diz onde cada arte está, em que resolução e em que formato, para que
@@ -45,30 +46,34 @@ export default function SobrePage() {
         </p>
       </section>
 
-      <section aria-label="Não afiliação">
-        <h2>Não afiliação</h2>
+      <section className="flex flex-col gap-2 text-13 leading-cartao text-texto-medio" aria-label="Não afiliação">
+        <h2 className="mb-1.5 text-12 font-medium uppercase tracking-rotulo text-texto-suave">Não afiliação</h2>
         {/* RF-21 e RNF-10. O mesmo texto do rodapé, aqui em destaque. */}
-        <p data-aviso="riot">{siteConfig.riotLegalNotice}</p>
+        <p data-aviso="riot" className="rounded-padrao border border-borda-forte bg-campo p-2.5 font-mono text-11 leading-cartao text-texto-suave">
+          {siteConfig.riotLegalNotice}
+        </p>
         <p>
           Este é um projeto pessoal, sem fins lucrativos, sem publicidade e sem qualquer
           vínculo com a Riot Games.
         </p>
       </section>
 
-      <section aria-label="Fontes e créditos">
-        <h2>Fontes e créditos</h2>
-        <ul>
+      <section className="flex flex-col gap-2 text-13 leading-cartao text-texto-medio" aria-label="Fontes e créditos">
+        <h2 className="mb-1.5 text-12 font-medium uppercase tracking-rotulo text-texto-suave">Fontes e créditos</h2>
+        <ul className="flex flex-col gap-2">
           {creditos.map((credito) => (
-            <li key={credito.fonte} data-fonte={credito.fonte}>
-              <a href={credito.url}>{credito.nome}</a> — {credito.papel}
+            <li key={credito.fonte} data-fonte={credito.fonte} className="rounded-padrao border border-borda-forte p-2.5">
+              <a href={credito.url} className="font-medium underline underline-offset-2 text-acento-claro hover:text-acento-mais-claro">
+                {credito.nome}
+              </a> — {credito.papel}
               {credito.licencaDoTexto && <> Licença do conteúdo: {credito.licencaDoTexto}.</>}
             </li>
           ))}
         </ul>
       </section>
 
-      <section aria-label="Licenças">
-        <h2>Licenças</h2>
+      <section className="flex flex-col gap-2 text-13 leading-cartao text-texto-medio" aria-label="Licenças">
+        <h2 className="mb-1.5 text-12 font-medium uppercase tracking-rotulo text-texto-suave">Licenças</h2>
         <p>
           <strong>A arte é da Riot Games.</strong> Toda ela, em todas as fontes. Este projeto
           não reivindica direito nenhum sobre as imagens e não altera a licença delas: ele
@@ -76,14 +81,19 @@ export default function SobrePage() {
         </p>
         <p>
           O <strong>código</strong> deste projeto é aberto e está em{" "}
-          <a href={siteConfig.repositoryUrl}>{siteConfig.repositoryUrl}</a>. O índice gerado
+          <a href={siteConfig.repositoryUrl} className="underline underline-offset-2 text-acento-claro hover:text-acento-mais-claro">
+            {siteConfig.repositoryUrl}
+          </a>. O índice gerado
           descreve arquivos de terceiros e não contém nenhum deles.
         </p>
       </section>
 
       <p>
-        <Link href="/">Voltar ao catálogo</Link>
+        <Link href="/" className="text-13 underline underline-offset-2 text-acento-claro hover:text-acento-mais-claro">
+          Voltar ao catálogo
+        </Link>
       </p>
+      </div>
     </main>
   );
 }
