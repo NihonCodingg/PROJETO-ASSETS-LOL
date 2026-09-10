@@ -19,7 +19,9 @@ from __future__ import annotations
 import hashlib
 import io
 import json
+from dataclasses import dataclass
 from pathlib import Path
+from typing import cast
 
 from PIL import Image, ImageDraw
 
@@ -33,17 +35,35 @@ BASE = "http://127.0.0.1:4321"
 
 VERSAO = "16.18.1"
 
-#: Dois campeões bastam para os três cliques e para a busca por skin.
-CAMPEOES = [
-    {"key": 24, "id": "Jax", "nome": "Jax", "titulo": "Grão-Mestre das Armas"},
-    {"key": 99, "id": "Lux", "nome": "Lux", "titulo": "a Dama Luminosa"},
-]
 
-SKINS = [
-    {"key": 24, "num": 0, "nome": "Jax", "base": True},
-    {"key": 24, "num": 7, "nome": "Jax Deus da Guerra", "base": False},
-    {"key": 99, "num": 0, "nome": "Lux", "base": True},
-]
+@dataclass(frozen=True, slots=True)
+class Campeao:
+    key: int
+    champion_id: str
+    nome: str
+    titulo: str
+    tags: tuple[str, ...]
+
+
+@dataclass(frozen=True, slots=True)
+class Skin:
+    key: int
+    num: int
+    nome: str
+    base: bool
+
+
+#: Dois campeões bastam para os três cliques e para a busca por skin.
+CAMPEOES = (
+    Campeao(24, "Jax", "Jax", "Grão-Mestre das Armas", ("Fighter",)),
+    Campeao(99, "Lux", "Lux", "a Dama Luminosa", ("Mage", "Support")),
+)
+
+SKINS = (
+    Skin(24, 0, "Jax", True),
+    Skin(24, 7, "Jax Deus da Guerra", False),
+    Skin(99, 0, "Lux", True),
+)
 
 
 def desenhar(largura: int, altura: int, texto: str, formato: str) -> bytes:
@@ -100,8 +120,8 @@ def main() -> None:
 
     assets: list[dict[str, object]] = []
     for campeao in CAMPEOES:
-        chave, cid = campeao["key"], campeao["id"]
-        comum = {"championKey": chave, "championId": cid}
+        chave, cid = campeao.key, campeao.champion_id
+        comum: dict[str, object] = {"championKey": chave, "championId": cid}
         assets.append(
             asset(
                 asset_id=f"square:{chave}",
@@ -110,18 +130,18 @@ def main() -> None:
                 largura=128,
                 altura=128,
                 formato="png",
-                nomes={"pt_BR": campeao["nome"]},
+                nomes={"pt_BR": campeao.nome},
                 extra=comum,
             )
         )
-        for skin in [s for s in SKINS if s["key"] == chave]:
-            num = skin["num"]
+        for skin in [s for s in SKINS if s.key == chave]:
+            num = skin.num
             sufixo = f"{num:03d}"
-            de_skin = {
+            de_skin: dict[str, object] = {
                 **comum,
                 "skinId": chave * 1000 + num,
                 "skinNum": num,
-                "isBaseSkin": skin["base"],
+                "isBaseSkin": skin.base,
             }
             # ADR 0002: o centrado é 1280x720 e o aberto é 1215x717. Nunca o contrário.
             assets.append(
@@ -132,7 +152,7 @@ def main() -> None:
                     largura=1280,
                     altura=720,
                     formato="jpeg",
-                    nomes={"pt_BR": skin["nome"]},
+                    nomes={"pt_BR": skin.nome},
                     extra=de_skin,
                 )
             )
@@ -144,7 +164,7 @@ def main() -> None:
                     largura=1215,
                     altura=717,
                     formato="jpeg",
-                    nomes={"pt_BR": skin["nome"]},
+                    nomes={"pt_BR": skin.nome},
                     extra=de_skin,
                 )
             )
@@ -156,7 +176,7 @@ def main() -> None:
                     largura=380,
                     altura=380,
                     formato="jpeg",
-                    nomes={"pt_BR": skin["nome"]},
+                    nomes={"pt_BR": skin.nome},
                     extra=de_skin,
                 )
             )
@@ -168,25 +188,25 @@ def main() -> None:
         "generatedAt": "2026-09-09T00:00:00Z",
         "champions": [
             {
-                "championKey": c["key"],
-                "championId": c["id"],
-                "names": {"pt_BR": c["nome"]},
-                "title": {"pt_BR": c["titulo"]},
-                "tags": ["Fighter"] if c["id"] == "Jax" else ["Mage", "Support"],
-                "skinCount": sum(1 for s in SKINS if s["key"] == c["key"]),
-                "baseSkinId": c["key"] * 1000,
-                "thumbnailUrl": por_id[f"square:{c['key']}"]["sourceUrl"],
+                "championKey": c.key,
+                "championId": c.champion_id,
+                "names": {"pt_BR": c.nome},
+                "title": {"pt_BR": c.titulo},
+                "tags": list(c.tags),
+                "skinCount": sum(1 for s in SKINS if s.key == c.key),
+                "baseSkinId": c.key * 1000,
+                "thumbnailUrl": por_id[f"square:{c.key}"]["sourceUrl"],
             }
             for c in CAMPEOES
         ],
         "skins": [
             {
-                "skinId": s["key"] * 1000 + s["num"],
-                "skinNum": s["num"],
-                "championKey": s["key"],
-                "names": {"pt_BR": s["nome"]},
-                "isBase": s["base"],
-                "thumbnailUrl": por_id[f"tile:{s['key']}{s['num']:03d}"]["sourceUrl"],
+                "skinId": s.key * 1000 + s.num,
+                "skinNum": s.num,
+                "championKey": s.key,
+                "names": {"pt_BR": s.nome},
+                "isBase": s.base,
+                "thumbnailUrl": por_id[f"tile:{s.key}{s.num:03d}"]["sourceUrl"],
             }
             for s in SKINS
         ],
@@ -225,7 +245,7 @@ def main() -> None:
                     "bytes": (INDICE / "catalog-e2e.json").stat().st_size,
                 },
                 "totalAssets": len(assets),
-                "totalBytes": sum(int(a["bytes"]) for a in assets),
+                "totalBytes": sum(cast("int", a["bytes"]) for a in assets),
                 "shards": [
                     {
                         "category": "champion",
