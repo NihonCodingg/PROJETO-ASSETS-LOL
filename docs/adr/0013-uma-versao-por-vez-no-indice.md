@@ -70,8 +70,10 @@ Ou seja: o histórico custa 115 MB/ano e entrega, na prática, ícones repetidos
   dá para testar.
 - **Perde-se a capacidade de comparar patches.** É real, e é aceita: o dono do projeto
   edita conteúdo atual.
-- A guarda de tamanho do T-10 continua valendo por versão (15 MiB) e agora coincide com o
-  total, porque só existe uma.
+- A guarda de tamanho do T-10 continua valendo por versão e agora coincide com o total,
+  porque só existe uma. **O número mudou:** os 15 MiB reservavam ~3 MB por versão antiga,
+  que este ADR eliminou; o [ADR 0015](0015-orcamento-do-indice-depois-da-segunda-fonte.md)
+  refez a conta com a fonte dupla medida e o teto passou a 24 MiB.
 
 ## Como voltar atrás
 

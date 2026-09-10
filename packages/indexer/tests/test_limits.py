@@ -100,15 +100,26 @@ def test_fatia_acima_do_limite_falha_nomeando_a_categoria() -> None:
 # --- índice inteiro: RNF-05 ---------------------------------------------------------
 
 
-def test_indice_acima_de_15_mib_falha() -> None:
+def test_indice_acima_do_teto_falha() -> None:
     """O limite do RNF-05 é sobre os bytes **escritos** — é o Git que paga."""
     with pytest.raises(BudgetExceededError, match="RNF-05"):
         check_budget(
             relatorio(
-                fatias={"champion": 8 * 1024 * 1024, "profile_icon": 8 * 1024 * 1024},
+                fatias={"champion": 13 * 1024 * 1024, "profile_icon": 12 * 1024 * 1024},
                 catalogo=1024,
             )
         )
+
+
+def test_o_teto_cobre_o_indice_completo_medido() -> None:
+    """19.013.632 bytes, medidos no 16.17.1 com as duas fontes ([ADR 0015]).
+
+    O teto de 15 MiB reprovava essa execução, e reprovar significava perder
+    chroma, emote e ward. Este é o número que derrubou o teto antigo: baixar
+    `INDEX_RAW_LIMIT` sem refazer a conta volta a quebrar o produto em silêncio,
+    e aqui isso vira teste vermelho.
+    """
+    assert INDEX_RAW_LIMIT >= 19_013_632
 
 
 def test_o_total_soma_catalogo_fatias_e_manifesto() -> None:

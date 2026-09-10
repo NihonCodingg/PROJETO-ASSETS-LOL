@@ -1619,6 +1619,47 @@ limite de 500 linhas.
 
 ---
 
+### T-38 — Reindexar quando o indexador muda, não só quando o patch muda
+
+| | |
+|---|---|
+| **Objetivo** | Que uma melhoria no indexador chegue ao site sem esperar duas semanas |
+| **Dependências** | T-13 |
+| **Estimativa** | ~60 linhas |
+| **Effort** | baixo |
+| **Cobre** | RNF-05, §9 |
+
+> Descoberto em **09/09/2026**, ao entregar o T-22. O `decide` do `scheduling.py` compara
+> **só a versão do jogo**: `indexed != latest`. O T-21 acrescentou etiquetas de filtro e o
+> T-22 acrescentou emotes e wards, e nenhum dos dois chegou ao índice publicado — a Riot
+> ainda está no 16.18.1, então o workflow olha, vê a mesma versão e não faz nada. A saída
+> hoje é disparar o workflow à mão com `force`, o que foi exatamente o que se fez.
+
+**Entra**
+- Uma **assinatura de geração** no manifesto: o que o indexador produziria de diferente
+  mesmo com a mesma versão do jogo. Candidato natural: `schemaVersion` mais a lista de
+  categorias mais um número de geração que sobe quando um construtor muda.
+- `decide` passa a reindexar quando a versão **ou** a assinatura diferem, com o motivo
+  dizendo qual dos dois mudou.
+- A assinatura entra no `index-manifest` (contrato `1.2.0`) e no seu JSON Schema.
+
+**NÃO entra**
+- Hash do código-fonte do indexador. Reindexaria a cada refatoração e a cada bump de
+  dependência — 22 minutos e 2,39 GB por mudança de comentário.
+- Reindexação a pedido pela interface. Não há back-end (ADR 0005).
+
+**Critérios de aceite**
+1. Mesma versão e mesma assinatura → não reindexa.
+2. Mesma versão e assinatura diferente → reindexa, e o motivo diz "assinatura".
+3. Versão diferente → reindexa como hoje.
+4. Manifesto sem assinatura (o publicado hoje) → reindexa, e não quebra.
+
+**Testes que provam**
+- Unitários de `decide` para as quatro combinações.
+- Teste do contrato com um manifesto antigo, sem o campo.
+
+---
+
 # Onda 6 — componente opcional
 
 ### T-32 — API FastAPI
