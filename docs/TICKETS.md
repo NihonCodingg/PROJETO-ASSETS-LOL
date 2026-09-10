@@ -1845,10 +1845,18 @@ limite de 500 linhas.
 | **Effort** | alto |
 | **Cobre** | §7 da Spec, [ADR 0006](adr/0006-api-como-componente-opcional.md) |
 
+> ✅ **Entregue em 09/09/2026**, com o escopo ajustado pelo
+> [ADR 0012](adr/0012-onde-guardar-os-assets.md): **não há bucket para ler nem MinIO para
+> simular**. O que existe é o diretório que o indexador escreve, e é dele que as rotas leem.
+> O resto do ticket ficou de pé como estava.
+
 **Entra**
-- `/health` (já existe), `/versions`, `/index/{gameVersion}/{category}`, `POST /zip`.
-- Leitura do bucket, com cache em memória.
-- `Dockerfile` e `docker-compose` para subir local com MinIO.
+- `/health` (já existia), `/versions`, `/index/{gameVersion}/{category}`, `POST /zip`.
+- ~~Leitura do bucket~~ → leitura do **diretório do índice**, com cache invalidado por
+  `mtime` do manifesto — barato de checar, e muda exatamente quando o arquivo muda. Um TTL
+  teria a janela de erro embutida no número.
+- `Dockerfile` e `docker-compose` para subir local, ~~com MinIO~~ **sozinha**: um contêiner
+  que precisasse de outro para responder `/health` não seria opcional coisa nenhuma.
 - Testes com `TestClient`.
 
 **NÃO entra**
@@ -1856,16 +1864,26 @@ limite de 500 linhas.
 - Qualquer alteração no front que passe a depender dela — isso é critério de revisão de PR.
 
 **Critérios de aceite**
-1. `docker compose up` sobe API + MinIO e `/health` responde.
-2. `/versions` devolve o mesmo conteúdo do `manifest.json`.
-3. `POST /zip` com N ids devolve um zip com N arquivos; acima do limite devolve 413.
-4. `grep` no `apps/web` não encontra nenhuma chamada à API.
-5. Derrubar a API não afeta nenhum teste do front.
+1. ✅ `docker compose up` sobe a API (~~+ MinIO~~) e `/health` responde — **verificado na
+   CI**, não localmente: não há Docker nesta máquina, então o critério virou um job que roda
+   o `compose up --wait` e faz `curl` no `/health` a cada PR que toca a API.
+2. ✅ `/versions` devolve o mesmo conteúdo do `manifest.json`, campo por campo.
+3. ✅ `POST /zip` com N ids devolve um zip com N arquivos; acima do limite devolve 413.
+4. ✅ `grep` no `apps/web` não encontra nenhuma chamada à API.
+5. ✅ Derrubar a API não afeta nenhum teste do front — ela nunca é iniciada por eles.
 
 **Testes que provam**
-- `TestClient` para cada endpoint, incluindo o 413.
-- Teste de arquitetura: nenhuma referência à API no código do front.
-- e2e do front rodando com a API desligada.
+- `TestClient` para cada endpoint, incluindo o 413 e o 503 de índice ausente.
+- Teste de arquitetura: nenhuma referência à API no código do front, nem no `package.json`.
+- e2e do front rodando com a API desligada (é como ele sempre roda).
+
+> O `POST /zip` monta no servidor o que o T-25 monta no cliente, e existe para **mostrar o
+> outro caminho**, não para ser usado: com o front zipando no navegador, uma API que baixa
+> 500 arquivos por requisição seria a coisa mais cara do sistema.
+>
+> Ela reusa o `SourceClient` do indexador de propósito. A regra 4 do CLAUDE.md — User-Agent
+> identificado, concorrência ≤ 4, backoff — é imposta por código, e ter duas implementações
+> dela é ter uma que vai divergir.
 
 ---
 

@@ -5,6 +5,10 @@ description = "API que serve o índice, metadados e zips sob demanda."
 requires-python = ">=3.12"
 dependencies = [
     "lol-assets-schema",
+    # O `SourceClient` do indexador é reusado de propósito: a regra 4 do
+    # CLAUDE.md (User-Agent identificado, concorrência <= 4, backoff) é imposta
+    # por código, e ter duas implementações dela é ter uma que vai divergir.
+    "lol-assets-indexer",
     "fastapi>=0.115.0",
     "uvicorn[standard]>=0.32.0",
     "pydantic>=2.9.0",

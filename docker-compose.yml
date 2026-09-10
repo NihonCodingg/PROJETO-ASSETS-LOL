@@ -1,0 +1,32 @@
+# Sobe a API opcional (T-32) — e só ela.
+#
+# O ticket previa MinIO aqui. O ADR 0012 tirou o storage do projeto e não sobrou
+# bucket nenhum para simular: o índice é um diretório de arquivos, e é ele que
+# entra como volume somente-leitura.
+#
+#   docker compose up --build
+#   curl localhost:8000/health
+#
+# O site NÃO precisa disto para nada (ADR 0006).
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: apps/api/Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      API_INDEX_DIR: /indice
+      API_CORS_ORIGINS: http://localhost:3000
+      API_ZIP_MAX_ITEMS: "500"
+      # Regra 4 do CLAUDE.md: o zip busca nas fontes, e vai identificado.
+      INDEXER_CONTACT: https://github.com/NihonCodingg/PROJETO-ASSETS-LOL/issues
+    volumes:
+      # Somente leitura: a API lê o índice publicado e nunca o escreve.
+      - ./apps/web/public/indice:/indice:ro
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request;urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
