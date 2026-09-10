@@ -49,6 +49,38 @@ O deploy da Vercel publica o commit. Não há storage, não há servidor no cami
 usuário: as imagens vêm das URLs das fontes, que têm CORS aberto
 ([ADR 0012](docs/adr/0012-onde-guardar-os-assets.md)).
 
+## Publicar na Vercel
+
+O repositório já traz o que a Vercel precisa
+([ADR 0016](docs/adr/0016-publicacao-na-vercel.md)):
+
+| Onde | O quê |
+|---|---|
+| Painel → *Root Directory* | `apps/web` — a única configuração que não mora no repositório |
+| `apps/web/vercel.json` | Next.js, e instalação e build com o **pnpm 11.8.0** do `packageManager`. Sozinha, a Vercel só vai até o pnpm 10 |
+| `apps/web/src/lib/cabecalhos.ts` | cache do índice — imutável para o que tem hash no nome, revalidação para o manifesto — e `noindex` |
+| Variáveis de ambiente | **nenhuma obrigatória**; as opcionais estão no `.env.example` |
+
+Cada push na `main` publica, inclusive o commit do índice que o workflow faz a cada patch.
+Cada PR ganha um preview, que pede login na Vercel; o domínio de produção é aberto.
+
+O passo a passo de criar o projeto está em [`docs/LANCAMENTO.md`](docs/LANCAMENTO.md).
+Depois de publicar, confira — os dois avisos, o `noindex`, o cache, e se o site está no
+mesmo índice do seu clone:
+
+```bash
+node apps/web/scripts/conferir-publicacao.mjs https://biblioteca-de-assets.vercel.app
+```
+
+O mesmo build, na sua máquina — é o que a CI faz em todo PR:
+
+```bash
+pnpm -C apps/web build
+pnpm -C apps/web start
+```
+
+E, em outro terminal, `node apps/web/scripts/conferir-publicacao.mjs http://localhost:3000`.
+
 ## Estrutura
 
 ```

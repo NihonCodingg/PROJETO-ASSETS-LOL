@@ -20,3 +20,4 @@ com contexto, decisão e consequências. A Spec referencia; não repete.
 | [0013](0013-uma-versao-por-vez-no-indice.md) | **Uma versão por vez** no índice; histórico sai da v1 | ✅ aceito — emenda 0007 |
 | [0014](0014-onde-vive-o-indice-gerado.md) | Índice gerado vive no `main`; crescimento medido | ✅ aceito |
 | [0015](0015-orcamento-do-indice-depois-da-segunda-fonte.md) | Teto do índice vai a **24 MiB**; emotes, wards e chromas cabem | ✅ aceito — emenda 0007 e 0013 |
+| [0016](0016-publicacao-na-vercel.md) | **Publicação na Vercel**: pnpm fixado, manifesto sempre revalida, `noindex` por padrão | ✅ aceito — emenda a §9 da Spec |

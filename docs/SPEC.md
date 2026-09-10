@@ -415,13 +415,20 @@ teriam que sumir de qualquer versão antiga. A conta e as alternativas estão no
 
 ## 9. Cache e CDN
 
-**O que controlamos** — servido pela Vercel, com `headers()` no `next.config.ts`:
+**O que controlamos** — servido pela Vercel, com `headers()` no `next.config.ts`
+(`apps/web/src/lib/cabecalhos.ts`):
 
 | Recurso | Nome | Cache-Control |
 |---|---|---|
-| `manifest.json` | fixo | `max-age=300, stale-while-revalidate=86400` |
-| Catálogo | com hash | `max-age=31536000, immutable` |
-| Fatias do índice | com hash | `max-age=31536000, immutable` |
+| `manifest.json` e `status.json` | fixo | `max-age=0, must-revalidate` |
+| Catálogo | com hash do conteúdo | `max-age=31536000, immutable` |
+| Fatias do índice | com hash do conteúdo | `max-age=31536000, immutable` |
+
+O manifesto tinha `max-age=300, stale-while-revalidate=86400`. O
+[ADR 0016](adr/0016-publicacao-na-vercel.md) trocou: sem bucket, cada deploy da Vercel
+apaga os arquivos com hash do anterior, e um manifesto velho vindo do cache apontaria para
+404. Toda resposta leva também `X-Robots-Tag: noindex, nofollow` enquanto o site não for
+divulgado.
 
 **O que não controlamos** — os assets, que agora vêm das fontes
 ([ADR 0012](adr/0012-onde-guardar-os-assets.md)). Medido:
@@ -520,4 +527,5 @@ jeito de o site apodrecer.
 | [0012](adr/0012-onde-guardar-os-assets.md) sem storage | §1.2, §5, §6.1, §8, §9, RNF-05, RNF-07, RNF-13; remove RF-16 e a categoria `rank` |
 | [0013](adr/0013-uma-versao-por-vez-no-indice.md) uma versão por vez | RNF-05, §8; remove RF-19 e RF-20 |
 | [0015](adr/0015-orcamento-do-indice-depois-da-segunda-fonte.md) orçamento depois da segunda fonte | RNF-05, D4 — emenda o 0007 e o 0013 |
+| [0016](adr/0016-publicacao-na-vercel.md) publicação na Vercel | §9 — emenda a tabela de cache; RNF-10 |
 | [0009](adr/0009-apelidos-de-busca-mantidos-a-mao.md) apelidos | RF-03, §6, §10 |

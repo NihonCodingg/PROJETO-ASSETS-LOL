@@ -73,9 +73,17 @@ function fillPlaceholder(template: string, placeholder: string, productName: str
  */
 const wikiConsentGranted = process.env.NEXT_PUBLIC_WIKI_CONSENT_GRANTED === "true";
 
+/**
+ * Se buscadores podem indexar o site. O padrão é **não**: o site é aberto por
+ * URL, sem senha e sem divulgação ([ADR 0016]). O `next.config.ts` lê a mesma
+ * variável para o `X-Robots-Tag`, que alcança também os JSON do índice.
+ */
+const indexable = process.env.NEXT_PUBLIC_SITE_INDEXABLE === "true";
+
 export const siteConfig = {
   displayName,
   wikiConsentGranted,
+  indexable,
   description:
     "Assets visuais de League of Legends na melhor fonte disponível, prontos para baixar.",
   repositoryUrl: "https://github.com/NihonCodingg/lol-assets",
