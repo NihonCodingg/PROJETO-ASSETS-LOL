@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 
+import { ProvedorDeNavegacao } from "@/components/navegacao-context";
 import { Rodape } from "@/components/rodape";
 import { fonteInterface, fonteMono } from "@/lib/fontes";
 import { siteConfig } from "@/lib/site-config";
@@ -32,8 +33,13 @@ export default function RootLayout({
           telefone de 375px deixariam 167px para a grade, que não é largura de
           nada. Acima, as duas colunas do design. */}
       <body className="grid h-screen grid-rows-[auto_1fr] overflow-hidden bg-fundo text-texto md:grid-cols-[var(--spacing-barra-lateral)_1fr] md:grid-rows-1">
-        <Rodape />
-        <div className="flex min-h-0 min-w-0 flex-col">{children}</div>
+        {/* O provedor envolve os dois porque a barra lateral tem os botões de
+            categoria e a página tem o conteúdo — e layout não recebe prop de
+            página. Ver `navegacao-context.tsx`. */}
+        <ProvedorDeNavegacao>
+          <Rodape />
+          <div className="flex min-h-0 min-w-0 flex-col">{children}</div>
+        </ProvedorDeNavegacao>
       </body>
     </html>
   );

@@ -110,7 +110,7 @@ export function PainelDeAsset({
   }, []);
 
   return (
-    <section aria-label={titulo} className="flex min-h-0 flex-col">
+    <section aria-label={titulo} className="flex min-h-0 flex-1 flex-col">
       <div className="flex flex-none items-center gap-2 px-3.5 py-2">
         <h2 className="truncate text-12 font-medium text-texto-forte">{titulo}</h2>
         <span className="font-mono text-11 text-texto-suave">
@@ -133,7 +133,7 @@ export function PainelDeAsset({
           onAlternar={onAlternar}
         />
       ) : (
-        <ul className="flex flex-col px-3.5 pb-4">
+        <ul className="flex min-h-0 flex-1 flex-col overflow-y-auto px-3.5 pb-4">
           {ordenados.map((asset) => (
             <li key={asset.id}>
               <CartaoDeAsset

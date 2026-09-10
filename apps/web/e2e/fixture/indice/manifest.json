@@ -20,8 +20,8 @@
         "skins": 3,
         "bytes": 1588
       },
-      "totalAssets": 16,
-      "totalBytes": 220249,
+      "totalAssets": 233,
+      "totalBytes": 247808,
       "shards": [
         {
           "category": "champion",
@@ -32,8 +32,8 @@
         {
           "category": "item",
           "url": "index-item-e2e.json",
-          "assets": 3,
-          "bytes": 2085
+          "assets": 220,
+          "bytes": 141929
         }
       ]
     }

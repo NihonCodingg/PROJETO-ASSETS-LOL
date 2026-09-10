@@ -19,7 +19,7 @@
  * Tela crua de propósito; o design chega no T-30.
  */
 
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 
 import type { Asset, AssetCategory, IndexShard } from "@lol-assets/schema";
 
@@ -28,7 +28,6 @@ import { PainelDeAsset } from "@/components/painel-de-asset";
 import { Botao } from "@/components/ui/botao";
 import { Campo } from "@/components/ui/campo";
 import {
-  categoriasDisponiveis,
   descreverFiltro,
   filtrar,
   filtrosPadrao,
@@ -40,9 +39,18 @@ import { alternar, selecionados, tudoDo } from "@/lib/selecao";
 import { cn } from "@/lib/utils";
 
 export interface NavegacaoPorCategoriaProps {
-  /** As fatias que o manifesto declara. Categoria fora daqui não vira botão. */
-  readonly shards: readonly { category: string }[];
+  /**
+   * A categoria aberta, decidida de fora.
+   *
+   * Os botões moram na barra lateral desde o **T-41**; este componente virou o
+   * conteúdo. Antes ele era dono dos dois, e a lista de categorias acabava
+   * embaixo de 173 cartões de campeão — para chegar em "Itens" era preciso
+   * rolar a grade inteira.
+   */
+  readonly aberta: AssetCategory | null;
   readonly carregar: (category: AssetCategory) => Promise<IndexShard>;
+  /** Fecha a categoria e volta para a grade de campeões. */
+  readonly onFechar: () => void;
   readonly assetsBaseUrl?: string;
 }
 
@@ -56,38 +64,54 @@ type Carga =
   | { fase: "pronta"; assets: readonly Asset[] };
 
 export function NavegacaoPorCategoria({
-  shards,
+  aberta,
   carregar,
+  onFechar,
   assetsBaseUrl,
 }: NavegacaoPorCategoriaProps) {
-  const categorias = useMemo(() => categoriasDisponiveis(shards), [shards]);
-  const [aberta, setAberta] = useState<AssetCategory | null>(null);
   const [carga, setCarga] = useState<Carga>({ fase: "vazia" });
   const [marcadas, setMarcadas] = useState<ReadonlySet<string>>(new Set());
   const [consulta, setConsulta] = useState("");
   const [selecao, setSelecao] = useState<ReadonlySet<string>>(new Set());
 
-  const abrir = useCallback(
-    async (category: AssetCategory) => {
-      setAberta(category);
-      setConsulta("");
-      setMarcadas(new Set());
-      setSelecao(new Set());
-      setCarga({ fase: "carregando" });
+  /**
+   * Carrega a fatia quando a categoria aberta muda.
+   *
+   * Efeito, e não manipulador de clique, porque quem clica agora é a barra
+   * lateral: este componente descobre a mudança pela prop. O `cancelado` é o
+   * de sempre — trocar de categoria duas vezes rápido não pode deixar a
+   * resposta da primeira sobrescrever a da segunda.
+   */
+  useEffect(() => {
+    if (aberta === null) {
+      setCarga({ fase: "vazia" });
+      return;
+    }
+
+    let cancelado = false;
+    setConsulta("");
+    setMarcadas(new Set());
+    setSelecao(new Set());
+    setCarga({ fase: "carregando" });
+
+    (async () => {
       try {
-        const shard = await carregar(category);
+        const shard = await carregar(aberta);
+        if (cancelado) return;
         // O filtro padrão depende das etiquetas que a fatia traz (§B.1.6 do
-        // KICKOFF), então só dá para calculá-lo aqui — e aqui, não num efeito
-        // depois do render: efeito que reage à chegada da fatia corre com o
-        // clique do usuário, e quem perde a corrida é o clique.
-        setMarcadas(filtrosPadrao(category, gruposDeFiltro(shard.assets)));
+        // KICKOFF), então só dá para calculá-lo depois de ela chegar.
+        setMarcadas(filtrosPadrao(aberta, gruposDeFiltro(shard.assets)));
         setCarga({ fase: "pronta", assets: shard.assets });
       } catch (erro) {
+        if (cancelado) return;
         setCarga({ fase: "erro", motivo: erro instanceof Error ? erro.message : String(erro) });
       }
-    },
-    [carregar],
-  );
+    })();
+
+    return () => {
+      cancelado = true;
+    };
+  }, [aberta, carregar]);
 
   const assets = carga.fase === "pronta" ? carga.assets : SEM_ASSETS;
   const grupos = useMemo(() => gruposDeFiltro(assets), [assets]);
@@ -106,31 +130,15 @@ export function NavegacaoPorCategoria({
   }, []);
 
   return (
-    <section aria-label="Categorias" className="flex min-h-0 flex-col border-t border-borda">
-      <div className="flex flex-none items-center gap-2 px-3.5 pt-3 pb-1.5">
-        <h2 className="font-mono text-10 uppercase tracking-rotulo text-texto-suave">
-          Categorias
-        </h2>
-      </div>
-      <ul className="flex flex-none flex-wrap gap-1.5 px-3.5 pb-2.5">
-        {categorias.map((categoria) => (
-          <li key={categoria.category}>
-            <button
-              type="button"
-              aria-pressed={aberta === categoria.category}
-              onClick={() => void abrir(categoria.category)}
-              className={cn(
-                "cursor-pointer rounded-padrao px-2 py-1.25 text-13",
-                aberta === categoria.category
-                  ? "bg-selecionado text-texto"
-                  : "text-texto-suave hover:bg-campo hover:text-texto",
-              )}
-            >
-              {categoria.rotulo}
-            </button>
-          </li>
-        ))}
-      </ul>
+    <section aria-label="Categorias" className="flex min-h-0 flex-1 flex-col">
+      {aberta && (
+        <div className="flex h-barra flex-none items-center gap-2.5 border-b border-borda bg-fundo-barra px-3.5">
+          <span className="text-12 font-medium text-texto-forte">{rotuloDaCategoria(aberta)}</span>
+          <Botao variante="fantasma" tamanho="md" className="ml-auto" onClick={onFechar}>
+            voltar aos campeões
+          </Botao>
+        </div>
+      )}
 
       {aberta && carga.fase === "carregando" && (
         <p className="px-3.5 py-3 text-13 text-texto-suave">
@@ -204,7 +212,7 @@ export function NavegacaoPorCategoria({
             <>
               <Botao
                 tamanho="md"
-                className="m-3.5 self-start"
+                className="m-3.5 flex-none self-start"
                 onClick={() => setSelecao(tudoDo(filtrados, true))}
               >
                 Selecionar os {filtrados.length} filtrados
@@ -221,7 +229,7 @@ export function NavegacaoPorCategoria({
                 titulo={rotuloDaCategoria(aberta)}
                 assets={filtrados}
                 assetsBaseUrl={assetsBaseUrl}
-                onClose={() => setAberta(null)}
+                onClose={onFechar}
                 selecao={selecao}
                 onAlternar={(id) => setSelecao((antes) => alternar(antes, id))}
               />

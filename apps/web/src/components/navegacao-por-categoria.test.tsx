@@ -1,13 +1,17 @@
 import { cleanup, fireEvent, render, screen, waitFor, within } from "@testing-library/react";
+import { useEffect, useState } from "react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import type { Asset, AssetCategory, CatalogChampion, IndexShard } from "@lol-assets/schema";
 
 import { AssetsClient } from "@/lib/assets-client";
+import { categoriasDisponiveis } from "@/lib/categorias";
 
 import { GradeDeCampeoes } from "./grade-de-campeoes";
+import { ProvedorDeNavegacao, useNavegacao } from "./navegacao-context";
 import { NavegacaoPorCategoria } from "./navegacao-por-categoria";
 import { PainelDeAsset } from "./painel-de-asset";
+import { Rodape } from "./rodape";
 
 /**
  * O RF-08 na escala real: 5.042 ícones de perfil numa categoria e 868 itens que
@@ -100,6 +104,45 @@ const SHARDS = [
   { category: "profile_icon" },
 ];
 
+/**
+ * O palco: o que a barra lateral faz de verdade, em miniatura.
+ *
+ * Desde o **T-41** os botões de categoria vivem na barra lateral, e este
+ * componente é o conteúdo. O palco reproduz o mínimo — uma lista de botões que
+ * controla a prop `aberta` — para que os testes de comportamento continuem
+ * escritos em cliques, que é como alguém usa a tela.
+ *
+ * Quem prova que a **barra lateral de verdade** desenha os botões certos é o
+ * bloco "barra lateral" no fim deste arquivo, montando o `Rodape` com provedor.
+ */
+function Palco({
+  shards,
+  carregar,
+}: {
+  shards: readonly { category: string }[];
+  carregar: (c: AssetCategory) => Promise<IndexShard>;
+}) {
+  const [aberta, setAberta] = useState<AssetCategory | null>(null);
+  return (
+    <>
+      {categoriasDisponiveis(shards).map((categoria) => (
+        <button
+          key={categoria.category}
+          type="button"
+          onClick={() => setAberta(categoria.category)}
+        >
+          {categoria.rotulo}
+        </button>
+      ))}
+      <NavegacaoPorCategoria
+        aberta={aberta}
+        carregar={carregar}
+        onFechar={() => setAberta(null)}
+      />
+    </>
+  );
+}
+
 function montar(shards = SHARDS) {
   const pedidas: AssetCategory[] = [];
   const carregar = vi.fn(async (category: AssetCategory) => {
@@ -108,7 +151,7 @@ function montar(shards = SHARDS) {
     if (!shard) throw new Error(`sem fatia ${category}`);
     return shard;
   });
-  const tela = render(<NavegacaoPorCategoria shards={shards} carregar={carregar} />);
+  const tela = render(<Palco shards={shards} carregar={carregar} />);
   return { ...tela, pedidas, carregar };
 }
 
@@ -146,18 +189,11 @@ describe("carga sob demanda", () => {
     expect(pedidas).not.toContain("champion");
   });
 
-  it("categoria que o manifesto não declara não vira botão", () => {
-    montar([{ category: "champion" }, { category: "item" }]);
-    expect(screen.getByRole("button", { name: "Itens" })).toBeTruthy();
-    expect(screen.queryByRole("button", { name: "Runas" })).toBeNull();
-    expect(screen.queryByRole("button", { name: "Emotes" })).toBeNull();
-  });
-
   it("erro de carga aparece sem derrubar a navegação", async () => {
     const carregar = vi.fn(async () => {
       throw new Error("HTTP 503");
     });
-    render(<NavegacaoPorCategoria shards={SHARDS} carregar={carregar} />);
+    render(<Palco shards={SHARDS} carregar={carregar} />);
     fireEvent.click(screen.getByRole("button", { name: "Itens" }));
     await waitFor(() => expect(screen.getByRole("alert").textContent).toContain("HTTP 503"));
     expect(screen.getByRole("button", { name: "Runas" })).toBeTruthy();
@@ -203,7 +239,7 @@ describe("uma fatia por categoria, contado em requisições", () => {
     chamadas.length = 0;
 
     render(
-      <NavegacaoPorCategoria
+      <Palco
         shards={manifest.versions[0].shards}
         carregar={(category) => cliente.loadShard(manifest, category)}
       />,
@@ -438,5 +474,69 @@ describe("filtro por função (RF-08)", () => {
       />,
     );
     expect(screen.queryByRole("group", { name: "Função" })).toBeNull();
+  });
+});
+
+// --- a barra lateral, que é onde as categorias moram desde o T-41 ---------------------
+
+describe("barra lateral", () => {
+  /** A página registra as categorias assim que o manifesto chega. */
+  function Registra({ shards }: { shards: readonly { category: string }[] }) {
+    const { registrar } = useNavegacao();
+    useEffect(() => registrar(categoriasDisponiveis(shards)), [registrar, shards]);
+    return null;
+  }
+
+  function barra(shards: readonly { category: string }[] = SHARDS) {
+    return render(
+      <ProvedorDeNavegacao>
+        <Registra shards={shards} />
+        <Rodape />
+      </ProvedorDeNavegacao>,
+    );
+  }
+
+  it("lista as categorias que o manifesto declara", () => {
+    barra();
+    const nav = screen.getByRole("navigation", { name: "Categorias" });
+    expect(within(nav).getByRole("button", { name: "Itens" })).toBeTruthy();
+    expect(within(nav).getByRole("button", { name: "Runas" })).toBeTruthy();
+  });
+
+  it("categoria que o manifesto não declara não vira botão", () => {
+    barra([{ category: "champion" }, { category: "item" }]);
+    const nav = screen.getByRole("navigation", { name: "Categorias" });
+    expect(within(nav).getByRole("button", { name: "Itens" })).toBeTruthy();
+    expect(within(nav).queryByRole("button", { name: "Runas" })).toBeNull();
+    expect(within(nav).queryByRole("button", { name: "Emotes" })).toBeNull();
+  });
+
+  it("Campeões é a primeira, e é a que abre marcada (RF-04)", () => {
+    barra();
+    const botoes = within(screen.getByRole("navigation", { name: "Categorias" })).getAllByRole(
+      "button",
+    );
+    expect(botoes[0].textContent).toBe("Campeões");
+    expect(botoes[0].getAttribute("aria-pressed")).toBe("true");
+  });
+
+  it("clicar numa categoria marca ela e desmarca Campeões", () => {
+    barra();
+    const nav = screen.getByRole("navigation", { name: "Categorias" });
+    fireEvent.click(within(nav).getByRole("button", { name: "Itens" }));
+
+    expect(within(nav).getByRole("button", { name: "Itens" }).getAttribute("aria-pressed")).toBe(
+      "true",
+    );
+    expect(
+      within(nav).getByRole("button", { name: "Campeões" }).getAttribute("aria-pressed"),
+    ).toBe("false");
+  });
+
+  it("sem provedor, a barra não desenha categoria nenhuma", () => {
+    // É como o teste do T-27 monta o `Rodape`. O aviso legal continua lá.
+    const { container } = render(<Rodape />);
+    expect(screen.queryByRole("navigation", { name: "Categorias" })).toBeNull();
+    expect(container.querySelector("[data-aviso='riot']")).not.toBeNull();
   });
 });

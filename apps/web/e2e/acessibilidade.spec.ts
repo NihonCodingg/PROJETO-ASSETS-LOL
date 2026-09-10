@@ -238,7 +238,10 @@ test.describe("axe", () => {
 
   test("a navegação por categoria não tem violação séria nem crítica", async ({ page }) => {
     await irParaHome(page);
-    await page.getByRole("button", { name: "Itens" }).click();
+    await page
+      .getByRole("navigation", { name: "Categorias" })
+      .getByRole("button", { name: "Itens" })
+      .click();
     // Grupos de filtro, caixas de seleção e a lista: é a tela com mais controles
     // do produto, e por isso a mais fácil de quebrar sem perceber.
     await expect(page.getByRole("group", { name: "Mapa" })).toBeVisible();

@@ -16,10 +16,12 @@ import type { Asset, Catalog, CatalogChampion, IndexManifest } from "@lol-assets
 
 import { AvisoDeIndiceVelho } from "@/components/aviso-de-indice-velho";
 import { GradeDeCampeoes } from "@/components/grade-de-campeoes";
+import { useNavegacao } from "@/components/navegacao-context";
 import { NavegacaoPorCategoria } from "@/components/navegacao-por-categoria";
 import { PainelDoCampeao } from "@/components/painel-do-campeao";
 import { PaletaDeBusca } from "@/components/paleta-de-busca";
 import { AssetsClient } from "@/lib/assets-client";
+import { categoriasDisponiveis } from "@/lib/categorias";
 import { siteConfig } from "@/lib/site-config";
 
 /** O índice é servido pelo próprio app, de `public/indice` (ADR 0012). */
@@ -45,6 +47,7 @@ interface Aberto {
 
 export default function HomePage() {
   const cliente = useMemo(() => new AssetsClient(BASE_INDICE), []);
+  const { aberta, abrir, registrar } = useNavegacao();
   const [estado, setEstado] = useState<Estado>({ fase: "carregando" });
   const [aberto, setAberto] = useState<Aberto | null>(null);
   const [assets, setAssets] = useState<Asset[] | null>(null);
@@ -68,7 +71,15 @@ export default function HomePage() {
     };
   }, [cliente]);
 
-  const abrir = useCallback(
+  // A barra lateral desenha os botões de categoria, e ela só sabe quais existem
+  // depois que o manifesto chega. Este é o único ponto em que os dois se
+  // encontram (T-41).
+  useEffect(() => {
+    if (estado.fase !== "pronto") return;
+    registrar(categoriasDisponiveis(versaoAtual(estado.manifest).shards));
+  }, [estado, registrar]);
+
+  const abrirCampeao = useCallback(
     async (champion: CatalogChampion, skinNum?: number) => {
       setAberto({ champion, skinNum });
       setErroDoPainel(null);
@@ -111,26 +122,37 @@ export default function HomePage() {
 
       <PaletaDeBusca
         catalog={catalog}
-        onChampion={(champion) => void abrir(champion)}
+        onChampion={(champion) => void abrirCampeao(champion)}
         // O resultado de skin é atalho para dentro do painel, não destino
         // separado: abre o campeão já naquela skin (RF-25).
-        onSkin={(skin, champion) => champion && void abrir(champion, skin.skinNum)}
+        onSkin={(skin, champion) => champion && void abrirCampeao(champion, skin.skinNum)}
       />
 
-      <div className="min-h-0 flex-1 overflow-y-auto">
-        <GradeDeCampeoes
-          champions={catalog.champions}
-          assetsBaseUrl={BASE_ASSETS}
-          onAbrir={(champion) => void abrir(champion)}
-        />
-
-        {/* RF-08: o outro caminho, para quem não tem nome para digitar. Nenhuma
-            fatia é buscada até alguém abrir uma categoria. */}
-        <NavegacaoPorCategoria
-          shards={versaoAtual(manifest).shards}
-          carregar={(category) => cliente.loadShard(manifest, category)}
-          assetsBaseUrl={BASE_ASSETS}
-        />
+      {/* Uma grade por vez, como o design desenha (T-41). "Campeões" é a
+          primeira categoria da barra lateral e é onde a home abre (RF-04);
+          escolher outra troca o conteúdo em vez de empilhar. */}
+      <div className="flex min-h-0 flex-1 flex-col">
+        {aberta === null ? (
+          // A grade rola por dentro deste `div`. A categoria **não** pode rolar
+          // aqui: ela tem scroller virtual próprio, e um pai que rola daria a
+          // ele altura zero — a lista viria vazia, sem erro nenhum.
+          <div className="min-h-0 flex-1 overflow-y-auto">
+            <GradeDeCampeoes
+              champions={catalog.champions}
+              assetsBaseUrl={BASE_ASSETS}
+              onAbrir={(champion) => void abrirCampeao(champion)}
+            />
+          </div>
+        ) : (
+          /* RF-08: o outro caminho, para quem não tem nome para digitar.
+             Nenhuma fatia é buscada até alguém abrir uma categoria. */
+          <NavegacaoPorCategoria
+            aberta={aberta}
+            carregar={(category) => cliente.loadShard(manifest, category)}
+            onFechar={() => abrir(null)}
+            assetsBaseUrl={BASE_ASSETS}
+          />
+        )}
       </div>
 
       <p className="flex-none border-t border-borda px-3.5 py-1.5 font-mono text-10 text-texto-suave">

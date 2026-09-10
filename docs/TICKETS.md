@@ -2052,7 +2052,7 @@ limite de 500 linhas.
 
 ---
 
-### ⏳ T-41 — Navegação unificada na barra lateral
+### ✅ T-41 — Navegação unificada na barra lateral
 
 | | |
 |---|---|
@@ -2062,14 +2062,14 @@ limite de 500 linhas.
 | **Effort** | médio |
 | **Cobre** | RF-04, RF-08 |
 
-> Aberto em **10/09/2026**. O design trata **"Campeões" como a primeira categoria da barra
-> lateral**, e a grade principal mostra uma categoria por vez. Hoje são duas navegações
-> empilhadas: a grade de campeões sempre visível, e a de categorias abaixo dela.
+> ✅ **Entregue em 10/09/2026**, no mesmo dia em que foi aberto: o dono viu a tela e pediu
+> as categorias à esquerda. Elas estavam **abaixo de 173 cartões de campeão**, o que obrigava
+> a rolar a grade inteira para chegar em "Itens" — o print que motivou o pedido mostra
+> exatamente isso.
 >
-> O T-30 **não** fez essa mudança de propósito — o ticket dele diz "se o design pedir
-> comportamento diferente, abre-se ticket novo; este só veste". Mudar a arquitetura de
-> informação altera o que os testes do T-19 e do T-24 afirmam, e alterá-los era exatamente o
-> que o critério 1 do T-30 proibia.
+> O T-30 não tinha feito de propósito: o ticket dele diz "se o design pedir comportamento
+> diferente, abre-se ticket novo; este só veste", e mudar a arquitetura de informação altera
+> o que os testes do T-19 e do T-24 afirmam.
 
 **Entra**
 - A barra lateral passa a listar "Campeões" junto com as outras categorias, com contagem.
@@ -2082,15 +2082,32 @@ limite de 500 linhas.
   continua operando em skin ([ADR 0010](adr/0010-navegacao-por-campeao-busca-por-skin.md)).
 
 **Critérios de aceite**
-1. A barra lateral lista todas as categorias, "Campeões" inclusive, com contagem.
-2. Abrir uma categoria troca a grade; a home abre em "Campeões" (RF-04).
-3. Nenhuma fatia é carregada antes do clique (RNF-03) — o e2e do T-29 continua valendo.
-4. O grupo de filtro de uma categoria com muitas opções (item tem ~30 `classe:*`) não empurra
-   a grade para fora da tela.
+1. ✅ A barra lateral lista todas as categorias, "Campeões" inclusive e primeira.
+2. ✅ Abrir uma categoria troca a grade; a home abre em "Campeões" (RF-04).
+3. ✅ Nenhuma fatia é carregada antes do clique (RNF-03) — o e2e do T-29 continua valendo.
+4. ✅ A barra de filtros quebra em linhas e a grade continua na tela.
 
 **Testes que provam**
-- Os do T-24, ajustados, mais um novo de "só uma grade por vez".
-- O e2e do T-29, inalterado.
+- Os do T-24, adaptados a um "palco" que reproduz o que a barra lateral faz, mais **5 testes
+  novos da barra lateral de verdade**, montando o `Rodape` com provedor.
+- O e2e do T-29, inalterado, mais dois cenários novos.
+
+> **Um defeito que o e2e não pegava, e agora pega.** Ao trocar a grade por categoria, o
+> scroller virtual passou a ficar dentro de um pai que também rolava — e um scroller virtual
+> num pai que rola mede **altura zero** e desenha nada. A contagem ficava certa ("254 de
+> 868"), os filtros funcionavam, e a lista vinha **vazia**, sem erro no console.
+>
+> A fixture do e2e tinha 3 itens, abaixo do limite de 200 que liga a virtualização — então o
+> caminho quebrado nunca era exercitado. Agora tem **220**, e há teste que confere altura do
+> scroller e contagem de cartões. É a segunda vez que esse defeito aparece; da terceira, ele
+> falha vermelho.
+>
+> **A peça nova é um contexto de 40 linhas.** A barra lateral vive no `layout.tsx` — é o
+> único caminho por onde toda página passa, e é por isso que o aviso do RF-21 mora lá — e a
+> lista de categorias só existe depois que a página carrega o manifesto. Layout não recebe
+> prop de página, então os dois falam por `navegacao-context.tsx`. Sem provedor, o padrão é
+> vazio e o `Rodape` desenha só o resto — que é o que mantém o teste do T-27 passando sem
+> saber que o contexto existe.
 
 ---
 
