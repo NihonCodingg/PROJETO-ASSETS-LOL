@@ -7,6 +7,10 @@ name: Indexação
 # Publicação é por COMMIT, não por API de bucket (ADR 0012): o job escreve o
 # índice, commita e dá push; o deploy da Vercel publica. Nenhum segredo de
 # storage é necessário — só o GITHUB_TOKEN que o Actions já fornece.
+#
+# O segredo VERCEL_DEPLOY_HOOK é opcional e é o plano B do ADR 0016: se um dia a
+# Vercel recusar o commit do bot, o dono cria um deploy hook e guarda a URL nele.
+# Sem o segredo, o último passo não roda.
 
 on:
   schedule:
@@ -44,6 +48,10 @@ jobs:
     # ~15 min; o teto é folgado de propósito, para timeout significar "algo
     # travou", não "o dia estava lento".
     timeout-minutes: 60
+    # No nível do job porque `if:` de passo não enxerga `secrets` nem o `env` do
+    # próprio passo. Vazio quando o segredo não existe.
+    env:
+      VERCEL_DEPLOY_HOOK: ${{ secrets.VERCEL_DEPLOY_HOOK }}
 
     steps:
       - uses: actions/checkout@v4
@@ -73,6 +81,7 @@ jobs:
             ${{ inputs.game_version && format('--game-version {0}', inputs.game_version) || '' }}
 
       - name: Commitar o índice
+        id: commitar
         if: steps.indexar.outcome == 'success'
         run: |
           set -euo pipefail
@@ -102,6 +111,7 @@ jobs:
           # certo: ninguém quer índice meio resolvido.
           for tentativa in 1 2 3; do
             if git push; then
+              echo "publicado=true" >> "$GITHUB_OUTPUT"
               exit 0
             fi
             echo "push recusado (tentativa $tentativa); a main andou. Rebase e de novo."
@@ -109,6 +119,12 @@ jobs:
           done
           echo "três tentativas de push recusadas; desistindo" >&2
           exit 1
+
+      # Plano B do ADR 0016, desligado até existir o segredo. A integração do Git
+      # já publica o commit acima; o hook só entra se ela deixar de publicar.
+      - name: Pedir o deploy à Vercel
+        if: steps.commitar.outputs.publicado == 'true' && env.VERCEL_DEPLOY_HOOK != ''
+        run: curl -fsS -X POST "$VERCEL_DEPLOY_HOOK" -o /dev/null
 
       - name: Publicar o status como artefato
         # Vale também quando a indexação falha: é o relatório do T-12, e é o

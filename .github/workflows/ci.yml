@@ -63,6 +63,21 @@ jobs:
       - name: Testes
         run: pnpm -r --if-present test
 
+      # O que a Vercel roda (ADR 0016). O e2e sobe `next dev`; sem este passo, um
+      # erro que só o build de produção pega chegaria ao deploy sem ninguém ver.
+      - name: Build de produção
+        run: pnpm --filter @lol-assets/web build
+
+      # E o que o build publica — cabeçalhos da §9, noindex, os dois avisos —,
+      # servido pelo servidor de produção do Next. É o mesmo script que o dono
+      # roda contra a URL da Vercel.
+      - name: Conferir o que o build publica
+        working-directory: apps/web
+        run: |
+          pnpm exec next start --port 3100 &
+          for i in $(seq 1 30); do curl -fsS -o /dev/null http://127.0.0.1:3100/ && break; sleep 1; done
+          node scripts/conferir-publicacao.mjs http://127.0.0.1:3100
+
   e2e:
     name: e2e (Playwright)
     runs-on: ubuntu-latest

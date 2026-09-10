@@ -10,6 +10,10 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: siteConfig.displayName,
   description: siteConfig.description,
+  // Sem divulgação ([ADR 0016]). O `X-Robots-Tag` do `next.config.ts` já diz o
+  // mesmo em toda resposta; o `<meta>` é para quem só vê o HTML — uma cópia
+  // salva, um cache intermediário.
+  robots: siteConfig.indexable ? undefined : { index: false, follow: false },
 };
 
 /**

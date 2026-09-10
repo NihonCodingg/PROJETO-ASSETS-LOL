@@ -2121,6 +2121,51 @@ limite de 500 linhas.
 
 ---
 
+### ✅ T-42 — Publicação na Vercel
+
+| | |
+|---|---|
+| **Objetivo** | O repositório pronto para a Vercel publicar sem configuração além do Root Directory |
+| **Dependências** | T-33 |
+| **Estimativa** | ~200 linhas |
+| **Effort** | médio |
+| **Cobre** | RNF-04, RNF-10, §9 da Spec, [ADR 0016](adr/0016-publicacao-na-vercel.md) |
+
+> ✅ **Entregue em 10/09/2026**, aberto no mesmo dia pelo "vamos publicar" do dono: no ar
+> para ele e alguns amigos, aberto por URL, sem senha, sem divulgação.
+
+**Entra**
+- `apps/web/vercel.json`: framework, e instalação e build com o pnpm do `packageManager` —
+  sozinha, a Vercel só vai até o pnpm 10.
+- Os cabeçalhos da §9 no `next.config.ts`, com o manifesto passando a revalidar sempre.
+- `noindex` por padrão, desligável por variável.
+- Build de produção na CI, e o servidor de produção conferido por um script que o dono também
+  roda contra a URL publicada.
+- Plano B desligado para o commit do bot: deploy hook por segredo opcional.
+- README e checklist com o passo a passo.
+
+**NÃO entra**
+- Criar o projeto na Vercel — é conta do dono.
+- Domínio próprio. O D7 decidiu publicar pela URL da Vercel.
+
+**Critérios de aceite**
+1. ✅ O `vercel.json` instala e builda com o pnpm do `packageManager`, e um teste segura os
+   dois juntos.
+2. ✅ O build de produção passa na CI.
+3. ✅ Catálogo e fatias saem imutáveis; manifesto e status revalidam — conferido no servidor
+   de produção, não só no config.
+4. ✅ Toda resposta leva `X-Robots-Tag: noindex`, e o HTML leva `<meta name="robots">`,
+   enquanto `NEXT_PUBLIC_SITE_INDEXABLE` não for `true`.
+5. ✅ Nenhuma variável de ambiente é obrigatória.
+6. 🔑 O site responde no domínio de produção — depende do dono criar o projeto.
+
+**Testes que provam**
+- `publicacao.test.ts`: `vercel.json` × `packageManager`; todo arquivo de `public/indice` cai
+  em exatamente uma regra de cache; o hash do nome é o do conteúdo; `noindex` nos dois modos.
+- A CI builda, sobe `next start` e roda `scripts/conferir-publicacao.mjs` contra ele.
+
+---
+
 ### ✅ T-36 — Teto de versões guardadas no índice
 
 > **Fechado em 08/09/2026 pela decisão, não pelo código.** Levantado durante o T-11, quando
@@ -2180,13 +2225,13 @@ Todo requisito da Spec tem pelo menos um ticket.
 | RNF-01 | T-14, T-19, T-29 |
 | RNF-02 | T-29 |
 | RNF-03 | T-10, T-08, T-24 |
-| RNF-04 | T-13 |
+| RNF-04 | T-13, T-42 |
 | RNF-05 | T-02, T-10, T-11, ✅ T-36, ✅ T-37 |
 | RNF-13 | T-15 (aviso de divergência), T-09 (medição do sha256) |
 | RNF-06 | T-12, T-13, T-31 |
 | RNF-07 | T-08 |
 | RNF-08, RNF-09 | T-03 |
-| RNF-10 | T-27, T-33 |
+| RNF-10 | T-27, T-33, T-42 |
 | RNF-11 | T-28, T-30 |
 | RNF-12 | CI, em todo ticket; **T-35** |
 
@@ -2201,4 +2246,4 @@ Todo requisito da Spec tem pelo menos um ticket.
 | 4 | (T-21 ∥ T-22); (T-24 ∥ T-25) ∥ · ⏸️ T-23 e T-26 suspensos | 2 frentes | Catálogo inteiro e download em lote pelo cliente |
 | 5 | (T-27 ∥ T-28 ∥ T-31) → T-29 → T-30 | 3 frentes | Produto fechado e vestido |
 | 6 | T-32 | — | API opcional |
-| — | T-33 | gatilho manual | Pré-lançamento |
+| — | 🟡 T-33 → ✅ T-42 | gatilho manual | Pré-lançamento e publicação na Vercel. O que resta do T-33 é conta do dono |

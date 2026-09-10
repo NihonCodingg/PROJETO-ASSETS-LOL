@@ -6,6 +6,85 @@ amigos.
 > **Estado em 10/09/2026:** tudo que dá para fazer sem a sua conta está feito e coberto por
 > teste. O que falta **depende de conta sua**, e está marcado com 🔑.
 
+## Publicar — o que você faz, na ordem 🔑
+
+Tudo que depende de código já está no repositório
+([ADR 0016](adr/0016-publicacao-na-vercel.md)). O que sobra são contas suas, e nenhum passo
+pede para colar segredo em lugar nenhum além do próprio painel.
+
+### 1. Criar o projeto na Vercel
+
+1. Entre em <https://vercel.com> com **Continue with GitHub**, usando a conta dona do
+   repositório (`NihonCodingg`). Plano **Hobby**, o gratuito. Tem de ser a mesma conta: no
+   Hobby, a Vercel publica commit de quem é dono da conta.
+2. **Add New… → Project.** Em *Import Git Repository*, autorize o app da Vercel no GitHub —
+   dá para limitar a *Only select repositories* → `lol-assets` — e clique **Import** em
+   `NihonCodingg/lol-assets`.
+3. Na tela *Configure Project*:
+
+   | Campo | Valor |
+   |---|---|
+   | Project Name | **`biblioteca-de-assets`** — não o `lol-assets` que ela sugere (ver D7) |
+   | Framework Preset | Next.js |
+   | Root Directory | **Edit** → `apps/web` |
+   | Build and Output Settings | não mexa: o `apps/web/vercel.json` já diz como instalar e buildar |
+   | Environment Variables | nenhuma |
+
+4. **Deploy.** O build leva uns 3 minutos. No fim, a Vercel mostra o domínio de produção —
+   `biblioteca-de-assets.vercel.app`, se o nome estiver livre.
+
+**Se o build falhar na instalação**, confira em *Settings → Build and Deployment → Root
+Directory* se *Include files outside the root directory in the Build Step* está **Enabled** —
+é o padrão, e o front depende de `packages/schema`, que mora fora de `apps/web`.
+
+### 2. Conferir
+
+Na pasta do repositório, com a URL que a Vercel deu:
+
+```bash
+node apps/web/scripts/conferir-publicacao.mjs https://biblioteca-de-assets.vercel.app
+```
+
+Ele confere os dois avisos, o `noindex`, o cache do índice e se o site está no mesmo índice do
+seu clone. Tudo `ok` é publicado certo.
+
+### 3. O que compartilhar — e o que não
+
+- **Só o domínio de produção** (`biblioteca-de-assets.vercel.app`). Ele é aberto, sem senha.
+- As URLs longas, com hash — de cada deploy e dos previews de PR — pedem login na Vercel. É a
+  *Standard Protection*, que já vem ligada; deixe como está.
+- O site não aparece em buscador: toda resposta leva `noindex`. Também não ponha a URL no
+  README nem no campo *Website* do repositório, que é público.
+
+### 4. Registrar na Riot
+
+Com a URL em mãos, o passo a passo do D6, mais abaixo — antes de mandar o link para os
+amigos.
+
+### Variáveis de ambiente
+
+**Nenhuma obrigatória.** As opcionais vão em *Settings → Environment Variables*, e pedem um
+redeploy depois — o Next grava as `NEXT_PUBLIC_` no build:
+
+| Variável | Quando |
+|---|---|
+| `NEXT_PUBLIC_SITE_INDEXABLE=true` | no dia de divulgar: tira o `noindex` |
+| `NEXT_PUBLIC_WIKI_CONSENT_GRANTED=true` | se o consentimento da Weird Gloop chegar (D2) |
+
+### Se um patch novo não chegar ao ar — plano B
+
+O workflow do índice commita como `github-actions[bot]`. Em repositório público a Vercel
+publica esse commit. Se um dia deixar de publicar, o sintoma aparece no passo 2: depois de um
+`git pull`, o script diz que o site está num índice diferente do repositório. Aí:
+
+1. Vercel → projeto → **Settings → Git → Deploy Hooks**: nome `indice`, branch `main`,
+   **Create Hook**. Copie a URL.
+2. GitHub → repositório → **Settings → Secrets and variables → Actions → New repository
+   secret**: nome `VERCEL_DEPLOY_HOOK`, valor a URL.
+
+Daí em diante o workflow chama o hook depois de cada commit do índice. A URL publica o seu
+site: não cole em mais lugar nenhum.
+
 ## D1 — Nome público ✅
 
 Decidido em 10/09/2026: **Biblioteca de Assets**
