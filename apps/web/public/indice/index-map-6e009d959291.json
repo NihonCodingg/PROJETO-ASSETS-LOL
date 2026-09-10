@@ -2,7 +2,7 @@
   "schemaVersion": "1.1.0",
   "gameVersion": "16.18.1",
   "category": "map",
-  "generatedAt": "2026-09-09T19:54:20Z",
+  "generatedAt": "2026-09-10T01:21:15Z",
   "assets": [
     {
       "id": "map_image:map11",
@@ -12,6 +12,9 @@
       "names": {
         "pt_BR": "map11"
       },
+      "tags": [
+        "mapa:11"
+      ],
       "source": "ddragon",
       "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/map/map11.png",
       "fileName": "Map_map11.png",
@@ -30,6 +33,9 @@
       "names": {
         "pt_BR": "map12"
       },
+      "tags": [
+        "mapa:12"
+      ],
       "source": "ddragon",
       "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/map/map12.png",
       "fileName": "Map_map12.png",
@@ -48,6 +54,9 @@
       "names": {
         "pt_BR": "map22"
       },
+      "tags": [
+        "mapa:22"
+      ],
       "source": "ddragon",
       "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/map/map22.png",
       "fileName": "Map_map22.png",
@@ -66,6 +75,9 @@
       "names": {
         "pt_BR": "map30"
       },
+      "tags": [
+        "mapa:30"
+      ],
       "source": "ddragon",
       "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/map/map30.png",
       "fileName": "Map_map30.png",
@@ -84,6 +96,9 @@
       "names": {
         "pt_BR": "map453"
       },
+      "tags": [
+        "mapa:453"
+      ],
       "source": "ddragon",
       "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/16.18.1/img/map/map453.png",
       "fileName": "Map_map453.png",

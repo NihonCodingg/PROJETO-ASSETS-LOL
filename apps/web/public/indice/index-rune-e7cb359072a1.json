@@ -2,7 +2,7 @@
   "schemaVersion": "1.1.0",
   "gameVersion": "16.18.1",
   "category": "rune",
-  "generatedAt": "2026-09-09T19:54:20Z",
+  "generatedAt": "2026-09-10T01:21:15Z",
   "assets": [
     {
       "id": "rune_tree_icon:8100",
@@ -13,6 +13,9 @@
         "pt_BR": "Dominação",
         "en_US": "Domination"
       },
+      "tags": [
+        "arvore:8100"
+      ],
       "source": "ddragon",
       "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/7200_Domination.png",
       "fileName": "RuneTree_8100.png",
@@ -32,6 +35,10 @@
         "pt_BR": "Eletrocutar",
         "en_US": "Electrocute"
       },
+      "tags": [
+        "arvore:8100",
+        "slot:0"
+      ],
       "source": "ddragon",
       "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Domination/Electrocute/Electrocute.png",
       "fileName": "Rune_8112.png",
@@ -51,6 +58,10 @@
         "pt_BR": "Colheita Sombria",
         "en_US": "Dark Harvest"
       },
+      "tags": [
+        "arvore:8100",
+        "slot:0"
+      ],
       "source": "ddragon",
       "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Domination/DarkHarvest/DarkHarvest.png",
       "fileName": "Rune_8128.png",
@@ -70,6 +81,10 @@
         "pt_BR": "Chuva de Lâminas",
         "en_US": "Hail of Blades"
       },
+      "tags": [
+        "arvore:8100",
+        "slot:0"
+      ],
       "source": "ddragon",
       "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Domination/HailOfBlades/HailOfBlades.png",
       "fileName": "Rune_9923.png",
@@ -89,6 +104,10 @@
         "pt_BR": "Golpe Desleal",
         "en_US": "Cheap Shot"
       },
+      "tags": [
+        "arvore:8100",
+        "slot:1"
+      ],
       "source": "ddragon",
       "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Domination/CheapShot/CheapShot.png",
       "fileName": "Rune_8126.png",
@@ -108,6 +127,10 @@
         "pt_BR": "Gosto de Sangue",
         "en_US": "Taste of Blood"
       },
+      "tags": [
+        "arvore:8100",
+        "slot:1"
+      ],
       "source": "ddragon",
       "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Domination/TasteOfBlood/GreenTerror_TasteOfBlood.png",
       "fileName": "Rune_8139.png",
@@ -127,6 +150,10 @@
         "pt_BR": "Impacto Repentino",
         "en_US": "Sudden Impact"
       },
+      "tags": [
+        "arvore:8100",
+        "slot:1"
+      ],
       "source": "ddragon",
       "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Domination/SuddenImpact/SuddenImpact.png",
       "fileName": "Rune_8143.png",
@@ -146,6 +173,10 @@
         "pt_BR": "Sexto Sentido",
         "en_US": "Sixth Sense"
       },
+      "tags": [
+        "arvore:8100",
+        "slot:2"
+      ],
       "source": "ddragon",
       "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Domination/SixthSense/SixthSense.png",
       "fileName": "Rune_8137.png",
@@ -165,6 +196,10 @@
         "pt_BR": "Lembranças Aterrorizantes",
         "en_US": "Grisly Mementos"
       },
+      "tags": [
+        "arvore:8100",
+        "slot:2"
+      ],
       "source": "ddragon",
       "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Domination/GrislyMementos/GrislyMementos.png",
       "fileName": "Rune_8140.png",
@@ -184,6 +219,10 @@
         "pt_BR": "Sentinela Profunda",
         "en_US": "Deep Ward"
       },
+      "tags": [
+        "arvore:8100",
+        "slot:2"
+      ],
       "source": "ddragon",
       "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Domination/DeepWard/DeepWard.png",
       "fileName": "Rune_8141.png",
@@ -203,6 +242,10 @@
         "pt_BR": "Caçador de Tesouros",
         "en_US": "Treasure Hunter"
       },
+      "tags": [
+        "arvore:8100",
+        "slot:3"
+      ],
       "source": "ddragon",
       "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Domination/TreasureHunter/TreasureHunter.png",
       "fileName": "Rune_8135.png",
@@ -222,6 +265,10 @@
         "pt_BR": "Caça Incansável",
         "en_US": "Relentless Hunter"
       },
+      "tags": [
+        "arvore:8100",
+        "slot:3"
+      ],
       "source": "ddragon",
       "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Domination/RelentlessHunter/RelentlessHunter.png",
       "fileName": "Rune_8105.png",
@@ -241,6 +288,10 @@
         "pt_BR": "Caça Suprema",
         "en_US": "Ultimate Hunter"
       },
+      "tags": [
+        "arvore:8100",
+        "slot:3"
+      ],
       "source": "ddragon",
       "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Domination/UltimateHunter/UltimateHunter.png",
       "fileName": "Rune_8106.png",
@@ -260,6 +311,9 @@
         "pt_BR": "Inspiração",
         "en_US": "Inspiration"
       },
+      "tags": [
+        "arvore:8300"
+      ],
       "source": "ddragon",
       "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/7203_Whimsy.png",
       "fileName": "RuneTree_8300.png",
@@ -279,6 +333,10 @@
         "pt_BR": "Aprimoramento Glacial",
         "en_US": "Glacial Augment"
       },
+      "tags": [
+        "arvore:8300",
+        "slot:0"
+      ],
       "source": "ddragon",
       "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Inspiration/GlacialAugment/GlacialAugment.png",
       "fileName": "Rune_8351.png",
@@ -298,6 +356,10 @@
         "pt_BR": "Livro de Feitiços Deslacrado",
         "en_US": "Unsealed Spellbook"
       },
+      "tags": [
+        "arvore:8300",
+        "slot:0"
+      ],
       "source": "ddragon",
       "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Inspiration/UnsealedSpellbook/UnsealedSpellbook.png",
       "fileName": "Rune_8360.png",
@@ -317,6 +379,10 @@
         "pt_BR": "Primeiro Ataque",
         "en_US": "First Strike"
       },
+      "tags": [
+        "arvore:8300",
+        "slot:0"
+      ],
       "source": "ddragon",
       "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Inspiration/FirstStrike/FirstStrike.png",
       "fileName": "Rune_8369.png",
@@ -336,6 +402,10 @@
         "pt_BR": "Flashtração Hextec",
         "en_US": "Hextech Flashtraption"
       },
+      "tags": [
+        "arvore:8300",
+        "slot:1"
+      ],
       "source": "ddragon",
       "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Inspiration/HextechFlashtraption/HextechFlashtraption.png",
       "fileName": "Rune_8306.png",
@@ -355,6 +425,10 @@
         "pt_BR": "Calçados Mágicos",
         "en_US": "Magical Footwear"
       },
+      "tags": [
+        "arvore:8300",
+        "slot:1"
+      ],
       "source": "ddragon",
       "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Inspiration/MagicalFootwear/MagicalFootwear.png",
       "fileName": "Rune_8304.png",
@@ -374,6 +448,10 @@
         "pt_BR": "Reembolso",
         "en_US": "Cash Back"
       },
+      "tags": [
+        "arvore:8300",
+        "slot:1"
+      ],
       "source": "ddragon",
       "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Inspiration/CashBack/CashBack2.png",
       "fileName": "Rune_8321.png",
@@ -393,6 +471,10 @@
         "pt_BR": "Tônico Triplo",
         "en_US": "Triple Tonic"
       },
+      "tags": [
+        "arvore:8300",
+        "slot:2"
+      ],
       "source": "ddragon",
       "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Inspiration/PerfectTiming/AlchemistCabinet.png",
       "fileName": "Rune_8313.png",
@@ -412,6 +494,10 @@
         "pt_BR": "Tônico de Distorção no Tempo",
         "en_US": "Time Warp Tonic"
       },
+      "tags": [
+        "arvore:8300",
+        "slot:2"
+      ],
       "source": "ddragon",
       "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Inspiration/TimeWarpTonic/TimeWarpTonic.png",
       "fileName": "Rune_8352.png",
@@ -431,6 +517,10 @@
         "pt_BR": "Entrega de Biscoitos",
         "en_US": "Biscuit Delivery"
       },
+      "tags": [
+        "arvore:8300",
+        "slot:2"
+      ],
       "source": "ddragon",
       "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Inspiration/BiscuitDelivery/BiscuitDelivery.png",
       "fileName": "Rune_8345.png",
@@ -450,6 +540,10 @@
         "pt_BR": "Perspicácia Cósmica",
         "en_US": "Cosmic Insight"
       },
+      "tags": [
+        "arvore:8300",
+        "slot:3"
+      ],
       "source": "ddragon",
       "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Inspiration/CosmicInsight/CosmicInsight.png",
       "fileName": "Rune_8347.png",
@@ -469,6 +563,10 @@
         "pt_BR": "Velocidade de Aproximação",
         "en_US": "Approach Velocity"
       },
+      "tags": [
+        "arvore:8300",
+        "slot:3"
+      ],
       "source": "ddragon",
       "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Resolve/ApproachVelocity/ApproachVelocity.png",
       "fileName": "Rune_8410.png",
@@ -488,6 +586,10 @@
         "pt_BR": "Quebra-galho",
         "en_US": "Jack Of All Trades"
       },
+      "tags": [
+        "arvore:8300",
+        "slot:3"
+      ],
       "source": "ddragon",
       "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Inspiration/JackOfAllTrades/JackofAllTrades2.png",
       "fileName": "Rune_8316.png",
@@ -507,6 +609,9 @@
         "pt_BR": "Precisão",
         "en_US": "Precision"
       },
+      "tags": [
+        "arvore:8000"
+      ],
       "source": "ddragon",
       "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/7201_Precision.png",
       "fileName": "RuneTree_8000.png",
@@ -526,6 +631,10 @@
         "pt_BR": "Pressione o Ataque",
         "en_US": "Press the Attack"
       },
+      "tags": [
+        "arvore:8000",
+        "slot:0"
+      ],
       "source": "ddragon",
       "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Precision/PressTheAttack/PressTheAttack.png",
       "fileName": "Rune_8005.png",
@@ -545,6 +654,10 @@
         "pt_BR": "Ritmo Fatal",
         "en_US": "Lethal Tempo"
       },
+      "tags": [
+        "arvore:8000",
+        "slot:0"
+      ],
       "source": "ddragon",
       "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Precision/LethalTempo/LethalTempoTemp.png",
       "fileName": "Rune_8008.png",
@@ -564,6 +677,10 @@
         "pt_BR": "Agilidade nos Pés",
         "en_US": "Fleet Footwork"
       },
+      "tags": [
+        "arvore:8000",
+        "slot:0"
+      ],
       "source": "ddragon",
       "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Precision/FleetFootwork/FleetFootwork.png",
       "fileName": "Rune_8021.png",
@@ -583,6 +700,10 @@
         "pt_BR": "Conquistador",
         "en_US": "Conqueror"
       },
+      "tags": [
+        "arvore:8000",
+        "slot:0"
+      ],
       "source": "ddragon",
       "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Precision/Conqueror/Conqueror.png",
       "fileName": "Rune_8010.png",
@@ -602,6 +723,10 @@
         "pt_BR": "Absorção Vital",
         "en_US": "Absorb Life"
       },
+      "tags": [
+        "arvore:8000",
+        "slot:1"
+      ],
       "source": "ddragon",
       "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Precision/AbsorbLife/AbsorbLife.png",
       "fileName": "Rune_9101.png",
@@ -621,6 +746,10 @@
         "pt_BR": "Triunfo",
         "en_US": "Triumph"
       },
+      "tags": [
+        "arvore:8000",
+        "slot:1"
+      ],
       "source": "ddragon",
       "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Precision/Triumph.png",
       "fileName": "Rune_9111.png",
@@ -640,6 +769,10 @@
         "pt_BR": "Presença de Espírito",
         "en_US": "Presence of Mind"
       },
+      "tags": [
+        "arvore:8000",
+        "slot:1"
+      ],
       "source": "ddragon",
       "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Precision/PresenceOfMind/PresenceOfMind.png",
       "fileName": "Rune_8009.png",
@@ -659,6 +792,10 @@
         "pt_BR": "Lenda: Espontaneidade",
         "en_US": "Legend: Alacrity"
       },
+      "tags": [
+        "arvore:8000",
+        "slot:2"
+      ],
       "source": "ddragon",
       "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Precision/LegendAlacrity/LegendAlacrity.png",
       "fileName": "Rune_9104.png",
@@ -678,6 +815,10 @@
         "pt_BR": "Lenda: Aceleração",
         "en_US": "Legend: Haste"
       },
+      "tags": [
+        "arvore:8000",
+        "slot:2"
+      ],
       "source": "ddragon",
       "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Precision/LegendHaste/LegendHaste.png",
       "fileName": "Rune_9105.png",
@@ -697,6 +838,10 @@
         "pt_BR": "Lenda: Linhagem",
         "en_US": "Legend: Bloodline"
       },
+      "tags": [
+        "arvore:8000",
+        "slot:2"
+      ],
       "source": "ddragon",
       "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Precision/LegendBloodline/LegendBloodline.png",
       "fileName": "Rune_9103.png",
@@ -716,6 +861,10 @@
         "pt_BR": "Golpe de Misericórdia",
         "en_US": "Coup de Grace"
       },
+      "tags": [
+        "arvore:8000",
+        "slot:3"
+      ],
       "source": "ddragon",
       "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Precision/CoupDeGrace/CoupDeGrace.png",
       "fileName": "Rune_8014.png",
@@ -735,6 +884,10 @@
         "pt_BR": "Dilacerar",
         "en_US": "Cut Down"
       },
+      "tags": [
+        "arvore:8000",
+        "slot:3"
+      ],
       "source": "ddragon",
       "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Precision/CutDown/CutDown.png",
       "fileName": "Rune_8017.png",
@@ -754,6 +907,10 @@
         "pt_BR": "Até a Morte",
         "en_US": "Last Stand"
       },
+      "tags": [
+        "arvore:8000",
+        "slot:3"
+      ],
       "source": "ddragon",
       "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Sorcery/LastStand/LastStand.png",
       "fileName": "Rune_8299.png",
@@ -773,6 +930,9 @@
         "pt_BR": "Determinação",
         "en_US": "Resolve"
       },
+      "tags": [
+        "arvore:8400"
+      ],
       "source": "ddragon",
       "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/7204_Resolve.png",
       "fileName": "RuneTree_8400.png",
@@ -792,6 +952,10 @@
         "pt_BR": "Aperto dos Mortos-Vivos",
         "en_US": "Grasp of the Undying"
       },
+      "tags": [
+        "arvore:8400",
+        "slot:0"
+      ],
       "source": "ddragon",
       "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Resolve/GraspOfTheUndying/GraspOfTheUndying.png",
       "fileName": "Rune_8437.png",
@@ -811,6 +975,10 @@
         "pt_BR": "Pós-choque",
         "en_US": "Aftershock"
       },
+      "tags": [
+        "arvore:8400",
+        "slot:0"
+      ],
       "source": "ddragon",
       "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Resolve/VeteranAftershock/VeteranAftershock.png",
       "fileName": "Rune_8439.png",
@@ -830,6 +998,10 @@
         "pt_BR": "Guardião",
         "en_US": "Guardian"
       },
+      "tags": [
+        "arvore:8400",
+        "slot:0"
+      ],
       "source": "ddragon",
       "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Resolve/Guardian/Guardian.png",
       "fileName": "Rune_8465.png",
@@ -849,6 +1021,10 @@
         "pt_BR": "Demolir",
         "en_US": "Demolish"
       },
+      "tags": [
+        "arvore:8400",
+        "slot:1"
+      ],
       "source": "ddragon",
       "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Resolve/Demolish/Demolish.png",
       "fileName": "Rune_8446.png",
@@ -868,6 +1044,10 @@
         "pt_BR": "Fonte da Vida",
         "en_US": "Font of Life"
       },
+      "tags": [
+        "arvore:8400",
+        "slot:1"
+      ],
       "source": "ddragon",
       "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Resolve/FontOfLife/FontOfLife.png",
       "fileName": "Rune_8463.png",
@@ -887,6 +1067,10 @@
         "pt_BR": "Golpe de Escudo",
         "en_US": "Shield Bash"
       },
+      "tags": [
+        "arvore:8400",
+        "slot:1"
+      ],
       "source": "ddragon",
       "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Resolve/MirrorShell/MirrorShell.png",
       "fileName": "Rune_8401.png",
@@ -906,6 +1090,10 @@
         "pt_BR": "Condicionamento",
         "en_US": "Conditioning"
       },
+      "tags": [
+        "arvore:8400",
+        "slot:2"
+      ],
       "source": "ddragon",
       "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Resolve/Conditioning/Conditioning.png",
       "fileName": "Rune_8429.png",
@@ -925,6 +1113,10 @@
         "pt_BR": "Ventos Revigorantes",
         "en_US": "Second Wind"
       },
+      "tags": [
+        "arvore:8400",
+        "slot:2"
+      ],
       "source": "ddragon",
       "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Resolve/SecondWind/SecondWind.png",
       "fileName": "Rune_8444.png",
@@ -944,6 +1136,10 @@
         "pt_BR": "Osso Revestido",
         "en_US": "Bone Plating"
       },
+      "tags": [
+        "arvore:8400",
+        "slot:2"
+      ],
       "source": "ddragon",
       "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Resolve/BonePlating/BonePlating.png",
       "fileName": "Rune_8473.png",
@@ -963,6 +1159,10 @@
         "pt_BR": "Crescimento Excessivo",
         "en_US": "Overgrowth"
       },
+      "tags": [
+        "arvore:8400",
+        "slot:3"
+      ],
       "source": "ddragon",
       "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Resolve/Overgrowth/Overgrowth.png",
       "fileName": "Rune_8451.png",
@@ -982,6 +1182,10 @@
         "pt_BR": "Revitalizar",
         "en_US": "Revitalize"
       },
+      "tags": [
+        "arvore:8400",
+        "slot:3"
+      ],
       "source": "ddragon",
       "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Resolve/Revitalize/Revitalize.png",
       "fileName": "Rune_8453.png",
@@ -1001,6 +1205,10 @@
         "pt_BR": "Inabalável",
         "en_US": "Unflinching"
       },
+      "tags": [
+        "arvore:8400",
+        "slot:3"
+      ],
       "source": "ddragon",
       "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Sorcery/Unflinching/Unflinching.png",
       "fileName": "Rune_8242.png",
@@ -1020,6 +1228,9 @@
         "pt_BR": "Feitiçaria",
         "en_US": "Sorcery"
       },
+      "tags": [
+        "arvore:8200"
+      ],
       "source": "ddragon",
       "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/7202_Sorcery.png",
       "fileName": "RuneTree_8200.png",
@@ -1039,6 +1250,10 @@
         "pt_BR": "Invocar Aery",
         "en_US": "Summon Aery"
       },
+      "tags": [
+        "arvore:8200",
+        "slot:0"
+      ],
       "source": "ddragon",
       "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Sorcery/SummonAery/SummonAery.png",
       "fileName": "Rune_8214.png",
@@ -1058,6 +1273,10 @@
         "pt_BR": "Cometa Arcano",
         "en_US": "Arcane Comet"
       },
+      "tags": [
+        "arvore:8200",
+        "slot:0"
+      ],
       "source": "ddragon",
       "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Sorcery/ArcaneComet/ArcaneComet.png",
       "fileName": "Rune_8229.png",
@@ -1077,6 +1296,10 @@
         "pt_BR": "Avanço da Tempestade",
         "en_US": "Stormraider's Surge"
       },
+      "tags": [
+        "arvore:8200",
+        "slot:0"
+      ],
       "source": "ddragon",
       "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Sorcery/PhaseRush/StormraidersSurgeRuneIcon2.png",
       "fileName": "Rune_8230.png",
@@ -1096,6 +1319,10 @@
         "pt_BR": "Toque Ígneo",
         "en_US": "Deathfire Touch"
       },
+      "tags": [
+        "arvore:8200",
+        "slot:0"
+      ],
       "source": "ddragon",
       "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Sorcery/DeathfireTouch/DEATHFIRE_TOUCH_KEYSTONE.png",
       "fileName": "Rune_8992.png",
@@ -1115,6 +1342,10 @@
         "pt_BR": "Arcanista do Axioma",
         "en_US": "Axiom Arcanist"
       },
+      "tags": [
+        "arvore:8200",
+        "slot:1"
+      ],
       "source": "ddragon",
       "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Sorcery/NullifyingOrb/Axiom_Arcanist.png",
       "fileName": "Rune_8224.png",
@@ -1134,6 +1365,10 @@
         "pt_BR": "Faixa de Fluxo de Mana",
         "en_US": "Manaflow Band"
       },
+      "tags": [
+        "arvore:8200",
+        "slot:1"
+      ],
       "source": "ddragon",
       "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Sorcery/ManaflowBand/ManaflowBand.png",
       "fileName": "Rune_8226.png",
@@ -1153,6 +1388,10 @@
         "pt_BR": "Manto de Nimbus",
         "en_US": "Nimbus Cloak"
       },
+      "tags": [
+        "arvore:8200",
+        "slot:1"
+      ],
       "source": "ddragon",
       "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Sorcery/NimbusCloak/6361.png",
       "fileName": "Rune_8275.png",
@@ -1172,6 +1411,10 @@
         "pt_BR": "Transcendência",
         "en_US": "Transcendence"
       },
+      "tags": [
+        "arvore:8200",
+        "slot:2"
+      ],
       "source": "ddragon",
       "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Sorcery/Transcendence/Transcendence.png",
       "fileName": "Rune_8210.png",
@@ -1191,6 +1434,10 @@
         "pt_BR": "Celeridade",
         "en_US": "Celerity"
       },
+      "tags": [
+        "arvore:8200",
+        "slot:2"
+      ],
       "source": "ddragon",
       "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Sorcery/Celerity/CelerityTemp.png",
       "fileName": "Rune_8234.png",
@@ -1210,6 +1457,10 @@
         "pt_BR": "Foco Absoluto",
         "en_US": "Absolute Focus"
       },
+      "tags": [
+        "arvore:8200",
+        "slot:2"
+      ],
       "source": "ddragon",
       "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Sorcery/AbsoluteFocus/AbsoluteFocus.png",
       "fileName": "Rune_8233.png",
@@ -1229,6 +1480,10 @@
         "pt_BR": "Chamuscar",
         "en_US": "Scorch"
       },
+      "tags": [
+        "arvore:8200",
+        "slot:3"
+      ],
       "source": "ddragon",
       "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Sorcery/Scorch/Scorch.png",
       "fileName": "Rune_8237.png",
@@ -1248,6 +1503,10 @@
         "pt_BR": "Caminhar Sobre as Águas",
         "en_US": "Waterwalking"
       },
+      "tags": [
+        "arvore:8200",
+        "slot:3"
+      ],
       "source": "ddragon",
       "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Sorcery/Waterwalking/Waterwalking.png",
       "fileName": "Rune_8232.png",
@@ -1267,6 +1526,10 @@
         "pt_BR": "Tempestade Crescente",
         "en_US": "Gathering Storm"
       },
+      "tags": [
+        "arvore:8200",
+        "slot:3"
+      ],
       "source": "ddragon",
       "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/Sorcery/GatheringStorm/GatheringStorm.png",
       "fileName": "Rune_8236.png",
@@ -1285,6 +1548,9 @@
       "names": {
         "pt_BR": "StatModsAdaptiveForceIcon"
       },
+      "tags": [
+        "arvore:nenhuma"
+      ],
       "source": "ddragon",
       "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/StatMods/StatModsAdaptiveForceIcon.png",
       "fileName": "StatMod_StatModsAdaptiveForceIcon.png",
@@ -1303,6 +1569,9 @@
       "names": {
         "pt_BR": "StatModsAdaptiveForceScalingIcon"
       },
+      "tags": [
+        "arvore:nenhuma"
+      ],
       "source": "ddragon",
       "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/StatMods/StatModsAdaptiveForceScalingIcon.png",
       "fileName": "StatMod_StatModsAdaptiveForceScalingIcon.png",
@@ -1321,6 +1590,9 @@
       "names": {
         "pt_BR": "StatModsArmorIcon"
       },
+      "tags": [
+        "arvore:nenhuma"
+      ],
       "source": "ddragon",
       "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/StatMods/StatModsArmorIcon.png",
       "fileName": "StatMod_StatModsArmorIcon.png",
@@ -1339,6 +1611,9 @@
       "names": {
         "pt_BR": "StatModsAttackSpeedIcon"
       },
+      "tags": [
+        "arvore:nenhuma"
+      ],
       "source": "ddragon",
       "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/StatMods/StatModsAttackSpeedIcon.png",
       "fileName": "StatMod_StatModsAttackSpeedIcon.png",
@@ -1357,6 +1632,9 @@
       "names": {
         "pt_BR": "StatModsCDRScalingIcon"
       },
+      "tags": [
+        "arvore:nenhuma"
+      ],
       "source": "ddragon",
       "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/StatMods/StatModsCDRScalingIcon.png",
       "fileName": "StatMod_StatModsCDRScalingIcon.png",
@@ -1375,6 +1653,9 @@
       "names": {
         "pt_BR": "StatModsHealthPlusIcon"
       },
+      "tags": [
+        "arvore:nenhuma"
+      ],
       "source": "ddragon",
       "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/StatMods/StatModsHealthPlusIcon.png",
       "fileName": "StatMod_StatModsHealthPlusIcon.png",
@@ -1393,6 +1674,9 @@
       "names": {
         "pt_BR": "StatModsHealthScalingIcon"
       },
+      "tags": [
+        "arvore:nenhuma"
+      ],
       "source": "ddragon",
       "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/StatMods/StatModsHealthScalingIcon.png",
       "fileName": "StatMod_StatModsHealthScalingIcon.png",
@@ -1411,6 +1695,9 @@
       "names": {
         "pt_BR": "StatModsMagicResIcon"
       },
+      "tags": [
+        "arvore:nenhuma"
+      ],
       "source": "ddragon",
       "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/StatMods/StatModsMagicResIcon.png",
       "fileName": "StatMod_StatModsMagicResIcon.png",
@@ -1429,6 +1716,9 @@
       "names": {
         "pt_BR": "StatModsMovementSpeedIcon"
       },
+      "tags": [
+        "arvore:nenhuma"
+      ],
       "source": "ddragon",
       "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/StatMods/StatModsMovementSpeedIcon.png",
       "fileName": "StatMod_StatModsMovementSpeedIcon.png",
@@ -1447,6 +1737,9 @@
       "names": {
         "pt_BR": "StatModsTenacityIcon"
       },
+      "tags": [
+        "arvore:nenhuma"
+      ],
       "source": "ddragon",
       "sourceUrl": "https://ddragon.leagueoflegends.com/cdn/img/perk-images/StatMods/StatModsTenacityIcon.png",
       "fileName": "StatMod_StatModsTenacityIcon.png",
