@@ -94,7 +94,7 @@ implementa e pelo teste que o prova.
 | **RF-05** | **A busca opera no nível de skin e também casa campeão**; um campeão casado aparece **uma** vez | `jax` retorna 1 entrada de campeão, não 18 de skin; `deus da guerra` retorna a skin em 1º lugar |
 | **RF-06** | Chromas não aparecem como resultado de primeiro nível | Nenhum dos 7.037 chromas aparece na lista; ficam atrás de um toggle dentro da skin, no painel do campeão |
 | **RF-07** | Atalho `/` foca a busca sem inserir o caractere | Após `/`, o foco é o campo e o valor não mudou |
-| **RF-08** | Navegação por categoria com filtros | Filtros de função, lane, comprável, mapa, árvore de runa e elo alteram a lista |
+| **RF-08** | Navegação por categoria com filtros | Filtros de função, comprável, mapa e árvore de runa alteram a lista. ~~lane~~ e ~~elo~~ **saíram em 09/09/2026** (T-24): nenhuma fonte declara posição, e a categoria `rank` saiu da v1 com o [ADR 0012](adr/0012-onde-guardar-os-assets.md) |
 | **RF-24** | **Busca por termo transversal a vários campeões** | `kda` e `prestigio` retornam skins de ≥ 3 campeões distintos, cada resultado rotulado com o campeão de origem |
 | **RF-25** | **O seletor de skin vive no painel do campeão** | Abrir um campeão lista as skins dele; clicar num resultado de skin abre o painel do campeão **já com aquela skin selecionada** |
 

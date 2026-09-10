@@ -1321,11 +1321,33 @@ limite de 500 linhas.
 | **Effort** | alto |
 | **Cobre** | RF-08, RNF-03 |
 
+> ✅ **Entregue em 09/09/2026.** Dois dos seis filtros nomeados no RF-08 **não existem**, e
+> não por esquecimento:
+>
+> - **`elo`** — a categoria `rank` saiu da v1 com o
+>   [ADR 0012](adr/0012-onde-guardar-os-assets.md). Não há o que filtrar.
+> - **`lane`** — nenhuma das duas fontes declara posição. O `champion.json` do ddragon traz
+>   `tags` (as seis classes) e o cdragon traz o mesmo; lane só existe em fontes de
+>   estatística, que este projeto não usa. Escrever "Top/Jungle/Mid/ADC/Suporte" à mão seria
+>   inventar dado, que é a única coisa que o projeto não faz. Se um dia entrar, entra como
+>   fonte nova e ticket próprio.
+>
+> Os outros quatro entregaram, e **`função` mudou de lugar**: ela é atributo de campeão, e
+> campeão é a home ([ADR 0010](adr/0010-navegacao-por-campeao-busca-por-skin.md)), então o
+> filtro vive na grade e não na navegação por categoria. Medido no catálogo real: Mago 75,
+> Lutador 60, Assassino 46, Tanque 46, Suporte 43, Atirador 33 — os 173 campeões têm função.
+>
+> Os grupos de filtro das categorias são **derivados da fatia carregada**, não declarados:
+> `compravel`, `mapa:*`, `classe:*`, `arvore:*` e `slot:*` viram grupo porque estão nos
+> dados. Fonte que parar de trazer uma etiqueta faz o grupo sumir sozinho.
+
 **Entra**
 - Navegação por categoria, carregando a fatia sob demanda (a home só carrega o catálogo).
-- **TanStack Virtual nas categorias grandes** — ícones de perfil (5.021) e emotes (2.347)
-  ([ADR 0011](adr/0011-base-de-componentes-do-front.md)).
-- Filtros por função, lane, comprável, mapa, árvore de runa e elo, a partir das `tags`.
+- **TanStack Virtual nas categorias grandes** — ícones de perfil (5.042) e emotes (2.338)
+  ([ADR 0011](adr/0011-base-de-componentes-do-front.md)). O limite mora no
+  `asset-panel.ts` e vale para os dois usos do painel: 200 cartões.
+- Filtros por ~~lane~~, função, comprável, mapa, árvore de runa e ~~elo~~, a partir das
+  `tags` — ver a nota acima.
 - Combinação de filtro com busca.
 
 **NÃO entra**
@@ -1333,16 +1355,20 @@ limite de 500 linhas.
 - Decisão visual — ver a nota no topo.
 
 **Critérios de aceite**
-1. Abrir uma categoria carrega só a fatia dela.
-2. Cada filtro reduz a lista corretamente, e combinados também.
-3. A fatia `champion` continua sendo a única carregada na home (RNF-03).
-4. Filtro sem resultado mostra estado vazio com o que foi filtrado.
-5. Abrir a categoria de ícones de perfil (5.021) mantém o DOM na casa das dezenas de nós e
-   a rolagem fluida.
+1. ✅ Abrir uma categoria carrega só a fatia dela.
+2. ✅ Cada filtro reduz a lista corretamente, e combinados também (OU dentro do grupo, E
+   entre grupos).
+3. ✅ A fatia `champion` continua sendo a única carregada na home (RNF-03) — e a navegação
+   por categoria nem essa pede.
+4. ✅ Filtro sem resultado mostra estado vazio com o que foi filtrado, em palavras.
+5. ✅ Abrir a categoria de ícones de perfil (5.042) desenha **12 cartões**, não 5.042.
 
 **Testes que provam**
 - Vitest com fixture multicategoria: carga sob demanda, cada filtro, combinações, vazio.
-- Teste de rede que confirma que só uma fatia é buscada na home.
+- Teste de rede que confirma que só uma fatia é buscada, contado em URLs pelo `AssetsClient`.
+- O teste da escala empresta uma janela de 700 px ao jsdom (`offsetHeight`), porque sem
+  layout o virtualizador desenha **zero** cartões — e zero passaria numa asserção de
+  "poucos nós" sem provar nada.
 
 ---
 
