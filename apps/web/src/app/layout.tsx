@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 
+import { Rodape } from "@/components/rodape";
 import { siteConfig } from "@/lib/site-config";
 
 import "./globals.css";
@@ -16,9 +17,8 @@ export default function RootLayout({
     <html lang="pt-BR">
       <body className="min-h-screen">
         {children}
-        <footer className="border-t border-neutral-800 px-6 py-8 text-xs text-neutral-500">
-          {siteConfig.riotLegalNotice}
-        </footer>
+        {/* RF-21: o layout é o único caminho por onde toda página passa. */}
+        <Rodape />
       </body>
     </html>
   );

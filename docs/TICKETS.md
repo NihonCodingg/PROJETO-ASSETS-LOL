@@ -1492,13 +1492,26 @@ limite de 500 linhas.
 - Decisão visual — ver a nota no topo.
 
 **Critérios de aceite**
-1. O aviso legal aparece em toda página.
-2. A página cita todas as fontes efetivamente usadas.
-3. O crédito à wiki não aparece enquanto o consentimento não existir.
-4. O nome exibido continua passando na regra do [ADR 0003](adr/0003-nome-publico-do-produto.md).
+1. ✅ O aviso legal aparece em toda página — mora no `layout.tsx`, que é o único caminho por
+   onde toda página passa.
+2. ✅ A página cita todas as fontes efetivamente usadas, e um teste percorre os valores de
+   `AssetSource` exigindo crédito para cada um: **fonte nova não entra sem crédito**.
+3. ✅ O crédito à wiki não aparece enquanto o consentimento não existir.
+4. ✅ O nome exibido continua passando na regra do [ADR 0003](adr/0003-nome-publico-do-produto.md).
 
 **Testes que provam**
 - Vitest: presença do aviso, ausência do bloco da wiki com a flag desligada, regra do nome.
+
+> ✅ **Entregue em 09/09/2026.** Duas coisas que o ticket não dizia e que valem registro:
+>
+> - **Creditar a wiki antes da autorização é pior que não creditar.** Seria afirmar em
+>   público que usamos conteúdo de quem pediu, nos termos, para não ser usado de forma
+>   automatizada ([ADR 0004](adr/0004-consentimento-da-wiki-e-teto-de-resolucao.md)). O
+>   `NEXT_PUBLIC_WIKI_CONSENT_GRANTED` espelha a trava do indexador, e o teste exige que a
+>   página **não** contenha "Weird Gloop" hoje.
+> - **As duas licenças ficam separadas.** A arte é da Riot em todas as fontes; o CC BY-SA
+>   3.0 vale só para o texto da wiki. Confundir as duas é o risco anotado no KICKOFF, e o
+>   teste exige que nenhuma outra fonte reivindique licença de texto.
 
 ---
 
