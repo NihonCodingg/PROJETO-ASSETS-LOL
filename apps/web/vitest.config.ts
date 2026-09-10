@@ -15,6 +15,8 @@ export default defineConfig({
     // pura não se importam com o ambiente, e um ambiente só evita a pergunta
     // "por que este arquivo não enxerga o DOM?".
     environment: "jsdom",
+    // Só `src/`: os `*.spec.ts` do Playwright vivem em `e2e/` e morreriam
+    // aqui, porque `@playwright/test` não roda dentro do vitest.
     include: ["src/**/*.test.ts", "src/**/*.test.tsx"],
     globals: false,
     setupFiles: ["./vitest.setup.ts"],

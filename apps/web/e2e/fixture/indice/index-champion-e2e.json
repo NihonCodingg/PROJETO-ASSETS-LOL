@@ -1,0 +1,244 @@
+{
+  "schemaVersion": "1.2.0",
+  "gameVersion": "16.18.1",
+  "category": "champion",
+  "generatedAt": "2026-09-09T00:00:00Z",
+  "assets": [
+    {
+      "id": "square:24",
+      "type": "square",
+      "category": "champion",
+      "names": {
+        "pt_BR": "Jax"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Jax_square.png",
+      "fileName": "Jax_square.png",
+      "width": 128,
+      "height": 128,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 1676,
+      "sha256": "c20a437ee47a1a390bcb4f02e0b34f67ecfabdbe2fa92ba160fcbb52fd0695ae",
+      "championKey": 24,
+      "championId": "Jax"
+    },
+    {
+      "id": "splash_centered:24000",
+      "type": "splash_centered",
+      "category": "champion",
+      "names": {
+        "pt_BR": "Jax"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Jax_000_splash_centered.jpg",
+      "fileName": "Jax_000_splash_centered.jpg",
+      "width": 1280,
+      "height": 720,
+      "format": "jpeg",
+      "hasAlpha": false,
+      "bytes": 29781,
+      "sha256": "338a640f9b611eca7a48822b0ca517964613a7ecdf85860b995e964ae799cc30",
+      "championKey": 24,
+      "championId": "Jax",
+      "skinId": 24000,
+      "skinNum": 0,
+      "isBaseSkin": true
+    },
+    {
+      "id": "splash_wide:24000",
+      "type": "splash_wide",
+      "category": "champion",
+      "names": {
+        "pt_BR": "Jax"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Jax_000_splash_wide.jpg",
+      "fileName": "Jax_000_splash_wide.jpg",
+      "width": 1215,
+      "height": 717,
+      "format": "jpeg",
+      "hasAlpha": false,
+      "bytes": 30442,
+      "sha256": "15b6f34ff2d606600dd2798f4920356d064097039df13845dc21978836ecf26a",
+      "championKey": 24,
+      "championId": "Jax",
+      "skinId": 24000,
+      "skinNum": 0,
+      "isBaseSkin": true
+    },
+    {
+      "id": "tile:24000",
+      "type": "tile",
+      "category": "champion",
+      "names": {
+        "pt_BR": "Jax"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Jax_000_tile.jpg",
+      "fileName": "Jax_000_tile.jpg",
+      "width": 380,
+      "height": 380,
+      "format": "jpeg",
+      "hasAlpha": false,
+      "bytes": 9027,
+      "sha256": "50a9a5fc8afb8db203ed2b6f8dce06a797ba26e2ece43a0cf91f569fba9c6e6a",
+      "championKey": 24,
+      "championId": "Jax",
+      "skinId": 24000,
+      "skinNum": 0,
+      "isBaseSkin": true
+    },
+    {
+      "id": "splash_centered:24007",
+      "type": "splash_centered",
+      "category": "champion",
+      "names": {
+        "pt_BR": "Jax Deus da Guerra"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Jax_007_splash_centered.jpg",
+      "fileName": "Jax_007_splash_centered.jpg",
+      "width": 1280,
+      "height": 720,
+      "format": "jpeg",
+      "hasAlpha": false,
+      "bytes": 29773,
+      "sha256": "569f77f501c7fd592db49aaf511377de5bff97d8018b590633b7bef3073d65c7",
+      "championKey": 24,
+      "championId": "Jax",
+      "skinId": 24007,
+      "skinNum": 7,
+      "isBaseSkin": false
+    },
+    {
+      "id": "splash_wide:24007",
+      "type": "splash_wide",
+      "category": "champion",
+      "names": {
+        "pt_BR": "Jax Deus da Guerra"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Jax_007_splash_wide.jpg",
+      "fileName": "Jax_007_splash_wide.jpg",
+      "width": 1215,
+      "height": 717,
+      "format": "jpeg",
+      "hasAlpha": false,
+      "bytes": 30354,
+      "sha256": "a822c5c293920b8ea47639c58cc561a61c40e5f7912cc088934545630b2fbe32",
+      "championKey": 24,
+      "championId": "Jax",
+      "skinId": 24007,
+      "skinNum": 7,
+      "isBaseSkin": false
+    },
+    {
+      "id": "tile:24007",
+      "type": "tile",
+      "category": "champion",
+      "names": {
+        "pt_BR": "Jax Deus da Guerra"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Jax_007_tile.jpg",
+      "fileName": "Jax_007_tile.jpg",
+      "width": 380,
+      "height": 380,
+      "format": "jpeg",
+      "hasAlpha": false,
+      "bytes": 8953,
+      "sha256": "400da6f87026115b6895f318316d09a3f8675735fe49404025504b1dadb666c9",
+      "championKey": 24,
+      "championId": "Jax",
+      "skinId": 24007,
+      "skinNum": 7,
+      "isBaseSkin": false
+    },
+    {
+      "id": "square:99",
+      "type": "square",
+      "category": "champion",
+      "names": {
+        "pt_BR": "Lux"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Lux_square.png",
+      "fileName": "Lux_square.png",
+      "width": 128,
+      "height": 128,
+      "format": "png",
+      "hasAlpha": true,
+      "bytes": 1698,
+      "sha256": "359958792a752b69fac0534c067d07afd533cd87a780bcb1fdca633a39ee302b",
+      "championKey": 99,
+      "championId": "Lux"
+    },
+    {
+      "id": "splash_centered:99000",
+      "type": "splash_centered",
+      "category": "champion",
+      "names": {
+        "pt_BR": "Lux"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Lux_000_splash_centered.jpg",
+      "fileName": "Lux_000_splash_centered.jpg",
+      "width": 1280,
+      "height": 720,
+      "format": "jpeg",
+      "hasAlpha": false,
+      "bytes": 29798,
+      "sha256": "cfe787904d69a35d94517e68a4f5ac2996f310df9e84d65f274b19cfa36da337",
+      "championKey": 99,
+      "championId": "Lux",
+      "skinId": 99000,
+      "skinNum": 0,
+      "isBaseSkin": true
+    },
+    {
+      "id": "splash_wide:99000",
+      "type": "splash_wide",
+      "category": "champion",
+      "names": {
+        "pt_BR": "Lux"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Lux_000_splash_wide.jpg",
+      "fileName": "Lux_000_splash_wide.jpg",
+      "width": 1215,
+      "height": 717,
+      "format": "jpeg",
+      "hasAlpha": false,
+      "bytes": 30202,
+      "sha256": "6299ad9331f5a96d16f0b882ec89d5535e5786bb1de6e77f8d1150abc73f1d92",
+      "championKey": 99,
+      "championId": "Lux",
+      "skinId": 99000,
+      "skinNum": 0,
+      "isBaseSkin": true
+    },
+    {
+      "id": "tile:99000",
+      "type": "tile",
+      "category": "champion",
+      "names": {
+        "pt_BR": "Lux"
+      },
+      "source": "ddragon",
+      "sourceUrl": "http://127.0.0.1:4321/imagens/Lux_000_tile.jpg",
+      "fileName": "Lux_000_tile.jpg",
+      "width": 380,
+      "height": 380,
+      "format": "jpeg",
+      "hasAlpha": false,
+      "bytes": 8994,
+      "sha256": "5937d5185e2c473f9f4e00ace53a9a7e8fddbcf5626ef8e01565633d4fddb3df",
+      "championKey": 99,
+      "championId": "Lux",
+      "skinId": 99000,
+      "skinNum": 0,
+      "isBaseSkin": true
+    }
+  ]
+}

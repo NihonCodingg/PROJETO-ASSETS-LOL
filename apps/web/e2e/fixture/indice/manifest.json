@@ -1,0 +1,34 @@
+{
+  "schemaVersion": "1.2.0",
+  "generatedAt": "2026-09-09T00:00:00Z",
+  "currentVersion": "16.18.1",
+  "generation": {
+    "indexer": 3,
+    "categories": [
+      "champion"
+    ]
+  },
+  "versions": [
+    {
+      "gameVersion": "16.18.1",
+      "indexedAt": "2026-09-09T00:00:00Z",
+      "assetsCopied": false,
+      "catalog": {
+        "url": "catalog-e2e.json",
+        "champions": 2,
+        "skins": 3,
+        "bytes": 1588
+      },
+      "totalAssets": 11,
+      "totalBytes": 210698,
+      "shards": [
+        {
+          "category": "champion",
+          "url": "index-champion-e2e.json",
+          "assets": 11,
+          "bytes": 6993
+        }
+      ]
+    }
+  ]
+}
