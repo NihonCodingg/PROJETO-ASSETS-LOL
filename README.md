@@ -72,6 +72,12 @@ mesmo índice do seu clone:
 node apps/web/scripts/conferir-publicacao.mjs https://biblioteca-de-assets.vercel.app
 ```
 
+E num navegador de verdade — baixar das duas fontes a partir do domínio publicado, PNG, zip:
+
+```bash
+URL_PUBLICADA=https://biblioteca-de-assets.vercel.app pnpm -C apps/web conferir:navegador
+```
+
 O mesmo build, na sua máquina — é o que a CI faz em todo PR:
 
 ```bash
@@ -80,6 +86,10 @@ pnpm -C apps/web start
 ```
 
 E, em outro terminal, `node apps/web/scripts/conferir-publicacao.mjs http://localhost:3000`.
+Sem `URL_PUBLICADA`, o `conferir:navegador` faz esse build sozinho e o serve como
+`http://biblioteca-de-assets.test:3200`: para as fontes, um domínio qualquer, e nenhum atalho
+de `localhost` ajuda. Esse modo não roda na CI, porque fala com o ddragon e o cdragon de
+verdade.
 
 ## Estrutura
 

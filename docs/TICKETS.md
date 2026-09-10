@@ -2166,6 +2166,61 @@ limite de 500 linhas.
 
 ---
 
+### ✅ T-43 — O site servido de um domínio público
+
+| | |
+|---|---|
+| **Objetivo** | Provar que nada quebra quando o site sai do `localhost` — e consertar o que só quebra fora dele |
+| **Dependências** | T-42 |
+| **Estimativa** | ~250 linhas |
+| **Effort** | médio |
+| **Cobre** | RNF-13, [ADR 0016](adr/0016-publicacao-na-vercel.md) |
+
+> ✅ **Entregue em 10/09/2026**, pedido junto com a publicação: verificar se algo quebra quando
+> o site é servido de um domínio público — CORS, caminhos relativos, o fetch do índice.
+
+**O que a verificação encontrou**
+
+| | |
+|---|---|
+| Fetch do índice | mesma origem — `/indice`, servido pelo próprio app. Não passa por CORS |
+| CORS das fontes | ddragon e cdragon respondem `Access-Control-Allow-Origin: *` a uma origem pública |
+| Conteúdo misto | nenhuma URL `http://` no índice nem no código |
+| Caminhos | relativos à raiz do domínio; não há `basePath` |
+| Imagens | `<img>` direto das fontes: nada passa pela otimização de imagem da Vercel, que tem cota no Hobby |
+| Contexto seguro | download, PNG e zip não dependem dele; o "Copiar URL" depende, e a Vercel é HTTPS |
+| Deploy com a página aberta | **quebrava**: 404 na fatia que o deploy apagou, e a falha ficava memorizada até recarregar |
+| Tela de erro da home | **mandava o visitante rodar o indexador** |
+
+**Entra**
+- `AssetsClient`: só o sucesso fica memorizado; 404 em arquivo com hash vira
+  `IndiceDesatualizadoError`, com mensagem para o visitante. 404 no manifesto continua erro
+  comum — é índice que falta, não índice que mudou.
+- A tela de erro da home fala com o visitante e tem botão de recarregar; a instrução do
+  indexador ficou só no `next dev`.
+- `pnpm conferir:navegador`: o fluxo num Chromium de verdade — contra o site no ar
+  (`URL_PUBLICADA`), ou contra o build local servido como `biblioteca-de-assets.test`.
+
+**NÃO entra**
+- A conferência no navegador na CI: ela fala com o ddragon e o cdragon de verdade (§10 da
+  Spec).
+- *Skew Protection*, que resolveria o deploy com a página aberta na raiz — fora do plano Hobby.
+
+**Critérios de aceite**
+1. ✅ Baixar do ddragon e do cdragon a partir de um domínio que não é `localhost` traz os
+   bytes do `sha256` do índice.
+2. ✅ A conversão para PNG e o zip funcionam a partir desse domínio.
+3. ✅ Uma fatia que falhou é buscada de novo no próximo pedido.
+4. ✅ 404 num arquivo com hash diz ao visitante para recarregar.
+5. ✅ Publicada, a tela de erro não fala de indexador.
+
+**Testes que provam**
+- 5 testes novos em `assets-client.test.ts`.
+- `publicacao/navegador.spec.ts`: 9 cenários. 8 rodam contra o build local no domínio falso,
+  com as fontes reais; o de HTTPS só contra o site no ar.
+
+---
+
 ### ✅ T-36 — Teto de versões guardadas no índice
 
 > **Fechado em 08/09/2026 pela decisão, não pelo código.** Levantado durante o T-11, quando
@@ -2246,4 +2301,4 @@ Todo requisito da Spec tem pelo menos um ticket.
 | 4 | (T-21 ∥ T-22); (T-24 ∥ T-25) ∥ · ⏸️ T-23 e T-26 suspensos | 2 frentes | Catálogo inteiro e download em lote pelo cliente |
 | 5 | (T-27 ∥ T-28 ∥ T-31) → T-29 → T-30 | 3 frentes | Produto fechado e vestido |
 | 6 | T-32 | — | API opcional |
-| — | 🟡 T-33 → ✅ T-42 | gatilho manual | Pré-lançamento e publicação na Vercel. O que resta do T-33 é conta do dono |
+| — | 🟡 T-33 → ✅ T-42 → ✅ T-43 | gatilho manual | Pré-lançamento, publicação na Vercel e o site conferido fora do `localhost`. O que resta do T-33 é conta do dono |

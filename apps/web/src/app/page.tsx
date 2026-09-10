@@ -20,6 +20,7 @@ import { useNavegacao } from "@/components/navegacao-context";
 import { NavegacaoPorCategoria } from "@/components/navegacao-por-categoria";
 import { PainelDoCampeao } from "@/components/painel-do-campeao";
 import { PaletaDeBusca } from "@/components/paleta-de-busca";
+import { Botao } from "@/components/ui/botao";
 import { AssetsClient } from "@/lib/assets-client";
 import { categoriasDisponiveis } from "@/lib/categorias";
 import { siteConfig } from "@/lib/site-config";
@@ -102,10 +103,19 @@ export default function HomePage() {
     return (
       <Moldura>
         <p role="alert">Falhou ao carregar o catálogo: {estado.motivo}</p>
-        <p>
-          Gere o índice com <code>lol-assets-indexer index</code>; ele é servido de{" "}
-          <code>{BASE_INDICE}</code>.
-        </p>
+        {/* T-43: publicado, quem lê isto é um visitante, não quem roda o
+            indexador. A instrução de gerar o índice só faz sentido no `next dev`. */}
+        {process.env.NODE_ENV === "development" ? (
+          <p>
+            Gere o índice com <code>lol-assets-indexer index</code>; ele é servido de{" "}
+            <code>{BASE_INDICE}</code>.
+          </p>
+        ) : (
+          <p>Recarregue a página. Se continuar, o site pode estar no meio de uma atualização.</p>
+        )}
+        <Botao tamanho="md" onClick={() => window.location.reload()}>
+          Recarregar
+        </Botao>
       </Moldura>
     );
   }

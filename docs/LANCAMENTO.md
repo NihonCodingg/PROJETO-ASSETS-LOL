@@ -48,6 +48,17 @@ node apps/web/scripts/conferir-publicacao.mjs https://biblioteca-de-assets.verce
 Ele confere os dois avisos, o `noindex`, o cache do índice e se o site está no mesmo índice do
 seu clone. Tudo `ok` é publicado certo.
 
+E, num navegador de verdade, o que o script não alcança — baixar das duas fontes a partir do
+domínio publicado, converter para PNG, montar um zip:
+
+```bash
+URL_PUBLICADA=https://biblioteca-de-assets.vercel.app pnpm -C apps/web conferir:navegador
+```
+
+No PowerShell: `$env:URL_PUBLICADA="https://biblioteca-de-assets.vercel.app"; pnpm -C apps/web conferir:navegador`.
+São 9 cenários, e eles baixam meia dúzia de arquivos do ddragon e do cdragon. Sem
+`URL_PUBLICADA`, ele confere o build da sua máquina num domínio falso — tudo menos o HTTPS.
+
 ### 3. O que compartilhar — e o que não
 
 - **Só o domínio de produção** (`biblioteca-de-assets.vercel.app`). Ele é aberto, sem senha.

@@ -16,9 +16,28 @@ export class AssetsFetchError extends Error {
   constructor(
     readonly url: string,
     readonly status: number,
+    mensagem = `falhou ao buscar ${url}: HTTP ${status}`,
   ) {
-    super(`falhou ao buscar ${url}: HTTP ${status}`);
+    super(mensagem);
     this.name = "AssetsFetchError";
+  }
+}
+
+/**
+ * Um arquivo com hash que sumiu: o índice foi trocado com a página aberta (T-43).
+ *
+ * Catálogo e fatias têm o hash do conteúdo no nome, e cada deploy da Vercel
+ * apaga os do deploy anterior ([ADR 0016]). Quem abriu a página antes do deploy
+ * e pede uma fatia depois dele recebe 404 — e a única saída é recarregar, que
+ * traz o manifesto novo. A mensagem diz isso, porque quem lê é o visitante.
+ *
+ * Só vale para os arquivos com hash. 404 no `manifest.json` é índice que não
+ * existe, e continua `AssetsFetchError`.
+ */
+export class IndiceDesatualizadoError extends AssetsFetchError {
+  constructor(url: string) {
+    super(url, 404, "o índice foi atualizado desde que esta página abriu — recarregue a página");
+    this.name = "IndiceDesatualizadoError";
   }
 }
 
@@ -57,6 +76,12 @@ export class AssetsClient {
     }
     const promessa = this.#json<IndexShard>(shard.url);
     this.#shards.set(category, promessa);
+    // Só o sucesso fica memorizado (T-43). Na internet a rede do visitante
+    // oscila, e uma falha guardada aqui deixaria a categoria quebrada até
+    // recarregar a página inteira — coisa que no `localhost` nunca aparece.
+    promessa.catch(() => {
+      if (this.#shards.get(category) === promessa) this.#shards.delete(category);
+    });
     return promessa;
   }
 
@@ -71,7 +96,14 @@ export class AssetsClient {
   async #json<T>(path: string): Promise<T> {
     const url = this.url(path);
     const resposta = await this.#fetch(url);
-    if (!resposta.ok) throw new AssetsFetchError(url, resposta.status);
+    if (!resposta.ok) {
+      // O manifesto tem nome fixo: 404 nele é índice que falta. Os outros têm
+      // hash no nome, e 404 neles é índice que mudou.
+      if (resposta.status === 404 && path !== MANIFEST_FILE) {
+        throw new IndiceDesatualizadoError(url);
+      }
+      throw new AssetsFetchError(url, resposta.status);
+    }
     return (await resposta.json()) as T;
   }
 }
