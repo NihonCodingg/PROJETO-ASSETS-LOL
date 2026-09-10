@@ -48,6 +48,16 @@ export interface PainelDeAssetProps {
   readonly onClose: () => void;
   readonly baixar?: (asset: Asset, comoPng: boolean, url: string) => Promise<void>;
   readonly copiar?: (texto: string) => Promise<void>;
+  /**
+   * Seleção do lote (RF-17), **de fora**.
+   *
+   * O estado mora no pai porque um lote pode atravessar dois painéis: "tudo do
+   * Jax" leva os assets da skin e os chromas, que são listas diferentes. Sem
+   * `onAlternar` não há caixa nenhuma — é o que mantém o painel usável em
+   * contexto onde lote não faz sentido.
+   */
+  readonly selecao?: ReadonlySet<string>;
+  readonly onAlternar?: (id: string) => void;
 }
 
 async function baixarDeVerdade(asset: Asset, comoPng: boolean, url: string): Promise<void> {
@@ -69,6 +79,8 @@ export function PainelDeAsset({
   onClose,
   baixar = baixarDeVerdade,
   copiar = copiarDeVerdade,
+  selecao,
+  onAlternar,
 }: PainelDeAssetProps) {
   const ordenados = useMemo(() => orderAssets(assets), [assets]);
   const [estados, setEstados] = useState<Record<string, EstadoDoCartao>>({});
@@ -103,6 +115,8 @@ export function PainelDeAsset({
           marcar={marcar}
           baixar={baixar}
           copiar={copiar}
+          selecao={selecao}
+          onAlternar={onAlternar}
         />
       ) : (
         <ul>
@@ -115,6 +129,8 @@ export function PainelDeAsset({
                 marcar={marcar}
                 baixar={baixar}
                 copiar={copiar}
+                selecionado={selecao?.has(asset.id)}
+                onAlternar={onAlternar}
               />
             </li>
           ))}
@@ -131,6 +147,8 @@ interface ListaVirtualProps {
   readonly marcar: (id: string, estado: EstadoDoCartao) => void;
   readonly baixar: (asset: Asset, comoPng: boolean, url: string) => Promise<void>;
   readonly copiar: (texto: string) => Promise<void>;
+  readonly selecao?: ReadonlySet<string>;
+  readonly onAlternar?: (id: string) => void;
 }
 
 /** Altura estimada de um cartão. Chute honesto: o design (T-30) mede de verdade. */
@@ -143,6 +161,8 @@ function ListaVirtual({
   marcar,
   baixar,
   copiar,
+  selecao,
+  onAlternar,
 }: ListaVirtualProps) {
   const scroller = useRef<HTMLDivElement>(null);
   // Sem `measureElement`: o cartão tem altura previsível e medir de volta em
@@ -184,6 +204,8 @@ function ListaVirtual({
                 marcar={marcar}
                 baixar={baixar}
                 copiar={copiar}
+                selecionado={selecao?.has(asset.id)}
+                onAlternar={onAlternar}
               />
             </li>
           );
@@ -200,9 +222,20 @@ interface CartaoProps {
   readonly marcar: (id: string, estado: EstadoDoCartao) => void;
   readonly baixar: (asset: Asset, comoPng: boolean, url: string) => Promise<void>;
   readonly copiar: (texto: string) => Promise<void>;
+  readonly selecionado?: boolean;
+  readonly onAlternar?: (id: string) => void;
 }
 
-function CartaoDeAsset({ asset, url, estado, marcar, baixar, copiar }: CartaoProps) {
+function CartaoDeAsset({
+  asset,
+  url,
+  estado,
+  marcar,
+  baixar,
+  copiar,
+  selecionado,
+  onAlternar,
+}: CartaoProps) {
   const acionar = useCallback(
     async (comoPng: boolean) => {
       marcar(asset.id, "baixando");
@@ -222,6 +255,16 @@ function CartaoDeAsset({ asset, url, estado, marcar, baixar, copiar }: CartaoPro
 
   return (
     <article aria-label={asset.fileName} data-tipo={asset.type} data-estado={estado}>
+      {onAlternar && (
+        <label>
+          <input
+            type="checkbox"
+            checked={selecionado ?? false}
+            onChange={() => onAlternar(asset.id)}
+          />
+          Selecionar {asset.fileName}
+        </label>
+      )}
       <h3>{asset.type}</h3>
       {/* RF-09: a ficha aparece antes de qualquer clique de download. */}
       <p>{assetSummary(asset)}</p>

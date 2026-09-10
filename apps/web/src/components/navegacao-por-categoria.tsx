@@ -23,6 +23,7 @@ import { useCallback, useMemo, useState } from "react";
 
 import type { Asset, AssetCategory, IndexShard } from "@lol-assets/schema";
 
+import { BarraDeLote } from "@/components/barra-de-lote";
 import { PainelDeAsset } from "@/components/painel-de-asset";
 import {
   categoriasDisponiveis,
@@ -33,6 +34,7 @@ import {
   prepararLista,
   rotuloDaCategoria,
 } from "@/lib/categorias";
+import { alternar, selecionados, tudoDo } from "@/lib/selecao";
 
 export interface NavegacaoPorCategoriaProps {
   /** As fatias que o manifesto declara. Categoria fora daqui não vira botão. */
@@ -60,12 +62,14 @@ export function NavegacaoPorCategoria({
   const [carga, setCarga] = useState<Carga>({ fase: "vazia" });
   const [marcadas, setMarcadas] = useState<ReadonlySet<string>>(new Set());
   const [consulta, setConsulta] = useState("");
+  const [selecao, setSelecao] = useState<ReadonlySet<string>>(new Set());
 
   const abrir = useCallback(
     async (category: AssetCategory) => {
       setAberta(category);
       setConsulta("");
       setMarcadas(new Set());
+      setSelecao(new Set());
       setCarga({ fase: "carregando" });
       try {
         const shard = await carregar(category);
@@ -86,8 +90,11 @@ export function NavegacaoPorCategoria({
   const grupos = useMemo(() => gruposDeFiltro(assets), [assets]);
   const lista = useMemo(() => prepararLista(assets), [assets]);
   const filtrados = useMemo(() => filtrar(lista, marcadas, consulta), [lista, marcadas, consulta]);
+  // O lote alcança o que o filtro deixou na tela — nunca a fatia inteira por
+  // baixo dele. "Selecionar todos" com 5.042 escondidos seria uma armadilha.
+  const noLote = useMemo(() => selecionados(filtrados, selecao), [filtrados, selecao]);
 
-  const alternar = useCallback((tag: string) => {
+  const alternarFiltro = useCallback((tag: string) => {
     setMarcadas((antes) => {
       const proximo = new Set(antes);
       if (!proximo.delete(tag)) proximo.add(tag);
@@ -134,7 +141,7 @@ export function NavegacaoPorCategoria({
                   <input
                     type="checkbox"
                     checked={marcadas.has(opcao.tag)}
-                    onChange={() => alternar(opcao.tag)}
+                    onChange={() => alternarFiltro(opcao.tag)}
                   />
                   {opcao.rotulo} ({opcao.total})
                 </label>
@@ -156,12 +163,30 @@ export function NavegacaoPorCategoria({
           {filtrados.length === 0 ? (
             <Vazio descricao={descreverFiltro(marcadas, consulta, grupos)} />
           ) : (
-            <PainelDeAsset
-              titulo={rotuloDaCategoria(aberta)}
-              assets={filtrados}
-              assetsBaseUrl={assetsBaseUrl}
-              onClose={() => setAberta(null)}
-            />
+            <>
+              <button
+                type="button"
+                onClick={() => setSelecao(tudoDo(filtrados, true))}
+              >
+                Selecionar os {filtrados.length} filtrados
+              </button>
+
+              <BarraDeLote
+                assets={noLote}
+                rotulo={rotuloDaCategoria(aberta)}
+                assetsBaseUrl={assetsBaseUrl}
+                onLimpar={() => setSelecao(new Set())}
+              />
+
+              <PainelDeAsset
+                titulo={rotuloDaCategoria(aberta)}
+                assets={filtrados}
+                assetsBaseUrl={assetsBaseUrl}
+                onClose={() => setAberta(null)}
+                selecao={selecao}
+                onAlternar={(id) => setSelecao((antes) => alternar(antes, id))}
+              />
+            </>
           )}
         </section>
       )}
