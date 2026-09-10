@@ -1311,7 +1311,7 @@ limite de 500 linhas.
 
 ---
 
-### T-24 — Front: navegação por categoria e filtros
+### ✅ T-24 — Front: navegação por categoria e filtros
 
 | | |
 |---|---|
@@ -1372,7 +1372,7 @@ limite de 500 linhas.
 
 ---
 
-### T-25 — Front: seleção múltipla e zip no cliente
+### ✅ T-25 — Front: seleção múltipla e zip no cliente
 
 | | |
 |---|---|
@@ -1470,7 +1470,7 @@ limite de 500 linhas.
 
 **Execução: (T-27 ∥ T-28 ∥ T-31) → T-29 → T-30.**
 
-### T-27 — Página "Sobre", créditos e rodapé legal
+### ✅ T-27 — Página "Sobre", créditos e rodapé legal
 
 | | |
 |---|---|
@@ -1515,7 +1515,7 @@ limite de 500 linhas.
 
 ---
 
-### T-28 — Acessibilidade
+### ✅ T-28 — Acessibilidade
 
 | | |
 |---|---|
@@ -1565,7 +1565,7 @@ limite de 500 linhas.
 
 ---
 
-### T-29 — e2e do fluxo completo
+### ✅ T-29 — e2e do fluxo completo
 
 | | |
 |---|---|
@@ -1652,7 +1652,7 @@ limite de 500 linhas.
 
 ---
 
-### T-31 — Aviso de índice velho
+### ✅ T-31 — Aviso de índice velho
 
 | | |
 |---|---|
@@ -1686,7 +1686,7 @@ limite de 500 linhas.
 
 ---
 
-### T-35 — Tirar o `next-env.d.ts` do controle de versão
+### ✅ T-35 — Tirar o `next-env.d.ts` do controle de versão
 
 | | |
 |---|---|
@@ -1732,7 +1732,7 @@ limite de 500 linhas.
 
 ---
 
-### T-38 — Reindexar quando o indexador muda, não só quando o patch muda
+### ✅ T-38 — Reindexar quando o indexador muda, não só quando o patch muda
 
 | | |
 |---|---|
@@ -1793,7 +1793,7 @@ limite de 500 linhas.
 
 ---
 
-### T-39 — Fatiar `champion` quando ela apertar o RNF-03
+### ⏳ T-39 — Fatiar `champion` quando ela apertar o RNF-03
 
 | | |
 |---|---|
@@ -1835,7 +1835,7 @@ limite de 500 linhas.
 
 # Onda 6 — componente opcional
 
-### T-32 — API FastAPI
+### ✅ T-32 — API FastAPI
 
 | | |
 |---|---|
