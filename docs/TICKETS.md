@@ -1981,7 +1981,7 @@ limite de 500 linhas.
 > | | O que é |
 > |---|---|
 > | **D6** registro | Registrar "Biblioteca de Assets" no Developer Portal — passo a passo no checklist |
-> | **D7** | Criar o projeto na Vercel como `biblioteca-de-assets` — sem domínio próprio, decidido pelo dono |
+> | ~~**D7**~~ | ✅ **No ar desde 11/09/2026** — projeto `biblioteca-de-assets` na Vercel, criado com autorização do dono; o domínio de produção abre sem login |
 >
 > O **D2** não está bloqueado, está **esperando**: se o consentimento da Weird Gloop chegar,
 > é uma variável de ambiente — o crédito já está escrito e desligado.
@@ -2009,7 +2009,8 @@ limite de 500 linhas.
 2. ✅ Os avisos legais são idênticos aos textos oficiais — comparação registrada no PR, no
    checklist e em `docs/evidencias/politicas-da-riot-2026-09-10.md`.
 3. 🔑 O produto aparece registrado no Developer Portal (print no PR).
-4. 🔑 A URL de produção da Vercel resolve para o site. *Ajustado em 10/09/2026:* era "o
+4. ✅ A URL de produção da Vercel resolve para o site — no ar em 11/09/2026, conferida contra
+   a URL publicada: 26 de 26 por HTTP e 9 de 9 no navegador. *Ajustado em 10/09/2026:* era "o
    domínio resolve"; o dono decidiu publicar sem domínio próprio, e o subdomínio segue a
    mesma regra de nome.
 5. ✅ Nenhum marcador resta. O `[A DECIDIR]` do nome e o `[A CONFIRMAR]` do texto legal
@@ -2157,7 +2158,8 @@ limite de 500 linhas.
 4. ✅ Toda resposta leva `X-Robots-Tag: noindex`, e o HTML leva `<meta name="robots">`,
    enquanto `NEXT_PUBLIC_SITE_INDEXABLE` não for `true`.
 5. ✅ Nenhuma variável de ambiente é obrigatória.
-6. 🔑 O site responde no domínio de produção — depende do dono criar o projeto.
+6. ✅ O site responde no domínio de produção — 11/09/2026: 26 de 26 no
+   `conferir-publicacao.mjs` e 9 de 9 no `conferir:navegador`, contra a URL publicada.
 
 **Testes que provam**
 - `publicacao.test.ts`: `vercel.json` × `packageManager`; todo arquivo de `public/indice` cai
@@ -2331,4 +2333,4 @@ Todo requisito da Spec tem pelo menos um ticket.
 | 4 | (T-21 ∥ T-22); (T-24 ∥ T-25) ∥ · ⏸️ T-23 e T-26 suspensos | 2 frentes | Catálogo inteiro e download em lote pelo cliente |
 | 5 | (T-27 ∥ T-28 ∥ T-31) → T-29 → T-30 | 3 frentes | Produto fechado e vestido |
 | 6 | T-32 | — | API opcional |
-| — | 🟡 T-33 → ✅ T-42 → ✅ T-43 | gatilho manual | Pré-lançamento, publicação na Vercel e o site conferido fora do `localhost`. O que resta do T-33 é conta do dono |
+| — | 🟡 T-33 → ✅ T-42 → ✅ T-43 | gatilho manual | Pré-lançamento, publicação na Vercel e o site conferido fora do `localhost`. **No ar desde 11/09/2026**; o que resta do T-33 é o registro na Riot |
