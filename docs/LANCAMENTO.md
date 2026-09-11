@@ -3,10 +3,15 @@
 O que separa o site que roda na sua máquina do site no ar, aberto por URL para você e alguns
 amigos.
 
-> **Estado em 10/09/2026:** tudo que dá para fazer sem a sua conta está feito e coberto por
-> teste. O que falta **depende de conta sua**, e está marcado com 🔑.
+> **Estado em 11/09/2026: no ar.** O projeto `biblioteca-de-assets` foi criado na Vercel (time
+> `nihon2`), ligado ao repositório, com Root Directory `apps/web`, e o domínio de produção abre
+> sem login. Conferido contra a URL publicada: **26 de 26** por HTTP e **9 de 9** no navegador.
+> O que falta é o registro na Riot (D6), marcado com 🔑.
 
-## Publicar — o que você faz, na ordem 🔑
+## Publicar — o que você faz, na ordem
+
+> Os passos 1 a 3 foram feitos em 11/09/2026, pela CLI da Vercel já logada na sua conta e com a
+> sua autorização. Ficam aqui para refazer do zero, se um dia for preciso.
 
 Tudo que depende de código já está no repositório
 ([ADR 0016](adr/0016-publicacao-na-vercel.md)). O que sobra são contas suas, e nenhum passo
@@ -64,6 +69,10 @@ São 9 cenários, e eles baixam meia dúzia de arquivos do ddragon e do cdragon.
 - **Só o domínio de produção** (`biblioteca-de-assets.vercel.app`). Ele é aberto, sem senha.
 - As URLs longas, com hash — de cada deploy e dos previews de PR — pedem login na Vercel. É a
   *Standard Protection*, que já vem ligada; deixe como está.
+- Os endereços com o sufixo do time (`biblioteca-de-assets-nihon2.vercel.app`) também pedem
+  login: a proteção do time é `all_except_custom_domains`, e só o domínio de produção fica aberto.
+  Conferido em 11/09/2026 — o domínio de produção responde 200, o com sufixo redireciona para o
+  login.
 - O site não aparece em buscador: toda resposta leva `noindex`. Também não ponha a URL no
   README nem no campo *Website* do repositório, que é público.
 
@@ -194,7 +203,10 @@ mesmo sem usar a API. É conta sua; ninguém faz por você.
 7. Tire um print da página do produto com o status e mande no PR ou numa issue: é o critério 3
    do T-33.
 
-## D7 — Endereço 🔑
+## D7 — Endereço ✅
+
+**No ar desde 11/09/2026**, no domínio de produção `biblioteca-de-assets.vercel.app` — o
+endereço limpo, sem sufixo.
 
 **Sem domínio próprio.** Decidido em 10/09/2026: o site fica no endereço que a Vercel dá,
 aberto por URL, sem senha e sem divulgação. Domínio próprio continua possível depois, e não
